@@ -1,0 +1,45 @@
+﻿<div id="divCommunityReportIndexController" ng-controller="CommunityReportIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+
+            <li class="active"><a href="#tabArrearsCommunity" role="tab" data-toggle="tab" onclick="ArrearsCommunityClick()" class="ng-binding">小区应收报表</a></li>
+            @*<li>  <a href="#tabArrearsCommunity" role="tab" data-toggle="tab" onclick="ArrearsCommunityClick()" class="ng-binding">小区报表</a></li>*@
+            <li>  <a href="#tabCollectionsCommunity" role="tab" data-toggle="tab" onclick="CollectionsCommunityClick()" class="ng-binding">小区实收报表</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            
+            <div class="tab-pane active" id="tabArrearsCommunity">
+                    <div id="divReportArrearsCommunityListController"></div>
+                </div>
+
+            <div class="tab-pane active" id="tabCollectionsCommunity">
+                <div id="divReportCollectionsCommunityListController"></div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ArrearsCommunityClick();
+
+        });
+
+        var deptContainerService = ckFramework.GetAngularService('CommunityReportIndexService');
+
+        //应收-科目
+      
+        function ArrearsCommunityClick()
+        {
+
+            deptContainerService.ShowContainerContent('divReportArrearsCommunityListController', 'PropertyMgr/Report/ArrearsCommunityListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportArrearsCommunityListController.js'], 'divReportArrearsCommunityListController');
+        }
+
+        function CollectionsCommunityClick() {
+
+            deptContainerService.ShowContainerContent('divReportCollectionsCommunityListController', 'PropertyMgr/Report/CollectionsCommunityListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportCollectionsCommunityListController.js'], 'divReportCollectionsCommunityListController');
+        }
+
+    </script>
+</div>

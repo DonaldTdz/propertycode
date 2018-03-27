@@ -1,0 +1,47 @@
+﻿<div id="divTemporaryChargesReportIndexController" ng-controller="TemporaryChargesReportIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+
+            <li class="active">
+                <a href="#tabTemporaryChargesSummaryReport" role="tab" data-toggle="tab" onclick="TemporaryChargesSummaryReport()" class="ng-binding">汇总表</a>
+            </li>
+            <li>  <a href="#tabTemporaryChargesDetailReport" role="tab" data-toggle="tab" onclick="TemporaryChargesDetailReport()" class="ng-binding">明细表</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabTemporaryChargesSummaryReport">
+                <div id="divTemporaryChargesReportContainer"></div>
+            </div>
+
+            <div class="tab-pane active" id="tabTemporaryChargesDetailReport">
+                <div id="divTemporaryChargesDetailReportContainerIndex"></div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            TemporaryChargesSummaryReport();
+
+        });
+
+       // var deptContainerService = ckFramework.GetAngularService('TemporaryChargesReportIndexService');
+
+        //汇总表
+        function TemporaryChargesSummaryReport() {
+
+            var deptContainerService = ckFramework.GetAngularService('ReportService');
+            deptContainerService.ShowContainerContent('divTemporaryChargesReportContainer', 'PropertyMgr/Report/TemporaryChargesReportContainerIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/TemporaryChargesReportContainerController.js'], 'divTemporaryChargesReportContainerController');
+        }
+        //明细表
+        function TemporaryChargesDetailReport()
+        {
+
+            var deptContainerService = ckFramework.GetAngularService('ReportService');
+            deptContainerService.ShowContainerContent('divTemporaryChargesDetailReportContainerIndex', 'PropertyMgr/Report/TemporaryChargesDetailReportContainerIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/TemporaryChargesDetailReportContainerController.js'], 'divTemporaryChargesDetailReportContainerController');
+        }
+
+
+    </script>
+</div>

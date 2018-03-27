@@ -1,0 +1,93 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<#
+	var manager = TemplateFileManager.Create(this);
+	string[] ProjectNames = new string[]{ "BackgroundMgr", "ParkingSys"};
+	string[] EntityNames = new string[]{ "DomainEntity" ,"ParkingDomainEntity" };
+
+	for(int i=0; i < ProjectNames.Length; i++)
+	{	
+		string strProjectName =  ProjectNames[i];
+		EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+		XmlDocument doc = new XmlDocument();
+		var strProjectPath = dte.ActiveDocument.Path;
+		var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+		var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.BackgroundMgr.MVCWeb\Models\FrameworkTemplate.xml");
+		doc.Load(strTemplateFilePath);
+		var frameworkTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='"+EntityNames[i]+"']");
+		foreach (XmlNode templateNode in frameworkTemplateNodes)
+		{
+		manager.StartNewFile(templateNode.Attributes["Name"].Value + "DomainService.cs");
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.Practices.Unity;
+using YK.<#= strProjectName #>.RepositoryContract;
+using YK.<#= strProjectName #>.DomainEntity;
+using YK.BackgroundMgr.Crosscuting;
+
+namespace YK.<#= strProjectName #>.DomainService
+{
+	public partial class <#= templateNode.Attributes["Name"].Value #>DomainService
+	{
+		public bool Insert<#= templateNode.Attributes["Name"].Value #>(<#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+            using (var _<#= strProjectName #>UnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                _<#= strProjectName #>UnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Add(domain<#= templateNode.Attributes["Name"].Value #>);
+                _<#= strProjectName #>UnitOfWork.Commit();
+                return true;
+            }
+        }
+
+        public bool Update<#= templateNode.Attributes["Name"].Value #>(<#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+            using (var _<#= strProjectName #>UnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                _<#= strProjectName #>UnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Update(domain<#= templateNode.Attributes["Name"].Value #>);
+                _<#= strProjectName #>UnitOfWork.Commit();
+                return true;
+            }
+        }
+
+        public bool Delete<#= templateNode.Attributes["Name"].Value #>(object id)
+        {
+            using (var _<#= strProjectName #>UnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                _<#= strProjectName #>UnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Delete(id);
+                _<#= strProjectName #>UnitOfWork.Commit();
+                return true;
+            }
+        }
+
+		public <#= templateNode.Attributes["Name"].Value #> Get<#= templateNode.Attributes["Name"].Value #>ByKey(object id)
+        {
+            using (var _<#= strProjectName #>UnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                return _<#= strProjectName #>UnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.GetByKey(id);
+            }
+        }
+
+        public List<<#= templateNode.Attributes["Name"].Value #>> Get<#= templateNode.Attributes["Name"].Value #>s()
+        {
+            using (var _<#= strProjectName #>UnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                return _<#= strProjectName #>UnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.GetAll().ToList();
+            }
+        }
+	}
+}
+<#
+    }
+	}
+	manager.Process();
+#>

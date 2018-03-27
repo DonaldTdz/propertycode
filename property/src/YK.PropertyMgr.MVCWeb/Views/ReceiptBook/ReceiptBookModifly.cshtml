@@ -1,0 +1,160 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divReceiptBookModiflyController" ng-controller="ReceiptBookModiflyController">
+    <form id="ReceiptBookModifyForm" class="form-horizontal">
+        <div class="form-horizontal box box-primary">
+            <div class="form-group ModalFormMagin col-md-8 has-feedback">
+                <div class="form-group">
+                    <label class="control-label ckFormControlLable">
+                        <span>票据类型<span style="color:red">*</span></span>
+                    </label>
+                    <div class=" selectContainer">
+                        <select class="form-control ckFormControl" ng-model="PageViewModel.ReceiptBookType" name="seleModifyReceiptBookType" id="ModifyReceiptBookTypeId" ng-options="m.Code as m.CnName for m in ReceiptBookTypeList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label ckFormControlLable">
+                        <span>票据号<span style="color:red">*</span></span>
+                    </label>
+                    <input type="text" id="txtOldCode" name="txtOldCode" maxlength="50"  ng-model="PageViewModel.OldReceiptNum" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label ckFormControlLable">
+                        <span>新票据号<span style="color:red">*</span></span>
+                    </label>
+                    <input type="text" id="txtNewCode" maxlength="50" name="txtNewCode" ng-model="PageViewModel.NewReceiptNum" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label ckFormControlLable">
+                        <span>备注<span style="color:red">*</span></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtRemark" name="txtRemark" ng-model="PageViewModel.Remark" class="form-control">
+                </div>
+                <div class="form-group pull-right">
+                    <button type="submit" id="btnReceiptbookModifySave" class="btn btn-primary" >保存</button>
+                    <button type="button" class="btn" onclick="ReceiptBookModifyformReset()">取消</button>
+                    <button type="button" id="btnHidReceiptbookModifySave" ng-click="SaveModifyData()" style="display:none" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.ReceiptBookModiflyData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $(document).ready(function () {
+
+            $('#ReceiptBookModifyForm').validate({
+                errorElement: 'span', //default input error message container
+                errorClass: 'text-danger', // default input error message class
+                focusInvalid: false, // do not focus the last invalid input
+                ignore: "",
+                rules: {
+                    seleModifyReceiptBookType: {
+                        required: true
+                    },
+                    txtOldCode: {
+                        required: true
+                    },
+                    txtNewCode: {
+                        required: true
+                    },
+                    txtRemark: {
+                        required: true,
+                        maxlength: 40
+                    }
+                },
+
+                highlight: function (element) {
+                    $(element).closest('.form-group').addClass('has-error');
+                },
+
+                success: function (label) {
+                    label.closest('.form-group').removeClass('has-error');
+                    label.remove();
+                },
+
+                submitHandler: function (form) {
+                    //form.submit();
+                    $("#btnHidReceiptbookModifySave").click();
+                }
+            });
+
+            //$('#ReceiptBookModifyForm')
+            //    .formValidation({
+            //        framework: 'bootstrap',
+            //        excluded: ':disabled',
+            //        button: {
+            //            selector: '#btnReceiptbookModifySave',
+            //            disabled: 'disabled'
+            //        },
+            //        icon: {
+            //            valid: 'glyphicon glyphicon-ok',
+            //            invalid: 'glyphicon glyphicon-remove',
+            //            validating: 'glyphicon glyphicon-refresh'
+            //        },
+
+
+            //        fields: {
+
+            //            seleModifyReceiptBookType: {
+            //                validators: {
+            //                    notEmpty: {
+            //                        message: '请选择票据类型'
+            //                    }
+            //                }
+            //            },
+            //            txtOldCode: {
+            //                validators: {
+            //                    notEmpty: {
+            //                        message: '票据号不能为空'
+            //                    }
+
+            //                }
+            //            },
+            //            txtNewCode: {
+            //                validators: {
+            //                    notEmpty: {
+            //                        message: '新票据号不能为空'
+            //                    }
+
+            //                }
+            //            },
+            //            txtRemark: {
+            //                validators: {
+            //                    notEmpty: {
+            //                        message: '备注不能为空'
+            //                    },
+            //                     stringLength: {
+            //                        min: 1,
+            //                        max: 40,
+            //                        message: '备注应在1-40个字符之间'
+            //                    }
+
+            //                }
+            //            }
+            //        }
+            //    });
+
+
+        });
+
+        function ReceiptBookModifyformReset() {
+           document.getElementById("ReceiptBookModifyForm").reset();
+
+           //$('#ReceiptBookModifyForm')
+           //     .formValidation('revalidateField', 'seleModifyReceiptBookType')
+           //     .formValidation('revalidateField', 'txtOldCode')
+           //     .formValidation('revalidateField', 'txtNewCode')
+           //     .formValidation('revalidateField', 'txtRemark');
+        }
+
+    </script>
+</div>

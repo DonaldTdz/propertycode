@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PropertyAlipay.Service</name>
+    </assembly>
+    <members>
+        <member name="T:PropertyAlipay.Service.Interface.IAlipayCommunityInitializeService">
+            <summary>
+            初始化小区信息
+            </summary>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayCommunityInitializeService.CommunityInitialize(PropertyAlipay.Entity.model.InitializeCommunity,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayCommunityInitializeService.CommunityInitializeModify(PropertyAlipay.Entity.model.InitializeCommunityModify,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyAlipay.Service.Interface.IAliPayCommunityService">
+            <summary>
+            小区信息接口
+            </summary>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAliPayCommunityService.CommunityCreate(PropertyAlipay.Entity.model.Community,System.String)">
+            <summary>
+            创建小区
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAliPayCommunityService.CommunityModify(PropertyAlipay.Entity.model.Community,System.String)">
+            <summary>
+            修改
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAliPayCommunityService.CommunityDetailsQuery(System.String,System.String)">
+            <summary>
+            查询单个物业小区信息
+            </summary>
+            <param name="community_id">支付宝平台物业Id    </param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAliPayCommunityService.CommunityBatchquery(PropertyAlipay.Entity.searchmodel.CommunityBatchSearchModel)">
+            <summary>
+            批量查询小区信息
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayOAuthTokenService.GetAppOAuthAuthorizationCode(System.String)">
+            <summary>
+            获取授权令牌
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayOAuthTokenService.GetAuthTokenAppQuery(System.String)">
+            <summary>
+            查询令牌值
+            </summary>
+            <param name="app_auth_token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayOAuthTokenService.GetAppOAuthrefresh_token(System.String)">
+            <summary>
+            更新授权令牌
+            </summary>
+            <param name="refresh_token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyAlipay.Service.Interface.IAlipayRoomUploadService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayRoomUploadService.RoomInfoUpload(PropertyAlipay.Entity.model.UploadRoom,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="UploadRoomobj"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayRoomUploadService.RoominfoQuery(PropertyAlipay.Entity.model.SeachRoomInfo,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="roominfoSeach"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Interface.IAlipayRoomUploadService.RoomInfoDelete(PropertyAlipay.Entity.model.DeleteRoomInfo,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="roomInfoDelete"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyAlipay.Service.Services.AlipayBillService">
+            <summary>
+            账单服务
+            </summary>
+        </member>
+        <member name="P:PropertyAlipay.Service.Services.AlipayBillService.Instance">
+            <summary>
+            单例
+            </summary>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayCommunityInitializeService.CommunityInitialize(PropertyAlipay.Entity.model.InitializeCommunity,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="community"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayCommunityInitializeService.CommunityInitializeModify(PropertyAlipay.Entity.model.InitializeCommunityModify,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayCommunityInitializeService.ExchangeCommunityInitialize2JSONString(PropertyAlipay.Entity.model.InitializeCommunity)">
+            <summary>
+            
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AliPayCommunityService.CommunityCreate(PropertyAlipay.Entity.model.Community,System.String)">
+            <summary>
+            创建小区
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AliPayCommunityService.CommunityModify(PropertyAlipay.Entity.model.Community,System.String)">
+            <summary>
+            修改
+            </summary>
+            <param name="community"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AliPayCommunityService.CommunityDetailsQuery(System.String,System.String)">
+            <summary>
+            查询单个物业小区信息
+            </summary>
+            <param name="community_id">支付宝平台物业Id    </param>
+             <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AliPayCommunityService.CommunityBatchquery(PropertyAlipay.Entity.searchmodel.CommunityBatchSearchModel)">
+            <summary>
+            批量查询小区信息
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayOAuthTokenService.GetAppOAuthAuthorizationCode(System.String)">
+            <summary>
+            通过授权Code换取授权token
+            </summary>
+            <param name="app_auth_code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayOAuthTokenService.GetAppOAuthrefresh_token(System.String)">
+            <summary>
+            通过更新码获取token
+            </summary>
+            <param name="refresh_token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayOAuthTokenService.GetAuthTokenAppQuery(System.String)">
+            <summary>
+            查询授权信息
+            </summary>
+            <param name="app_auth_token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.Services.AlipayRoomUploadService.RoomInfoUploadAsync(PropertyAlipay.Entity.model.UploadRoom,System.String)">
+            <summary>
+            异步保存
+            </summary>
+            <param name="UploadRoomobj"></param>
+            <param name="appAuthToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyAlipay.Service.StatusHelper.ConversionAlipayStatus">
+            <summary>
+            支付宝状态列表返回
+            </summary>
+        </member>
+        <member name="M:PropertyAlipay.Service.StatusHelper.ConversionAlipayStatus.GetBasicServiceStatus">
+            <summary>
+            服务状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyAlipay.Service.StatusHelper.ConversionAlipayStatus.GetBasicServiceType">
+            <summary>
+            获取基础服务类型
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

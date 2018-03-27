@@ -1,0 +1,229 @@
+﻿@using YK.FrameworkTools.PluginService;
+
+<div id="divArrearsReportContainerController" ng-controller="ArrearsReportContainerController">
+    <div id="SearchContainerArrearsReport" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">小区</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="ComDeptIdStr" id="ComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList"></select>
+                            <input type="hidden" id="DefaultComDeptId" name="DefaultComDeptId" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">资源名称</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="ResourceName" name="ResourceName" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">业主姓名</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="OwnerName" name="OwnerName" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">楼栋资源</label>
+                        <div class="col-sm-8">
+                            <input id="LouyuName" name="LouyuName" type="text" readonly value="" class="form-control" style="background-color: #FFF" onclick="showMenu();" />
+                            <input type="hidden" id="LouyuIdStr" name="LouyuIdStr" />
+                            <!--下拉列表-->
+                            <div id="ArrearsReportContainermenuContent" class="col-sm-8" style="display:none; position: absolute;top:59px;background:#FFF;z-index:1000">
+                                <ul id="ArrearsReportContainertreeDemo" class="ztree form-control" style="margin-top:0; height: 300px;overflow:auto;"></ul>
+                                <div style="text-align:center; padding-bottom:5px; padding-top:5px;">
+                                    <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuSelect()" value="全选">
+                                    <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuReset()" value="清除">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">欠费截止日期</label>
+                        <div class="col-sm-8">
+                            <div class="input-append date dateBeginMonth input-group">
+                                <input type="text" id="ChargeDate" name="ChargeDate" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" id="btnSearchArrearsReport" class="btn btn-primary" ng-click="searchClick()" value="查询">
+                        <input type="button" id="btnExportArrearsReport" class="btn btn-primary" ng-click="ArrearsReportExportData()" value="导出">
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+
+    @*<div id="divArrearsReportTable" />*@
+    <div class="row">
+        <div class="col-md-12">
+            <table id="testCustomer" ui-jq="dataTable" ui-options="testTableOptions" class="table table-striped">
+                <thead>
+                    <tr id="trTestThead"></tr>
+                </thead>
+                <tbody id="tbodyTest"></tbody>
+            </table>
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.ArrearsReportData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $("#DefaultComDeptId").val(ckFramework.ArrearsReportData.DefaultDeptId);
+        ckFramework.ArrearsReportTable = null;
+
+
+    </script>
+    <script type="text/javascript">
+        var setting = {
+            async: { //异步加载
+                type: "get",
+                enable: true,
+                url: getUrl
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick,
+                onCheck: onCheck
+            },
+            view: {
+                showIcon: false
+            }
+        };
+
+        function getUrl() {
+
+
+
+            var ComDeptId = $("#SearchContainerArrearsReport select[name='ComDeptIdStr']").val();
+            if (ComDeptId == null) {
+                ComDeptId = $("#SearchContainerArrearsReport input:hidden[name='DefaultComDeptId']").val();
+            }
+            else {
+                ComDeptId = ComDeptId.replace("number:", "");
+            }
+
+            return "PropertyMgr/Report/GetCommunityLouyuDeptList?ComDeptId=" + ComDeptId;
+        }
+
+        function beforeClick(treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("ArrearsReportContainertreeDemo");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            return false;
+        }
+
+        function GetbtnAllLouyuSelect() {
+            var zTree = $.fn.zTree.getZTreeObj("ArrearsReportContainertreeDemo");
+            zTree.checkAllNodes(true);
+            var nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerArrearsReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerArrearsReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function GetbtnAllLouyuReset() {
+            var treeObj = $.fn.zTree.getZTreeObj("ArrearsReportContainertreeDemo");
+            treeObj.checkAllNodes(false);
+            var cityObj = $("#SearchContainerArrearsReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerArrearsReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", "");
+            cityObj.prop("value", "");
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("ArrearsReportContainertreeDemo"),
+                nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerArrearsReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerArrearsReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function showMenu() {
+
+            var cityObj = $("#SearchContainerArrearsReport input[name='LouyuName']");
+            var cityOffset = $("#SearchContainerArrearsReport input[name='LouyuName']").offset();
+            //$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+            $("#ArrearsReportContainermenuContent").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#ArrearsReportContainermenuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+
+
+            if (!(event.target.id == "menuBtn" || event.target.id == "LouyuName" || event.target.id == "ArrearsReportContainermenuContent" || $(event.target).parents("#ArrearsReportContainermenuContent").length > 0)) {
+                hideMenu();
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+            var currentdate = new Date();
+            var y = currentdate.getFullYear();
+            var m = currentdate.getMonth() + 1;
+            var d = currentdate.getDate();
+            var date = y+'-'+ (m > 9?m:'0'+m) + '-'+ (d > 9?d:'0'+d);
+            $('#ChargeDate').val(date);
+
+            $.fn.zTree.init($("#ArrearsReportContainertreeDemo"), setting);
+
+            $("#SearchContainerArrearsReport select[name='ComDeptIdStr']").change(function () {
+                var cityObj = $("#SearchContainerArrearsReport input[name='LouyuName']");
+                var LouyuIdstr = $("#SearchContainerArrearsReport input:hidden[name='LouyuIdStr']")
+                LouyuIdstr.prop("value", "");
+                cityObj.prop("value", "");
+                var treeObj = $.fn.zTree.getZTreeObj("ArrearsReportContainertreeDemo");
+                treeObj.reAsyncChildNodes(null, "refresh");
+
+
+            });
+
+        });
+    </script>
+</div>

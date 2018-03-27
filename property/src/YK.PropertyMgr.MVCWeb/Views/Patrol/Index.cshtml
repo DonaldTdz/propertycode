@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+<div id="divPatrol">
+    <iframe id="ifPatrol" name="ifPatrol" src="@(ViewBag.PatrolSrc)"  frameborder="0" style="width: 96%;overflow: hidden"></iframe>
+</div>
+<script type="text/javascript" language="javascript">
+
+    $('#ifPatrol').height($(document).height() - 100);
+    //$(function () {
+    //    alert(11)
+    //    $("#ifPatrol").load(function () {
+    //        alert(22)
+    //        var mainheight = $(this).contents().find("body").height() + 30;
+    //        alert(mainheight);
+    //        $(this).height(mainheight);
+    //    });
+    //});
+
+</script>

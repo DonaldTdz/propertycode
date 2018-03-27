@@ -1,0 +1,70 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<# 
+	var manager = TemplateFileManager.Create(this);
+	string strProjectName = "PropertyMgr";
+#>
+<#
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.PropertyMgr.MVCWeb\Models\PropertyMgrTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var oAProjectTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='DomainEntity']");
+	manager.StartNewFile("I" + strProjectName + "UnitOfWork.cs");
+#>
+using KW.Sprite.Common.Repository;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+
+namespace YK.<#= strProjectName #>.RepositoryContract
+{
+    /// <summary>
+    /// 通过UnitOfWork对数据访问进行统一管理
+    /// </summary>
+    public partial interface I<#= strProjectName #>UnitOfWork : IUnitOfWork, IDisposable
+    {
+        #region Repository
+<#
+	foreach (XmlNode templateNode in oAProjectTemplateNodes)
+	{
+#>
+        I<#= templateNode.Attributes["Name"].Value #>Repository <#= templateNode.Attributes["Name"].Value #>Repository { get; }
+<# 
+	}
+#>
+        #endregion
+
+        /// <summary>
+        /// 直接执行Sql语句
+        /// </summary>
+        /// <param name="sql">Sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>执行结果</returns>
+        int ExecuteSqlCommand(string sql, params object[] parameters);
+
+        /// <summary>
+        /// 直接执行Sql语句
+        /// </summary>
+        /// <param name="transactionalBehavior">是否封装在存储过程中</param>
+        /// <param name="sql">Sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>执行结果</returns>
+        int ExecuteSqlCommand(TransactionalBehavior transactionalBehavior, string sql, params object[] parameters);
+
+		void AddRelation(string strTableName, string strKey1Name, string strKey2Name, object strKey1Value, object strKey2Value);
+    }
+}
+<#
+	manager.Process();
+#>
+

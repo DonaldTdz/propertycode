@@ -1,0 +1,47 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    .tale_text th, .tale_text tr {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+<div id="divPaymentTaskDetailBySubjectListController" ng-controller="PaymentTaskDetailBySubjectListController" >
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped tale_text">
+                <tbody>        
+                    <tr>
+                        <th>收费项目</th>
+                        <th>金额（含优惠）</th>
+                       
+                    </tr>
+                    <tr ng-repeat="item in PaymentTaskSubjectDataList" ng-style="item.GroupId == 3? TotalStyle : ''">
+                        <td>{{item.Name}}</td>
+                        <td>{{item.Amount | number:2}}</td>
+                      
+                    </tr>
+                    <tr ng-show="PaymentTaskSubjectDataList.length == 0">
+                        <td colspan="11" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.DayReportData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.DayReportTable = null;
+   $(document).ready(function () {
+
+         $('#btnOrgListSearchView').click(function()
+         {
+             var pageScope = angular.element(document.getElementById('PaymentTaskDetailBySubjectListController')).scope();
+             pageScope.GetPaymentTaskSubjectDataList();
+         });
+   });
+    </script>
+
+</div>

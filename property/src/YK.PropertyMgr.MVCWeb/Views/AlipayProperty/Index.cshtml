@@ -1,0 +1,95 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divAlipayPropertyIndexController" ng-controller="AlipayPropertyIndexController">
+
+
+    <div ng-show="IsShowPage">
+
+        <div ng-show="!IsOAuth">
+            <p style="color:red;font-size:30px;">该物业尚未授权支付宝缴费</p>
+            <input type="button" id="btnSplit" class="btn btn-primary btn-lg" ng-click="GetOAuthUrl()" value="授权">
+
+        </div>
+
+        <div ng-show="IsOAuth">
+            <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+
+                <li class="active">
+                    <a href="#tabAlipayAppAuthToken" role="tab" data-toggle="tab" onclick="AlipayAppAuthToken()" class="ng-binding">授权信息</a>
+                </li>
+                <li><a href="#tabAlipayCommunityList" role="tab" data-toggle="tab" onclick="AlipayCommunityList()" class="ng-binding">小区接入</a></li>
+                <li><a href="#tabAlipayCommunityBasicserviceList" role="tab" data-toggle="tab" onclick="AlipayCommunityBasicserviceList()" class="ng-binding">小区初始化</a></li>
+                <li><a href="#tabAlipayRoomList" role="tab" data-toggle="tab" onclick="AlipayRoomList()" class="ng-binding">房屋信息</a></li>
+                <li><a href="#tabAlipayChargeBillList" role="tab" data-toggle="tab" onclick="AlipayChargeBillList()" class="ng-binding">账单信息</a></li>
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabAlipayAppAuthToken">
+                    <div id="divAlipayAppAuthTokenContainerIndex"></div>
+                </div>
+
+                <div class="tab-pane active" id="tabAlipayCommunityList">
+                    <div id="divAlipayCommunityListContainer"></div>
+                </div>
+                <div class="tab-pane active" id="tabAlipayCommunityBasicserviceList">
+                    <div id="divAlipayCommunityBasicserviceListContainer"></div>
+                </div>
+                <div class="tab-pane active" id="tabAlipayRoomList">
+                    <div id="divAlipayRoomListContainer"></div>
+                </div>
+                <div class="tab-pane active" id="tabAlipayChargeBillList">
+                    <div id="divAlipayChargeBillistContainer"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            AlipayAppAuthToken();
+        });
+
+        
+        // var deptContainerService = ckFramework.GetAngularService('ArrearsReportIndexService');
+
+        //授权
+        function AlipayAppAuthToken() {
+
+            var deptContainerService = ckFramework.GetAngularService('AlipayPropertyService');
+            deptContainerService.ShowContainerContent('divAlipayAppAuthTokenContainerIndex', 'PropertyMgr/AlipayProperty/AlipayAppAuthTokenIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/AlipayProperty/AlipayAppAuthTokenIndexController.js'], 'divAlipayAppAuthTokenIndexController');
+        }
+        //小区接入
+        function AlipayCommunityList() {
+            var deptContainerService = ckFramework.GetAngularService('AlipayPropertyService');
+            deptContainerService.ShowContainerContent('divAlipayCommunityListContainer', 'PropertyMgr/AlipayProperty/AlipayCommunityList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/AlipayProperty/AlipayCommunityListController.js'], 'divAlipayCommunityListController');
+        }
+        //小区初始化
+        function AlipayCommunityBasicserviceList() {
+            var deptContainerService = ckFramework.GetAngularService('AlipayPropertyService');
+            deptContainerService.ShowContainerContent('divAlipayCommunityBasicserviceListContainer', 'PropertyMgr/AlipayProperty/AlipayBasicServiceList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/AlipayProperty/AlipayBasicerviceListController.js'], 'divAlipayBasicerviceListController');
+        }
+        //房间接入
+        function AlipayRoomList()
+        {
+            var DeptId = $('#SelectDeptId').val();
+            var deptContainerService = ckFramework.GetAngularService('AlipayPropertyService');
+            deptContainerService.ShowContainerContent('divAlipayRoomListContainer', 'PropertyMgr/AlipayProperty/AlipayRoomList?ProDeptId=' + DeptId, ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/AlipayProperty/AlipayRoomListController.js'], 'divAlipayRoomListController');
+        }
+        function AlipayChargeBillList()
+        {
+        
+            var deptContainerService = ckFramework.GetAngularService('AlipayPropertyService');
+            deptContainerService.ShowContainerContent('divAlipayChargeBillistContainer', 'PropertyMgr/AlipayProperty/AlipayChargeBillList?ProDeptId='+ $('#SelectDeptId').val(), ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/AlipayProperty/AlipayChargeBillListController.js'], 'divAlipayChargeBillListController');
+        }
+
+    </script>
+
+
+</div>
+

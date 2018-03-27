@@ -1,0 +1,61 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divReceiptBookIndexController" ng-controller="ReceiptBookIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+
+            <li class="active">
+            <a href="#tabReceiptBookManager" role="tab" data-toggle="tab" onclick="ReceiptBookManager()" class="ng-binding">票据配置</a></li>
+            <li>
+            <a href="#tabReceiptBookModifly" role="tab" data-toggle="tab" onclick="ReceiptBookModifly()" class="ng-binding">票据修改</a></li>
+            <li>
+            <a href="#tabReciptBookHistory" role="tab" data-toggle="tab" onclick="ReciptBookHistory()" class="ng-binding">日志</a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabReceiptBookManager">
+                <div id="divReceiptBookManagerContainerIndex"></div>
+            </div>
+
+            <div class="tab-pane active" id="tabReceiptBookModifly">
+                <div id="divReceiptBookModiflyContainerIndex"></div>
+            </div>
+            <div class="tab-pane active" id="tabReciptBookHistory">
+                <div id="divReciptBookHistoryContainerIndex"></div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ReceiptBookManager();
+
+        });
+
+       // var deptContainerService = ckFramework.GetAngularService('ReceiptBookIndexService');
+
+        //票据配置
+        function ReceiptBookManager() {
+
+            var deptContainerService = ckFramework.GetAngularService('ReceiptBookService');
+            deptContainerService.ShowContainerContent('divReceiptBookManagerContainerIndex', 'PropertyMgr/ReceiptBook/ReciptBookManagerList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ReceiptBook/ReciptBookManagerListController.js'], 'divReciptBookManagerListController');
+        }
+        //票据修改
+        function ReceiptBookModifly()
+        {
+
+            var deptContainerService = ckFramework.GetAngularService('ReceiptBookService');
+            deptContainerService.ShowContainerContent('divReceiptBookModiflyContainerIndex', 'PropertyMgr/ReceiptBook/ReceiptBookModifly', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ReceiptBook/ReceiptBookModiflyController.js'], 'divReceiptBookModiflyController');
+        }
+        //日志
+        function ReciptBookHistory() {
+
+            var deptContainerService = ckFramework.GetAngularService('ReceiptBookService');
+            deptContainerService.ShowContainerContent('divReciptBookHistoryContainerIndex', 'PropertyMgr/ReceiptBook/ReciptBookHistoryList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ReceiptBook/ReciptBookHistoryListController.js'], 'divReciptBookHistoryListController');
+        }
+
+
+
+    </script>
+</div>

@@ -1,0 +1,47 @@
+﻿
+// Generated helper templates
+// Generated items
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayChargeBillSynchronizerDetailDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayChargeBillSynchronizerDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayChargeBillDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayRoomDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayAPPAuthTokenDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayCommunityDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\AlipayApiRequestLogDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ClientPaymentLogDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ReceiptBookHistoryDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ReceiptBookDetailDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ReceiptBookDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\TemplatePrintRecordDetailDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\TemplatePrintRecordDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PaymentDiscountInfoDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\TicketSerialNumberDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ShareKeyDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ProvinceDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\CountyDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\CityDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\EntranceUserDetailDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\EntranceUserDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\EntranceLogDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\EntranceDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ChargBillShowDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ChargeBillRecordMatchingDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\RefundRecordDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ReceiptDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PrepayAccountExcelDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PrepayAccountShowDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\MeterReadRecordDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\MeterDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PaymentTaskDetailDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PaymentTasksDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PreferentialRecordDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PrepayAccountDetailDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PrepayAccountDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ChargeRecordDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ChargeSubjectSnaDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ChargBillDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\SubjectHouseRefDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\ChargeSubjectDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\NotificeConfigDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\PrepayAccountLogDTO.cs
+// D:\git\property\src\YK.PropertyMgr.ApplicationDTO\CommunityConfigDTO.cs

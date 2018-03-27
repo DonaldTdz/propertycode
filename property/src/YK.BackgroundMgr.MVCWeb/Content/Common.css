@@ -1,0 +1,60 @@
+/*ÊÖ»ú¶Ë×èÖ¹µ¯³öÓÒ¼ü*/
+body {
+    -webkit-touch-callout: none !important;
+}
+
+a {
+    -webkit-user-select: none !important;
+}
+
+.dataTables_wrapper .dataTables_length {
+    float: right;
+    position:static;
+}
+.dataTables_wrapper .dataTables_filter {
+    float:left;
+}
+
+.columnTool {
+    font-size: 20px;
+    margin-right: 10px;
+    padding: 0px;
+}
+
+.ckFormControlLable {
+    font-weight: 700;
+}
+
+.ckFormControl {
+    width: 98%;
+    margin: 2px;
+}
+
+.modal .modal-body {
+    max-height: 2000px;
+    overflow-y: auto;
+}
+
+.fade-in.ng-enter {
+    opacity: 0;
+}
+
+    .fade-in.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+
+    .ModalFormMagin
+    {
+        margin-right:0px !important;
+        margin-left:0px !important;
+        margin-bottom:10px !important;
+    }
+
+    .TreeLeftStyle{
+        color:white !important;
+    }
+
+.dataTables_processing {
+margin-top:60px !important;
+padding-bottom:20px;
+}

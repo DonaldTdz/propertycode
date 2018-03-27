@@ -1,0 +1,63 @@
+﻿<div id="divVacationViewController" ng-controller="VacationViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.VacationViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.createVacationFormData = {
+            FormId:'vacationViewForm',
+            DivContainer:$('#divContainer'),
+            TemplateItemDatas:ckFramework.VacationViewData.TemplateModels,
+            jumpFields:['Id'],
+            ColumnCount:2
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createVacationFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createVacationFormData);
+        });
+    </script>
+
+    <script type="text/javascript">
+        ckFramework.VacationViewPageService = (function (vacationViewPageService) {
+            var ValidateBaseVacation = function()
+            {
+                var vacationViewControllerScope = angular.element(document.getElementById('divVacationViewController')).scope();
+                return vacationViewControllerScope.Validate(ckFramework.createVacationFormData.FormId);
+            };
+
+            var SaveBaseVacation = function(isSetRemainSave,callback)
+            {
+                var vacationViewControllerScope = angular.element(document.getElementById('divVacationViewController')).scope();
+                vacationViewControllerScope.SaveData(callback);
+            };
+
+            var ChangedVacationEditType = function(newVacationId)
+            {
+                ckFramework.VacationViewData.VacationInfo.Id = newVacationId;
+                ckFramework.VacationViewData.ViewType = 'Edit';
+            }
+
+            vacationViewPageService.SaveCurrentPage = function()
+            {
+                if(ValidateBaseVacation())
+                {
+                    SaveBaseVacation(false,ChangedVacationEditType);
+                }
+            };
+
+            return vacationViewPageService;
+        }(ckFramework.VacationViewPageService || {}));
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>{{ClientMessage.VacationModalHeader}}</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divContainer" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">{{ClientMessage.Cancel}}</button>
+        <button type="button" class="btn btn-primary" onclick="ckFramework.VacationViewPageService.SaveCurrentPage()" ng-disabled="VacationViewData.ViewType == 'Look'">{{ClientMessage.Save}}</button>
+    </div>
+</div>

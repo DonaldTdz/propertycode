@@ -1,0 +1,232 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divMonthReportDetailController" ng-controller="MonthReportDetailController">
+    <div id="SearchContainerMonthtDetailReport" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="col-sm-3 control-label">小区</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="ComDeptIdStr" id="dllComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList"></select>
+                        <input type="hidden" id="hidDetailDefaultComDeptId" name="DefaultComDeptId" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">收费日期</label>
+                    <div class="col-sm-8">
+                        <div class="input-append date dateBeginMonth input-group">
+                            <input type="text" id="txtDetailChargeDate" name="ChargeDate" class="form-control">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-3 control-label">楼栋资源</label>
+                    <div class="col-sm-9">
+                        <input id="LouyuName" name="LouyuName" type="text" readonly value="" class="form-control" style="background-color: #FFF" onclick="showMenu();" />
+                        <input type="hidden" id="LouyuIdStr" name="LouyuIdStr" />
+                        <!--下拉列表-->
+                        <div id="MonthReportDetailmenuContent" class="col-sm-8" style="display:none; position: absolute;top:59px;background:#FFF;z-index:1000">
+                            <ul id="MonthReportDetailtreeDemo" class="ztree form-control" style="margin-top:0; height: 300px;overflow:auto;"></ul>
+                            <div style="text-align:center; padding-bottom:5px; padding-top:5px;">
+                                <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuSelect()" value="全选">
+                                <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuReset()" value="清除">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <input type="button" id="btnSearchMonthReportDetail" class="btn btn-primary" value="查询">
+                    <input type="button" id="btnExportMonthReportDetail" class="btn btn-primary" ng-click="MonthDetailReportExportData()" value="导出">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="divMonthReportDetailTable" />
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.MonthReportDetailData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $("#hidDetailDefaultComDeptId").val(ckFramework.MonthReportData.DefaultDeptId);
+        ckFramework.MonthReportDetailTable = null;
+
+        ckFramework.createMonthReportDetailData = {
+            TableId: 'table_ckFramework_MonthReportDetail',
+            Language: ckFramework.HomeData.Language,
+            TemplateItemDatas: ckFramework.MonthReportDetailData.TemplateModels,
+            DivTable: $('#divMonthReportDetailTable')
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createMonthReportDetailData);
+
+    </script>
+    <script type="text/javascript">
+        var setting = {
+            async: { //异步加载
+                type: "get",
+                enable: true,
+                url: getUrl
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick,
+                onCheck: onCheck
+            },
+            view: {
+                showIcon: false
+            }
+        };
+
+        function getUrl() {
+
+
+
+            var ComDeptId = $("#SearchContainerMonthtDetailReport select[name='ComDeptIdStr']").val();
+            if (ComDeptId == null) {
+                ComDeptId = $("#SearchContainerMonthtDetailReport input:hidden[name='DefaultComDeptId']").val();
+            }
+            else {
+                ComDeptId = ComDeptId.replace("number:", "");
+            }
+
+            return "PropertyMgr/Report/GetCommunityLouyuDeptList?ComDeptId=" + ComDeptId;
+        }
+
+        function beforeClick(treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("MonthReportDetailtreeDemo");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            return false;
+        }
+
+        function GetbtnAllLouyuSelect() {
+            var zTree = $.fn.zTree.getZTreeObj("MonthReportDetailtreeDemo");
+            zTree.checkAllNodes(true);
+            var nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerMonthtDetailReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerMonthtDetailReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function GetbtnAllLouyuReset() {
+            var treeObj = $.fn.zTree.getZTreeObj("MonthReportDetailtreeDemo");
+            treeObj.checkAllNodes(false);
+            var cityObj = $("#SearchContainerMonthtDetailReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerMonthtDetailReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", "");
+            cityObj.prop("value", "");
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("MonthReportDetailtreeDemo"),
+                nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerMonthtDetailReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerMonthtDetailReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function showMenu() {
+
+            var cityObj = $("#SearchContainerMonthtDetailReport input[name='LouyuName']");
+            var cityOffset = $("#SearchContainerMonthtDetailReport input[name='LouyuName']").offset();
+            //$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+            $("#MonthReportDetailmenuContent").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#MonthReportDetailmenuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+
+
+            if (!(event.target.id == "menuBtn" || event.target.id == "LouyuName" || event.target.id == "MonthReportDetailmenuContent" || $(event.target).parents("#MonthReportDetailmenuContent").length > 0)) {
+                hideMenu();
+            }
+        }
+
+
+
+
+
+        $(document).ready(function () {
+            $('.date').datetimepicker({
+                format: 'yyyy-mm',
+                minView: 3,
+                startView: 3
+            });
+            var currentdate = new Date();
+            var y = currentdate.getFullYear();
+            var m = currentdate.getMonth() + 1;
+            var d = currentdate.getDate();
+            var date = y + '-' + (m > 9 ? m : '0' + m);// + '-'+ (d > 9?d:'0'+d);
+            $('#txtDetailChargeDate').val(date);
+
+            ckFramework.MonthReportDetailTable = $('#' + ckFramework.createMonthReportDetailData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createMonthReportDetailData),
+                filterOptions: {
+                    searchButton: "btnSearchMonthReportDetail",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerMonthtDetailReport",
+                    Url: '@Url.PluginAction("PropertyMgr", "Report", "GetMonthReportDetailList")',
+                    DrawTable:function(){
+                        ckFramework.MonthReportDetailTable.draw();
+                    }
+                }
+            });
+
+            $.fn.zTree.init($("#MonthReportDetailtreeDemo"), setting);
+
+            $("#SearchContainerMonthtDetailReport select[name='ComDeptIdStr']").change(function () {
+                var cityObj = $("#SearchContainerMonthtDetailReport input[name='LouyuName']");
+                var LouyuIdstr = $("#SearchContainerMonthtDetailReport input:hidden[name='LouyuIdStr']")
+                LouyuIdstr.prop("value", "");
+                cityObj.prop("value", "");
+                var treeObj = $.fn.zTree.getZTreeObj("MonthReportDetailtreeDemo");
+                treeObj.reAsyncChildNodes(null, "refresh");
+
+
+            });
+
+
+
+        });
+    </script>
+</div>

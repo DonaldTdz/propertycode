@@ -1,0 +1,59 @@
+page-payment {
+    .payment_title{
+        margin-top: 3vh;
+        margin-bottom: 1vh;
+        font-size: $large_small_font;
+        color: $color_white;
+        span{
+            color: $color_yellow;
+        }
+    }
+
+    .payment_tips{
+        font-size: $middle_md_font;
+        color: $color_white;
+        margin: 0;
+    }
+
+    .payment_scan_total{
+        background: transparent;
+        margin: 10vh auto 0 auto;
+        display: flex;
+        max-width: 80vh;
+        .payment_wechat{
+            width: 25vh;
+
+            .payment_wechat_img{
+                position: relative;
+                width: 25vh;
+                height: 25vh;
+                padding: 10px;
+                background: #ffffff;
+                img{
+                    width: 100%
+                }
+
+                .payment_wechat_icon{
+                    width: 50px;
+                    position: absolute;
+                    top: 10vh;
+                    left: 10vh;
+                }
+            }
+        }
+
+        .payment_wechat_text{
+            background: $color_green_dark;
+            text-align: center;
+            margin: -2px 0 0 0 !important;
+            color: $color_white;
+            height: 40px;
+            line-height: 40px;
+            font-size: $middle_large_font;
+        }
+
+        .payment_pay_text{
+            background: $color_blue;
+        }
+    }
+}

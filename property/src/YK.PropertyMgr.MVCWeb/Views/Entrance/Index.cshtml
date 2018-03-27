@@ -1,0 +1,119 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divEntranceListController" ng-controller="EntranceListController">
+
+    <div id="SearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>设备名称</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="Name" />
+                </div>
+                <div class="col-md-4">
+                    <label>状态</label>
+
+                    <select class="form-control" name="State">
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <input type="button" id="btnOrgListSearch" class="btn btn-primary" value="查询">
+        </div>
+        <div class="box-footer1">
+        </div>
+    </div>
+    <div id="divToolbar" class="pull-left">
+        <a class="btn btn-app" ng-if="CheckPermission('AddEntrance')" ng-click="ShowEntranceView('Add',0)">
+            <i class="fa fa-pencil pull-left"></i>新增
+        </a>
+    </div>
+    <div id="divEntranceListTable" />
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.EntranceListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.EntranceViewUrlAdd  = '@Url.PluginAction("PropertyMgr", "Entrance", "EntranceViewAdd")';
+        ckFramework.EntranceViewUrlEdit = '@Url.PluginAction("PropertyMgr", "Entrance", "EntranceViewEdit")';
+        ckFramework.EntranceViewUrlLook = '@Url.PluginAction("PropertyMgr", "Entrance", "EntranceViewLook")';
+
+        ckFramework.EntranceTable = null;
+        ckFramework.createEntranceListData = {
+            TableId:'table_ckFramework_EntranceList',
+            IsAddOperate:JQCheckPermission("EditEntrance"),
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.EntranceListData.TemplateModels,
+            DivTable:$('#divEntranceListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60,
+                "render": function(data)
+                {
+                    var editContent = "";
+                    var deleteContent = "";
+                    var notBind = "";
+
+                    if (JQCheckPermission("EditEntrance")) {
+                        editContent = '<a herf="#" class="btn columnTool Edit"><i class="ui-tooltip fa fa-edit" data-original-title="Edit"></i></a>'
+                    }
+                    if (JQCheckPermission("NotBind")) {
+                        notBind = '<a herf="#" class="btn columnTool NotBind" onclick="NoBind('+data.Id+',\''+data.Name+'\')" ><i class="ui-tooltip  fa  fa-key" data-original-title="NotBind"></i></a>'
+                    }
+                    return editContent + deleteContent+notBind;
+                }
+            }
+        };
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createEntranceListData);
+    </script>
+    <script type="text/javascript">
+        function NoBind(obj,name)
+        {   var url=   "PropertyMgr/Entrance/NotBind";
+            ckFramework.ModalHelper.Confirm("确定要解除锁和大门“"+name+"”的关系么?",function(){
+                $.post(url,{ entranceId:obj },function(data){
+                    if (data.IsSuccess) {
+                        ckFramework.ModalHelper.Alert(data.Msg);
+                        $("#btnOrgListSearch").click();
+                    }else{
+                        ckFramework.ModalHelper.Alert(data.Msg);
+                    }
+                });
+            });
+        }
+        $(document).ready(function () {
+            ckFramework.EntranceTable = $('#' + ckFramework.createEntranceListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createEntranceListData),
+                filterOptions: {
+                    searchButton: "btnOrgListSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "Entrance", "GetEntrances")',
+                    DrawTable:function(){
+                        ckFramework.EntranceTable.draw();
+                    }
+                }
+            });
+            $('#'+ ckFramework.createEntranceListData.TableId +' tbody').on('click', '.Edit', function () {
+
+                var data = ckFramework.EntranceTable.rows($(this).parents('tr')).data();
+                var entranceListService = ckFramework.GetAngularService('EntranceListService');
+                entranceListService.ShowEntranceView('Edit', data[0].Id);
+            });
+            //$('#'+ ckFramework.createEntranceListData.TableId +' tbody').on('click', '.NotBind', function () {
+
+            //    var data = ckFramework.EntranceTable.rows($(this).parents('tr')).data();
+            //    var confirm=confirm("请谨慎操作解除绑定，您确定要解除当前大门的锁么？");
+            //    if(confirm==true)
+            //    {
+            //        /*document.write("恭喜你答对了！");*/
+            //        alert("恭喜你答对了！");
+            //        begin();
+            //    }
+            //});
+            $("div.toolbar").html($('#divToolbar'));
+            $('#SearchContainer').click();
+        });
+    </script>
+
+</div>

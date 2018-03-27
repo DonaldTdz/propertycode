@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+<<<<<<< HEAD
+    <script src="jquery-1.10.2.min.js"></script>
+    <script>
+        var url = "http://localhost:18618/api/PropertyService/";
+=======
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript">
+        var url = "http://localhost:18618/api/PropertyClient/";
+>>>>>>> dev
+        //var url = "http://propertytest2.cloudkay.net/api/PropertyCharge/";
+        //var url = "http://localhost:8087/api/PropertyCharge/"
+        //旧接口PayChargePlanMoney
+        //var url = "http://propertytest2.cloudkay.net/api/PropertyService/";
+        function PaymentPost() {
+            $.ajax({
+                url: url + "PaymentPost",
+                type: "post",
+                //data: {
+                //    BillIds: ['ca94a7cc-5e87-44b5-9b3d-527ddbf85f92'], PayType: 6, CustomerName: "李燕"
+                //    , DiscountInfo: {
+                //        DiscountType: 1, DiscountDesc: "欢天喜地0.01元优惠券", DiscountAmount: 0.01
+                //        , RefId: 3191, UserId: "48b57f68-bb0e-4b3b-b620-136365c8eb58"
+                //    }
+                //},
+                data: { "CustomerName": "OK", "DiscountInfo": { "DiscountType": 1, "DiscountDesc": "物业费满减券", "DiscountAmount": 0.0100, "RefId": "3190", "UserId": "48b57f68-bb0e-4b3b-b620-136365c8eb58" }, "BillIds": ["134e78d8-7665-4241-a143-4d04a11a27d2"], "PayType": 6 },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        function PaymentPostCheck() {
+            $.ajax({
+                url: url + "AppPaymentPostCheck",
+                type: "post",
+                data: { BillIds: ['65e6e8bd-4b03-4745-bc71-4d57260cc322'], PayType: 6 },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+        // 旧接口名GetIdToChargePlan
+        function GetBillListByIds() {
+            $.ajax({
+                url: url + "GetBillListByIds",
+                type: "get",
+                data: { BillIds: '952f21f7-886e-4f6b-9ca3-d5b480fb60ec,a07a8c5f-ea22-4d84-a2e9-7f73e68f3458' },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+        function get() {
+            $.ajax({
+                url: url + "get",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(data);
+                    console.log(data);
+                }
+            });
+        }
+        //旧接口名GetChatChargeSubjectId
+        function GetChargeSubjectByComDeptId() {
+            $.ajax({
+                url: url + "GetChargeSubjectByComDeptId",
+                type: "get",
+                data: { ComDeptId: 14438 },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+
+        function GetOwnerByValidatePhonerNumber() {
+            $.ajax({
+                url: url + "GetOwnerByValidatePhonerNumber",
+                type: "get",
+                data: {RoomId:118997, BindingPhonerNumber: "4084" },
+                dataType: "json",
+                success: function (data) {
+                    alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+
+        function CarportChangeNotice() {
+            $.ajax({
+                url: url + "CarportChangeNotice",
+                type: "post",
+                data: { HouseDeptId: 33357, CarportId: 4234, ActionStatus: 1, RelieveOperator:-1},
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        //旧接口名GetRoomToChargePlan
+        function GetChargBillListByHouseDeptId() {
+            $.ajax({
+                url: url + "GetChargBillListByHouseDeptId?houseDeptId=34768&state=2&subjectId=0&beginDate=&endDate=2017/12/31",
+                type: "get",
+               // data: { houseDeptId: 5534768, state: 2, subjectId: 0, beginDate: "", endDate: "2016-11-02" },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        
+        function ChangeBindPost() {
+            var data = { "APIEntrancList": '[{ "EntranceId": 2046, "NewKeyId": 3 }, { "EntranceId": 2045, "NewKeyId": 4 }]' };
+            $.ajax({
+                url: url + "ChangeEntranceKey",
+                type: "post",
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+        var url2 = "http://localhost:18618/api/ShareKeyService/";
+        //var url2 = "http://localhost:18618/api/ShareKeyService/AddShareKeys?keyDate=2017-05-25&setNums=1&userId=F8EB60DE-FA97-4451-882B-3B8249E2E74D&keys=0,0,0,0,0,0,5128,5129,5131,5140,5171";
+        //var url2 = "http://propertytest2.cloudkay.net/api/ShareKeyService/";
+        function AddShareKeys() {
+            $.ajax({
+                url: url2 + "AddShareKeys",
+                type: "post", 
+                data: {
+                    "keyDate": "2017-05-25",
+                    "setNums": "1",
+                    "userId": "F8EB60DE-FA97-4451-882B-3B8249E2E74D",
+                    "keys": "0,0,0,0,0,0,5128,5129,5131,5140,5171"
+                },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        function GetShareKeys() {
+            $.ajax({
+                url: url2 + "GetShareKeys",
+                type: "post",
+                data: { shareKey:"D/Cy4Pst7iv6dfyO+uO5S5ZW9unkD3/XU4nhdncPIUX4JwiiMiCT/nucGz4F57BeqpLAjEriIjzdsaSHVvtldPDhkQxkmNWsHX4SPkfKfStWPW7GARCMqg=="},
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        
+
+        function SubjectPreCostPost() {
+            $.ajax({
+                url: url + "SubjectPreCostPost",
+                type: "post",
+                data: {
+                    ComDeptId: 113344, HouseDeptId: 118998, Month: 2,
+                    SubjectIds: null, ManualSubjectPreCostList:[{ SubjectId: 7, PreCost:80}],PaymentAmount: 80, PayType: 5, CustomerName: "唐德舟",
+                    DiscountInfo: null
+                },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        function SubjectPreCostPostCheck() {
+            $.ajax({
+                url: url + "SubjectPreCostPostCheck",
+                type: "post",
+                data: {
+                    ComDeptId: 113344, HouseDeptId: 118998, Month: 2,
+                    SubjectIds: [6], ManualSubjectPreCostList:[{ SubjectId: 7, PreCost: 80 }], PaymentAmount: 92, PayType: 5, CustomerName: "唐德舟",
+                    DiscountInfo: null
+                },
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        //var durl = "http://localhost:52900/api/JiCloud/";
+        var durl = "http://znmsapitest2.cloudkay.net/api/JiCloud/";
+        //var durl = "http://localhost:8086/api/JiCloud/";
+        function AddDevices() {  
+            var zdata = { toZNMSdatas: '[{ "doorId": 2056, "number": "211104780102" }]'};
+            //var zdata = {toZNMSdatas:'[{"doorId":2058,"number":"211111111111"}]'};
+            //var zdata = '{ toZNMSdatas: \'[{ "doorId": 2058, "number": "211111111111" }]\' }';
+            $.ajax({
+                url: durl + "AddDevices",
+                type: "post",
+                data: zdata,
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        function BindLogout() {
+            var zdata = { toZNMSdatas: "21110956011b" };
+            //var zdata = {toZNMSdatas:'[{"doorId":2058,"number":"211111111111"}]'};
+            //var zdata = '{ toZNMSdatas: \'[{ "doorId": 2058, "number": "211111111111" }]\' }';
+            $.ajax({
+                url: durl + "BindLogout",
+                type: "post",
+                data: zdata,
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        function GetDoorByNumber() {
+            var zdata = { toZNMSdatas: "[{number: \"21110956011d\" }]"};
+            $.ajax({
+                url: durl + "GetDoorByNumber",
+                type: "post",
+                data: zdata,
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+
+        //var nurl = "http://localhost:18618/api/EntranceBind/";
+        var nurl = "http://propertytest2.cloudkay.net/api/EntranceBind/";
+        function NoBindKey() {
+            var zdata = { APIEntrancList: '[{"EntranceId":2046, "NewKeyId":7174}]' };
+            $.ajax({
+                url: nurl + "NoBindKey",
+                type: "post",
+                data: zdata,
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        var tturl = "http://propertytest2.cloudkay.net/api/ZNMSService/";
+        //var tturl = "http://localhost:18618/api/ZNMSService/"
+        function GetKeysByOwnerId() {
+            var data = { userOwnerId: 'D8C517ED-AFFA-4174-A64A-C8D234110B78' };
+            $.ajax({
+                url: tturl + "GetKeysByOwnerId",
+                type: "post",
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    //alert(data)
+                    $("#divResult").html(JSON.stringify(data));
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="inputTest" value="自助交款" onclick="PaymentPost()" />
+    <input type="button" id="inputTest1" value="获取账单列表" onclick="GetBillListByIds()" />
+    <input type="button" id="inputTest2" value="获取小区缴费项目" onclick="GetChargeSubjectByComDeptId()" />
+    <input type="button" id="inputTest3" value="根据条件获取账单列表" onclick="GetChargBillListByHouseDeptId()" />
+    <input type="button" id="inputTest4" value="test" onclick="get()" />
+    <input type="button" id="inputTest5" value="自助交款验证" onclick="PaymentPostCheck()" />
+    <input type="button" id="inputTest6" value="CarportChangeNotice" onclick="CarportChangeNotice()" />
+    <input type="button" id="AddShareKeys" value="AddShareKeys" onclick="AddShareKeys()" />
+    <input type="button" id="GetShareKeys" value="GetShareKeys" onclick="GetShareKeys()" />
+    <input type="button" id="SubjectPreCostPost" value="SubjectPreCostPost" onclick="SubjectPreCostPost()" />
+    <input type="button" id="SubjectPreCostPostCheck" value="SubjectPreCostPostCheck" onclick="SubjectPreCostPostCheck()" />
+    <br />
+    <div id="divResult"></div>
+    <div>
+        <input type="button" id="AddDevices" value="AddDevices" onclick="AddDevices()" />
+        <input type="button" id="BindLogout" value="BindLogout" onclick="BindLogout()" />
+        <input type="button" id="NoBindKey" value="NoBindKey" onclick="NoBindKey()" />
+        <input type="button" id="GetDoorByNumber" value="GetDoorByNumber" onclick="GetDoorByNumber()" />
+    </div>
+    <div>
+        <input type="button" id="GetKeysByOwnerId" value="GetKeysByOwnerId" onclick="GetKeysByOwnerId()" />
+    </div>
+    <div>
+        <input type="button" id="GetOwnerByBindingPhonerNumber" value="GetOwnerByBindingPhonerNumber" onclick="GetOwnerByBindingPhonerNumber()" />
+    </div>
+    <div>
+        <input type="button" id="GetOwnerByValidatePhonerNumber" value="GetOwnerByValidatePhonerNumber" onclick="GetOwnerByValidatePhonerNumber()" />
+    </div>
+</body>
+</html>

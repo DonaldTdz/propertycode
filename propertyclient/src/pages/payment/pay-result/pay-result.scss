@@ -1,0 +1,38 @@
+page-pay-result {
+    .pay_result_total{
+        width: 60%;
+        text-align: center;
+        margin:  15vh auto;
+
+        .pay_result_img{
+            width: 20%;
+            margin: 0 auto;
+
+            img{
+                max-width: 150px;
+            }
+        }
+
+        .pay_result_title{
+            font-size: $large_small_font;
+            margin: 1vh 0;
+        }
+
+        .pay_reuslt_tips{
+            font-size: $middle_md_font;
+            margin: 0;
+        }
+
+        // 重试按钮样式
+        .pay_result_reset{
+            margin: 3vh auto;
+            display: block;
+            height: 8vh;
+            width: 33vh;
+            background: url($img-path + 'reset_icon.png') no-repeat;
+            background-size: cover;
+            color: $color_white;
+            font-size: $middle_large_font;
+        }
+    }
+}

@@ -1,0 +1,116 @@
+﻿@using YK.FrameworkTools.PluginService;
+
+<div id="divAlipayRoomListController" ng-controller="AlipayRoomListController">
+    <div id="SearchContainerAlipayRoom" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label>小区</label>
+                    <select class="form-control" name="ComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in CommunityDeptList"></select>
+                    <input type="hidden" id="DefaultComDeptId" name="DefaultComDeptId" />
+
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <input type="button" id="btnSearchAlipayRoom" class="btn btn-primary" value="查询">
+                        <input type="button" id="btnExportAlipayRoom" class="btn btn-primary" ng-click="ShowUploadAlipayRoomView()" value="上传房屋">
+                        <input type="button" id="btnExportAlipayRoom" class="btn btn-primary" ng-click="BatchDelete()" value="批量删除">
+                        <input type="button" id="btnExportAlipayRoom" class="btn btn-primary" ng-click="SynchronizationRoomInfo()" value="数据同步">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="divAlipayRoomTable" />
+
+
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.AlipayRoomListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            ckFramework.AlipayRoomViewUrlAdd = '@Url.PluginAction("PropertyMgr", "AlipayRoom", "AlipayRoomViewAdd")';
+            ckFramework.AlipayRoomViewUrlEdit = '@Url.PluginAction("PropertyMgr", "AlipayRoom", "AlipayRoomViewEdit")';
+            ckFramework.AlipayRoomViewUrlShow = '@Url.PluginAction("PropertyMgr", "AlipayRoom", "AlipayRoomDetailShowView")';
+            $("#SearchContainerAlipayRoom input:hidden[name='DefaultComDeptId']").val(ckFramework.AlipayRoomListData.DefaultComDeptId);
+               
+            ckFramework.InitAlipayRoom = function () {
+
+                $('btnSearchAlipayRoom').click();
+            }
+        ckFramework.createAlipayRoomListData = {
+            TableId:'table_ckFramework_AlipayRoomList',
+            IsAddOperate:true,
+            IsAddAllCheck:true,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas: ckFramework.AlipayRoomListData.TemplateModels,
+            DivTable:$('#divAlipayRoomTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":100,
+                "render": function(data)
+                {
+
+                    var content = '<input type="checkbox" name="AlipayRoomCheck" data="'+data.Id+'" >'
+                    return content;
+                }
+        }
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createAlipayRoomListData);
+
+        function allTableCheck(a)
+        {
+                 var Ischeck= $("#tableallCheck").prop("checked");
+                $("#table_ckFramework_AlipayRoomList").find("input[type='checkbox']").each(function () {
+
+                        if(Ischeck)
+                        {
+                           $(this).prop("checked",true);
+                        }
+                        else
+                        {
+                           $(this).prop("checked",false);
+                        }
+
+                });
+
+
+        }
+
+
+        $(document).ready(function () {
+
+
+
+            ckFramework.AlipayRoomTable = $('#' + ckFramework.createAlipayRoomListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createAlipayRoomListData),
+                filterOptions: {
+                    searchButton: "btnSearchAlipayRoom",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerAlipayRoom",
+                    Url: '/PropertyMgr/AlipayProperty/GetAlipayRoomList',
+                    DrawTable:function(){
+                        ckFramework.AlipayRoomTable.draw();
+                    }
+                }
+
+            });
+
+
+
+
+
+
+            $("div.toolbar").html($('#divToolbar'));
+
+        });
+    </script>
+</div>
+

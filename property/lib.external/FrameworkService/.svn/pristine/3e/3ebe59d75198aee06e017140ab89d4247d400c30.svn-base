@@ -1,0 +1,1521 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YK_PaySys_Entity</name>
+    </assembly>
+    <members>
+        <member name="T:YK_PaySys_Entity.ALPayConfig">
+            <summary>
+            支付宝配置
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.WYId">
+            <summary>
+            物业Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.WYName">
+            <summary>
+            物业名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Partner">
+            <summary>
+            合作身份者ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.ALKey">
+            <summary>
+            交易安全检验码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Seller_id">
+            <summary>
+            卖家支付宝账号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Private_key">
+            <summary>
+            商户的私钥
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Public_key">
+            <summary>
+            支付宝的公钥
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Input_charset">
+            <summary>
+            字符编码格式
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.Sign_type">
+            <summary>
+            签名方式（不起作用）
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.ALPayConfig.APPID">
+            <summary>
+            APPID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceUserLS.UserTotalBalance">
+            <summary>
+            个人钱总额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceUserLS.TotalPage">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceUserLS.Counts">
+            <summary>
+            总记录数
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceUserLS.BalanceUserLSDetail">
+            <summary>
+            初次加载的个人钱包明细
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.ID">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PrivilegeScenario">
+            <summary>
+            优惠场景/// 充值 = 101
+            线上消费 = 201
+            线下消费 = 301
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PrivilegeType">
+            <summary>
+            优惠类型/// 折扣 = 101
+            现金赠送 = 201
+            优惠券 = 301
+            积分 = 401
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PrivilegeContent">
+            <summary>
+            优惠内容/// 一条优惠内容之间，用“;”号隔开，优惠内容内部，用“,”号隔开，如：满100送5元，满300送20元
+            100,5;300,20;
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PrivilegeContentText">
+            <summary>
+            优惠内容显示/// 一条优惠内容之间，用“;”号隔开，优惠内容内部，用“,”号隔开，如：满100送5元，满300送20元
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PropertyIds">
+            <summary>
+            物业ID集合/// 用“;”号隔开，如：1;2;3;
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PropertyNames">
+            <summary>
+            物业名称集合/// 用“;”号隔开
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.CommunityIds">
+            <summary>
+            小区ID集合/// 小区ID之间用“;”隔开
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.CommunityCodes">
+            <summary>
+            小区Code集合/// 小区Code之间用“;”隔开
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.CommunityNames">
+            <summary>
+            小区名称集合/// 小区名称之间用“;”隔开
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.MerchantIds">
+            <summary>
+            商家Id集合/// 商家ID之间用“;”隔开
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.MerchantNames">
+            <summary>
+            商家名称集合/// 商家名称之间用“;”隔开
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.IsUsed">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceRule.PersonalCountLimit">
+            <summary>
+            个人领取上限
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.ID">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.Red_ID">
+            <summary>
+            红包ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.GotCount">
+            <summary>
+            已领取总数
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.LastDayGotCount">
+            <summary>
+            最后一天领取数量
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalRedPacketStatistics.LastUpdateTime">
+            <summary>
+            最后修改时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketLog.ID">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketLog.Red_ID">
+            <summary>
+            红包规则外键
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketLog.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketLog.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketLog.GotValue">
+            <summary>
+            领取数值
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketLog.GotTime">
+            <summary>
+            领取时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.ID">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.RedPacketScenario">
+            <summary>
+            规则适用场景/// 门禁 = 101
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.PropertyIds">
+            <summary>
+            物业ID集合
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.PropertyNames">
+            <summary>
+            物业名称集合
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.CommunityIds">
+            <summary>
+            小区ID集合
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.CommunityCodes">
+            <summary>
+            小区Code集合
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.CommunityNames">
+            <summary>
+            小区名称集合
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.RedPacketName">
+            <summary>
+            红包名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.RedPacketCount">
+            <summary>
+            红包总数
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.MaxMoney">
+            <summary>
+            最大发放金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.GotCount">
+            <summary>
+            已领取数量
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.GotMoney">
+            <summary>
+            已发放金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.Probability">
+            <summary>
+            获取概率
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.RedPacketType">
+            <summary>
+            红包类型/// 现金 = 101
+            积分 = 201
+            优惠券 = 301
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.PersonalDayCountLimit">
+            <summary>
+            人日个数限制
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.PersonalCountLimit">
+            <summary>
+            每人总数限制
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.RandomStartLimit">
+            <summary>
+            随机范围开始限制
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.RandomEndLimit">
+            <summary>
+            随机范围结束限制
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.CouponId">
+            <summary>
+            优惠券Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.CouponName">
+            <summary>
+            优惠券名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.Weightiness">
+            <summary>
+            权重/// 1-10
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.IsUsed">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.WishTagId">
+            <summary>
+            祝福语分类Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.ADId">
+            <summary>
+            广告Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.ADName">
+            <summary>
+            广告名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.RedPacketRule.NamingMerchant">
+            <summary>
+            冠名商
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.BalanceStatistics">
+            <summary>
+            钱包流水
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.ID">
+            <summary>
+            序号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.WYName">
+            <summary>
+            物业名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.XQName">
+            <summary>
+            小区名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.AlipayIn">
+            <summary>
+            支付宝充值金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.WechatPayIn">
+            <summary>
+            微信充值金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.BalanceIn">
+            <summary>
+            充值金额合计
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.OnlineOut">
+            <summary>
+            线上支付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.OfflineOut">
+            <summary>
+            线下支付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceStatistics.BalanceOut">
+            <summary>
+            支付金额合计
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.BalanceLS">
+            <summary>
+            钱包流水
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.ID">
+            <summary>
+            ID 标识 钱包流水
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.SumPrice">
+            <summary>
+            应收应付总金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.Price">
+            <summary>
+            实收实付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.PrivilegeValue">
+            <summary>
+            优惠金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.Creatime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.PersonalCenterID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.Type">
+            <summary>
+            类型 支付 冲入
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.BalanceNumber">
+            <summary>
+            余额流水编码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.YXBalance">
+            <summary>
+            钱包余额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.CZType">
+            <summary>
+            充值类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.BalanceName">
+            <summary>
+            钱包流水名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.PrivilegeType">
+            <summary>
+            优惠类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.PrivilegeContent">
+            <summary>
+            优惠内容
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.RuleId">
+            <summary>
+            优惠券关联Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.BalanceLS.NumericalNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Card">
+            <summary>
+            卡片
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.CardCenterId">
+            <summary>
+            发卡中心Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.Number">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.IsExchange">
+            <summary>
+            是否已兑换
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.PersonalCenterID">
+            <summary>
+            个人中心Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Card.ExchangeTime">
+            <summary>
+            兑换时间
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.CardCenter">
+            <summary>
+            发卡中心
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.CardName">
+            <summary>
+            发卡名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.CardType">
+            <summary>
+            发卡类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.Price">
+            <summary>
+            发卡金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.Num">
+            <summary>
+            发卡数量
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.CardCenter.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.ERedPacketType">
+            <summary>
+            红包类型
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.ERedPacketScenario">
+            <summary>
+            规则适用场景
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.EPrivilegeType">
+            <summary>
+            优惠类型
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.EPrivilegeScenario">
+            <summary>
+            优惠场景
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Emun.ECardType">
+            <summary>
+            发卡类型
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Emun.ECarType">
+            <summary>
+            卡类型
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Emun.ECZType">
+            <summary>
+            充值类型
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Emun.EPayScenario">
+            <summary>
+            支付场景
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Emun.ESysState">
+            <summary>
+            系统状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.RequestIP">
+            <summary>
+            请求IP
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.RequestUrl">
+            <summary>
+            请求URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.RequestDate">
+            <summary>
+            请求时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.RequestFromSys">
+             <summary>
+            来自系统
+             </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.NumericalNumber">
+            <summary>
+            订单流水
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.Msg">
+            <summary>
+            日志信息
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.TradeNo">
+            <summary>
+            支付流水号  第三方
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalLog.IsTB">
+            <summary>
+            是否同步
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.NumericalMsg">
+            <summary>
+            交易流水
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.ID">
+            <summary>
+            自增ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.NumericalNumber">
+            <summary>
+            交易流水号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.CreatTime">
+            <summary>
+            交易时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.SumPrice">
+            <summary>
+            交易总价
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.PayPrice">
+            <summary>
+            支付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.BalancePrice">
+            <summary>
+            钱包抵扣金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.State">
+            <summary>
+             0--交易中  1--交易成功 -1--交易失败
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.Msg">
+            <summary>
+            流水信息
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.GoUrl">
+            <summary>
+            返回URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.NotifyUrl">
+            <summary>
+            异步通知URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.CallBackUrl">
+            <summary>
+            同步通知URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.RequestFromSys">
+            <summary>
+            请求来源
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.PayType">
+            <summary>
+            支付类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.PersonalCenterID">
+            <summary>
+            用户ID    
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.CarNumber">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.PayConfigId">
+            <summary>
+            支付配置Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.WxPayConfigId">
+            <summary>
+            微信支付配置Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.BalanceRuleId">
+            <summary>
+            钱包优惠规则Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsg.PayScenario">
+            <summary>
+            支付场景，默认为线上支付
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.NumericalMsgOrderView">
+            <summary>
+            订单流水详情
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.NumericalNumber">
+            <summary>
+            流水编码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.CreatTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.SumPrice">
+            <summary>
+            总价
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.PayPrice">
+            <summary>
+            支付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.BalancePrice">
+            <summary>
+            钱包抵扣金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.Msg">
+            <summary>
+            信息
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.RquestFromSys">
+            <summary>
+            系统来源
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.PayType">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.CarNumber">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.NumericalMsgOrderView.OrderList">
+            <summary>
+             订单列表
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.OrderNumerical.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.OrderNumerical.NumericalNumber">
+            <summary>
+            支付流水号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.OrderNumerical.OrderNumber">
+            <summary>
+            订单编号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.OrderNumerical.OrderPrice">
+            <summary>
+            订单价钱
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.OrderNumerical.OrderName">
+            <summary>
+            订单名称
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.PayResultDisplay">
+            <summary>
+            交易详情（充值成功，收支明细显示返回结果）
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PayResultDisplay.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PayResultDisplay.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PayResultDisplay.PayResultDetails">
+            <summary>
+            交易详情详细
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.PaySuccessResultDetail">
+            <summary>
+            交易详情详细
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PaySuccessResultDetail.Field">
+            <summary>
+            字段名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PaySuccessResultDetail.CnName">
+            <summary>
+            显示名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PaySuccessResultDetail.Value">
+            <summary>
+            显示值
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Name">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.NickName">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Address">
+            <summary>
+            用户地址
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Phone">
+            <summary>
+            用户联系电话
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.SumPrice">
+            <summary>
+            应收应付总金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Price">
+            <summary>
+            实收实付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.PrivilegeValue">
+            <summary>
+            优惠金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Balance">
+            <summary>
+            用户余额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.WYId">
+            <summary>
+            物业ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.WYName">
+            <summary>
+            物业名字
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.XQId">
+            <summary>
+            小区ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.XQName">
+            <summary>
+            小区名字
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.ID">
+            <summary>
+            ID 标识 钱包流水
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Creatime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.PersonalCenterID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.Type">
+            <summary>
+            类型 支付 冲入
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.BalanceNumber">
+            <summary>
+            余额流水编码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.YXBalance">
+            <summary>
+            钱包余额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalBalanceLSView.CZType">
+            <summary>
+            充值类型
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.PersonalCar">
+            <summary>
+            用户绑定卡信息
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.ID">
+            <summary>
+            ID 标识
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.CarNumber">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.Pwd">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.CarType">
+            <summary>
+            卡类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.CreatDate">
+            <summary>
+            绑定时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.PayPwd">
+            <summary>
+            支付密码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.PersonalCenterID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.CarName">
+            <summary>
+            卡名字
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCar.CarImage">
+            <summary>
+            卡图片
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.PersonalCenter">
+            <summary>
+            个人中心
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.ID">
+            <summary>
+            个人中心
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.Name">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.NickName">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.Address">
+            <summary>
+            用户地址
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.Phone">
+            <summary>
+            用户联系电话
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.Balance">
+            <summary>
+            用户余额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.WYId">
+            <summary>
+            物业ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.WYName">
+            <summary>
+            物业名字
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.XQId">
+            <summary>
+            小区ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenter.XQName">
+            <summary>
+            小区名字
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.Name">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.NickName">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.Address">
+            <summary>
+            用户地址
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.Phone">
+            <summary>
+            用户联系电话
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.Balance">
+            <summary>
+            用户余额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.CarNumber">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.Pwd">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.CarType">
+            <summary>
+            卡类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.CreatDate">
+            <summary>
+            绑定时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.PayPwd">
+            <summary>
+            支付密码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.PersonalCenterID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.CarName">
+            <summary>
+            卡名字
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalCenterCarView.CarImage">
+            <summary>
+            卡图片
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.PersonalNumericalMsgView">
+            <summary>
+            用户流水信息
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.ID">
+            <summary>
+            流水ID 
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.PersonalCenterID">
+            <summary>
+            个人ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.Phone">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.NumericalNumber">
+            <summary>
+            流水编码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.CreatTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.SumPrice">
+            <summary>
+            总价
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.PayPrice">
+            <summary>
+            支付金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.BalancePrice">
+            <summary>
+            钱包抵扣金额
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.SysState">
+            <summary>
+            系统状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.RquestFromSys">
+            <summary>
+            系统来源
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.PayType">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.PersonalNumericalMsgView.CarNumber">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.SysKey">
+            <summary>
+            系统key
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.SysKey.ID">
+            <summary>
+            ID 标识
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.SysKey.RequestKey">
+            <summary>
+            Key值
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.SysKey.RequestValue">
+            <summary>
+            Value值
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.SysKey.DomainUrl">
+            <summary>
+            请求域名
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.SysKey.Ip">
+            <summary>
+            请求IP
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.SysKey.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.VisitLog">
+            <summary>
+            游览日志
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.VisitLog.ID">
+            <summary>
+             自增ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.VisitLog.Msg">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.VisitLog.RequestFromSys">
+            <summary>
+            请求来源
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.VisitLog.VisitIP">
+            <summary>
+            访问IP
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.VisitLog.VisiDate">
+            <summary>
+            访问时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.VisitLog.VisitPropertity">
+            <summary>
+            请求参数
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.Wish">
+            <summary>
+            祝福语
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.WishContent">
+            <summary>
+            祝福语内容
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.WishTagId">
+            <summary>
+            祝福语分类Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.Updator">
+            <summary>
+            更新人
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.Wish.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.WishTag">
+            <summary>
+            祝福语分类
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WishTag.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WishTag.TagName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WishTag.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WishTag.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WishTag.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_Entity.WxPayConfig">
+            <summary>
+            微信支付配置
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.WYId">
+            <summary>
+            物业Id
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.WYName">
+            <summary>
+            物业名称
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.APPPayAPPID">
+            <summary>
+            绑定支付的APPID（必须配置）
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.APPPayMCHID">
+            <summary>
+            商户号（必须配置）
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.APPPayAPPSECRET">
+            <summary>
+            开放平台应用secert（APP支付的时候需要配置）
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.APIKEY">
+            <summary>
+            商户支付密钥（必须配置）
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_Entity.WxPayConfig.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+    </members>
+</doc>

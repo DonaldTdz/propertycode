@@ -1,0 +1,115 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divPrepayAccountListController" ng-controller="PrepayAccountListController">
+
+    <div id="SearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-6">
+                    @*<label>房屋编号</label>*@
+                    <div class="input-group margin">
+                        <input style="width: 100%; " class="form-control" placeholder="房屋编号" type="text" name="HouseNumber" />
+                        <span class="input-group-btn">
+                            <input type="button" id="btnOrgListSearch" class="btn btn-primary" value="{{ClientMessage.Search}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divToolbar" class="pull-left">
+        <div id="divImportPrepayAccount" class="btn btn-app" style="cursor:pointer">
+            <form id="formFileUpload" name="formFileUpload" target="iframeFile" method="post">
+                <input type="file" name="fileToUpload" id="fileToUpload" onchange="ckFramework.PrepayAccountListHelper.PrepayAccountFileSelected()" style="position: absolute; left: -5000px; top: 0;" />
+                <label style="cursor:pointer" for="fileToUpload"><i class="fa fa-upload pull-left" ng-if="CheckPermission('FileIn')" style="font-size:20px"></i>余额导入</label>
+                <input type="hidden" id="PrepayAccountdeptId" name="PrepayAccountdeptId" />
+            </form>
+            <iframe name='iframeFile' id="iframeFile" style='display:none'></iframe>
+        </div>
+        <a class="btn btn-app ng-binding" ng-if="CheckPermission('FileOut')" href="~/Files/余额导入模板.xls">
+            <i class="fa fa-download pull-left"></i>导出余额模版
+        </a>
+    </div>
+    <div id="divPrepayAccountListTable" />
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        $("#divImportPrepayAccount").hide();
+        var ckFramework = ckFramework || {};
+        ckFramework.PrepayAccountListHelper = ckFramework.PrepayAccountListHelper || {};
+        ckFramework.PrepayAccountListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.PrepayAccountViewUrlEdit = '@Url.PluginAction("PropertyMgr", "PrepayAccount", "PrepayAccountView")';
+        ckFramework.PrepayAccountViewUrlLook = '@Url.PluginAction("PropertyMgr", "PrepayAccount", "PrepayAccountViewLook")';
+        ckFramework.PrepayAccountTable = null;
+
+        ckFramework.createPrepayAccountListData = {
+            TableId:'table_ckFramework_PrepayAccountList',
+            IsAddOperate:JQCheckPermission("AccountDetail"),
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.PrepayAccountListData.TemplateModels,
+            DivTable:$('#divPrepayAccountListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60,
+                "render": function()
+                {
+                    var editContent = "";
+                    var deleteContent = "";
+                    if (JQCheckPermission("AccountDetail")) {
+                        editContent = '<a herf="#"   class="btn columnTool Edit"><i class="ui-tooltip fa fa-edit" data-original-title="Edit"></i></a>'
+
+                    }
+                    return editContent + deleteContent;
+                }
+            }
+        };
+
+        ckFramework.TableService.CreateBusinessTable( ckFramework.createPrepayAccountListData);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ckFramework.PrepayAccountTable = $('#' + ckFramework.createPrepayAccountListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createPrepayAccountListData),
+                filterOptions: {
+                    searchButton: "btnOrgListSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "PrepayAccount", "GetPrepayAccountShow")',
+                    DrawTable:function(){
+                        ckFramework.PrepayAccountTable.draw();
+                    }
+                }
+            });
+            $('#'+ ckFramework.createPrepayAccountListData.TableId +' tbody').on('click', '.Edit', function () {
+                var data = ckFramework.PrepayAccountTable.rows($(this).parents('tr')).data();
+                var PrepayAccountOwnerListService = ckFramework.GetAngularService('PrepayAccountListService');
+                PrepayAccountOwnerListService.ShowPrepayAccountView('Edit', data[0].HouseDeptId);
+                $("#btnAccountBillListSearch").click();
+            });
+            $("div.toolbar").html($('#divToolbar'));
+            $('#SearchContainer').click();
+
+            var PrepayDeptType = $('#SelectDeptType').val();
+          
+            if(PrepayDeptType==DeptTypeInfos.XiaoQu)
+            {
+                $("#divImportPrepayAccount").show()
+            }
+            else
+            {
+                $("#divImportPrepayAccount").hide();
+            }
+
+
+          
+        });
+
+
+        ckFramework.PrepayAccountListHelper.PrepayAccountFileSelected = function()
+        {
+            $("#PrepayAccountdeptId").val($("#SelectDeptId").val());
+            var PrepayAccountController = angular.element(document.getElementById('divPrepayAccountListController')).scope();
+            PrepayAccountController.FileSelected();
+            $("#btnOrgListSearch").click();
+        }
+    </script>
+</div>

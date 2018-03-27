@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9DF87DBE-774E-42D0-A639-D1C9484812C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.BackgroundMgr.ApplicationService</RootNamespace>
+    <AssemblyName>YK.BackgroundMgr.ApplicationService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="KW.Sprite.Common.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationService\SEC_AdminUserAppService.cs" />
+    <Compile Include="ApplicationService\SEC_DeptAppService.cs" />
+    <Compile Include="ApplicationService\SEC_ModuleAppService.cs" />
+    <Compile Include="ApplicationService\SEC_OperateAppService.cs" />
+    <Compile Include="ApplicationService\Sys_DictionaryAppService.cs" />
+    <Compile Include="OtherSysErrorEntityAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BackgroundMgrApplicationService.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_AdminUserAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_AreaAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_BuildingAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_CarportAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_CommunityAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_DeptAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_DeveloperAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_FieldAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GarageAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayAuthAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_HouseAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_ModuleAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_OperateAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_PropertyAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_RoleAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_UserAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_User_OwnerAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatOpenIdAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatPublicNumberAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryItemAppService.cs">
+      <DependentUpon>BackgroundMgrApplicationService.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241a595-7f3d-4b58-aaea-c5e73f41c317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationMapper\YK.BackgroundMgr.ApplicationMapper.csproj">
+      <Project>{80dc3e82-67bb-43ca-a9b3-1539a850a863}</Project>
+      <Name>YK.BackgroundMgr.ApplicationMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainEntity\YK.BackgroundMgr.DomainEntity.csproj">
+      <Project>{0b6e4039-636b-4e37-981e-ee919a38cd44}</Project>
+      <Name>YK.BackgroundMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainService\YK.BackgroundMgr.DomainService.csproj">
+      <Project>{dc76e507-7060-4f8a-9ee4-ffdaa5d5ea83}</Project>
+      <Name>YK.BackgroundMgr.DomainService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0a61350a-2238-4847-8c0b-fc18df7780a2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BackgroundMgrApplicationService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BackgroundMgrApplicationService.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

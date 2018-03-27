@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C33EB923-5100-4F13-A993-AD63C810CCF2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.CompositeDomainService</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.CompositeDomainService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=8.0.2.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.ExcelService.1.2.9\lib\net45\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>DLL\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="KW.Sprite.Common.Repository">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit.Core, Version=1.1.9.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.Core.1.1.9.0\lib\net45\LinqKit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyAlipay.Entity">
+      <HintPath>..\..\lib.external\PropertyAlipay.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyAlipay.Service">
+      <HintPath>..\..\lib.external\PropertyAlipay.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YK.Framework.ApplicationDTO">
+      <HintPath>DLL\YK.Framework.ApplicationDTO.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.FrameworkTools.ExcelService, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.ExcelService.1.2.9\lib\net45\YK.FrameworkTools.ExcelService.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.Settlement.BusinessComponent">
+      <HintPath>DLL\YK.Settlement.BusinessComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.Settlement.DBBusinessComponent">
+      <HintPath>DLL\YK.Settlement.DBBusinessComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.SysPay.Entity, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.SysPay.SDK.1.0.6\lib\net45\YK.SysPay.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.SysPay.SDK, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.SysPay.SDK.1.0.6\lib\net45\YK.SysPay.SDK.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlipayService\AlipayService.cs" />
+    <Compile Include="AlipayService\Interface\IAlipayService.cs" />
+    <Compile Include="BalanceService\BalanceService.cs" />
+    <Compile Include="BalanceService\Interface\IBalanceService.cs" />
+    <Compile Include="BillCommonService.cs" />
+    <Compile Include="CompositeException.cs" />
+    <Compile Include="DataInitService\DataInitService.cs" />
+    <Compile Include="DataInitService\Interface\IDataInitService.cs" />
+    <Compile Include="GenerateBillService\BillDateRange.cs" />
+    <Compile Include="GenerateBillService\BillServices\AbstractBillService.cs" />
+    <Compile Include="GenerateBillService\BillServices\IBillService.cs" />
+    <Compile Include="GenerateBillService\CalculateProperty.cs" />
+    <Compile Include="GenerateBillService\CalculatePropertyHelper.cs" />
+    <Compile Include="GenerateBillService\GenerateChargBillService.cs" />
+    <Compile Include="GenerateBillService\Interface\ICalculateProperty.cs" />
+    <Compile Include="GenerateBillService\Interface\IGenerateChargBill.cs" />
+    <Compile Include="HttpClientService\HttpClientService.cs" />
+    <Compile Include="Model\PaymentModel.cs" />
+    <Compile Include="Model\UserCouponpModel.cs" />
+    <Compile Include="NoticeService\APPNoticeService.cs" />
+    <Compile Include="NoticeService\Interface\INoticeService.cs" />
+    <Compile Include="NoticeService\NoticeDecorator.cs" />
+    <Compile Include="NoticeService\NoticeMsg.cs" />
+    <Compile Include="NoticeService\NoticeTaskService.cs" />
+    <Compile Include="NoticeService\SMSNoticeService.cs" />
+    <Compile Include="PaymentService\Interface\IPayment.cs" />
+    <Compile Include="PaymentService\PaymentService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportService\interface\IReportService.cs" />
+    <Compile Include="ReportService\RePortService.cs" />
+    <Compile Include="ShareKeyService\ShareKeyService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241a595-7f3d-4b58-aaea-c5e73f41c317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Common\YK.BackgroundMgr.Common.csproj">
+      <Project>{294bb781-d0aa-45cc-914f-9990310a2b3e}</Project>
+      <Name>YK.BackgroundMgr.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.CompositeAppService\YK.BackgroundMgr.CompositeAppService.csproj">
+      <Project>{a400c1e9-2b60-4737-a81c-4ff4b5af0a57}</Project>
+      <Name>YK.BackgroundMgr.CompositeAppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Crosscuting\YK.BackgroundMgr.Crosscuting.csproj">
+      <Project>{07834BA1-0724-4192-98AB-DF7B9D1A314A}</Project>
+      <Name>YK.BackgroundMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainCompositeService\YK.BackgroundMgr.DomainCompositeService.csproj">
+      <Project>{85093ccd-07ec-4ac9-9bdc-8b7c06b94f51}</Project>
+      <Name>YK.BackgroundMgr.DomainCompositeService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainEntity\YK.BackgroundMgr.DomainEntity.csproj">
+      <Project>{0b6e4039-636b-4e37-981e-ee919a38cd44}</Project>
+      <Name>YK.BackgroundMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainInterface\YK.BackgroundMgr.DomainInterface.csproj">
+      <Project>{71f15fec-65cb-4ef3-84f5-7606b332b686}</Project>
+      <Name>YK.BackgroundMgr.DomainInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0a61350a-2238-4847-8c0b-fc18df7780a2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationDTO\YK.PropertyMgr.ApplicationDTO.csproj">
+      <Project>{c4dcfc6b-8842-4dc5-9b63-67b5529fd865}</Project>
+      <Name>YK.PropertyMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationMapper\YK.PropertyMgr.ApplicationMapper.csproj">
+      <Project>{B37D77A1-0404-4B86-9887-6023044E3D02}</Project>
+      <Name>YK.PropertyMgr.ApplicationMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.Crosscuting\YK.PropertyMgr.Crosscuting.csproj">
+      <Project>{06fa26ea-b6cb-4f79-a0fd-3ea5c27a7fac}</Project>
+      <Name>YK.PropertyMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainEntity\YK.PropertyMgr.DomainEntity.csproj">
+      <Project>{d44079aa-1823-4e0e-af79-80afda8d01c1}</Project>
+      <Name>YK.PropertyMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.RepositoryContract\YK.PropertyMgr.RepositoryContract.csproj">
+      <Project>{ecc30580-fe67-4fcd-a304-b7620dbf1094}</Project>
+      <Name>YK.PropertyMgr.RepositoryContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.Repository\YK.PropertyMgr.Repository.csproj">
+      <Project>{4d246b69-ba6b-4059-b491-63dab8a9b33e}</Project>
+      <Name>YK.PropertyMgr.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Aspose.Cells.lic" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\Dapper.dll" />
+    <Content Include="DLL\MySql.Data.dll" />
+    <Content Include="DLL\YK.Framework.ApplicationDTO.dll" />
+    <Content Include="DLL\YK.Settlement.BusinessComponent.dll" />
+    <Content Include="DLL\YK.Settlement.DBBusinessComponent.dll" />
+    <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

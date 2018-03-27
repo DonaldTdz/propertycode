@@ -1,0 +1,86 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<#
+	var manager = TemplateFileManager.Create(this);
+	string strProjectName = "PropertyMgr";
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.PropertyMgr.MVCWeb\Models\PropertyMgrTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var frameworkTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='DomainEntity']");
+	foreach (XmlNode templateNode in frameworkTemplateNodes)
+	{
+	manager.StartNewFile(templateNode.Attributes["Name"].Value + "AppService.cs");
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YK.<#= strProjectName #>.ApplicationDTO;
+using YK.<#= strProjectName #>.ApplicationMapper;
+using YK.<#= strProjectName #>.DomainService;
+
+namespace YK.<#= strProjectName #>.ApplicationService
+{
+	public partial class <#= templateNode.Attributes["Name"].Value #>AppService
+	{
+		private <#= templateNode.Attributes["Name"].Value #>DomainService _<#= templateNode.Attributes["Name"].Value #>DomainService;
+        protected <#= templateNode.Attributes["Name"].Value #>DomainService <#= templateNode.Attributes["Name"].Value #>Service
+        {
+            get
+            {
+                if (_<#= templateNode.Attributes["Name"].Value #>DomainService == null)
+                {
+                    _<#= templateNode.Attributes["Name"].Value #>DomainService = new <#= templateNode.Attributes["Name"].Value #>DomainService();
+                }
+
+                return _<#= templateNode.Attributes["Name"].Value #>DomainService;
+            }
+        }   
+
+        public bool Insert<#= templateNode.Attributes["Name"].Value #>(<#= templateNode.Attributes["Name"].Value #>DTO dto<#= templateNode.Attributes["Name"].Value #>)
+        {
+            var domain<#= templateNode.Attributes["Name"].Value #> = <#= templateNode.Attributes["Name"].Value #>Mappers.ChangeDTOTo<#= templateNode.Attributes["Name"].Value #>New(dto<#= templateNode.Attributes["Name"].Value #>);
+
+            return <#= templateNode.Attributes["Name"].Value #>Service.Insert<#= templateNode.Attributes["Name"].Value #>(domain<#= templateNode.Attributes["Name"].Value #>);
+        }
+
+        public bool Update<#= templateNode.Attributes["Name"].Value #>(<#= templateNode.Attributes["Name"].Value #>DTO dto<#= templateNode.Attributes["Name"].Value #>)
+        {
+            var domain<#= templateNode.Attributes["Name"].Value #> = <#= templateNode.Attributes["Name"].Value #>Mappers.ChangeDTOTo<#= templateNode.Attributes["Name"].Value #>New(dto<#= templateNode.Attributes["Name"].Value #>);
+
+            return <#= templateNode.Attributes["Name"].Value #>Service.Update<#= templateNode.Attributes["Name"].Value #>(domain<#= templateNode.Attributes["Name"].Value #>);
+        }
+
+        public bool Delete<#= templateNode.Attributes["Name"].Value #>(object id)
+        {
+            return <#= templateNode.Attributes["Name"].Value #>Service.Delete<#= templateNode.Attributes["Name"].Value #>(id);
+        }
+
+        public List<<#= templateNode.Attributes["Name"].Value #>DTO> Get<#= templateNode.Attributes["Name"].Value #>s()
+        {
+            var domain<#= templateNode.Attributes["Name"].Value #>s = <#= templateNode.Attributes["Name"].Value #>Service.Get<#= templateNode.Attributes["Name"].Value #>s();
+
+            return <#= templateNode.Attributes["Name"].Value #>Mappers.Change<#= templateNode.Attributes["Name"].Value #>ToDTOs(domain<#= templateNode.Attributes["Name"].Value #>s);
+        }
+
+		public <#= templateNode.Attributes["Name"].Value #>DTO Get<#= templateNode.Attributes["Name"].Value #>ByKey(object id)
+        {
+            var domain<#= templateNode.Attributes["Name"].Value #> = <#= templateNode.Attributes["Name"].Value #>Service.Get<#= templateNode.Attributes["Name"].Value #>ByKey(id);
+
+            return <#= templateNode.Attributes["Name"].Value #>Mappers.Change<#= templateNode.Attributes["Name"].Value #>ToDTO(domain<#= templateNode.Attributes["Name"].Value #>);
+        }
+	}
+}
+<#
+    }
+	manager.Process();
+#>

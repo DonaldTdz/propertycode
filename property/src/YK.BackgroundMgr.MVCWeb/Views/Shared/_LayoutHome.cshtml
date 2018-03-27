@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html ng-controller="HomeController" id="htmlHomeController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="fragment" content="!" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{homeData.FrameworkName}}</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!--datatable-->
+    <link href="Scripts/lib/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="Scripts/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/widgets/datatable/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <link href="Scripts/widgets/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="Scripts/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/AdminLTE/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/AdminLTE/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/AdminLTE/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/widgets/Modal/css/bootstrap-modal.css" rel="stylesheet" />
+
+    <link href="~/Scripts/widgets/datatable/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="Scripts/widgets/jsTree/themes/default/style.min.css" rel="stylesheet" />
+    <link href="Scripts/widgets/formvalidation/css/formValidation.min.css" rel="stylesheet" />
+    <link href="Content/Common.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="Content/cms.css" />
+    <link href="~/Scripts/widgets/ztree/css/metroStyle/metroStyle.css" rel="stylesheet" />
+    <script src="Scripts/lib/jQuery-2.1.4.min.js"></script>
+    @*<script src="~/Scripts/lib/jquery.min.js"></script>*@
+    <script src="Scripts/lib/jquery.dataTables.min.js"></script>
+    @*<script src="Scripts/widgets/datatable/jquery.dataTables.min.js"></script>*@
+    <script src="Scripts/AdminLTE/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    @*<script src="Scripts/widgets/datetimepicker/moment.min.js"></script>*@
+    @*<script src="Scripts/widgets/datetimepicker/locale.js"></script>*@
+    <script src="Scripts/AdminLTE/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    @*<script src="Scripts/widgets/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>*@
+    <script src="Scripts/widgets/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/widgets/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="Scripts/widgets/Modal/js/bootstrap-modal.js"></script>
+    <script src="Scripts/widgets/bootbox.min.js"></script>
+    <script src="Scripts/widgets/jsTree/jstree.min.js"></script>
+    <script src="Scripts/lib/angular.js"></script>
+    @*<script src="Scripts/lib/angular.min.js"></script>*@
+    <script src="Scripts/lib/angular-route.min.js"></script>
+    <script src="Scripts/lib/angular-animate.min.js"></script>
+    <script src="Scripts/lib/angular-ui-utils.js"></script>
+    <script src="Scripts/lib/ui-bootstrap.js"></script>
+    <script src="Scripts/widgets/formvalidation/js/formValidation.min.js"></script>
+    <script src="Scripts/widgets/formvalidation/js/framework/bootstrap.min.js"></script>
+    <script src="Scripts/lib/jquery.validate.min.js"></script>
+    <script src="Scripts/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
+    @*<script src="Scripts/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>*@
+    <script src="Scripts/widgets/Common.js"></script>
+    <script src="Scripts/widgets/RegularService.js"></script>
+    <script src="Scripts/widgets/FormService.js"></script>
+    <script src="Scripts/widgets/BalanceRedPacketService.js"></script>
+    <script src="Scripts/widgets/ResourceService.js"></script>
+    <script src="Scripts/widgets/FileUploadService.js"></script>
+    <script src="Scripts/widgets/CookieService.js"></script>
+    <script src="Scripts/widgets/Echarts/echarts.js"></script>
+    <script src="~/Scripts/widgets/ztree/js/jquery.ztree.all.min.js"></script>
+    <!--datatable-->
+    @*<script src="Scripts/lib/jquery.dataTables.min.js"></script>*@
+    @*<script src="Scripts/widgets/datatable/jquery.dataTables.min.js"></script>*@
+    <script src="Scripts/widgets/datatable/ZeroClipboard.js"></script>
+    <script src="Scripts/widgets/datatable/dataTables.tableTools.min.js"></script>
+    <script src="Scripts/widgets/datatable/dataTables.bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="Scripts/AdminLTE/IE8Support/html5shiv.min.js"></script>
+        <script src="Scripts/AdminLTE/IE8Support/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("HeadCss", false)
+    @RenderSection("HeadJs", false)
+</head>
+<body class="skin-blue sidebar-mini">
+    <div id="divModal" class="modal fade" tabindex="-1" style="display: none;"></div>
+    <div id="divModal2" class="modal fade" tabindex="-1" style="display: none;"></div>
+    <div class="wrapper">
+        @RenderBody()
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                {{homeData.FrameworkName}}
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; @DateTime.Now.ToString("yyyy") <a href="#">{{homeData.FrameworkName}}{{homeData.FrameworkVersion}}</a>.</strong>{{homeData.FooterInfo}}
+        </footer>
+    </div>
+    <div modal-directive></div>
+    <div modal-confirm-directive></div>
+
+    <script src="Scripts/widgets/ClientMessage.js"></script>
+
+    @{
+        var lang = "<script src='Scripts/widgets/formvalidation/js/language/" + System.Globalization.CultureInfo.CurrentUICulture.Name + ".js'></script>";
+        @Html.Raw(lang)
+    }
+    @*设置全局变量*@
+    <script type="text/javascript">
+        $.support.cors = true;
+        var ckFramework = ckFramework || {};
+    </script>
+
+    @RenderSection("FooterJs", false)
+    @*注册全局设置*@
+
+    <script src="Scripts/require.js" data-main="Scripts/mainHome"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<ion-content class="pageBg">
+  <!--顶部标题区域-->
+ <ion-item class="mobile_head_total">
+   <ion-icon item-left class="mobile_head_logo"><img src="assets/images/logo_dh.png"/></ion-icon>
+   <h1 item-left class="mobile_head_title">{{paydata.FName}}</h1>
+   <!--倒计时区域-->
+   <count-down [time]="120" (onPrevious)="goPrevious()" (onGoHome)="storpPayDown()" #countDown ></count-down>
+ </ion-item>
+
+ <!--中间内容区域-->
+ <div class="mobile_content_total">
+   <div class="clearfix" text-center>
+     <!--顶部标题-->
+     <h1 class="payment_title">付款金额：<span>￥{{paydata.PayAmount}}</span></h1>
+     <p class="payment_tips">请用手机扫描下方支付宝或微信二维码进行付款</p>
+     <!--扫码区域-->
+     <ion-item class="payment_scan_total">
+      <div class="payment_wechat" item-left >
+         <p class="payment_wechat_img" id="alipay_qrcode">
+            <!--<img  src="assets/images/code.png"/>-->
+           <img  src="assets/images/pay_icon.png" class="payment_wechat_icon"/>
+         </p>
+         <p class="payment_wechat_text payment_pay_text">支付宝支付</p>
+       </div>
+
+       <div class="payment_wechat" item-right >
+         <p class="payment_wechat_img" id="wechat_qrcode" >
+           <!--<img  src="assets/images/code.png"/>-->
+           <!--这个是微信图标-->
+           <img  src="assets/images/wechat.png" class="payment_wechat_icon"/>
+         </p>
+         <p class="payment_wechat_text">微信支付</p>
+       </div>
+     </ion-item>
+   </div>
+ </div>
+</ion-content>

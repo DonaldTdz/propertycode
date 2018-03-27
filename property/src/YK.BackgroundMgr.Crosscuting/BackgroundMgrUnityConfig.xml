@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<configSections>
+		<section name="unity" type="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection,Microsoft.Practices.Unity.Configuration" />
+	</configSections>
+	<unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
+		<assembly name="YK.BackgroundMgr.RepositoryContract"></assembly>
+		<assembly name="YK.BackgroundMgr.Repository"></assembly>
+		<assembly name="KW.Sprite.Common.Repository"></assembly>
+    <assembly name="YK.BackgroundMgr.UnitOfWork"></assembly>
+    
+    <assembly name="YK.ParkingSys.RepositoryContract"></assembly>
+    <assembly name="YK.ParkingSys.Repository"></assembly>
+    <assembly name="YK.ParkingSys.UnitOfWork"></assembly>
+
+		<namespace name="YK.BackgroundMgr.RepositoryContract"></namespace>
+		<namespace name="YK.BackgroundMgr.Repository"></namespace>
+		<namespace name="KW.Sprite.Common.Repository"></namespace>
+    <namespace name="YK.BackgroundMgr.UnitOfWork"></namespace>
+
+    <namespace name="YK.ParkingSys.RepositoryContract"></namespace>
+    <namespace name="YK.ParkingSys.Repository"></namespace>
+    <namespace name="YK.ParkingSys.UnitOfWork"></namespace>
+		<container >
+      <register type="IBackgroundMgrUnitOfWork" mapTo="BackgroundMgrUnitOfWork" />
+			<register type="BackgroundMgrDataBaseContext" mapTo="BackgroundMgrDataBaseContext" name="dataBaseContext">
+			</register>
+      <register type="IParkingSysUnitOfWork" mapTo="ParkingSysUnitOfWork" />
+      <register type="ParkingSysDataBaseContext" mapTo="ParkingSysDataBaseContext" name="dataBaseParkingSysContext">
+      </register>
+		</container>
+	</unity>
+</configuration>

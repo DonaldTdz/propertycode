@@ -1,0 +1,129 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<# 
+	var manager = TemplateFileManager.Create(this);
+	string[] ProjectNames = new string[]{ "BackgroundMgr", "ParkingSys"};
+	string[] EntityNames = new string[]{ "DomainEntity" ,"ParkingDomainEntity" };
+
+	for(int i=0; i < ProjectNames.Length; i++)
+	{	
+	string strProjectName = ProjectNames[i];
+#>
+<#
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.BackgroundMgr.MVCWeb\Models\FrameworkTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var oAProjectTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='"+EntityNames[i]+"']");
+	manager.StartNewFile(strProjectName + "UnitOfWork.cs");
+#>
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Threading;
+using KW.Sprite.Common.Repository;
+using YK.<#= strProjectName #>.RepositoryContract;
+using YK.<#= strProjectName #>.Repository;
+
+namespace YK.<#= strProjectName #>.UnitOfWork
+{
+    public partial class <#= strProjectName #>UnitOfWork : UnitOfWorkWithEntityFramework, I<#= strProjectName #>UnitOfWork, IDisposable
+    {
+        private bool m_Disposed;
+        private <#= strProjectName #>DataBaseContext m_DbContext;
+<#
+	foreach (XmlNode templateNode in oAProjectTemplateNodes)
+	{
+#>
+        private Lazy<I<#= templateNode.Attributes["Name"].Value #>Repository> _I<#= templateNode.Attributes["Name"].Value #>Repository;
+        public I<#= templateNode.Attributes["Name"].Value #>Repository <#= templateNode.Attributes["Name"].Value #>Repository
+        {
+            get
+            {
+                if (_I<#= templateNode.Attributes["Name"].Value #>Repository == null)
+                {
+                    _I<#= templateNode.Attributes["Name"].Value #>Repository = new Lazy<I<#= templateNode.Attributes["Name"].Value #>Repository>(() => new <#= templateNode.Attributes["Name"].Value #>Repository(m_DbContext), LazyThreadSafetyMode.ExecutionAndPublication);
+                }
+                return _I<#= templateNode.Attributes["Name"].Value #>Repository.Value;
+            }
+        }
+<# 
+	}
+#>
+
+        public <#= strProjectName #>UnitOfWork()
+        {
+            m_DbContext = new <#= strProjectName #>DataBaseContext();
+        }
+
+        public int ExecuteSqlCommand(string sql, params object[] parameters)
+        {
+            return m_DbContext.Database.ExecuteSqlCommand(sql, parameters);
+        }
+
+        public int ExecuteSqlCommand(TransactionalBehavior transactionalBehavior, string sql, params object[] parameters)
+        {
+            return m_DbContext.Database.ExecuteSqlCommand(transactionalBehavior, sql, parameters);
+        }
+
+        protected override DbContext InnerDbContext
+        {
+            get
+            {
+                return m_DbContext;
+            }
+        }       
+
+        protected override void AbortCommit(DbUpdateConcurrencyException ex)
+        {
+        }
+
+        protected override void ResolveIfStoreDeleted(DbEntityEntry failedEntry)
+        {
+        }
+
+        protected override void ResolveIfStoreModified(DbEntityEntry failedEntry)
+        {
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (m_Disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                m_DbContext.Dispose();
+            }
+
+            m_Disposed = true;
+        }
+
+        #region Private Method
+
+        public void AddRelation(string strTableName, string strKey1Name, string strKey2Name, object strKey1Value, object strKey2Value)
+        {
+            string sqlTemplate = "INSERT INTO [{0}]({1},{2}) VALUES({3},{4})";
+            ExecuteSqlCommand(string.Format(sqlTemplate, strTableName, strKey1Name, strKey2Name, strKey1Value, strKey2Value));
+        }
+
+        #endregion
+    }
+}
+<#
+}
+	manager.Process();
+#>
+

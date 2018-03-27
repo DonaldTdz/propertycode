@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ECC30580-FE67-4FCD-A304-B7620DBF1094}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.RepositoryContract</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.RepositoryContract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="KW.Sprite.Common.Repository">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IAlipayApiRequestLogRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IAlipayAPPAuthTokenRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IAlipayChargeBillRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IAlipayChargeBillSynchronizerDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IAlipayChargeBillSynchronizerRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IAlipayCommunityRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IAlipayRoomRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IChargBillRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IChargeBillRecordMatchingRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IChargeRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IChargeSubjectRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IChargeSubjectSnaRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICityRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IClientPaymentLogRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICommunityConfigRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICountyRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEntranceLogRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEntranceRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEntranceUserDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEntranceUserRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IMeterReadRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IMeterRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INotificeConfigRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPaging.cs" />
+    <Compile Include="IPaymentDiscountInfoRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPaymentTaskDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPaymentTasksRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPreferentialRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPrepayAccountDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPrepayAccountLogRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPrepayAccountRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPropertyMgrUnitOfWork.cs">
+      <DependentUpon>PropertyMgrIUnitOfWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IProvinceRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IReceiptBookDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IReceiptBookHistoryRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IReceiptBookRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IReceiptRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRefundRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IShareKeyRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISubjectHouseRefRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ITemplatePrintRecordDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ITemplatePrintRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ITicketSerialNumberRepository.cs">
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyMgrIUnitOfWork.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyMgrIUnitOfWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyMgrRepositoryContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyMgrRepositoryContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertyMgrIUnitOfWork.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyMgrIUnitOfWork.cs</LastGenOutput>
+    </None>
+    <None Include="PropertyMgrRepositoryContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyMgrRepositoryContract.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainEntity\YK.PropertyMgr.DomainEntity.csproj">
+      <Project>{d44079aa-1823-4e0e-af79-80afda8d01c1}</Project>
+      <Name>YK.PropertyMgr.DomainEntity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

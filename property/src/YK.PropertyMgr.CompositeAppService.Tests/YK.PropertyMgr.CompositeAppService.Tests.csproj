@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BA27B485-CC2D-4860-BEDB-4092CCCFE7F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.CompositeAppService.Tests</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.CompositeAppService.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="AppServiceTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241a595-7f3d-4b58-aaea-c5e73f41c317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Common\YK.BackgroundMgr.Common.csproj">
+      <Project>{294bb781-d0aa-45cc-914f-9990310a2b3e}</Project>
+      <Name>YK.BackgroundMgr.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.CompositeAppService\YK.BackgroundMgr.CompositeAppService.csproj">
+      <Project>{a400c1e9-2b60-4737-a81c-4ff4b5af0a57}</Project>
+      <Name>YK.BackgroundMgr.CompositeAppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Crosscuting\YK.BackgroundMgr.Crosscuting.csproj">
+      <Project>{07834ba1-0724-4192-98ab-df7b9d1a314a}</Project>
+      <Name>YK.BackgroundMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainCompositeService\YK.BackgroundMgr.DomainCompositeService.csproj">
+      <Project>{85093ccd-07ec-4ac9-9bdc-8b7c06b94f51}</Project>
+      <Name>YK.BackgroundMgr.DomainCompositeService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainInterface\YK.BackgroundMgr.DomainInterface.csproj">
+      <Project>{71f15fec-65cb-4ef3-84f5-7606b332b686}</Project>
+      <Name>YK.BackgroundMgr.DomainInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0a61350a-2238-4847-8c0b-fc18df7780a2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.UnitOfWork\YK.BackgroundMgr.UnitOfWork.csproj">
+      <Project>{a219a112-104f-492a-8d6b-ec790d536b70}</Project>
+      <Name>YK.BackgroundMgr.UnitOfWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationDTO\YK.PropertyMgr.ApplicationDTO.csproj">
+      <Project>{c4dcfc6b-8842-4dc5-9b63-67b5529fd865}</Project>
+      <Name>YK.PropertyMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.CompositeAppService\YK.PropertyMgr.CompositeAppService.csproj">
+      <Project>{d2b6eee8-e5c3-4e26-9dae-c774ad7397bd}</Project>
+      <Name>YK.PropertyMgr.CompositeAppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.CompositeDomainService\YK.PropertyMgr.CompositeDomainService.csproj">
+      <Project>{C33EB923-5100-4F13-A993-AD63C810CCF2}</Project>
+      <Name>YK.PropertyMgr.CompositeDomainService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.Crosscuting\YK.PropertyMgr.Crosscuting.csproj">
+      <Project>{06fa26ea-b6cb-4f79-a0fd-3ea5c27a7fac}</Project>
+      <Name>YK.PropertyMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.UnitOfWork\YK.PropertyMgr.UnitOfWork.csproj">
+      <Project>{29a9cce0-4154-4672-8e4a-3251261f2fc3}</Project>
+      <Name>YK.PropertyMgr.UnitOfWork</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="GenericTest1.GenericTest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7790B0B4-A596-4EEE-8BDE-5FA3455240FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.ApplicationService</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.ApplicationService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopSdk">
+      <HintPath>..\..\lib.external\AopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Cells, Version=8.0.2.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.ExcelService.1.2.9\lib\net45\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\TemplatePrintPDF.0.0.6\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="KW.Sprite.Common.Repository">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyAlipay.Entity">
+      <HintPath>..\..\lib.external\PropertyAlipay.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyAlipay.Service">
+      <HintPath>..\..\lib.external\PropertyAlipay.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\YK.BackgroundMgr.MVCWeb\DELL\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TemplatePrintPDF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TemplatePrintPDF.0.0.6\lib\TemplatePrintPDF.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.Framework.ApplicationDTO, Version=1.0.0.501, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\YK.PropertyMgr.CompositeDomainService\DLL\YK.Framework.ApplicationDTO.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.FrameworkTools.ExcelService, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.ExcelService.1.2.9\lib\net45\YK.FrameworkTools.ExcelService.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.Opendoor.IOpendoor">
+      <HintPath>..\..\lib.external\YK.Opendoor.IOpendoor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlipayApiRequestLogAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayAPPAuthTokenAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillSynchronizerAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillSynchronizerDetailAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayCommunityAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayRoomAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargBillAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeBillRecordMatchingAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeRecordAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeSubjectAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPaymentLogAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityConfigAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountyAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceLogAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceUserAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceUserDetailAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterReadRecordAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificeConfigAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentDiscountInfoAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountLogAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProvinceAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookDetailAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookHistoryAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefundRecordAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SearchParm.cs" />
+    <Compile Include="Service\AlipayAPPAuthTokenAppService.cs" />
+    <Compile Include="Service\AlipayPropertyAppService.cs" />
+    <Compile Include="Service\BillDetailAppService.cs" />
+    <Compile Include="Service\CarParkAppService.cs" />
+    <Compile Include="Service\CommunityConfigAppService.cs" />
+    <Compile Include="Service\NotificeConfigAppService.cs" />
+    <Compile Include="Service\PaymentDiscountInfoAppService.cs" />
+    <Compile Include="Service\ChargBillAppService.cs" />
+    <Compile Include="Service\ChargeRecordAppService.cs" />
+    <Compile Include="Service\ChargeSubjectAppService.cs" />
+    <Compile Include="ChargeSubjectSnaAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CityAppService.cs" />
+    <Compile Include="Service\CountyAppService.cs" />
+    <Compile Include="Service\DataInitAppService.cs" />
+    <Compile Include="Service\DeptAppService.cs" />
+    <Compile Include="Service\EntranceAppService.cs" />
+    <Compile Include="Service\EntranceChangeAppService.cs" />
+    <Compile Include="Service\EntrancePowerAppService.cs" />
+    <Compile Include="Service\MeterAppService.cs" />
+    <Compile Include="PaymentTaskDetailAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTasksAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PreferentialRecordAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountDetailAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyMgrApplicationService.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnResult.cs" />
+    <Compile Include="Service\MeterReadRecordAppService.cs" />
+    <Compile Include="Service\PaymentTasksAppService.cs" />
+    <Compile Include="Service\PrepayAccountAppService.cs" />
+    <Compile Include="Service\ReceiptBookAppService.cs" />
+    <Compile Include="Service\ReceiptBookDetailAppService.cs" />
+    <Compile Include="Service\ReceiptBookHistoryAppService.cs" />
+    <Compile Include="Service\RefundRecordAppService.cs" />
+    <Compile Include="Service\ReportsTemplateAppService.cs" />
+    <Compile Include="Service\SubjectHouseRefAppService.cs" />
+    <Compile Include="Service\TemplatePrintRecordAppService.cs" />
+    <Compile Include="ShareKeyAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectHouseRefAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateModelHelper.cs" />
+    <Compile Include="TemplatePrintRecordAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplatePrintRecordDetailAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketSerialNumberAppService.cs">
+      <DependentUpon>PropertyMgrApplicationService.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241A595-7F3D-4B58-AAEA-C5E73F41C317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationMapper\YK.BackgroundMgr.ApplicationMapper.csproj">
+      <Project>{80DC3E82-67BB-43CA-A9B3-1539A850A863}</Project>
+      <Name>YK.BackgroundMgr.ApplicationMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Crosscuting\YK.BackgroundMgr.Crosscuting.csproj">
+      <Project>{07834BA1-0724-4192-98AB-DF7B9D1A314A}</Project>
+      <Name>YK.BackgroundMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainEntity\YK.BackgroundMgr.DomainEntity.csproj">
+      <Project>{0B6E4039-636B-4E37-981E-EE919A38CD44}</Project>
+      <Name>YK.BackgroundMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainInterface\YK.BackgroundMgr.DomainInterface.csproj">
+      <Project>{71F15FEC-65CB-4EF3-84F5-7606B332B686}</Project>
+      <Name>YK.BackgroundMgr.DomainInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0A61350A-2238-4847-8C0B-FC18DF7780A2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationDTO\YK.PropertyMgr.ApplicationDTO.csproj">
+      <Project>{c4dcfc6b-8842-4dc5-9b63-67b5529fd865}</Project>
+      <Name>YK.PropertyMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationMapper\YK.PropertyMgr.ApplicationMapper.csproj">
+      <Project>{b37d77a1-0404-4b86-9887-6023044e3d02}</Project>
+      <Name>YK.PropertyMgr.ApplicationMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.CompositeAppService\YK.PropertyMgr.CompositeAppService.csproj">
+      <Project>{d2b6eee8-e5c3-4e26-9dae-c774ad7397bd}</Project>
+      <Name>YK.PropertyMgr.CompositeAppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.CompositeDomainService\YK.PropertyMgr.CompositeDomainService.csproj">
+      <Project>{C33EB923-5100-4F13-A993-AD63C810CCF2}</Project>
+      <Name>YK.PropertyMgr.CompositeDomainService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.Crosscuting\YK.PropertyMgr.Crosscuting.csproj">
+      <Project>{06FA26EA-B6CB-4F79-A0FD-3EA5C27A7FAC}</Project>
+      <Name>YK.PropertyMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainEntity\YK.PropertyMgr.DomainEntity.csproj">
+      <Project>{d44079aa-1823-4e0e-af79-80afda8d01c1}</Project>
+      <Name>YK.PropertyMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainService\YK.PropertyMgr.DomainService.csproj">
+      <Project>{8b3d981a-a56b-49e8-bb9e-c19a753ab6d7}</Project>
+      <Name>YK.PropertyMgr.DomainService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.RepositoryContract\YK.PropertyMgr.RepositoryContract.csproj">
+      <Project>{ecc30580-fe67-4fcd-a304-b7620dbf1094}</Project>
+      <Name>YK.PropertyMgr.RepositoryContract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Aspose.Cells.lic" />
+    <None Include="packages.config" />
+    <None Include="PropertyMgrApplicationService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyMgrApplicationService.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C4DCFC6B-8842-4DC5-9B63-67B5529FD865}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.ApplicationDTO</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.ApplicationDTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\lib.service\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlipayApiRequestLogDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayAPPAuthTokenDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillSynchronizerDetailDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillSynchronizerDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayCommunityDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayRoomDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationDTO\AlipayCommunityBasicserviceDTO.cs" />
+    <Compile Include="ApplicationDTO\AlipayCommunityDTO.cs" />
+    <Compile Include="ApplicationDTO\AlipayCommunityParameter.cs" />
+    <Compile Include="ApplicationDTO\AlipayFindBill.cs" />
+    <Compile Include="ApplicationDTO\AlipayInformDTO.cs" />
+    <Compile Include="ApplicationDTO\AlipayPropertySearchDTO.cs" />
+    <Compile Include="ApplicationDTO\APICarportChangeParameter.cs" />
+    <Compile Include="ApplicationDTO\APILastChargeRecord.cs" />
+    <Compile Include="ApplicationDTO\APIModelDTO.cs" />
+    <Compile Include="ApplicationDTO\APIResultDTO.cs" />
+    <Compile Include="ApplicationDTO\AppChargBillView.cs" />
+    <Compile Include="ApplicationDTO\AppChargeRecordDetail.cs" />
+    <Compile Include="ApplicationDTO\AppOldBillView.cs" />
+    <Compile Include="ApplicationDTO\AppSubjectPreCost.cs" />
+    <Compile Include="ApplicationDTO\ArrearageInfo.cs" />
+    <Compile Include="ApplicationDTO\BalanceInfo.cs" />
+    <Compile Include="ApplicationDTO\BaseImportBillInfo.cs" />
+    <Compile Include="ApplicationDTO\BaseSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\BatchDeductionBillDTO.cs" />
+    <Compile Include="ApplicationDTO\BatchDeductionSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\BillChargeRecord.cs" />
+    <Compile Include="ApplicationDTO\BillChargeRecordSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\BillDetailInfo.cs" />
+    <Compile Include="ApplicationDTO\BillDetailSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ChargBillDTO.cs" />
+    <Compile Include="ApplicationDTO\ChargBillSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ChargeBillInformationDTO.cs" />
+    <Compile Include="ApplicationDTO\ChargeBillListData.cs" />
+    <Compile Include="ApplicationDTO\ChargeRecordDTO.cs" />
+    <Compile Include="ApplicationDTO\ChargeRecordSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ChargeSubjectSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ClientModels.cs" />
+    <Compile Include="ApplicationDTO\CommunityConfigDTO.cs" />
+    <Compile Include="ApplicationDTO\DailyChargBillDTO.cs" />
+    <Compile Include="ApplicationDTO\DepositDeductionResult.cs" />
+    <Compile Include="ApplicationDTO\DeptInfoDTO.cs" />
+    <Compile Include="ApplicationDTO\DeveloperSetTimeListDTO.cs" />
+    <Compile Include="ApplicationDTO\EntrancePersonal.cs" />
+    <Compile Include="ApplicationDTO\EntranceSendMsgModel.cs" />
+    <Compile Include="ApplicationDTO\EntranceViewDTO.cs" />
+    <Compile Include="ApplicationDTO\EntranceSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\FullChargeSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\HistoryCostInfo.cs" />
+    <Compile Include="ApplicationDTO\MessageInfo.cs" />
+    <Compile Include="ApplicationDTO\MeterBindSubjectHouse.cs" />
+    <Compile Include="ApplicationDTO\MeterDTO.cs" />
+    <Compile Include="ApplicationDTO\OwnerInfo.cs" />
+    <Compile Include="ApplicationDTO\OwnerInformationDTO.cs" />
+    <Compile Include="ApplicationDTO\PaymentDiscountInfoDTO.cs" />
+    <Compile Include="ApplicationDTO\PaymentParameter.cs" />
+    <Compile Include="ApplicationDTO\PaymentTaskBySubjetDTO.cs" />
+    <Compile Include="ApplicationDTO\PaymentTasksDTO.cs" />
+    <Compile Include="ApplicationDTO\PaymentTasksSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\PaymentNoticePrintModel.cs" />
+    <Compile Include="ApplicationDTO\PreAccountCostTransferDTO.cs" />
+    <Compile Include="ApplicationDTO\PreAccountORSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\PrepayAccountLogDTO.cs" />
+    <Compile Include="ApplicationDTO\PrepayAccountTransferDTO.cs" />
+    <Compile Include="ApplicationDTO\PrepayAccountShowDTO.cs" />
+    <Compile Include="ApplicationDTO\PrePaymentdeductionDetailReportDTO.cs" />
+    <Compile Include="ApplicationDTO\PrePaymentdeductionDetailSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\PrePaymentDetailReportDTO.cs" />
+    <Compile Include="ApplicationDTO\PrePaymentDetailSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptBookDetailSeachDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptBookDetailShowDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptBookDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptBookHistoryDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptBookModifyDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptBookSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReceiptPrintModel .cs" />
+    <Compile Include="ApplicationDTO\RefundRecordDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportArrearsDetailDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportExternalchargeDetailDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportExternalchargeDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportExternalchargeExportModel.cs" />
+    <Compile Include="ApplicationDTO\ReportExternalchargeModels.cs" />
+    <Compile Include="ApplicationDTO\ReportExternalchargeSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportMeterDetailDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportMeterDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportMeterExportModel.cs" />
+    <Compile Include="ApplicationDTO\ReportMeterModels.cs" />
+    <Compile Include="ApplicationDTO\ReportMeterSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportMonthDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportPayDisInf.cs" />
+    <Compile Include="ApplicationDTO\ReportArrearsDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportArrearsExportModel.cs" />
+    <Compile Include="ApplicationDTO\ReportArrearsModels.cs" />
+    <Compile Include="ApplicationDTO\ReportPayDisInfSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportArrearsSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportDayDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportDaySearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportHead.cs" />
+    <Compile Include="ApplicationDTO\ReportRowData.cs" />
+    <Compile Include="ApplicationDTO\ReportSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\ReportTableDTO.cs" />
+    <Compile Include="ApplicationDTO\ResultModel.cs" />
+    <Compile Include="ApplicationDTO\SmsEntityModel.cs" />
+    <Compile Include="ApplicationDTO\SubjectBillView.cs" />
+    <Compile Include="ApplicationDTO\SubjectBindLogDTO.cs" />
+    <Compile Include="ApplicationDTO\SubjectBindLogSearchDTO.cs" />
+    <Compile Include="ApplicationDTO\SubjectHouseRefDTO.cs" />
+    <Compile Include="ApplicationDTO\SubjectMonthPrePaymentDTO.cs" />
+    <Compile Include="ApplicationDTO\TempChargeDTO.cs" />
+    <Compile Include="ApplicationDTO\UnbundlingDto.cs" />
+    <Compile Include="ApplicationDTO\UserSearchDTO.cs" />
+    <Compile Include="ChargBillDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargBillShowDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeBillRecordMatchingDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeRecordDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeSubjectDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeSubjectSnaDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPaymentLogDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityConfigDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountyDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceLogDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceUserDetailDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceUserDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\AccountingStatusEnum.cs" />
+    <Compile Include="Enums\ActionStatusEnum.cs" />
+    <Compile Include="Enums\AlipayPropertyEnum.cs" />
+    <Compile Include="Enums\AllocationTypeEnum.cs" />
+    <Compile Include="Enums\AutomaticBillEnum.cs" />
+    <Compile Include="Enums\BalanceTypeEnum.cs" />
+    <Compile Include="Enums\BillPeriodEnum.cs" />
+    <Compile Include="Enums\BillStatusEnum.cs" />
+    <Compile Include="Enums\BindSockStateEnum.cs" />
+    <Compile Include="Enums\ChargeFormulaEnum.cs" />
+    <Compile Include="Enums\ChargeStatusEnum.cs" />
+    <Compile Include="Enums\ChargeTypeEnum.cs" />
+    <Compile Include="Enums\ConfigTypeEnum.cs" />
+    <Compile Include="Enums\DiscountStatusEnum.cs" />
+    <Compile Include="Enums\DiscountTypeEnum.cs" />
+    <Compile Include="Enums\EnableEnum.cs" />
+    <Compile Include="Enums\EnumHelper.cs" />
+    <Compile Include="Enums\EnumHelpService.cs" />
+    <Compile Include="Enums\FrequencyTypeEnum.cs" />
+    <Compile Include="Enums\HouseStatusEnum.cs" />
+    <Compile Include="Enums\MeterTypeEnum.cs" />
+    <Compile Include="Enums\ParkingSpaceStatusEnum.cs" />
+    <Compile Include="Enums\PaymentTaskStatusEnum.cs" />
+    <Compile Include="Enums\PayTypeEnum.cs" />
+    <Compile Include="Enums\PersonStateEnums.cs" />
+    <Compile Include="Enums\PrintTemplateEnum.cs" />
+    <Compile Include="Enums\ReceiptBookHistoryTypeEnum.cs" />
+    <Compile Include="Enums\ReceiptBookTypeEnum.cs" />
+    <Compile Include="Enums\ReceiptStatusEnum.cs" />
+    <Compile Include="Enums\RowTypeEnum.cs" />
+    <Compile Include="Enums\ReourceTypeEnum.cs" />
+    <Compile Include="Enums\SettleAccountWayEnum.cs" />
+    <Compile Include="Enums\SubjectTypeEnum.cs" />
+    <Compile Include="MeterDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterReadRecordDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificeConfigDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentDiscountInfoDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTaskDetailDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTasksDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PreferentialRecordDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountDetailDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountExcelDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountLogDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountShowDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyMgrDTOEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinceDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookDetailDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookHistoryDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefundRecordDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\TemplatePrintFormDetail.cs" />
+    <Compile Include="Resources\TemplatePrintModel.cs" />
+    <Compile Include="Resources\StaticResourceHelper.cs" />
+    <Compile Include="ShareKeyDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectHouseRefDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplatePrintRecordDetailDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplatePrintRecordDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketSerialNumberDTO.cs">
+      <DependentUpon>PropertyMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertyMgrDTOEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyMgrDTOEntity.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241A595-7F3D-4B58-AAEA-C5E73F41C317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0a61350a-2238-4847-8c0b-fc18df7780a2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainEntity\YK.PropertyMgr.DomainEntity.csproj">
+      <Project>{D44079AA-1823-4E0E-AF79-80AFDA8D01C1}</Project>
+      <Name>YK.PropertyMgr.DomainEntity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

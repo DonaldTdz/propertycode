@@ -1,0 +1,34 @@
+<ion-content class="pageBg">
+  <!--顶部标题区域-->
+ <ion-item class="mobile_head_total">
+   <ion-icon item-left class="mobile_head_logo"><img src="assets/images/logo_dh.png"/></ion-icon>
+   <h1 item-left class="mobile_head_title">{{community.Name}}</h1>
+   <!--倒计时区域-->
+   <count-down [time]="60" (onPrevious)="goPrevious()" #countDown ></count-down>
+ </ion-item>
+
+ <!--中间内容区域-->
+ <div class="mobile_content_total">
+   <div class="clearfix owner_content_all">
+      <h1 class="owner_title">请确认业主信息</h1>
+      <ion-card class="owner_card_total" *ngIf="user" >
+        <!--<p>17栋03单元16楼1604</p>-->
+        <p>业主姓名: {{user.FUserName}}</p>
+        <p>业主电话：{{user.FPhoneNumber}}</p>
+      </ion-card>
+
+      <ion-list no-lines class="owner_warning_total clearfix">
+        <h1 class="owner_title">请选择您要缴费的房屋</h1>
+        <p class="ci_list_content">
+          <button ion-button clear class="ci_list_btn" *ngFor="let h of user.HouseData" (tap)="goSubmit(h)" >{{h.FName}}</button>
+        </p>
+        <ion-item class="mobile_left_bottom">
+          <ion-icon class="mobile_bottom_icon" item-left>
+            <img  src="assets/images/waning.png"/>
+          </ion-icon>
+          请在页面倒计时结束前完成操作，否则将返回首页。
+        </ion-item>
+      </ion-list>
+   </div>
+ </div>
+</ion-content>

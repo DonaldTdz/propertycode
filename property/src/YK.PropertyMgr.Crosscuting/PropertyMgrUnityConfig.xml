@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<configSections>
+		<section name="unity" type="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection,Microsoft.Practices.Unity.Configuration" />
+	</configSections>
+	<unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
+		<assembly name="YK.PropertyMgr.RepositoryContract"></assembly>
+		<assembly name="YK.PropertyMgr.Repository"></assembly>
+		<assembly name="KW.Sprite.Common.Repository"></assembly>
+    <assembly name="YK.PropertyMgr.UnitOfWork"></assembly>
+
+		<namespace name="YK.PropertyMgr.RepositoryContract"></namespace>
+		<namespace name="YK.PropertyMgr.Repository"></namespace>
+		<namespace name="KW.Sprite.Common.Repository"></namespace>
+    <namespace name="YK.PropertyMgr.UnitOfWork"></namespace>
+		<container >
+      <register type="IPropertyMgrUnitOfWork" mapTo="PropertyMgrUnitOfWork" />
+			<register type="PropertyMgrDataBaseContext" mapTo="PropertyMgrDataBaseContext" name="dataBaseContext">
+			</register>
+		</container>
+	</unity>
+</configuration>

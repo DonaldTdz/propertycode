@@ -1,0 +1,35 @@
+﻿<div id="divImportHistoryCostIndexController" ng-controller="ImportHistoryCostIndexController">
+    <div class="box box-primary form-group">
+        <div class="box-footer">
+            <a class="btn btn-primary" href="~/Files/历史缴费信息导入模板.xls">
+                <label>模板下载</label>
+            </a>
+            <div id="divImportHistoryCostIndex" onclick="fnDivHistoryCostClick()" class="btn btn-primary" style="cursor:pointer">
+                <form id="historyCostFormFileUpload" name="historyCostFormFileUpload" target="iframehistoryCostFile" method="post">
+                    <input type="file" name="historyCostFileToUpload" id="historyCostFileToUpload" onchange="historyCostFileSelected()" style="position: absolute; left: -5000px; top: 0;" />
+                    <label for="historyCostFileToUpload" style="cursor:pointer">导入历史缴费信息</label>
+                    <input type="hidden" name="historyCostComDeptId" id="historyCostComDeptId" />
+                </form>
+                <iframe name='iframehistoryCostFile' id="iframehistoryCostFile" style='display:none'></iframe>
+            </div>
+        </div>
+    </div>  
+</div>
+<script language="javascript" type="text/javascript">
+    function historyCostFileSelected() {
+        var deptType = $("#SelectDeptType").val();
+        //alert(deptType)
+        if (deptType != 11) {
+            ckFramework.ModalHelper.Alert("请选择小区");
+            $("#historyCostFileToUpload").val("");
+            return;
+        }
+        //alert($("#SelectDeptId").val())
+        $("#historyCostComDeptId").val($("#SelectDeptId").val());
+        var divImportHistoryCostIndexController = angular.element(document.getElementById('divImportHistoryCostIndexController')).scope();
+        divImportHistoryCostIndexController.FileSelected();
+    }
+    function fnDivHistoryCostClick() {
+       return $("#historyCostFileToUpload").click();
+    }
+</script>

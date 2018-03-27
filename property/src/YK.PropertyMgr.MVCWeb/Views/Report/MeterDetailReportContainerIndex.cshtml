@@ -1,0 +1,263 @@
+﻿<div id="divMeterDetailReportContainerController" ng-controller="MeterDetailReportContainerController">
+    <div id="SearchContainerMeterDetailRep" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">小区</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="ComDeptIdStr" id="ComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList"></select>
+                            <input type="hidden" id="DefaultComDeptId" name="DefaultComDeptId" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">资源名称</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="ResourceName" name="ResourceName" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">楼栋资源</label>
+                        <div class="col-sm-8">
+                            <input id="LouyuName" name="LouyuName" type="text" readonly value="" class="form-control" style="background-color: #FFF" onclick="showMenu();" />
+                            <input type="hidden" id="LouyuIdStr" name="LouyuIdStr" />
+                            <!--下拉列表-->
+                            <div id="MeterDetailReportContainermenuContent" class="col-sm-8" style="display:none; position: absolute;top:59px;background:#FFF;z-index:1000">
+                                <ul id="MeterDetailReportContainertreeDemo" class="ztree form-control" style="margin-top:0; height: 300px;overflow:auto;"></ul>
+                                <div style="text-align:center; padding-bottom:5px; padding-top:5px;">
+                                    <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuSelect()" value="全选">
+                                    <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuReset()" value="清除">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">业主姓名</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="OwnerName" name="OwnerName" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">收费开始日期</label>
+                        <div class="col-sm-8">
+                            <div class="input-append date dateBeginMonth input-group">
+                                <input type="text" id="BeginDate" name="BeginDate" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">收费结束日期</label>
+                        <div class="col-sm-8">
+                            <div class="input-append date dateEndMonth input-group">
+                                <input type="text" id="EndDate" name="EndDate" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" id="btnSearchMeterDetailRep" class="btn btn-primary" value="查询">
+                        <input type="button" id="btnExportMeterDetailRep" class="btn btn-primary" ng-click="MeterReportExportData()" value="导出">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div id="divMeterDetailRepTable" class="col-md-12" />*@
+    <div class="row">
+        <div class="col-md-12">
+            <div id="divMeterDetailRepTable" />
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.MeterDetailRepListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            $("input:hidden[name='DefaultComDeptId']").val(ckFramework.MeterDetailRepListData.DefaultDeptId);
+
+
+        ckFramework.createMeterDetailRepListData = {
+            TableId:'table_ckFramework_MeterDetailRepList',
+            IsAddOperate:false,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.MeterDetailRepListData.TemplateModels,
+            DivTable:$('#divMeterDetailRepTable')
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createMeterDetailRepListData);
+
+        var setting = {
+            async: { //异步加载
+                type: "get",
+                enable: true,
+                url: getUrl
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick,
+                onCheck: onCheck
+            },
+            view: {
+                showIcon: false
+            }
+        };
+
+        function getUrl() {
+
+
+
+            var ComDeptId = $("#SearchContainerMeterDetailRep select[name='ComDeptIdStr']").val();
+            if (ComDeptId == null) {
+                ComDeptId = $("#SearchContainerMeterDetailRep input:hidden[name='DefaultComDeptId']").val();
+            }
+            else {
+                ComDeptId = ComDeptId.replace("number:", "");
+            }
+
+            return "PropertyMgr/Report/GetCommunityLouyuDeptList?ComDeptId=" + ComDeptId;
+        }
+
+        function beforeClick(treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("MeterDetailReportContainertreeDemo");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            return false;
+        }
+
+        function GetbtnAllLouyuSelect() {
+            var zTree = $.fn.zTree.getZTreeObj("MeterDetailReportContainertreeDemo");
+            zTree.checkAllNodes(true);
+            var nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerMeterDetailRep input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerMeterDetailRep input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function GetbtnAllLouyuReset() {
+            var treeObj = $.fn.zTree.getZTreeObj("MeterDetailReportContainertreeDemo");
+            treeObj.checkAllNodes(false);
+            var cityObj = $("#SearchContainerMeterDetailRep input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerMeterDetailRep input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", "");
+            cityObj.prop("value", "");
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("MeterDetailReportContainertreeDemo"),
+                nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerMeterDetailRep input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerMeterDetailRep input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function showMenu() {
+
+            var cityObj = $("#SearchContainerMeterDetailRep input[name='LouyuName']");
+            var cityOffset = $("#SearchContainerMeterDetailRep input[name='LouyuName']").offset();
+            //$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+            $("#MeterDetailReportContainermenuContent").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#MeterDetailReportContainermenuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+
+
+            if (!(event.target.id == "menuBtn" || event.target.id == "LouyuName" || event.target.id == "MeterDetailReportContainermenuContent" || $(event.target).parents("#MeterDetailReportContainermenuContent").length > 0)) {
+                hideMenu();
+            }
+        }
+
+
+
+
+
+        $(document).ready(function () {
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+
+            var currentdate = new Date();
+            var y = currentdate.getFullYear();
+            var m = currentdate.getMonth() + 1;
+            var d = currentdate.getDate();
+            var mfirday= y+'-'+ (m > 9?m:'0'+m) + '-01';
+            var date = y+'-'+ (m > 9?m:'0'+m) + '-'+ (d > 9?d:'0'+d);
+            $("input[name='BeginDate']").val(mfirday);
+            $("input[name='EndDate']").val(date);
+
+
+
+            ckFramework.MeterDetailRepTable = $('#' + ckFramework.createMeterDetailRepListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createMeterDetailRepListData),
+                filterOptions: {
+                    searchButton: "btnSearchMeterDetailRep",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerMeterDetailRep",
+                    Url: '/PropertyMgr/Report/GetMeterDetailReportList',
+                    DrawTable:function(){
+                        ckFramework.MeterDetailRepTable.draw();
+                    }
+                }
+
+            });
+
+             $.fn.zTree.init($("#MeterDetailReportContainertreeDemo"), setting);
+
+            $("#SearchContainerMeterDetailRep select[name='ComDeptIdStr']").change(function () {
+                var cityObj = $("#SearchContainerMeterDetailRep input[name='LouyuName']");
+                var LouyuIdstr = $("#SearchContainerMeterDetailRep input:hidden[name='LouyuIdStr']")
+                LouyuIdstr.prop("value", "");
+                cityObj.prop("value", "");
+                var treeObj = $.fn.zTree.getZTreeObj("MeterDetailReportContainertreeDemo");
+                treeObj.reAsyncChildNodes(null, "refresh");
+
+
+            });
+
+        });
+    </script>
+</div>

@@ -1,0 +1,92 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divVacationListController" ng-controller="VacationListController">
+    <div id="SearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>UserName</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="UserName" />
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <input type="button" id="btnVacationListSearch" class="btn btn-primary" value="{{ClientMessage.Search}}">
+            <label class="pull-right">
+                <input type="checkbox" ng-model="IsShowSearch">{{ClientMessage.Show}}
+            </label>
+        </div>
+    </div>
+    <div id="divToolbar" class="pull-left">
+        <a operate-authority authority="UpdateAdminUser" authorty-type="hide" class="btn btn-app" ng-click="ShowVacationView('Add',0)">
+            <i class="fa fa-pencil pull-left"></i>{{ClientMessage.Add}}
+        </a>
+    </div>
+    <div id="divVacationListTable" />
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.VacationListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.VacationViewUrlAdd = '@Url.PluginAction("PropertyMgr", "Vacation", "VacationViewAdd")';
+        ckFramework.VacationViewUrlEdit = '@Url.PluginAction("PropertyMgr", "Vacation", "VacationViewEdit")';
+        ckFramework.VacationViewUrlLook = '@Url.PluginAction("PropertyMgr", "Vacation", "VacationViewLook")';
+        ckFramework.VacationTable = null;
+
+        ckFramework.createVacationListData = {
+            TableId:'table_ckFramework_VacationList',
+            IsAddOperate:true,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.VacationListData.TemplateModels,
+            DivTable:$('#divVacationListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60,
+                "render": function()
+                {
+                    var editContent = "";
+                    var deleteContent = "";
+                    editContent = '<a herf="#" class="btn columnTool Edit"><i class="ui-tooltip fa fa-edit" data-original-title="Edit"></i></a>'
+                    if(ckFramework.OperateAuthorityService.CheckAuthority('AddBuilding'))
+                    {
+                        deleteContent = '<a herf="#" class="btn columnTool Delete"><i class="ui-tooltip fa fa-trash-o" data-original-title="Delete"></i></a>'
+                    }
+                    return editContent + deleteContent;
+                }
+            }
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createVacationListData);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ckFramework.VacationTable = $('#' + ckFramework.createVacationListData.TableId).dataTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createVacationListData),
+                filterOptions: {
+                    searchButton: "btnVacationListSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "Vacation", "GetVacations")',
+                    DrawTable:function(){
+                        ckFramework.VacationTable.draw();
+                    }
+                }
+            });
+            $('#'+ ckFramework.createVacationListData.TableId +' tbody').on('click', '.Edit', function () {
+                var data = ckFramework.VacationTable.rows($(this).parents('tr')).data();
+                var vacationOwnerListService = ckFramework.GetAngularService('VacationListService');
+                vacationOwnerListService.ShowVacationView('Edit', data[0].Id);
+            });
+            $('#'+ ckFramework.createVacationListData.TableId +' tbody').on('click', '.Delete', function () {
+                var data = ckFramework.VacationTable.rows($(this).parents('tr')).data();
+                ckFramework.ModalHelper.Confirm(ckFramework.ClientMessage.GetMessage().ConfirmDelete,function(){
+                    ckFramework.ModalHelper.OpenWait();
+                    var VacationListController = angular.element(document.getElementById('divVacationListController')).scope();
+                    VacationListController.DeleteVacation(data[0].Id);
+                });
+            });
+            //$('#'+ckFramework.createVacationListData.TableId).find("div.toolbar").html($('#divToolbar'));
+            $("div.toolbar").html($('#divToolbar'));
+            $('#SearchContainer').click();
+        });
+    </script>
+</div>

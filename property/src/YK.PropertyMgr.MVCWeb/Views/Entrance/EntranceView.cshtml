@@ -1,0 +1,91 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divEntranceViewController" ng-controller="EntranceViewController">
+    <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="ng-binding">门禁编辑</h4>
+    </div>
+    <div class="modal-body" style="overflow: auto; max-height: 600px;">
+        <div class="row">
+            <div class="form-group ModalFormMagin col-md-6 has-feedback">
+                @*<label class="control-label">
+                        <span>设备类型</span>
+                    </label>
+                    <select class="form-control" id="typeLock" ng-model="type" ng-change="EnableControl(type)" >
+                        <option value="0">-- 请选择 --</option>
+                        <option value="1" ng-selected="(!(Entrance.BuildId.length>0)&&!(Entrance.UnitName.length>0))?true:false">小区锁</option>
+                        <option value="2" ng-selected="(Entrance.BuildId.length>0&&!(Entrance.UnitName.length>0))?true:false">楼宇锁</option>
+                        <option value="3" ng-selected="(Entrance.BuildId.length>0&&Entrance.UnitName.length>0)?true:false">单元锁</option>
+                    </select>*@
+                <label class="control-label">
+                    <span>小区*</span>
+                </label>
+                <select class="form-control" ng-model="Entrance.VillageID" id="drpVillage" ng-disabled="true"  ng-change="ChangeLoadBuild(Entrance.VillageID)" ng-options="m.Id as m.Text for m in DeptVillages">
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <label class="control-label">
+                    <span>楼宇</span>
+                </label>
+                <select class="form-control" ng-model="Entrance.BuildId" id="drpBuild" ng-change="ChangeLoadUnit(Entrance.BuildId)" ng-options="m.Id as m.Text for m in Builds">
+                    <option value="">-- 请选择 --</option>
+
+                </select>
+
+                <label class="control-label">
+                    <span>单元</span>
+                </label>
+                <select class="form-control" ng-model="Entrance.UnitName" id="drpUnit" ng-options="m for m in Units"></select>
+                <label class="control-label">
+                    <span>名称*</span>
+                </label>
+                <input type="text" class="form-control" ng-model="Entrance.Name" placeholder="例如:门禁_11栋11单元" />
+                <label class="control-label">
+                    <span>状态*</span>
+                </label>
+                <br />
+                <input type="checkbox" ng-checked="Entrance.State>0?true:false" id="radState" ng-model="Entrance.State" />是否启用
+                <div style="color:red">&nbsp;&nbsp;注：请根据实际情况选择小区、楼宇、单元。门锁创建有关于开门授权,不要省略具体信息。单元门必须补全信息到单元、楼栋门必须补全信息到楼栋。</div>
+
+            </div>
+            <div class="form-group ModalFormMagin col-md-6 has-feedback">
+                <label class="control-label">
+                    <span>省*</span>
+                </label>
+                <select class="form-control" name="drpProvince" ng-change="ChangeLoadCity(Entrance.ProvinceID)" ng-model="Entrance.ProvinceID" ng-options="m.Id as m.Name for m in Provinces">
+                    <option value="">-- 请选择 --</option>
+                </select>
+
+                <label class="control-label">
+                    <span>市*</span>
+                </label>
+                <select class="form-control" name="drpCity" ng-change="ChangeLoadCountry(Entrance.CityID)" ng-model="Entrance.CityID" ng-options="m.Id as m.Name for m in Cities">
+                    <option value="">-- 请选择 --</option>
+                </select>
+
+                <label class="control-label">
+                    <span>区/县*</span>
+                </label>
+                <select class="form-control" name="drpCountry" ng-model="Entrance.CountyID" ng-options="m.Id as m.Name for m in Countries">
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <label class="control-label">
+                    <span>地址*</span>
+                </label>
+                <input type="text" value="" placeholder="例如:阳光物业_锦上小区_11栋11单元" class="form-control" ng-model="Entrance.Address" />
+                <label ng-show="hide()" ng-model="Entrance.KeyID"></label>
+                <label ng-show="hide()" ng-model="Entrance.DoorId"></label>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="Save(Entrance.Id>0?'Edit':'Add')" ng-disabled="Disabled">保存</button>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var ckFramework = ckFramework || {};
+    ckFramework.EntranceViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+</script>

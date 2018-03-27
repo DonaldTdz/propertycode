@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8241A595-7F3D-4B58-AAEA-C5E73F41C317}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.BackgroundMgr.ApplicationDTO</RootNamespace>
+    <AssemblyName>YK.BackgroundMgr.ApplicationDTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationDTO\AppHouseView.cs" />
+    <Compile Include="ApplicationDTO\BuildingInfo.cs" />
+    <Compile Include="ApplicationDTO\BuildingSingle.cs" />
+    <Compile Include="ApplicationDTO\DeptInfo.cs" />
+    <Compile Include="ApplicationDTO\HouseInfo.cs" />
+    <Compile Include="ApplicationDTO\HouseState.cs" />
+    <Compile Include="ApplicationDTO\OwnerInformation.cs" />
+    <Compile Include="ApplicationDTO\ParkingInfo.cs" />
+    <Compile Include="ApplicationDTO\ParkingSpaceInfo.cs" />
+    <Compile Include="ApplicationDTO\SEC_AreaDTO.cs" />
+    <Compile Include="BackgroundMgrDTOEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OtherSysErrorEntityDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ApplicationDTO\RelationshipInfo.cs" />
+    <Compile Include="SEC_AdminUserDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_AreaDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_BuildingDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_CarportDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_CommunityDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_DeptDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_DeveloperDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_FieldDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GarageDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayAuthDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_HouseDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_ModuleDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_OperateDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_PropertyDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_RoleDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_UserDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_User_OwnerDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatOpenIdDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatPublicNumberDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryItemDTO.cs">
+      <DependentUpon>BackgroundMgrDTOEntity.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BackgroundMgrDTOEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BackgroundMgrDTOEntity.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

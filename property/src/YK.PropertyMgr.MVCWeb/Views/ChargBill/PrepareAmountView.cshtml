@@ -1,0 +1,35 @@
+﻿<div id="divPrepareAmountViewController" ng-controller="PrepareAmountViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.PrepareAmountViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var readonlyDatas = ['HouseDoorNo'];
+        ckFramework.createPrepareAmountViewFormData = {
+            FormId:'PrepareAmountViewForm',
+            DivContainer:$('#divPrepareAmountViewContainer'),
+            TemplateItemDatas:ckFramework.PrepareAmountViewData.TemplateModels,
+            jumpFields:['Id'],
+            ReadonlyDatas: readonlyDatas,
+            ColumnCount:1
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createPrepareAmountViewFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createPrepareAmountViewFormData);
+        });
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>生成预存费</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divPrepareAmountViewContainer" />
+        @*<div class="alert alert-info alert-dismissible" ng-show="IsDepPay">
+            <i class="icon fa fa-info"></i> 提示：该房屋存在开发商代缴，请手动输入金额
+        </div>*@
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="PrepareAmount()">确定</button>
+    </div>
+</div>

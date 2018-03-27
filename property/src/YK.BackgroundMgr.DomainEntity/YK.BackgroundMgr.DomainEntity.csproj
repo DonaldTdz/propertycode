@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B6E4039-636B-4E37-981E-EE919A38CD44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.BackgroundMgr.DomainEntity</RootNamespace>
+    <AssemblyName>YK.BackgroundMgr.DomainEntity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="KW.Sprite.Common.Repository">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundMgrDomainEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carport.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OtherSysErrorEntity.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parking.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relationship\SEC_User_OwnerSEC_Carport.cs" />
+    <Compile Include="Relationship\SEC_User_OwnerSEC_Dept.cs" />
+    <Compile Include="SEC_AdminUser.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Area.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Building.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Carport.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Community.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Dept.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Developer.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Field.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Garage.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Gateway.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayAuth.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_House.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Module.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Operate.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Property.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_Role.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_User.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_User_Owner.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatOpenId.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatPublicNumber.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\Sms_IdentifyingCode.cs" />
+    <Compile Include="SMS\Sms_Log.cs" />
+    <Compile Include="Sys_Dictionary.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryItem.cs">
+      <DependentUpon>BackgroundMgrDomainEntity.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BackgroundMgrDomainEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BackgroundMgrDomainEntity.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,214 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divCarParkContainerController" ng-controller="CarParkContainerController">
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.IsDeptContainer = true;
+        ckFramework.DeptContainerHelper = ckFramework.DeptContainerHelper || {};
+        ckFramework.CarParkContainerData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.ClientCustomSearch = [];
+        ckFramework.ClientCustomSearch.push({ "name": "DeptId", "value": RootDeptId });
+        ckFramework.ClientCustomSearch.push({ "name": "DeptName", "value": RootDeptName });
+        ckFramework.ClientCustomSearch.push({ "name": "DeptType", "value": RootDeptType });
+    </script>
+    <div class="row">
+        <div class="col-md-3">
+            <input type="hidden" id="hidIsDeveloper" value="false" />
+            <div class="input-group" id="divKeyWord" style="display:none;">
+                <input type="text" id="deptKeyWord" placeholder="车位编号" class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" name="btnTopSearch" onclick="fnDeptKeyWordSearch()" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+            <div id="divTreeWrap" style="padding-top:10px; overflow: auto;">
+                <div id="deptTree"></div>
+            </div>
+        </div>
+        <div class="page-context col-md-9" id="divDeptContainer"></div>
+    </div>
+    <input type="hidden" id="SelectDeptId" />
+    <input type="hidden" id="SelectDeptName" />
+    <input type="hidden" id="SelectDeptType" />
+    <input type="hidden" id="SelectDeptTypeAndId" />
+    <input type="hidden" id="SelectSubjectType" />
+    <input type="hidden" id="SelectDeptContainerType" />
+
+    <script type="text/javascript">
+        var DeptTypeInfos = {
+            RootNode : 1,
+            WuYE : 10,
+            XiaoQu : 11,
+            LouYu : 12,
+            CheKu : 13,
+            FangWu : 20,
+            CheWei : 21,
+            CheLiang : 22,
+            GongGongZiYuan : 23,
+            SheBei : 24,
+            KaiFaShang : 30,
+            UserOwner : 31,
+            Others : 100,
+
+        };
+
+        var URLTypeInfos = {
+            CarParkChargBill:14 //停车场收费
+        };
+
+        $('#divTreeWrap').height($(document).height() - 200);
+        $('#SelectDeptId').val(RootDeptId);
+        $('#SelectDeptName').val(RootDeptName);
+        $('#SelectDeptType').val(RootDeptType);
+        ckFramework.DeptTree = $('#deptTree').jstree({
+            'core': {
+                'data': {
+                    'cache' : false,
+                    'url': function(node){
+                        if ($("#deptKeyWord").val() != "") {
+                            return ckFramework.CarParkContainerData.ContentSearchUrl;
+                        }
+                        else {
+                            return node.id==='#'?
+                            ckFramework.CarParkContainerData.ContentUrl : ckFramework.CarParkContainerData.ContentChildUrl
+                        }
+                    },
+                    'data' : function(node){
+                        var typeId=node.id.split('_');
+
+                        return {'id':typeId[0],'type':typeId[1], 'keyWord': $("#deptKeyWord").val()};
+                    }
+                },
+                "check_callback": true,
+            },
+            "plugins" : ["search"]
+        }).on('loaded.jstree', function (event,data) {
+            //ckFramework.ModalHelper.Alert(JSON.stringify(node))
+            //$(this).jstree("select_node", RootDeptIdAndType, false);
+            //$(this).jstree("open_node", RootDeptIdAndType);
+        }).on('changed.jstree', function (node, action, selected, event) {
+            if (action.node == undefined || action.node == null) {
+                action.node = $(this).jstree().get_node($(this).jstree().get_selected());
+            }
+            else {
+                //alert($("span.logo-mini").is(":hidden"))
+                //控制菜单收缩
+                if ($("span.logo-mini").is(":hidden")) {
+                    $("#aLeftMenuControl").click();
+                    var oTable = $('div.dataTables_scrollBody>table.display').dataTable();
+                    if ( oTable.length > 0 ) {
+                        oTable.fnAdjustColumnSizing();
+                    }
+                }
+            }
+
+            ckFramework.ClientCustomSearch = [];
+            if (action.node && action.node.original) {
+                var typedata = action.node.original.id;
+                var deptId = typedata.split('_')[0];
+                var deptType = typedata.split('_')[1];
+                ckFramework.ClientCustomSearch.push({ "name": "DeptId", "value": deptId });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptName", "value": action.node.original.text });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptType", "value": deptType });
+                $("#deptId").val(deptId);
+                $('#SelectDeptId').val(deptId);
+                $('#SelectDeptName').val(action.node.original.text);
+                $('#SelectDeptType').val(deptType);
+                $('#SelectDeptTypeAndId').val(typedata);
+
+
+
+
+            }
+            else {
+                ckFramework.ClientCustomSearch.push({ "name": "DeptId", "value": RootDeptId });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptName", "value": RootDeptName });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptType", "value": RootDeptType });
+            }
+            if (action.event) {
+
+
+               if(ckFramework.CarParkContainerData.PageType==URLTypeInfos.CarParkChargBill)
+                {
+
+                    if(deptType==DeptTypeInfos.CheWei)
+                    {
+                        $('#btnOrgListSearch').click();
+                         GetOwnerName();
+                    }
+
+                    $('#btnTempListSearch').click();
+                    $('#btnChargeRecordSearch').click();
+                    $('#btnHCSListSearch').click();
+
+                }
+
+            }
+        }).on("refresh.jstree",function(){
+
+        });
+
+
+    </script>
+    <script type="text/javascript" language="javascript">
+
+        var CarParkContainerType = {
+            CarParkChargBill:14 //停车场收费
+        };
+
+        $('#SelectDeptContainerType').val(ckFramework.CarParkContainerData.PageType);
+
+        var carParkContainerService = ckFramework.GetAngularService('CarParkContainerService');
+
+        switch (ckFramework.CarParkContainerData.PageType) {
+            case CarParkContainerType.CarParkChargBill:{
+                $("#divKeyWord").show();
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/Index', ['apps/HomeApp','/Plugins/PropertyMgr/Scripts/controllers/ChargBill/ChargBillIndexController.js'], 'divChargBillIndexController',{ IsCarPark : true });
+                break;
+            }
+        }
+
+
+        function SearchNotRefresh(){
+
+            var to = false;
+            if(to) { clearTimeout(to); }
+            to = setTimeout(function () {
+                var v = $("#deptKeyWord").val();
+                debugger;
+                $('#deptTree').jstree(true).search(v);
+                if (v!=""&&v!=null) {
+                    $("#deptTree li[aria-level='1']").each(function(){
+                        if (!($(this).html().indexOf("jstree-search")>0)) {
+                            $(this).hide();
+                        }
+                    })
+                }else{
+                    $("#deptTree li").show();
+                }
+
+            }, 250);
+        }
+
+        function fnDeptKeyWordSearch(){
+            switch (ckFramework.CarParkContainerData.PageType){
+                case CarParkContainerType.CarParkChargBill:{
+                    if ($("#deptKeyWord").val().length == 1) {
+                        ckFramework.ModalHelper.Alert("请输入2位以上的字符查询");
+                        return;
+                    }
+                    $('#deptTree').jstree('refresh');
+                    break;
+                }
+
+            }
+        }
+        $(function(){
+            $('#deptKeyWord').bind('keypress',function(event){
+                if(event.keyCode == "13")
+                {
+                    fnDeptKeyWordSearch()
+                }
+            });
+        });
+    </script>
+</div>

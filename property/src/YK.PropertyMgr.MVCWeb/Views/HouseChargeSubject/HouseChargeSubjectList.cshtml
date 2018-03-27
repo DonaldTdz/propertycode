@@ -1,0 +1,135 @@
+﻿<style type="text/css">
+    .table-condensed label {
+        width:70px;
+    }
+</style>
+<div id="divHouseChargeSubjectListController" ng-controller="HouseChargeSubjectListController">
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.HouseChargeSubjectData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
+    <input type="button" id="btnHCSListSearch" ng-click="RefreshData()" value="刷新" style=" display:none;" />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>项目名称</th>
+                        <th>收费周期</th>
+                        <th>单价</th>
+                        <th>计费公式</th>
+                        <th>滞纳金（日）</th>
+                        <th>账单日</th>
+                        <th>在线支付</th>
+                        <th>自动生成</th>
+                        <th>备注</th>
+                    </tr>
+                    <tr ng-repeat="item in ChargeSubjectList">
+                        <td>{{item.Name}}</td>
+                        <td>{{GetBillPeriodName(item.BillPeriod)}}</td>
+                        <td>{{item.Price}}</td>
+                        <td>{{item.ChargeFormulaShow}}</td>
+                        <td>{{item.PenaltyRate*1000}}‰</td>
+                        <td>{{item.BillDay == null? "" : item.BillDay + "日"}}</td>
+                        <td>{{item.IsOnline == true? "是":"否"}}</td>
+                        <td>{{item.AutomaticBill == 1? "是":"否"}}</td>
+                        <td>{{item.Remark}}</td>
+                    </tr>
+                    <tr ng-show="ChargeSubjectList.length == 0">
+                        <td colspan="8" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" ng-show="IsShowHouse">
+                <div class="box-header">
+                    <h3 class="box-title">房屋信息</h3>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <td><label>门牌号:</label>{{ChargeBillInformation.houseInfo.DoorNo}}</td>
+                                <td><label>套内面积:</label>{{ChargeBillInformation.houseInfo.HouseInArea}}</td>
+                                <td><label>建筑面积:</label>{{ChargeBillInformation.houseInfo.BuildArea}}</td>
+                                <td><label>房屋状态:</label>{{ChargeBillInformation.houseInfo.HouseStatusStr}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box" ng-show="IsShowCarPark">
+                <div class="box-header">
+                    <h3 class="box-title">车位信息</h3>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr ng-repeat="item in ChargeBillInformation.parkingSpaceInfo" >
+                                <td><label>车位号:</label>{{item.CarportNum}}</td>
+                                <td><label>面积:</label>{{item.Area}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box" ng-show="IsShowMeter">
+                <div class="box-header">
+                    <h3 class="box-title">三表信息</h3>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr ng-repeat="item in ChargeBillInformation.meter" >
+                                <td><label>仪器编号:</label>{{item.MeterNum}}</td>
+                                <td><label>仪表类型:</label>{{item.MeterTypeStr}}</td>
+                                <td><label>最新读数:</label>{{item.MeterValue}}</td>
+                                <td><label>抄表时间:</label>{{item.ReadDateStr}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @*<div ng-show="IsShowHouse">
+                <div class="col-md-12">
+                    <h3>房屋信息</h3>
+                </div>
+                <div class="col-md-12">
+                    <label>门牌号： {{ChargeBillInformation.houseInfo.DoorNo}}    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+                    套内面积：   {{ChargeBillInformation.houseInfo.HouseInArea}}     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+                    建筑面积： {{ChargeBillInformation.houseInfo.BuildArea}}  </label>
+                </div>
+                <div class="col-md-12">
+                    <hr style="background-color:black;height:1px;border:none;" />
+                </div>
+            </div>*@
+            @*<div ng-show="IsShowCarPark">
+                <div class="col-md-12">
+                    <h3>车位信息</h3>
+                </div>
+                <div class="col-md-12" ng-repeat="item in ChargeBillInformation.parkingSpaceInfo">
+                    <label>车位号：  {{item.CarportNum}}   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                    面积：    {{item.Area}}       </label>
+                </div>
+                <div class="col-md-12">
+                    <hr style="background-color:black;height:1px;border:none;" />
+                </div>
+            </div>*@
+            @*<div ng-show="IsShowMeter">
+                <div class="col-md-12">
+                    <h3>三表信息</h3>
+                </div>
+                <div class="col-md-12" ng-repeat="item in ChargeBillInformation.meter">
+                    <label>仪器编号： {{item.MeterNum}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+                    仪表类型：  {{item.MeterTypeStr}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                    最新读数：{{item.MeterValue }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                    抄表时间：  {{item.ReadDateStr}}  </label>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>

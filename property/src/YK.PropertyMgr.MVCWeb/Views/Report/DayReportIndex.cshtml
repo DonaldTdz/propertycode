@@ -1,0 +1,35 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divDayReportIndexController" ng-controller="DayReportIndexController" >
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+            <li class="active">
+                <a href="#tabDayReport" role="tab" data-toggle="tab" onclick="DayReportClick()" class="ng-binding">汇总表</a>
+            </li>
+            <li><a href="#tabDayReportDetail" role="tab" data-toggle="tab" onclick="DayReportDetailClick()" class="ng-binding">明细表</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabDayReport">
+                <div id="divDayReportContainer"></div>
+            </div>
+            <div class="tab-pane" id="tabDayReportDetail">
+                <div id="divDayReportDetailContainer"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var deptContainerService = ckFramework.GetAngularService('DeptContainerService');
+        $(document).ready(function () {
+            DayReportClick();
+        });
+        //汇总表
+        function DayReportClick() {
+            deptContainerService.ShowContainerContent('divDayReportContainer', 'PropertyMgr/Report/DayReportContainerIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/DayReportContainerController.js'], 'divDayReportContainerController');
+        }
+        //明细表
+        function DayReportDetailClick() {
+            deptContainerService.ShowContainerContent('divDayReportDetailContainer', 'PropertyMgr/Report/DayReportDetailIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/DayReportDetailController.js'], 'divDayReportDetailController');
+        }
+     
+    </script>
+</div>
+

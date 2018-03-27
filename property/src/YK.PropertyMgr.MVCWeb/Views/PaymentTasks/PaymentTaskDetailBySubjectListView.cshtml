@@ -1,0 +1,22 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divPaymentTaskDetailBySubjectListViewController" ng-controller="PaymentTaskDetailBySubjectListController">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="testCustomer" ui-jq="dataTable" ui-options="testTableOptions" class="table table-striped">
+                <thead>
+                    <tr id="trTestThead"></tr>
+                </thead>
+                <tbody id="tbodyTest"></tbody>
+            </table>
+        </div>
+    </div>
+
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+
+        ckFramework.PaymentTaskDetailBySubjectListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
+    
+</div>
+

@@ -1,0 +1,108 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divForeigBillChargeListController" ng-controller="ForeigBillChargeListController">
+    <div class="form-horizontal box box-primary">
+        <div class="box-body">
+            <div class="ModalFormMagin col-md-10 has-feedback" style="margin-bottom:0px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">应收金额</label>
+                    <div class="col-sm-4">
+                        <input type="text" value="" placeholder="应收金额" class="form-control" name="AmountShouldTotal" ng-readonly="true" ng-model="PageModel.AmountShouldTotal" />
+                    </div>
+                    @*<label class="col-sm-4 control-label">票据号</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="" placeholder="票据编号" class="form-control" name="ReceiptNum" ng-model="PageModel.ReceiptNum" />
+                        </div>*@
+                    <label class="col-sm-2 control-label" style="text-align:center;">付款方式</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="PageModel.PayTypeId" ng-options="m.Code as m.CnName for m in PayTypeList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">实收金额</label>
+                    <div class="col-sm-4">
+                        <input type="text" value="" placeholder="实收金额" class="form-control" name="ReceivedAmountTotal" ng-model="PageModel.ReceivedAmountTotal" ng-keyup="toDecimal($event)" ng-blur="isNumber($event)" />
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="checkbox">
+                            <label>
+                                <label>
+                                
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:0px;">
+                    <label class="col-sm-2 control-label">找零</label>
+                    <div class="col-sm-4">
+                        <input type="text" value="" placeholder="找零" class="form-control" name="SmallChange" ng-readonly="true" ng-model="PageModel.SmallChange" />
+                    </div>
+                    @*<label class="col-sm-2 control-label">备注</label>*@
+                    <div class="col-sm-6">
+                        <textarea rows="2" ng-model="PageModel.Remark" name="Remark" class="form-control">请您妥善保存交款收据，如是押金类或代收费项目，票据遗失恕不退付</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="ModalFormMagin col-md-2 has-feedback">
+                <div class="form-group"> 
+                    <div class="col-sm-12" style="margin-top:20px;">
+                        <input type="button" id="btnResourceFirstAdd" ng-if="CheckPermission('ConfirmForeigBillCharge')" class="btn btn-primary btn-lg" ng-click="SaveData()" value="确认收费">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12" style="margin-top:20px;">
+                        <input type="button" id="btnAddForeigBillCharge"  ng-if="CheckPermission('ConfirmShowForeigBillViewModal')"  ng-click="ShowForeigBillViewModal()" class="btn btn-primary" value="添加对外收费">
+                        <input type="button" id="btnForeigBillListSearch" ng-click="GetForeigBillChargList()" class="btn btn-primary" style="display:none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*修改为angular绑定table*@
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th style="text-align:center;"><input type="checkbox" ng-click="fnDailyCheckedAll()" ng-model="IsCheckedAll" ng-checked="IsCheckedAll" /></th>
+                        <th>收费对象</th>
+                        <th>收费项目</th>
+                        <th>计费金额</th>
+                        <th>已交金额</th>
+                        <th>应收金额</th>
+                        <th>开始日期</th>
+                        <th>结束日期</th>
+                        <th>减免金额</th>
+                        @*<th>描述</th>*@
+                    </tr>
+                    <tr ng-repeat="item in ChargeBillList">
+                        <th style="text-align:center;"><input type="checkbox" ng-model="item.IsChecked" ng-checked="{{item.IsChecked}}" ng-click="fnDailyChecked(item)" /></th>
+                        <td>{{item.CustomerName}}</td>
+                        <td>{{item.ChargeSubjectName}}</td>
+                        <td>{{item.BillAmount | number:2}}</td>
+                        <td>{{item.ReceivedAmount | number:2}}</td>
+                        <td>{{item.AmountShould | number:2}}</td>
+                        <td>{{item.BeginDateFormat}}</td>
+                        <td>{{item.EndDateFormat}}</td>
+                        <td>{{item.ReliefAmount | number:2}}</td>
+                        @*<td>{{item.Description}}</td>*@
+                    </tr>
+                    <tr ng-show="ChargeBillList.length == 0">
+                        <td colspan="9" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ForeigBillChargeTable =null;
+        ckFramework.ForeigBillChargeListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.ForeigBillChargeViewUrlAdd='@Url.PluginAction("PropertyMgr", "ChargBill", "ForeigBillChargeViewAdd")';
+        ckFramework.ForeigBillPrintPDFChargeRecordUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ReceiptPrintPDF")';
+        ckFramework.ForeigBillCustomerName = "";
+    </script>
+</div>

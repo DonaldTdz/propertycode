@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{80DC3E82-67BB-43CA-A9B3-1539A850A863}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.BackgroundMgr.ApplicationMapper</RootNamespace>
+    <AssemblyName>YK.BackgroundMgr.ApplicationMapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="KW.Sprite.Common.Repository">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationMapper\AdminUsersMapper.cs" />
+    <Compile Include="ApplicationMapper\Sys_DictionaryItemMappers.cs" />
+    <Compile Include="ApplicationMapper\TemplateModelsMapper.cs" />
+    <Compile Include="BackgroundMgrMapper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OtherSysErrorEntityMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SEC_AdminUserMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_AreaMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_BuildingMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_CarportMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_CommunityMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_DeptMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_DeveloperMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_FieldMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GarageMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayAuthMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_GatewayMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_HouseMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_ModuleMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_OperateMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_PropertyMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_RoleMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_UserMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_User_OwnerMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatOpenIdMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEC_WeChatPublicNumberMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryItemMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DictionaryMappers.cs">
+      <DependentUpon>BackgroundMgrMapper.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BackgroundMgrMapper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BackgroundMgrMapper.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241a595-7f3d-4b58-aaea-c5e73f41c317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Crosscuting\YK.BackgroundMgr.Crosscuting.csproj">
+      <Project>{07834BA1-0724-4192-98AB-DF7B9D1A314A}</Project>
+      <Name>YK.BackgroundMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainEntity\YK.BackgroundMgr.DomainEntity.csproj">
+      <Project>{0b6e4039-636b-4e37-981e-ee919a38cd44}</Project>
+      <Name>YK.BackgroundMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0a61350a-2238-4847-8c0b-fc18df7780a2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

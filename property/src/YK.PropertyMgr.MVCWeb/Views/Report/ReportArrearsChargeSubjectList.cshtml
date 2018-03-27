@@ -1,0 +1,97 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divReportArrearsChargeSubjectListController" ng-controller="ReportArrearsChargeSubjectListController">
+
+    <div id="SearchContainerReportArrearsChargeSubject" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label>小区</label>
+                <select class="form-control" name="ComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList">
+                        <option value="">-- 请选择 --</option>
+                </select>
+                </div>
+               
+                <div class="col-md-3">
+                    <label>费用开始时间</label>
+                    <div class="input-append date input-group">
+                        <input type="text" name="BeginDate" class="form-control">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>费用结束时间</label>
+                    <div class="input-append date input-group">
+                        <input type="text" name="EndDate" class="form-control">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="box-footer">
+            <input type="button" id="btnSearchContainerReportArrearsChargeSubject" class="btn btn-primary" value="查询">
+
+        </div>
+    </div>
+    
+    <div id="divReportArrearsChargeSubjectListTable" />
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+      
+        var ckFramework = ckFramework || {};
+
+        ckFramework.ReportArrearsChargeSubjectListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+       
+        ckFramework.ArrearsChargeSubjectTable = null;
+
+        ckFramework.createReportArrearsChargeSubjectListData = {
+            TableId:'table_ckFramework_ReportArrearsChargeSubjectList',
+            IsAddOperate:false,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.ReportArrearsChargeSubjectListData.TemplateModels,
+            DivTable:$('#divReportArrearsChargeSubjectListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60
+                
+            }
+        };
+
+        ckFramework.TableService.CreateBusinessTable( ckFramework.createReportArrearsChargeSubjectListData);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.date').datetimepicker({
+                format:  'yyyy-mm-dd'
+            });
+
+
+
+            ckFramework.ArrearsChargeSubjectTable = $('#' + ckFramework.createReportArrearsChargeSubjectListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createReportArrearsChargeSubjectListData),
+                filterOptions: {
+                    searchButton: "btnSearchContainerReportArrearsChargeSubject",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerReportArrearsChargeSubject",
+                    Url: '@Url.PluginAction("PropertyMgr", "Report", "GetArrearsChargeSubjectList")',
+                    DrawTable:function(){
+                        ckFramework.ArrearsChargeSubjectTable.draw();
+                    }
+                }
+            });
+
+           
+
+          
+            $('#SearchContainer').click();
+        });
+    </script>
+</div>

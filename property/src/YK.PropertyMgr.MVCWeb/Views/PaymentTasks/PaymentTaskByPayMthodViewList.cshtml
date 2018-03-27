@@ -1,0 +1,79 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    .tale_text th, .tale_text tr {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+<div id="divPaymentTaskByPayMthodViewListController" ng-controller="PaymentTaskByPayMthodViewListController" style="height:280px;">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped tale_text  table-bordered" cellspacing="0">
+                <thead>
+
+                    <tr>
+                        <th rowspan="2" style="vertical-align: middle">支付方式</th>
+                        <th colspan="5">线下支付</th>
+                        <th colspan="4">App缴费</th>
+                        <th rowspan="2" style="vertical-align: middle">预存抵扣</th>
+                        <th rowspan="2" style="vertical-align: middle">优惠券</th>
+                        <th rowspan="2" style="vertical-align: middle">合计</th>
+                    </tr>
+                    <tr>
+                        <th>现金</th>
+                        <th>银行卡</th>
+                        <th>支付宝</th>
+                        <th>微信</th>
+                        <th>内部划账</th>
+                        <th>支付宝</th>
+                        <th>微信</th>
+                        <th>一网通</th>
+                        <th>钱包抵扣</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{PayTypeMthodData.Name}}</td>
+                        <td>{{PayTypeMthodData.Cash}}</td>
+                        <td>{{PayTypeMthodData.BankCard}}</td>
+                        <td>{{PayTypeMthodData.OffAlipay}}</td>
+                        <td>{{PayTypeMthodData.OffWeChat}}</td>
+                        <td>{{PayTypeMthodData.InternalDebit}}</td>
+
+                        <td>{{PayTypeMthodData.OnAlipay}}</td>
+                        <td>{{PayTypeMthodData.OnWeChat}}</td>
+                        <td>{{PayTypeMthodData.OneNetcom}}</td>
+                        <td>{{PayTypeMthodData.Wallet}}</td>
+
+                        <td>{{PayTypeMthodData.InternalTransfer}}</td>
+                        <td>{{PayTypeMthodData.Coupon}}</td>
+                        <td>{{PayTypeMthodData.Total}}</td>
+
+
+                    </tr>
+                    <tr ng-show="PayTypeMthodData.length == 0">
+                        <td colspan="11" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.DayReportData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.DayReportTable = null;
+   $(document).ready(function () {
+
+         $('#btnOrgListSearchView').click(function()
+         {
+              var pageScope = angular.element(document.getElementById('divPaymentTaskByPayMthodViewListController')).scope();
+              pageScope.GetPayTypeMthodDataList();
+         });
+         //ckFramework.ResetWindowLayout();
+   });
+    </script>
+
+</div>

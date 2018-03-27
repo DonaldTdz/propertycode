@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YK_PaySys_SDK</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:YK_PaySys_SDK.Command.Encrypt.GetLegalKey(System.String)" -->
+        <member name="M:YK_PaySys_SDK.Command.Encrypt.GetLegalIV">
+            <summary>  
+            获得初始向量IV   
+            </summary>   
+            <returns>初试向量IV</returns>   
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.Encrypt.Encrypto(System.String,System.String)">
+            <summary>  
+            加密方法   
+            </summary>   
+            <param name="Source">待加密的串</param>   
+            <returns>经过加密的串</returns>   
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.Encrypt.Decrypto(System.String,System.String)">
+            <summary>  
+            解密方法   
+            </summary>   
+            <param name="Source">待解密的串</param>   
+            <returns>经过解密的串</returns>   
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.Encrypt.MD5(System.String)">
+            <summary>
+            MD5   32位加密
+            </summary>
+            <param name="value"></param>
+            <returns>加密后字符串</returns>
+        </member>
+        <member name="T:YK_PaySys_SDK.Command.RandomHelper">
+            <summary>
+            随机数生成器
+            </summary>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.RandomHelper.NextInt(System.Int32,System.Int32)">
+            <summary>
+            随机一个Int值
+            </summary>
+            <param name="minValue">最小值</param>
+            <param name="maxValue">最大值</param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.RandomHelper.NextDouble(System.Double,System.Double)">
+            <summary>
+            随机一个Double值
+            </summary>
+            <param name="minValue">最小值</param>
+            <param name="maxValue">最大值</param>
+            <returns></returns>
+        </member>
+        <member name="T:YK_PaySys_SDK.Command.RequestSumbit">
+            <summary>
+             请求相关
+            </summary>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.RequestSumbit.RequestLog(YK_PaySys_SDK.Entity.RetNumerical)">
+            <summary>
+            提交信息
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.RequestSumbit.RetLogSinge(System.String,System.String)">
+            <summary>
+            获取数字签名
+            </summary>
+            <param name="entity"></param>
+            <param name="Key"></param>
+            <param name="Value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.RequestSumbit.CheckRequestPropertity(YK_PaySys_SDK.Entity.RetNumerical)">
+            <summary>
+            检测提交信息
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.ResponseSumbit.RetResponseSerialize(YK_PaySys_SDK.Entity.ResponseResult)">
+            <summary>
+            封装成JSON
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.ResponseSumbit.RetResponse(System.String)">
+            <summary>
+            解析JSON 
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.ResponseSumbit.ResponseAnalysisMsg(System.String)">
+            <summary>
+            解析Msg信息
+            </summary>
+            <param name="Msg"></param>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.ResponseSumbit.AuthenticationSigna(System.String,System.String,System.String)">
+            <summary>
+            数字签名验证
+            </summary>
+            <param name="Msg"></param>
+            <param name="Value"></param>
+            <param name="Signa"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.ResponseSumbit.CheckRequestPropertity(YK_PaySys_SDK.Entity.RetNumerical)">
+            <summary>
+            检测提交信息
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.StringHelper.GetNumericalNumber(YK_PaySys_Entity.Emun.ERequestFromSys)">
+            <summary>
+            生成流水编码
+            </summary>
+            <param name="RequestFromSys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.StringHelper.MD5(System.String)">
+            <summary>
+            MD5   32位加密
+            </summary>
+            <param name="value"></param>
+            <returns>加密后字符串</returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.StringHelper.GetStr">
+            <summary>
+            获取字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.StringHelper.EncodeBase64(System.Text.Encoding,System.String)">
+            <summary>
+            Base64加密 
+            </summary>
+            <param name="encode"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.StringHelper.DecodeBase64(System.Text.Encoding,System.String)">
+            <summary>
+             Base64解密 
+            </summary>
+            <param name="encode"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YK_PaySys_SDK.Command.SumbitMsg">
+            <summary>
+            提交信息类
+            </summary>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.SumbitMsg.EncodeBase64(System.Text.Encoding,System.String)">
+            <summary>
+            Base64加密 
+            </summary>
+            <param name="encode"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.SumbitMsg.DecodeBase64(System.Text.Encoding,System.String)">
+            <summary>
+             Base64解密 
+            </summary>
+            <param name="encode"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.SumbitMsg.GetSignaValue">
+            <summary>
+            获取数字签名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.SumbitMsg.RetSumbit(YK_PaySys_SDK.Entity.RetNumerical,System.String)">
+            <summary>
+            生成提交字符串
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK_PaySys_SDK.Command.SumbitMsg.GetSumbit(System.String,System.String)">
+            <summary>
+            解析提交的字符串
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YK_PaySys_SDK.Entity.RetNumerical">
+            <summary>
+            流水描述
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.NumericalNumber">
+            <summary>
+            流水编码  请求为空
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.listOrder">
+            <summary>
+            订单列表
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.SumPrice">
+            <summary>
+            订单总价
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.Msg">
+            <summary>
+            流水描述
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.GoUrl">
+            <summary>
+            返回URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.NotifyUrl">
+            <summary>
+            异步通知URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.CallBackUrl">
+            <summary>
+            同步通知URL
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.PayType">
+            <summary>
+            支付类型
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.RequestFromSys">
+            <summary>
+            系统来源
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.SumbitTime">
+            <summary>
+            提交时间
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.Key">
+            <summary>
+            认证Key
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.PayScenario">
+            <summary>
+            支付场景，默认为线上支付
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetNumerical.MerchantId">
+            <summary>
+            商户Id
+            </summary>
+        </member>
+        <member name="T:YK_PaySys_SDK.Entity.RetOrder">
+            <summary>
+            订单清单
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetOrder.OrderNumber">
+            <summary>
+            订单编码
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetOrder.Price">
+            <summary>
+            订单价钱
+            </summary>
+        </member>
+        <member name="P:YK_PaySys_SDK.Entity.RetOrder.OrderName">
+            <summary>
+            订单名称
+            </summary>
+        </member>
+    </members>
+</doc>

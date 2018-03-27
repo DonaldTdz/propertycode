@@ -1,0 +1,102 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style>
+    #simpleTable {
+        width:778px !important;
+    }
+</style>
+<div id="divSubjectBillController" ng-controller="SubjectBillController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>解除绑定收费项目</h4>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-sm-9" style="color:red;">
+                <p>
+                    您解除收费项目绑定的资源存在账单未生成的情况，如果确定解除绑定，未生成的账单将不能再生成!
+                    <br />
+                    您可以在下面的列表中点击"生成"，将账单生成到当前时间，再点击"确定保存"
+                </p>
+            </div>
+            <div class="col-sm-3">
+                <input type="button" ng-click="BindSave()" class="btn btn-primary pull-right btn-lg" value="确定保存">
+            </div>
+        </div>
+        <div class="row" style="border-top:1px solid #f4f4f4;">
+            <div class="box-footer">
+                <div class="col-sm-9">
+                    @*<input type="text" placeholder="资源搜索" class="form-control" ng-model="ResourceName" />*@
+                </div>
+                <div class="col-sm-3">
+                    <input type="button" class="btn btn-primary pull-right" ng-click="GenerationBillUnbundling(0,0,0)" value="批量生成" />
+                    @*<input type="button" class="btn btn-primary btn-small" value="查询" />*@
+                </div>
+            </div>
+        </div>
+        <div class="row" id="divSimpleTable">
+            <div class="col-sm-12">
+                <table ui-jq="dataTable" width="778"  id="simpleTable" ui-options="simpleTableOptions" class="table table-bordered table-striped dataTable">
+                    <thead>
+                        <tr>
+                            <th width="43" ><input type="checkbox" name="chkAll" ng-checked="IsCheckedAll" ng-model="IsCheckedAll" ng-click="ChkAll()" /></th>
+                            <th width="203" >资源</th>
+                            <th width="130" >收费项目</th>
+                            <th width="186" >账单截止日期</th>
+                            <th width="126" >操作</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        @*修改为angular绑定table*@
+        @*<div class="row">
+                <div class="col-md-12">
+                    <div style="height:420px; overflow-y:auto">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;"><input type="checkbox" id="chkAll" ng-checked="IsCheckedAll" ng-click="ChkAll()" /></th>
+                                    <th>资源</th>
+                                    <th>收费项目</th>
+                                    <th>账单截止日期</th>
+                                    <th style="text-align:center;">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in PageViewSubjectBillsSearch =(PageViewSubjectBills |filter:ResourceName)">
+                                    <td style="text-align:center;"><input type="checkbox" ng-checked="item.IsChecked" ng-click="SingleChecked(item.ResourceId,item.SubjectId)" /></td>
+                                    <td>{{item.ResourceName}}</td>
+                                    <td>{{item.SubjctName}}</td>
+                                    <td>{{item.BillEndTime|date:'yyyy-MM-dd'}}</td>
+                                    <td style="text-align:center;">
+                                        <input type="button" value="生成" class="btn btn-primary btn-small" ng-click="GenerationBillUnbundling(item.SubjectId,item.ResourceId,item.HouseDeptId)" />
+                                    </td>
+                                </tr>
+                                <tr ng-show="PageViewSubjectBills.length == 0">
+                                    <td colspan="5" style="text-align:center;">没有数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table ui-jq="dataTable" id="simpleTable" ui-options="simpleTableOptions" class="table table-bordered table-striped dataTable">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;"><input type="checkbox" id="chkAll" ng-checked="IsCheckedAll" ng-click="ChkAll()" /></th>
+                                        <th >资源</th>
+                                        <th >收费项目</th>
+                                        <th >账单截止日期</th>
+                                        <th style="text-align:center;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</div>
+@*设置MVC的一些页面变量事件绑定*@
+@*<script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.PageViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>*@

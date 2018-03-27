@@ -1,0 +1,8 @@
+<ion-content class="pageBg">
+  <div class="month_list_content">
+    <!--中间列表区域-->
+    <div class="month_list_total clearfix">
+      <button ion-button clear class="month_list_btn" (tap)="close(month)"  *ngFor="let month of monthList">{{month.text}}</button>
+    </div>
+  </div>
+</ion-content>

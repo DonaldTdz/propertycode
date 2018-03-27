@@ -1,0 +1,700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{522CB144-2E37-43E6-8348-26DA7A8694F6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.MVCWeb</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.MVCWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=8.0.2.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.ExcelService.1.2.9\lib\net45\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyAlipay.Entity">
+      <HintPath>..\..\lib.external\PropertyAlipay.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyAlipay.Service">
+      <HintPath>..\..\lib.external\PropertyAlipay.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="YK.Framework.ApplicationDTO">
+      <HintPath>..\YK.PropertyMgr.CompositeDomainService\DLL\YK.Framework.ApplicationDTO.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.FrameworkTools.ExcelService, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.ExcelService.1.2.9\lib\net45\YK.FrameworkTools.ExcelService.dll</HintPath>
+    </Reference>
+    <Reference Include="YK.FrameworkTools.PluginService, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YK.FrameworkTools.PluginService.1.0.5\lib\net45\YK.FrameworkTools.PluginService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AlipayPropertyController.cs" />
+    <Compile Include="Controllers\BillDetailController.cs" />
+    <Compile Include="Controllers\BindSubjectBySingleResController.cs" />
+    <Compile Include="Controllers\CarParkController.cs" />
+    <Compile Include="Controllers\ChargBillController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Controllers\ChargeRecordController.cs" />
+    <Compile Include="Controllers\ChargeSubjectController.cs" />
+    <Compile Include="Controllers\DataInitController.cs" />
+    <Compile Include="Controllers\DeptController.cs" />
+    <Compile Include="Controllers\EntranceBindController.cs" />
+    <Compile Include="Controllers\EntranceController.cs" />
+    <Compile Include="Controllers\EntrancePowerController.cs" />
+    <Compile Include="Controllers\HouseChargeSubjectController.cs" />
+    <Compile Include="Controllers\NotificeConfigController.cs" />
+    <Compile Include="Controllers\PatrolController.cs" />
+    <Compile Include="Controllers\PaymentTasksController.cs" />
+    <Compile Include="Controllers\PersonalizedConfigurationController.cs" />
+    <Compile Include="Controllers\PreAccountManageController.cs" />
+    <Compile Include="Controllers\PrepayAccountController.cs" />
+    <Compile Include="Controllers\ReceiptBookController.cs" />
+    <Compile Include="Controllers\RefundRecordController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ResTypeController.cs" />
+    <Compile Include="Controllers\SubjectBillController.cs" />
+    <Compile Include="Controllers\SubjectBindLogController.cs" />
+    <Compile Include="Controllers\SubjectHouseRefController.cs" />
+    <Compile Include="Controllers\TemporaryChargeController.cs" />
+    <Compile Include="Controllers\VacationController.cs" />
+    <Compile Include="Controllers\WebApi\AlipayPropertServiceController.cs" />
+    <Compile Include="Controllers\WebApi\EntrancePowerAPIController.cs" />
+    <Compile Include="Controllers\WebApi\EntranceBindController.cs" />
+    <Compile Include="Controllers\WebApi\PropertyChargeController.cs" />
+    <Compile Include="Controllers\WebApi\PropertyClientController.cs" />
+    <Compile Include="Controllers\WebApi\PropertyServiceController.cs" />
+    <Compile Include="Controllers\WebApi\ShareKeyServiceController.cs" />
+    <Compile Include="Controllers\WebApi\ZNMSServiceController.cs" />
+    <Compile Include="Models\VacationInfo.cs" />
+    <Compile Include="PropertyMgrPlugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\PropertyMgrTemplate.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="readme.txt" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayAppAuthTokenIndexController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayBasicerviceListController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayBasicerviceViewController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayChargeBillListController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayChargeBillViewController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayRoomListController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayCommunityListController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayCommunityViewController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayPropertyIndexController.js" />
+    <Content Include="Scripts\controllers\AlipayProperty\AlipayRoomViewController.js" />
+    <Content Include="Scripts\controllers\BillDetail\BillDetailListController.js" />
+    <Content Include="Scripts\controllers\BindSubjectBySingleRes\BindSubjectBySingleResController.js" />
+    <Content Include="Scripts\controllers\CarPark\CarParkContainerController.js" />
+    <Content Include="Scripts\controllers\ChargBill\ConfirmViewController.js" />
+    <Content Include="Scripts\controllers\ChargBill\GeneratePaymentNoticeIndexController.js" />
+    <Content Include="Scripts\controllers\ChargBill\BatchGenerateBillIndexController.js" />
+    <Content Include="Scripts\controllers\ChargBill\ChargBillIndexController.js" />
+    <Content Include="Scripts\controllers\ChargBill\DailyChargeListController.js" />
+    <Content Include="Scripts\controllers\ChargBill\DeleteBillViewController.js" />
+    <Content Include="Scripts\controllers\ChargBill\DeleteChargBillListController.js" />
+    <Content Include="Scripts\controllers\ChargBill\DeveloperChargeListController.js" />
+    <Content Include="Scripts\controllers\ChargBill\DeveloperIndexController.js" />
+    <Content Include="Scripts\controllers\ChargBill\ForeigBillChargeListController.js" />
+    <Content Include="Scripts\controllers\ChargBill\ForeigBillChargeViewController.js" />
+    <Content Include="Scripts\controllers\ChargBill\ForeigBillIndexController.js" />
+    <Content Include="Scripts\controllers\ChargBill\ManuallyGenerateBillViewController.js" />
+    <Content Include="Scripts\controllers\ChargBill\PrepareAmountViewController.js" />
+    <Content Include="Scripts\controllers\ChargBill\SplitBillViewController.js" />
+    <Content Include="Scripts\controllers\ChargeRecord\BillChargeRecordViewController.js" />
+    <Content Include="Scripts\controllers\ChargeRecord\ChargeRecordListController.js" />
+    <Content Include="Scripts\controllers\ChargeRecord\ChargeRecordViewController.js" />
+    <Content Include="Scripts\controllers\ChargeRecord\ForgiChargeRecordListController.js" />
+    <Content Include="Scripts\controllers\ChargeRecord\FullChargeRecordListController.js" />
+    <Content Include="Scripts\controllers\ChargeRecord\ReceiptPrintViewController.js" />
+    <Content Include="Scripts\controllers\ChargeSubject\ChargeSubjectListController.js" />
+    <Content Include="Scripts\controllers\DataInit\ImportArrearageIndexController.js" />
+    <Content Include="Scripts\controllers\DataInit\ImportHistoryCostIndexController.js" />
+    <Content Include="Scripts\controllers\Dept\DeptContainerController.js" />
+    <Content Include="Scripts\controllers\ChargeSubject\ChargeSubjectViewController.js" />
+    <Content Include="Scripts\controllers\EntranceBind\EntranceBindListController.js" />
+    <Content Include="Scripts\controllers\EntrancePower\EntrancePowerListController.js" />
+    <Content Include="Scripts\controllers\EntrancePower\EntrancePowerViewController.js" />
+    <Content Include="Scripts\controllers\Entrance\EntranceListController.js" />
+    <Content Include="Scripts\controllers\Entrance\EntranceViewController.js" />
+    <Content Include="Scripts\controllers\HouseChargeSubject\HouseChargeSubjectListController.js" />
+    <Content Include="Scripts\controllers\NotificeConfig\NotificeConfigIndexController.js" />
+    <Content Include="Scripts\controllers\PaymentTasks\PaymentTaskByPayMthodViewListController.js" />
+    <Content Include="Scripts\controllers\PaymentTasks\PaymentTaskDetailBySubjectListController.js" />
+    <Content Include="Scripts\controllers\PaymentTasks\PaymentTaskDetailIndexController.js" />
+    <Content Include="Scripts\controllers\PaymentTasks\PaymentTaskDetailListController.js" />
+    <Content Include="Scripts\controllers\PaymentTasks\PaymentTasksAddListController.js" />
+    <Content Include="Scripts\controllers\PaymentTasks\PaymentTasksListController.js" />
+    <Content Include="Scripts\controllers\PersonalizedConfiguration\PersonalizedConfigurationController.js" />
+    <Content Include="Scripts\controllers\PreAccountManage\PreAccountCostTransferViewController.js" />
+    <Content Include="Scripts\controllers\PreAccountManage\PreAccountManageController.js" />
+    <Content Include="Scripts\controllers\PreAccountManage\PreCostBatchDeductionController.js" />
+    <Content Include="Scripts\controllers\PrepayAccount\PrepayAccountListController.js" />
+    <Content Include="Scripts\controllers\PrepayAccount\PrepayAccountViewController.js" />
+    <Content Include="Scripts\controllers\ReceiptBook\ReceiptBookDetailShowViewController.js" />
+    <Content Include="Scripts\controllers\ReceiptBook\ReceiptBookIndexController.js" />
+    <Content Include="Scripts\controllers\ReceiptBook\ReceiptBookModiflyController.js" />
+    <Content Include="Scripts\controllers\ReceiptBook\ReceiptBookViewController.js" />
+    <Content Include="Scripts\controllers\ReceiptBook\ReciptBookHistoryListController.js" />
+    <Content Include="Scripts\controllers\ReceiptBook\ReciptBookManagerListController.js" />
+    <Content Include="Scripts\controllers\RefundRecord\RefundRecordController.js" />
+    <Content Include="Scripts\controllers\Report\ArrearsCollComparisonChartController.js" />
+    <Content Include="Scripts\controllers\Report\DayReportDetailController.js" />
+    <Content Include="Scripts\controllers\Report\DayReportIndexController.js" />
+    <Content Include="Scripts\controllers\Report\ArrearsDetailReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ArrearsReportIndexController.js" />
+    <Content Include="Scripts\controllers\Report\ExternalchargeContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ExternalchargeDetailContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ExternalchargeIndexController.js" />
+    <Content Include="Scripts\controllers\Report\MeterDetailReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\MeterReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\MeterReportIndexController.js" />
+    <Content Include="Scripts\controllers\Report\MonthReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\MonthReportDetailController.js" />
+    <Content Include="Scripts\controllers\Report\MonthReportIndexController.js" />
+    <Content Include="Scripts\controllers\Report\PaymentDiscountInfoReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ArrearsReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\CommunityReportIndexController.js" />
+    <Content Include="Scripts\controllers\Report\DayReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\IntegratedReportByChargeSubjectController.js" />
+    <Content Include="Scripts\controllers\Report\IntegratedReportByHouseController.js" />
+    <Content Include="Scripts\controllers\Report\IntegratedReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\PrePaymentdeductionDetetailReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\PrePaymentDetailReportContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ReportArrearsChargeSubjectListController.js" />
+    <Content Include="Scripts\controllers\Report\ReportArrearsCommunityListController.js" />
+    <Content Include="Scripts\controllers\Report\ReportArrearsContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ReportArrearsDetailListController.js" />
+    <Content Include="Scripts\controllers\Report\ReportCollectionsChargeSubjectListController.js" />
+    <Content Include="Scripts\controllers\Report\ReportCollectionsCommunityListController.js" />
+    <Content Include="Scripts\controllers\Report\ReportCollectionsContainerController.js" />
+    <Content Include="Scripts\controllers\Report\ReportCollectionsDetailListController.js" />
+    <Content Include="Scripts\controllers\Report\TemporaryChargesReportIndexController.js" />
+    <Content Include="Scripts\controllers\ResType\ResTypeIndexController.js" />
+    <Content Include="Scripts\controllers\SubjectBill\SubjectBillListController.js" />
+    <Content Include="Scripts\controllers\SubjectBindLog\SubjectBindLogController.js" />
+    <Content Include="Scripts\controllers\SubjectHouseRef\SubjectHouseRefListController.js" />
+    <Content Include="Scripts\controllers\TempCharge\TempChargeListController.js" />
+    <Content Include="Scripts\controllers\TempCharge\TempChargeViewController.js" />
+    <Content Include="Scripts\controllers\Vacation\VacationListController.js" />
+    <Content Include="Scripts\controllers\Vacation\VacationViewController.js" />
+    <Content Include="Scripts\Plugin\Echarts\echarts.js" />
+    <Content Include="Scripts\services\AlipayProperty\AlipayPropertyService.js" />
+    <Content Include="Scripts\services\BindSubjectBySingleRes\BindSubjectBySingleResService.js" />
+    <Content Include="Scripts\services\CarPark\CarParkContainerService.js" />
+    <Content Include="Scripts\services\ChargBill\DailyChargListService.js" />
+    <Content Include="Scripts\services\ChargBill\DeveloperChargeListService.js" />
+    <Content Include="Scripts\services\ChargBill\ForeigBillChargeListService.js" />
+    <Content Include="Scripts\services\ChargeRecord\ChargeRecordListService.js" />
+    <Content Include="Scripts\services\ChargeSubject\ChargeSubjectListService.js" />
+    <Content Include="Scripts\services\ChargeSubject\ChargeSubjectViewService.js" />
+    <Content Include="Scripts\services\Dept\DeptContainerService.js" />
+    <Content Include="Scripts\services\EntrancePower\EntrancePowerListService.js" />
+    <Content Include="Scripts\services\EntrancePower\EntrancePowerViewService.js" />
+    <Content Include="Scripts\services\Entrance\EntranceListService.js" />
+    <Content Include="Scripts\services\Entrance\EntranceViewService.js" />
+    <Content Include="Scripts\services\NotificeConfig\NotificeConfigService.js" />
+    <Content Include="Scripts\services\PaymentTasks\PaymentTaskDetailBySubjectListService.js" />
+    <Content Include="Scripts\services\PaymentTasks\PaymentTaskDetailListService.js" />
+    <Content Include="Scripts\services\PaymentTasks\PaymentTasksAddListService.js" />
+    <Content Include="Scripts\services\PaymentTasks\PaymentTasksListService.js" />
+    <Content Include="Scripts\services\PersonalizedConfiguration\PersonalizedConfigurationService.js" />
+    <Content Include="Scripts\services\PreAccountManage\PreAccountManageService.js" />
+    <Content Include="Scripts\services\PrepayAccount\PrepayAccountListService.js" />
+    <Content Include="Scripts\services\PrepayAccount\PrepayAccountViewViewService.js" />
+    <Content Include="Scripts\services\ReceiptBook\ReceiptBookService.js" />
+    <Content Include="Scripts\services\Report\CommunityReportIndexService.js" />
+    <Content Include="Scripts\services\Report\IntegratedReportContainerService.js" />
+    <Content Include="Scripts\services\Report\ReportArrearsContainerService.js" />
+    <Content Include="Scripts\services\Report\ReportCollectionsContainerService.js" />
+    <Content Include="Scripts\services\Report\ReportService.js" />
+    <Content Include="Scripts\services\ResType\ResTypeIndexService.js" />
+    <Content Include="Scripts\services\SubjectBill\SubjectBillService.js" />
+    <Content Include="Scripts\services\TempCharge\TempChargViewService.js" />
+    <Content Include="Scripts\services\TempCharge\TempChargListService.js" />
+    <Content Include="Scripts\services\Vacation\VacationListService.js" />
+    <Content Include="Scripts\services\Vacation\VacationViewService.js" />
+    <Content Include="Scripts\services\SubjectHouseRef\SubjectHouseRefListService.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Plugin\Img\" />
+    <Folder Include="Scripts\services\RefundRecord\" />
+    <Folder Include="Views\Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationDTO\YK.BackgroundMgr.ApplicationDTO.csproj">
+      <Project>{8241A595-7F3D-4B58-AAEA-C5E73F41C317}</Project>
+      <Name>YK.BackgroundMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.ApplicationMapper\YK.BackgroundMgr.ApplicationMapper.csproj">
+      <Project>{80DC3E82-67BB-43CA-A9B3-1539A850A863}</Project>
+      <Name>YK.BackgroundMgr.ApplicationMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Common\YK.BackgroundMgr.Common.csproj">
+      <Project>{294BB781-D0AA-45CC-914F-9990310A2B3E}</Project>
+      <Name>YK.BackgroundMgr.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.Crosscuting\YK.BackgroundMgr.Crosscuting.csproj">
+      <Project>{07834BA1-0724-4192-98AB-DF7B9D1A314A}</Project>
+      <Name>YK.BackgroundMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainCompositeService\YK.BackgroundMgr.DomainCompositeService.csproj">
+      <Project>{85093ccd-07ec-4ac9-9bdc-8b7c06b94f51}</Project>
+      <Name>YK.BackgroundMgr.DomainCompositeService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainEntity\YK.BackgroundMgr.DomainEntity.csproj">
+      <Project>{0B6E4039-636B-4E37-981E-EE919A38CD44}</Project>
+      <Name>YK.BackgroundMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.DomainInterface\YK.BackgroundMgr.DomainInterface.csproj">
+      <Project>{71f15fec-65cb-4ef3-84f5-7606b332b686}</Project>
+      <Name>YK.BackgroundMgr.DomainInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.MVCWeb\YK.BackgroundMgr.MVCWeb.csproj">
+      <Project>{26049F12-E083-4C46-A735-B0457F08BE21}</Project>
+      <Name>YK.BackgroundMgr.MVCWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.BackgroundMgr.PresentationService\YK.BackgroundMgr.PresentationService.csproj">
+      <Project>{0a61350a-2238-4847-8c0b-fc18df7780a2}</Project>
+      <Name>YK.BackgroundMgr.PresentationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationDTO\YK.PropertyMgr.ApplicationDTO.csproj">
+      <Project>{c4dcfc6b-8842-4dc5-9b63-67b5529fd865}</Project>
+      <Name>YK.PropertyMgr.ApplicationDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.ApplicationService\YK.PropertyMgr.ApplicationService.csproj">
+      <Project>{7790b0b4-a596-4eee-8bde-5fa3455240fc}</Project>
+      <Name>YK.PropertyMgr.ApplicationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.CompositeAppService\YK.PropertyMgr.CompositeAppService.csproj">
+      <Project>{d2b6eee8-e5c3-4e26-9dae-c774ad7397bd}</Project>
+      <Name>YK.PropertyMgr.CompositeAppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.CompositeDomainService\YK.PropertyMgr.CompositeDomainService.csproj">
+      <Project>{C33EB923-5100-4F13-A993-AD63C810CCF2}</Project>
+      <Name>YK.PropertyMgr.CompositeDomainService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.Crosscuting\YK.PropertyMgr.Crosscuting.csproj">
+      <Project>{06fa26ea-b6cb-4f79-a0fd-3ea5c27a7fac}</Project>
+      <Name>YK.PropertyMgr.Crosscuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainEntity\YK.PropertyMgr.DomainEntity.csproj">
+      <Project>{D44079AA-1823-4E0E-AF79-80AFDA8D01C1}</Project>
+      <Name>YK.PropertyMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainService\YK.PropertyMgr.DomainService.csproj">
+      <Project>{8B3D981A-A56B-49E8-BB9E-C19A753AB6D7}</Project>
+      <Name>YK.PropertyMgr.DomainService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.UnitOfWork\YK.PropertyMgr.UnitOfWork.csproj">
+      <Project>{29a9cce0-4154-4672-8e4a-3251261f2fc3}</Project>
+      <Name>YK.PropertyMgr.UnitOfWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.ZNMS\PropertySysAPI.Accessor\PropertySysAPI.Accessor.csproj">
+      <Project>{92607c3d-f0ca-4771-84c6-6dd542602551}</Project>
+      <Name>PropertySysAPI.Accessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.ZNMS\PropertySysAPI.Entity\PropertySysAPI.Entity.csproj">
+      <Project>{bd77da43-9842-4749-869e-3c610780ed44}</Project>
+      <Name>PropertySysAPI.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vacation\Index.cshtml" />
+    <Content Include="Views\Vacation\VacationView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeSubject\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dept\DeptContainerIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeSubject\ChargeSubjecView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeSubject\ChargeFormulaView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PrepayAccount\PrepayAccountList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SubjectHouseRef\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ResType\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PaymentTasks\PaymentTasksList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeRecord\ChargeRecordList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargBill\DailyChargeList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargBill\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RefundRecord\RefundModal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeRecord\ChargeRecordView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Entrance\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Entrance\EntranceView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeRecord\BillChargeRecordView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\HouseChargeSubject\HouseChargeSubjectList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TemporaryCharge\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeRecord\ReceiptPrintView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TemporaryCharge\TempChargeView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargeRecord\ReceiptPrintPDF.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PaymentTasks\PaymentTasksAddListView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PaymentTasks\PaymentTaskDetailBySubjectListView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PaymentTasks\PaymentTaskDetailIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PaymentTasks\PaymentTaskDetailListView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargBill\SplitBillView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ChargBill\PrepareAmountView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PrepayAccount\UploadFileResult.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportArrearsContainerIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportArrearsChargeSubjectList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportArrearsCommunityList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportArrearsDetailList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportCollectionsCommunityList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportCollectionsChargeSubjectList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportCollectionsContainerIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ReportCollectionsDetailList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Aspose.Cells.lic" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\pmsys.pubxml" />
+    <Content Include="Views\PrepayAccount\PrepayAccountView.cshtml" />
+    <Content Include="Views\ChargBill\DeveloperChargeList.cshtml" />
+    <Content Include="Views\ChargBill\DeveloperIndex.cshtml" />
+    <Content Include="Views\EntrancePower\EntrancePowerList.cshtml" />
+    <Content Include="Views\EntrancePower\EntrancePowerView.cshtml" />
+    <Content Include="Views\EntrancePower\EntrancePowerPersonal.cshtml" />
+    <Content Include="Views\Report\CommunityReportIndex.cshtml" />
+    <Content Include="Views\Report\ArrearsCollComparisonChart.cshtml" />
+    <Content Include="Views\Patrol\Index.cshtml" />
+    <Content Include="Views\EntranceBind\Index.cshtml" />
+    <Content Include="Views\Report\IntegratedReportByChargeSubject.cshtml" />
+    <Content Include="Views\Report\IntegratedReportByHouse.cshtml" />
+    <Content Include="Views\DataInit\Index.cshtml" />
+    <Content Include="Views\DataInit\ImportArrearageIndex.cshtml" />
+    <Content Include="Views\DataInit\UploadFileResult.cshtml" />
+    <Content Include="Views\Report\DevelopingView.cshtml" />
+    <Content Include="Views\Report\IntegratedReportIndex.cshtml" />
+    <Content Include="Views\Report\IntegratedReportContainerIndex.cshtml" />
+    <None Include="Properties\PublishProfiles\虚拟机发布.pubxml" />
+    <Content Include="Views\BindSubjectBySingleRes\Index.cshtml" />
+    <Content Include="Views\ChargBill\DeleteBillView.cshtml" />
+    <Content Include="Views\ChargBill\ManuallyGenerateBillView.cshtml" />
+    <Content Include="Views\SubjectBill\SubjectBillIndex.cshtml" />
+    <Content Include="Views\ChargBill\BatchGenerateBillIndex.cshtml" />
+    <Content Include="Views\ChargBill\ForeigBillIndex.cshtml" />
+    <Content Include="Views\ChargBill\ForeigBillChargeList.cshtml" />
+    <Content Include="Views\SubjectBindLog\Index.cshtml" />
+    <Content Include="Views\ChargBill\ForeigBillChargeView.cshtml" />
+    <Content Include="Views\ChargeRecord\ForegiChargeRecordList.cshtml" />
+    <Content Include="Views\ChargBill\DeleteChargBillList.cshtml" />
+    <Content Include="Views\DataInit\ImportHistoryCostIndex.cshtml" />
+    <Content Include="Views\BillDetail\BillDetailList.cshtml" />
+    <Content Include="Views\CarPark\CarParkContainerIndex.cshtml" />
+    <Content Include="Views\Report\DayReportContainerIndex.cshtml" />
+    <Content Include="Views\Report\ArrearsReportContainerIndex.cshtml" />
+    <Content Include="Views\Report\PaymentDiscountInfoReportIndex.cshtml" />
+    <Content Include="Views\ChargBill\GeneratePaymentNoticeIndex.cshtml" />
+    <Content Include="Views\ChargBill\PaymentNoticePrintPDF.cshtml" />
+    <Content Include="Views\PaymentTasks\PaymentTaskByPayMthodViewList.cshtml" />
+    <Content Include="Views\Report\MonthReportContainerIndex.cshtml" />
+    <Content Include="Views\PaymentTasks\PaymentTaskDetailBySubjectListNewView.cshtml" />
+    <Content Include="Views\Report\PrePaymentDetailReportIndex.cshtml" />
+    <Content Include="Views\PreAccountManage\PreAccountManageIndex.cshtml" />
+    <Content Include="Views\PreAccountManage\PreAccountCostTransferView.cshtml" />
+    <Content Include="Views\NotificeConfig\NotificeConfigIndex.cshtml" />
+    <Content Include="Views\Report\DayReportIndex.cshtml" />
+    <Content Include="Views\Report\DayReportDetailIndex.cshtml" />
+    <Content Include="Views\Report\MonthReportIndex.cshtml" />
+    <Content Include="Views\Report\MonthReportDetailIndex.cshtml" />
+    <Content Include="Views\Report\ArrearsDetailReportContainerIndex.cshtml" />
+    <Content Include="Views\Report\ArrearsReportIndex.cshtml" />
+    <Content Include="Views\ReceiptBook\index.cshtml" />
+    <Content Include="Views\ReceiptBook\ReciptBookManagerList.cshtml" />
+    <Content Include="Views\ReceiptBook\ReceiptBookView.cshtml" />
+    <Content Include="Views\ChargeRecord\FullChargeRecordListIndex.cshtml" />
+    <Content Include="Views\ReceiptBook\ReceiptBookModifly.cshtml" />
+    <Content Include="Views\ReceiptBook\ReciptBookHistoryList.cshtml" />
+    <Content Include="Views\Report\MeterReportIndex.cshtml" />
+    <Content Include="Views\Report\MeterReportContainerIndex.cshtml" />
+    <Content Include="Views\Report\MeterDetailReportContainerIndex.cshtml" />
+    <Content Include="Views\PreAccountManage\PreCostBatchDeductionIndex.cshtml" />
+    <Content Include="Views\Report\PrePaymentdeductionDetetailReport.cshtml" />
+    <Content Include="Views\Report\ExternalchargeIndex.cshtml" />
+    <Content Include="Views\Report\ExternalchargeDetailContainerIndex.cshtml" />
+    <Content Include="Views\Report\ExternalchargeContainerIndex.cshtml" />
+    <Content Include="Views\ReceiptBook\ReceiptBookDetailShowView.cshtml" />
+    <Content Include="Views\PersonalizedConfiguration\Index.cshtml" />
+    <Content Include="Views\AlipayProperty\Index.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayAppAuthTokenIndex.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayCommunityList.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayCommunityView.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayBasicserviceList.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayBasicserviceView.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayRoomList.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayRoomView.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayChargeBillList.cshtml" />
+    <Content Include="Views\AlipayProperty\AlipayChargeBillView.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ChargBill\ConfirmView.cshtml" />
+	<Content Include="Views\Report\TemporaryChargesReportContainerIndex.cshtml" />
+    <Content Include="Views\Report\TemporaryChargesReportIndex.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:26468/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>SET Area=PropertyMgr
+SET FrameworkMVC=$(SolutionDir)YK.BackgroundMgr.MVCWeb
+
+set PluginDirectory="%25FrameworkMVC%25\Plugins\%25Area%25\"
+set PluginViewDirectory="%25FrameworkMVC%25\Plugins\%25Area%25\Views"
+set PluginBinDirectory="%25FrameworkMVC%25\Plugins\%25Area%25\bin"
+set PluginContentDirectory="%25FrameworkMVC%25\Plugins\%25Area%25\Content"
+set PluginScriptDirectory="%25FrameworkMVC%25\Plugins\%25Area%25\Scripts"
+
+set ProjectViewDirectory="$(SolutionDir)$(ProjectName)\Views"
+set ProjectBinDirectory="$(SolutionDir)$(ProjectName)\bin"
+set ProjectContentDirectory="$(SolutionDir)$(ProjectName)\Content"
+set ProjectScriptDirectory="$(SolutionDir)$(ProjectName)\Scripts"
+set ProjectConfig="$(SolutionDir)$(ProjectName)\Web.config"
+
+
+rmdir /s/q %25PluginDirectory%25
+
+md %25PluginViewDirectory%25 
+xcopy /s /y %25ProjectViewDirectory%25 %25PluginViewDirectory%25
+
+md %25PluginBinDirectory%25 
+xcopy /s /y %25ProjectBinDirectory%25 %25PluginBinDirectory%25
+
+if exist %25ProjectContentDirectory%25 (
+md %25PluginContentDirectory%25
+xcopy /s /y %25ProjectContentDirectory%25 %25PluginContentDirectory%25
+)
+
+if exist %25ProjectConfig%25 (
+xcopy /s /y %25ProjectConfig%25 %25PluginDirectory%25
+)
+
+if exist %25ProjectScriptDirectory%25 (
+md %25PluginScriptDirectory%25 
+xcopy /s /y %25ProjectScriptDirectory%25 %25PluginScriptDirectory%25
+)
+
+xcopy /s /y $(SolutionDir)YK.PropertyMgr.Crosscuting\PropertyMgrUnityConfig.xml $(SolutionDir)YK.BackgroundMgr.MVCWeb\bin\</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,90 @@
+page-home {
+
+}
+page-home{
+    p{
+        margin: 0 auto !important;
+    }
+
+    // logo样式
+    .home_logo{
+        width: 20vw;
+        margin: 5vh auto 0 auto;
+        img{
+            width: 100%;
+            max-width: $logo_size;
+        }
+    }
+
+    // 中间内容区域
+    .home_content_total{
+        width: 60%;
+        margin: 9vh auto 9vh auto;
+
+        .home_content_title{
+            margin: 0 !important;
+            font-size: $large_font;
+            color: $color_white;
+            font-family: "黑体";
+            font-weight: 600;
+        }
+
+        .home_btn_total{
+            margin-top: 10vh;
+            background: transparent;
+            width: 100%;
+            .home_btn_icon{
+                width: 45%;
+                float: left;
+                img{
+                    width: 100%;
+                }
+            }
+            .home_btn_left{
+                    margin-right: 10%;
+            }
+        }
+    }
+
+    // 二维码扫码区域
+    .home_code_total{
+        text-align: center;
+        margin-bottom: 6vh;
+        .home_code_img{
+            width:10vw;
+            height: 10vw;
+            img{
+                width: 100%;
+            }
+        }
+
+        .home_code_text{
+            font-size: $small_font;
+            color: $color_white;
+            line-height: 30px;
+            height: 30px;
+        }
+    }
+
+    // 电话号码区域
+    .home_tel_total{
+        background: transparent;
+        padding-left: 0;
+        width: 205px;
+        margin: 0 auto;
+        .item-inner{
+            padding-right: 0 !important;
+        }
+        .home_tel_icon{
+            margin: 0 !important;
+
+            img{
+                width: 20px;
+            }
+        }
+        .home_tel_num{
+            font-size:$middle_md_font;
+            color: $color_white;
+        }
+    }
+}

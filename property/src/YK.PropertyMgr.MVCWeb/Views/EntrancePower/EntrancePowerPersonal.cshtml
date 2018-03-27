@@ -1,0 +1,83 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divEntrancePowerPersonalController" ng-controller="EntrancePowerPersonalController">
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+    </script>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="button" id="btnOrgListSearch" class="btn btn-primary" ng-show="hide()">
+            <ul class="nav nav-tabs" role="tablist" id="ulEntranceDevice">
+                <li class="active"><a href="#tabHandPowerDevice" role="tab" loadUrl="/PropertyMgr/ResType/House" data-toggle="tab" type="12">手动授权</a></li>
+                <li><a href="#tabAutomaticPowerDevice; " role="tab" loadUrl="/PropertyMgr/ResType/CarPlace" data-toggle="tab" type="13">自动授权</a></li>
+            </ul>
+            <div class="tabcontent">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //$(".tabcontent").load("/PropertyMgr/ResType/Default");
+        $("#btnOrgListSearch").click(function () {
+            var selDept = $("#SelectDeptTypeAndId").val();
+            selDept = selDept.split("_");
+            if (selDept.length == 2 || selDept.length == 3) {
+                if (selDept[1] == 1001)/*选中的为科目*/ {
+                    var liType = 0
+                    $.post("PropertyMgr/ChargeSubject/GetSubject", { subjectId: selDept[0] }, function (data) {
+                        /*subject:1(房屋)和5（其他） 选项卡楼宇选中*/
+                        /*subject:2（车位） 选项卡车位选中*/
+                        /*subject:3（三表）* (公式中有4：水表单位|公式中有5：气表单位|公式中有6：电表单位)*/
+                        if (data.SubjectType == 1 || data.SubjectType == 5) {
+                            liType = 12;
+                        } else if (data.SubjectType == 2) {
+                            liType = 13;
+                        } else if (data.SubjectType == 3) {
+                            var arr = data.ChargeFormula.split(',');
+
+                            for (var i = 0; i < arr.length; i++) {
+
+                                if (arr[i] == 4) {
+                                    liType = 1;
+                                    break;
+                                }
+                                if (arr[i] == 5) {
+                                    liType = 3;
+                                    break;
+
+                                }
+                                if (arr[i] == 6) {
+                                    liType = 2;
+                                    break;
+                                }
+                            }
+                        }
+                        $("li[liType='" + liType + "'] a").click();
+                    })
+
+                }
+            }
+        });
+        $("#subjectHouseRefTab li a").click(function () {
+
+            var commuDeptId = 0;
+            var subjectType = 0;
+            var billPeriod = 0;
+            var selDept = $("#SelectDeptTypeAndId").val();
+            selDept = selDept.split("_");
+            if (selDept.length == 2 || selDept.length == 3) {
+                if (selDept[1] == 1001)/*选中的为科目*/ {
+                    var selectedId = $('#deptTree').jstree().get_selected() + "";
+                    var parendId = $("#deptTree").jstree().get_parent(selectedId);
+                    var arr = parendId.split("_");
+                    billPeriod = selectedId.split("_")[2];
+                }
+            } else {
+                ckFramework.ModalHelper.Alert("请选择科目!");
+                $(".tabcontent").empty();
+                return false;
+            }
+            $(".tabcontent").load($(this).attr("loadUrl") + "?id=" + commuDeptId + "&type=" + $(this).attr("type") + "&billPeriod=" + billPeriod);
+        })
+    })
+</script>

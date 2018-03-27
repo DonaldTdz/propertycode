@@ -1,0 +1,61 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<# 
+	var manager = TemplateFileManager.Create(this);
+	string[] ProjectNames = new string[]{ "BackgroundMgr", "ParkingSys"};
+	string[] EntityNames = new string[]{ "DomainEntity" ,"ParkingDomainEntity" };
+
+	for(int i=0; i < ProjectNames.Length; i++)
+	{	
+	string strProjectName = ProjectNames[i];
+#>
+<#
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.BackgroundMgr.MVCWeb\Models\FrameworkTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var oAProjectTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='"+EntityNames[i]+"']");
+	foreach (XmlNode templateNode in oAProjectTemplateNodes)
+	{
+	manager.StartNewFile(templateNode.Attributes["Name"].Value + "Repository.cs");
+#>
+using YK.<#= strProjectName #>.DomainEntity;
+using YK.<#= strProjectName #>.RepositoryContract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace YK.<#= strProjectName #>.Repository
+{
+    public partial class <#= templateNode.Attributes["Name"].Value #>Repository: <#= strProjectName #>Repository<<#= templateNode.Attributes["Name"].Value #>>, I<#= templateNode.Attributes["Name"].Value #>Repository
+    {
+        public <#= templateNode.Attributes["Name"].Value #>Repository(<#= strProjectName #>DataBaseContext context)
+            : base(context)
+        {
+        }
+
+        public override string TableName
+        {
+            get
+            {
+                return "<#= templateNode.Attributes["DataTableName"].Value #>";
+            }
+        }
+    }
+}
+
+<#
+    }
+	}
+	manager.Process();
+#>
+

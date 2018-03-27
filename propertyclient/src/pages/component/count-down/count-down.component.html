@@ -1,0 +1,14 @@
+<div item-right class="mobile_head_btn clearix">
+    <!--倒计时区域-->
+    <p class="mobile_head_time">
+    <span class="mobile_time_num" id="showDown">{{time}}</span>s
+    <span class="mobile_time_text">倒计时</span>
+    </p>
+    <button ion-button icon-only clear class="mobile_head_return" *ngIf="showBack" (tap)="goPrevious()">
+    <ion-icon class="mobile_head_returnIcon"><img  src="assets/images/return_buttonA.png"/></ion-icon>
+    </button>
+    <button ion-button icon-only clear class="mobile_head_return" (tap)="goHome()">
+    <ion-icon class="mobile_head_returnIcon"><img  src="assets/images/return_button.png"/></ion-icon>
+    </button>
+</div>
+ 

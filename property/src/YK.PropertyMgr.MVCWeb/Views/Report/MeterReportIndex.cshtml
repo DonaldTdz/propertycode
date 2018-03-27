@@ -1,0 +1,44 @@
+﻿<div id="divMeterReportIndexController" ng-controller="MeterReportIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+            <li class="active">
+                <a href="#tabMeterReportSummaryReport" role="tab" data-toggle="tab" onclick="MeterReportSummaryReport()" class="ng-binding">汇总表</a>
+            </li>
+            <li>  <a href="#tabMeterReportDetailReport" role="tab" data-toggle="tab" onclick="MeterReportDetailReport()" class="ng-binding">明细表</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabMeterReportSummaryReport">
+                <div id="divMeterReportContainer"></div>
+            </div>
+
+            <div class="tab-pane active" id="tabMeterReportDetailReport">
+                <div id="divMeterDetailReportContainerIndex"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            MeterReportSummaryReport();
+
+        });
+
+       // var deptContainerService = ckFramework.GetAngularService('ArrearsReportIndexService');
+
+        //汇总表
+        function MeterReportSummaryReport() {
+
+            var deptContainerService = ckFramework.GetAngularService('ReportService');
+            deptContainerService.ShowContainerContent('divMeterReportContainer', 'PropertyMgr/Report/MeterReportContainerIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/MeterReportContainerController.js'], 'divMeterReportContainerController');
+        }
+        //明细表
+        function MeterReportDetailReport()
+        {
+
+            var deptContainerService = ckFramework.GetAngularService('ReportService');
+            deptContainerService.ShowContainerContent('divMeterDetailReportContainerIndex', 'PropertyMgr/Report/MeterDetailReportContainerIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/MeterDetailReportContainerController.js'], 'divMeterDetailReportContainerController');
+        }
+
+
+    </script>
+</div>

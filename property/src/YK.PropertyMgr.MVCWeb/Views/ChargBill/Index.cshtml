@@ -1,0 +1,64 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divChargBillIndexController" ng-controller="ChargBillIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+            <li class="active">
+            <a href="#tabDailyCharge" role="tab" data-toggle="tab" onclick="DailyChargeClick()" class="ng-binding">日常收费</a></li>
+            <li><a href="#tabTemporaryCharge" role="tab" data-toggle="tab" onclick="TemporaryChargeClick()" class="ng-binding">临时性收费</a></li>
+            <li><a href="#tabChargeRecord" role="tab" data-toggle="tab" onclick="ChargeRecordClick()" class="ng-binding">费用记录</a></li>
+            <li><a href="#tabChargeSubject" role="tab" data-toggle="tab" onclick="ChargeSubjectClick()" class="ng-binding">收费信息</a></li>
+            <li style="float: right;font-weight: 600;margin-right: 88px;line-height: 40px;"><span>业主:</span><span id="CBI_OwnerName"></span></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabDailyCharge">
+                <div id="divDailyChargContainer"></div>
+            </div>
+            <div class="tab-pane" id="tabTemporaryCharge">
+                <div id="divTemporaryChargeContainer"></div>
+            </div>
+            <div class="tab-pane" id="tabChargeRecord">
+                <div id="divChargeRecordContainer"></div>
+            </div>
+            <div class="tab-pane" id="tabChargeSubject">
+                <div id="divChargeSubjectContainer"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ChargBillPageData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $(document).ready(function () {
+            DailyChargeClick();
+        });
+        
+        //获取业主姓名
+        function GetOwnerName()
+        {
+         var HouseDeptId=   $('#SelectDeptId').val();
+         var DeptTypeId = $('#SelectDeptType').val();  
+         $.post('PropertyMgr/ChargBill/GetOwerName?HouseDeptId=' + HouseDeptId + "&DeptTypeId=" + DeptTypeId).success(function (result) {
+             $("#CBI_OwnerName").text(result);
+            });
+        }
+       
+        //日常收费
+        function DailyChargeClick() {
+
+            deptContainerService.ShowContainerContent('divDailyChargContainer', 'PropertyMgr/ChargBill/DailyChargeList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/DailyChargeListController.js'], 'divDailyChargListController', { IsCarPark: ckFramework.ChargBillPageData.IsCarPark});
+        }
+        //临时收费
+        function TemporaryChargeClick() {
+            $("#divChargeSubjectContainer").empty();
+            deptContainerService.ShowContainerContent('divTemporaryChargeContainer', 'PropertyMgr/TemporaryCharge/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/TempCharge/TempChargeListController.js'], 'divTempChargeListController', { IsCarPark: ckFramework.ChargBillPageData.IsCarPark });
+        }
+        //费用记录
+        function ChargeRecordClick() {
+            var SettleAccount = JQCheckPermission("SettleAccount");
+            deptContainerService.ShowContainerContent('divChargeRecordContainer', 'PropertyMgr/ChargeRecord/ChargeRecordList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargeRecord/ChargeRecordListController.js'], 'divChargeRecordListController', { SettleAccount: SettleAccount });
+        }
+        //收费项目
+        function ChargeSubjectClick() {
+            deptContainerService.ShowContainerContent('divChargeSubjectContainer', 'PropertyMgr/HouseChargeSubject/HouseChargeSubjectList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/HouseChargeSubject/HouseChargeSubjectListController.js'], 'divHouseChargeSubjectListController', { IsShowHouse: true });
+        }
+    </script>
+</div>

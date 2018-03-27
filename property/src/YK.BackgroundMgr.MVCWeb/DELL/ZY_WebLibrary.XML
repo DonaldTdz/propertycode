@@ -1,0 +1,1847 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZY_WebLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:ZY_WebLibrary.CacheTool">
+            <summary>
+            缓存帮助类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Addcookie(System.String,System.String)">
+            <summary>
+            添加cookie
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Addcookie_AES(System.String,System.String)">
+            <summary>
+            添加cookie 通过加密
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Addcookie_cn(System.String,System.String)">
+            <summary>
+            添加cookie 中文字符串
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Clearcookie(System.String)">
+            <summary>
+            清除cookie
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCoookie(System.String)">
+            <summary>
+            获取cookie
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCoookie_AES(System.String)">
+            <summary>
+            获取cookie
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCoookie``1(System.String)">
+            <summary>
+            获取cookie
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCookie_cn(System.String)">
+            <summary>
+            获取cookie 中文字符串
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.AddSession(System.String,System.Object)">
+            <summary>
+            添加session
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetSession(System.String)">
+            <summary>
+            获取session
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Addcookie_custom(System.String,System.String,System.String)">
+            <summary>
+            添加cookie 自定义主KEY
+            </summary>
+            <param name="minkey">主键</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Clearcookie_custom(System.String)">
+            <summary>
+            清除cookie 自定义主KEY
+            </summary>
+            <param name="minkey">主键</param>
+            <param name="key">键</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.Clearcookie_custom(System.String,System.String)">
+            <summary>
+            清除cookie 自定义主KEY
+            </summary>
+            <param name="minkey">主键</param>
+            <param name="key">键</param>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCoookie_custom(System.String)">
+            <summary>
+            获取cookie 自定义主KEY
+            </summary>
+            <param name="minkey">主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCoookie_custom(System.String,System.String)">
+            <summary>
+            获取cookie 自定义主KEY
+            </summary>
+            <param name="minkey">主键</param>
+            <param name="key">键 key=''为查所有 返回ArrayList</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCoookie_custom_ids(System.String)">
+            <summary>
+            获取cookie 自定义主KEY 返回数据 为逗号分隔字符串
+            </summary>
+            <param name="minkey">主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.ConnectionString(System.String)">
+            <summary>
+            获取config ConnectionString
+            </summary>
+            <param name="key">key</param>
+            <returns>value</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.appSettings(System.String)">
+            <summary>
+            获取config appSettings
+            </summary>
+            <param name="key">key</param>
+            <returns>value</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.GetCache(System.String)">
+            <summary>  
+            获取当前应用程序指定CacheKey的Cache值  
+            </summary>  
+            <param name="CacheKey">key</param>  
+            <returns></returns>  
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.IsExistsCache(System.String)">
+            <summary>  
+            查询指定CacheKey的Cache值是否存在  
+            </summary>  
+            <param name="CacheKey">key</param>  
+            <returns></returns>  
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.SetCache(System.String,System.Object)">
+            <summary>  
+            设置当前应用程序指定CacheKey的Cache值  
+            </summary>  
+            <param name="CacheKey">key</param>  
+            <param name="objObject">value</param>  
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.SetCache(System.String,System.Object,System.DateTime)">
+            <summary>  
+            设置当前应用程序指定CacheKey的Cache值  
+            绝对过期时间，当超过设定时间，立即移除
+            </summary>  
+            <param name="CacheKey">key</param>  
+            <param name="objObject">value</param>  
+            <param name="absoluteExpiration">时间</param>  
+            <param name="slidingExpiration">时间间隔</param>  
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.SetCache(System.String,System.Object,System.TimeSpan)">
+            <summary>  
+            设置数据缓存  
+            当超过设定时间没再使用时，才移除缓存
+            </summary> 
+            <param name="CacheKey">key</param>  
+            <param name="objObject">value</param>  
+            <param name="Timeout">时间间隔</param>  
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.RemoveAllCache(System.String)">
+            <summary>  
+            移除指定数据缓存  
+            </summary> 
+            <param name="CacheKey">key</param>   
+        </member>
+        <member name="M:ZY_WebLibrary.CacheTool.RemoveAllCache">
+            <summary>  
+            移除全部缓存  
+            </summary>  
+        </member>
+        <member name="P:ZY_WebLibrary.CacheTool.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="F:Messages._Instance">
+            <summary>
+            实例化 只实例化一次
+            </summary>
+        </member>
+        <member name="M:Action_u.SetUser(System.String,System.String)">
+            <summary>
+            添加登录人员
+            </summary>
+            <param name="uid"></param>
+            <param name="uname"></param>
+        </member>
+        <member name="M:Action_u.Claer(System.String)">
+            <summary>
+            删除登录人员 
+            </summary>
+            <param name="uid"></param>
+        </member>
+        <member name="M:Action_u.ClaerAll">
+            <summary>
+            删除所有登录人员 
+            </summary>
+        </member>
+        <!-- 对于成员“T:CoverHandler”忽略有格式错误的 XML 注释 -->
+        <member name="F:CoverHandler.Waterpanth">
+            <summary>
+            【水印图片路径】
+            </summary>
+        </member>
+        <member name="F:CoverHandler.WaterString">
+            <summary>
+            【水印文字】
+            </summary>
+        </member>
+        <member name="F:CoverHandler.Defaltpanth">
+            <summary>
+            【无图片时默认图片】
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.FTP">
+            <summary>
+            FTP 操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.FTP.Upload(System.Web.UI.HtmlControls.HtmlInputFile)">
+            <summary>
+            ftp的上传功能
+            </summary>
+            <param name="filename">HtmlInputFile控件</param>
+        </member>
+        <member name="M:ZY_WebLibrary.FTP.Download(System.String,System.String)">
+            <summary>
+            从ftp服务器上下载文件的功能
+            </summary>
+            <param name="filePath">文件路径</param>
+            <param name="fileName">文件名称</param>
+        </member>
+        <member name="M:ZY_WebLibrary.FTP.GetFileList">
+            <summary>
+            从ftp服务器上获得文件列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ZY_WebLibrary.FTP.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.HttpModuleTool">
+            <summary>
+            对httprequest批量处理
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.HttpModuleTool.Dispose">
+            <summary>
+            回收
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.HttpModuleTool.Init(System.Web.HttpApplication)">
+            <summary>
+            加载
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:ZY_WebLibrary.IPTool">
+            <summary>
+            IP 端口操作
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.IPTool.GetUserIP">
+            <summary>
+            获取客户端ip
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.IPTool.GetIPAddress(System.String)">
+            <summary>
+            获取ip 所在地
+            </summary> 
+            <param name="IP">ip地址，不填为本机ip地址</param>   
+            <returns>string[] [0]为省 [1]为市 [2]为省市 宽带类型</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.IPTool.DnsToIP(System.String)">
+            <summary>
+            根据域名获取ip
+            </summary>
+            <param name="hostName">域名</param>
+            <returns>ArrayList</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.IPTool.IptoHost(System.String)">
+            <summary>
+            根据ip得到域名
+            </summary>
+            <param name="ip">ip</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.IPTool.Scan(System.Net.IPAddress,System.Int32,System.Int32)">
+            <summary>   
+            端口 扫描   
+            </summary>   
+            <param name="ip">扫描的 IP地址</param>   
+            <param name="startPort">起始端口号</param>   
+            <param name="endPort">终止端口号</param>   
+        </member>
+        <member name="M:ZY_WebLibrary.IPTool.ScanCallBack(System.IAsyncResult)">
+            <summary>   
+            BeginConnect的回调函数   
+            </summary>   
+            <param name="result">异步Connect的结果</param>   
+        </member>
+        <member name="P:ZY_WebLibrary.IPTool.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.Language">
+            <summary>
+            解码格式
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Language.Default">
+            <summary>
+            Default
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Language.UTF8">
+            <summary>
+            utf-8
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Language.gb2312">
+            <summary>
+            gb2312
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Language.Unicode">
+            <summary>
+            gb2312
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.Serialize">
+            <summary>
+            序列化操作
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.GetJson``1(``0,ZY_WebLibrary.Language)">
+            <summary>
+            把对象序列化 JSON 字符串 
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="obj">对象实体</param>
+            <returns>JSON字符串</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.ParseJson``1(System.String,ZY_WebLibrary.Language)">
+            <summary>
+            把JSON字符串还原为对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="szJson">JSON字符串</param>
+            <returns>对象实体</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.GetJson``1(``0)">
+            <summary>
+            json序列化
+            </summary>
+            <typeparam name="T">转换的对象</typeparam>
+            <param name="t">对象数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.ParseJson``1(System.String)">
+            <summary>
+            json反序列化
+            </summary>
+            <typeparam name="T">接受的对象</typeparam>
+            <param name="json">json字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.Serializexml_Str``1(``0)">
+            <summary>
+            xml序列化
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="t">对象</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.DeSerializexml_Str``1(System.String)">
+            <summary>
+            xml反序列化
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="by">xml字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.Serializexml``1(``0,System.String)">
+            <summary>
+            xml序列化  保存到文件
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="t">对象</param>
+            <param name="path">序列化后保存路径</param>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.DeSerializexml``1(System.String)">
+            <summary>
+            xml序列化 保存到文件
+            </summary>
+            <param name="t">对象</param>
+            <param name="path">序列化对象文件路径</param>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.Serializefile``1(``0)">
+            <summary>
+            二进制序列化
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="t">对象</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.DeSerializefile``1(System.Byte[])">
+            <summary>
+            反二进制序列化
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="by">对象的二进制流</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.Serializefile``1(``0,System.String)">
+            <summary>
+            二进制序列化  保存到文件
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="t">对象</param>
+            <param name="path">序列化后保存路径</param>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.DeSerializefile``1(System.String)">
+            <summary>
+            反二进制序列化  保存到文件
+            </summary>
+            <param name="t">对象</param>
+            <param name="path">序列化对象文件路径</param>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.Serializestring``1(``0)">
+            <summary>
+             序列化 对象到字符串
+            </summary>
+            <param name="obj">泛型对象</param>
+            <returns>序列化后的字符串</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Serialize.Desrializestring``1(System.String)">
+            <summary>
+             反序列化 字符串到对象
+            </summary>
+            <param name="str">要转换为对象的字符串</param>
+            <returns>反序列化出来的对象</returns>
+        </member>
+        <member name="T:ZY_WebLibrary.ServerInfo">
+            <summary>
+            服务器信息
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.IP">
+            <summary>
+            服务器IP
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Name">
+            <summary>
+            服务器名
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Port">
+            <summary>
+            服务器端口
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Time">
+            <summary>
+            服务器时间
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Sysetem">
+            <summary>
+            服务器操作系统
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.PassFile">
+            <summary>
+            允许文件
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Virtual">
+            <summary>
+            虚拟目录
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Physics">
+            <summary>
+            物理目录
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Probe">
+            <summary>
+            探针文件路径
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Script">
+            <summary>
+            脚本超时时间
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.CPUnum">
+            <summary>
+            CPU个数
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.CPUtype">
+            <summary>
+            CPU类型
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.OSVersion">
+            <summary>
+            服务器操作系统版本
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.NET">
+            <summary>
+            .NET解释引擎版本
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.IIS">
+            <summary>
+            服务器IIS版本
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.HOST">
+            <summary>
+            域名主机
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Language">
+            <summary>
+            域名主机
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.OpenTime">
+            <summary>
+            开机时长
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.SessonNum">
+            <summary>
+            Session总数
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.ApplicationNum">
+            <summary>
+            Application总数
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.CacheNum">
+            <summary>
+            应用程序缓存总数
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.Total">
+            <summary>
+            应用程序占用内存
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.FSO">
+            <summary>
+            FSO 文本文件读写
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.PageTime">
+            <summary>
+            本页执行时间
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.StartTime">
+            <summary>
+            进程开始时间
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.AspNet">
+            <summary>
+            AspNet 内存占用
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.ServerInfo.AspNetCPU">
+            <summary>
+            AspNet CPU时间
+            </summary>
+        </member>
+        <member name="P:ZY_WebLibrary.ServerInfo.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <!-- 对于成员“T:ZY_WebLibrary.Timer”忽略有格式错误的 XML 注释 -->
+        <member name="M:ZY_WebLibrary.Timer.Instance">
+            <summary>
+            实例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.Timer.Start">
+            <summary>
+            开始
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.Timer.Stop">
+            <summary>
+            停止
+            </summary>
+        </member>
+        <member name="E:ZY_WebLibrary.Timer.ExecuteTask">
+            <summary>
+            自定义添加事件
+            </summary>
+        </member>
+        <member name="P:ZY_WebLibrary.Timer.Interval">
+            <summary>
+            时间间隔
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.VodioFormat">
+            <summary>
+            视频像素
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.Vedio">
+            <summary>
+            视频转码处理
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Vedio.ConvertTool">
+            <summary>  
+            转换软件所在的路径  
+            </summary>  
+        </member>
+        <member name="M:ZY_WebLibrary.Vedio.Convert(System.String,System.Boolean)">
+            <summary>  
+            将视频文件转换为Flv格式  
+            </summary>  
+            <param name="sourceFile">要转换的文件虚拟连接</param>  
+            <param name="high_quality">视频品质 默认低品质</param>  
+            <returns></returns>  
+        </member>
+        <member name="M:ZY_WebLibrary.Vedio.Convert(System.String,ZY_WebLibrary.VodioFormat,System.Boolean)">
+            <summary>  
+            将视频文件转换为Flv格式  
+            </summary>  
+            <param name="sourceFile">要转换的文件虚拟连接</param>  
+            <param name="vf">分辨率</param>  
+            <param name="high_quality">视频品质 默认高品质</param>  
+            <returns></returns>  
+        </member>
+        <member name="M:ZY_WebLibrary.Vedio.CatchImg(System.String)">
+            <summary>
+            @从视频文件截图,生成在视频文件所在文件夹
+            2.截图的尺寸大小
+            <add key="CatchFlvImgSize" value="240x180" />
+            </summary>
+            <returns>成功:返回图片虚拟地址; 失败:返回空字符串</returns>
+        </member>
+        <member name="P:ZY_WebLibrary.Vedio.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SmsService">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.#ctor">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetSmsState(System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateAsync(System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateAsync(System.String,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateEx(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateExAsync(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateExAsync(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBatchSendID">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBatchSendIDAsync">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBatchSendIDAsync(System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBlackWords(System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBlackWordsAsync(System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBlackWordsAsync(System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.Send(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendEx(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendExAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendExAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendEx2(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendEx2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendEx2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendWapPush(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendWapPushAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SendWapPushAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.CancelScheduleSMS(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.CancelScheduleSMSAsync(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.CancelScheduleSMSAsync(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBalance(System.String,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBalanceAsync(System.String,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.GetBalanceAsync(System.String,System.String,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySms(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsAsync(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsAsync(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsEx(System.String,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExAsync(System.String,System.String,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExAsync(System.String,System.String,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExComplete(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExCompleteAsync(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExCompleteAsync(System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SetPassword(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SetPasswordAsync(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.SetPasswordAsync(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:ZY_WebLibrary.Web.Sms.SmsService.CancelAsync(System.Object)">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.GetSmsStateExCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.GetBatchSendIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.GetBlackWordsCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.SendCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.SendExCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.SendEx2Completed">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.SendWapPushCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.CancelScheduleSMSCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.GetBalanceCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.QuerySmsExCompleteCompleted">
+            <remarks/>
+        </member>
+        <member name="E:ZY_WebLibrary.Web.Sms.SmsService.SetPasswordCompleted">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetSmsStateExResp">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetSmsStateExResp.Result">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetSmsStateExResp.ErrorDesc">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetSmsStateExResp.Count">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetSmsStateExResp.Sms">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.Message">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.Message.BatchSendID">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.Message.Mobile">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.Message.Content">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.Message.Status">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.Message.SubmitTime">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.Message.DoneTime">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.UpSms">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.UpSms.UpSmsID">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.UpSms.MobileNum">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.UpSms.DestTermID">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.UpSms.SubNumber">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.UpSms.MsgContent">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.UpSms.UpSmsDate">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsExResp">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsExResp.Result">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsExResp.ErrorDesc">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsExResp.Count">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsExResp.Sms">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.CancelScheduleSMSResp">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.CancelScheduleSMSResp.AddedBalance">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.CancelScheduleSMSResp.Result">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.CancelScheduleSMSResp.ErrorDesc">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendExResp">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.PayCount">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.BlackWords">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.ErrorMobiles">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.BlackMobiles">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.BatchSendID">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.Result">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExResp.ErrorDesc">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetSmsStateCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetSmsStateCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetSmsStateCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetSmsStateExCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetSmsStateExCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetSmsStateExCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetBatchSendIDCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetBatchSendIDCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetBatchSendIDCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetBlackWordsCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetBlackWordsCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetBlackWordsCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendExCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendExCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendExCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendEx2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendEx2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendEx2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendWapPushCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SendWapPushCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SendWapPushCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.CancelScheduleSMSCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.CancelScheduleSMSCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.CancelScheduleSMSCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetBalanceCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.GetBalanceCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.GetBalanceCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsExCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsExCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsExCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsExCompleteCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.QuerySmsExCompleteCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.QuerySmsExCompleteCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SetPasswordCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.Web.Sms.SetPasswordCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:ZY_WebLibrary.Web.Sms.SetPasswordCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:ZY_WebLibrary.WebFileTool">
+            <summary>
+            文件上传
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.OpenPath(System.String)">
+            <summary>
+            获取物理路径 没有不创建
+            </summary>
+            <param name="path">相对根目录路径  uploud/aa.txt</param>
+            <returns>物理路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetPath(System.String)">
+            <summary>
+            获取物理路径 没有创建
+            </summary>
+            <param name="path">相对根目录路径  uploud/aa.txt</param>
+            <returns>物理路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.OpenPath_server(System.String)">
+            <summary>
+            获取物理路径 没有不创建 不需求要请求
+            </summary>
+            <param name="path">相对根目录路径  uploud/aa.txt</param>
+            <returns>物理路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetPath_server(System.String)">
+            <summary>
+            获取物理路径 没有创建 不需求要请求
+            </summary>
+            <param name="path">相对根目录路径  uploud\\aa.txt</param>
+            <returns>物理路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetFiles(System.String,System.String[],System.Boolean)">
+            <summary>
+            获取指定文件夹下所有指定文件【文件名】或者【路径】
+            </summary>
+            <param name="filepath">
+            指定文件相对目录 例：网站下upload "upload"； 网站根目录则是 ""
+            路径以网站根目录开始
+            </param>
+            <param name="filepath">视频文件路径</param>
+            <param name="type">需要获取的文件类型 例：.aspx .txt 如果为所有 则是 "*"</param>
+            <param name="allpath">是否获取全路径 默认只获取文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetFiles(System.String,System.String)">
+            <summary>
+            获取指定文件夹下所有指定文件
+            </summary>
+            <param name="filepath">指定文件相对目录 例：网站下upload "upload"； 网站根目录则是 ""</param>
+            <param name="type">需要获取的文件类型 例：aa.html或者bb.htm 输入*.htm 如果为所有 则是 ""</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetAllFiles(System.String,System.String[],System.Boolean)">
+            <summary>
+            获取指定文件夹下所有指定文件【文件名】或者【路径】，以及所在文件夹下所有子文件中指定文件【文件名】或者【路径】
+            </summary>
+            <param name="path">指定文件相对目录 例：网站下upload "upload"； 网站根目录则是 ""</param>
+            <param name="type">需要获取的文件类型 例：.aspx .txt 如果为所有 则是 "*"</param>
+            <param name="allpath">是否获取全路径 默认只获取文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.Web.HttpPostedFile)">
+            <summary>
+            【上传图片类 按日期建立文件件】
+            </summary>
+            <param name="PostedFile">HttpPostedFile 控件</param>
+            <returns>上传后图片路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.Web.UI.Control)">
+            <summary>
+            【上传图片类 按日期建立文件件】
+            </summary>
+            <param name="upfile">FileUpload|HtmlInputFile 控件</param>
+            <returns>上传后图片路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.String)">
+            <summary>
+            【上传图片类 按日期建立文件件】
+            </summary>
+            <param name="name">file文件的name</param>
+            <returns>上传后图片路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg">
+            <summary>
+            【上传图片类 按日期建立文件件 多图片上传】
+            </summary>
+            <returns>上传后图片路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimgs">
+            <summary>
+            【上传图片类 按日期建立文件件 多图片上传】
+            </summary>
+            <returns>上传后图片路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.Web.HttpPostedFile,System.String[])">
+            <summary>
+            【上传文件类 按日期建立文件件  指定上传类型】
+            </summary>
+            <param name="PostedFile">HttpPostedFile</param>
+            <param name="type">文件类型new string[]{".doc",".docx"}</param>
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.Web.UI.Control,System.String[])">
+            <summary>
+            【上传文件类 按日期建立文件件  指定上传类型】
+            </summary>
+            <param name="upfile">FileUpload|HtmlInputFile 控件</param>
+            <param name="type">文件类型new string[]{".doc",".docx"}</param>
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.String[])">
+            <summary>
+            【上传文件类 按日期建立文件件  指定上传类型 多文件上传】
+            </summary>
+            <param name="type">文件类型new string[]{".doc",".docx"}</param>
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.Web.HttpPostedFile,System.Int32,System.Int32)">
+            <summary>
+            【上传图片 按日期建立文件件  指定压缩生成图片高宽 】
+            </summary>
+            <param name="PostedFile">HttpPostedFile</param>
+            <param name="width">生成压缩图的宽</param>
+            <param name="height">生成压缩图的高</param>
+            <returns>生成图片的相对路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Uploadimg(System.Web.UI.Control,System.Int32,System.Int32)">
+            <summary>
+            【上传图片 按日期建立文件件  指定压缩生成图片高宽 】
+            </summary>
+            <param name="upfile">FileUpload或者HtmlInputFile控件</param>
+            <param name="width">生成压缩图的宽</param>
+            <param name="height">生成压缩图的高</param>
+            <returns>生成图片的相对路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.UploadVedio(System.Web.HttpPostedFile,System.Boolean)">
+            <summary>
+            【上传视频类 按日期建立文件件  自动转换flv视频】
+            </summary>
+            <param name="PostedFile">FileUpload 控件</param>
+            <param name="high_quality">视频品质 默认高品质</param>  
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.UploadVedio(System.Web.UI.Control,System.Boolean)">
+            <summary>
+            【上传视频类 按日期建立文件件  自动转换flv视频】
+            </summary>
+            <param name="upfile">FileUpload或者HtmlInputFile控件</param>
+            <param name="high_quality">视频品质 默认高品质</param>  
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.UploadVedio(System.Web.HttpPostedFile,ZY_WebLibrary.VodioFormat,System.Boolean)">
+            <summary>
+            【上传视频类 按日期建立文件件  自动转换flv视频】
+            </summary>
+            <param name="PostedFile">HttpPostedFile</param>
+            <param name="vf">分辨率</param>  
+            <param name="high_quality">视频品质 默认高品质</param>  
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.UploadVedio(System.Web.UI.Control,ZY_WebLibrary.VodioFormat,System.Boolean)">
+            <summary>
+            【上传视频类 按日期建立文件件  自动转换flv视频】
+            </summary>
+            <param name="upfile">FileUpload或者HtmlInputFile控件</param>
+            <param name="vf">分辨率</param>  
+            <param name="high_quality">视频品质 默认高品质</param>  
+            <returns>上传后文件路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.UploadFile_path(System.Web.HttpPostedFile,System.String,System.String[])">
+            <summary>
+            【上传文件类 按指定路径上传  指定上传类型】
+            </summary>
+            <param name="PostedFile">HttpPostedFile数据源</param>
+            <param name="filepath">存储路径 Upload/2014</param>
+            <param name="type">文件类型</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.UploadFile_path(System.Web.UI.Control,System.String,System.String[])">
+            <summary>
+            【上传文件类 按指定路径上传  指定上传类型】
+            </summary>
+            <param name="upfile">FileUpload|HtmlInputFile 控件</param>
+            <param name="filepath">存储路径 Upload/2014</param>
+            <param name="type">文件类型</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.SaveSmallPhoto(System.Web.HttpPostedFile,System.String)">
+            <summary>
+            上传图片压缩按固定宽比例收缩
+            width=500px
+            </summary>
+            <param name="myFile">HttpPostedFile上传文件</param>
+            <param name="path">保存路径</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.SaveSmallPhoto(System.Web.HttpPostedFile,System.String,System.Int32,System.Int32)">
+            <summary>
+            上传图片压缩 自己设置宽高
+            </summary>
+            <param name="myFile">上传文件</param>
+            <param name="path">保存路径</param>
+            <param name="width">压缩图宽</param>
+            <param name="height">压缩图高</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.IsAllowedExtension(System.Web.HttpPostedFile,ZY_WebLibrary.FileExtension[])">
+            <summary>
+            验证上传文件是不是指定格式的文件
+            </summary>
+            <param name="upfile"></param>
+            <param name="fileEx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetExtension(System.Web.HttpPostedFile)">
+            <summary>
+            检测后缀编码
+            </summary>
+            <param name="upfile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.GetExtension(System.IO.Stream)">
+            <summary>
+            检测后缀编码
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.File_Download(System.String,System.String,System.Boolean)">
+            <summary>
+            【文件下载】
+            </summary>
+            <param name="FileName">【下载显示的文件名】</param>
+            <param name="panth">【下载文件路径,相对路径uplaod/2014/a.txt】</param>
+            <param name="auto">【是否是自定义路径:true 为自定义路径 默认false】</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.File_Download(System.String,System.String,ZY_WebLibrary.Language,System.Boolean)">
+            <summary>
+            【文件下载】
+            </summary>
+            <param name="FileName">【下载显示的文件名】</param>
+            <param name="panth">【下载文件路径,相对路径uplaod/2014/a.txt】</param>
+            <param name="lg">【编码格式】</param>
+            <param name="auto">【是否是自定义路径:true 为自定义路径 默认false】</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.File_Download(System.String,System.IO.Stream,ZY_WebLibrary.Language,System.Boolean)">
+            <summary>
+            【文件下载】
+            </summary>
+            <param name="FileName">【下载显示的文件名】</param>
+            <param name="stream">【下载文件数据流】</param>
+            <param name="lg">【编码格式】</param>
+            <param name="auto">【是否是自定义路径:true 为自定义路径 默认false】</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.DownFile(System.String)">
+            <summary>
+            将远程图片自动下载到本地服务器
+            </summary>
+            <param name="url">网络图片</param>
+            <returns>下载保存的路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.DownFile(System.String,System.String)">
+            <summary>
+            将远程文件自动下载到本地服务器
+            </summary>
+            <param name="url">远程文件地址</param>
+            <param name="suffix">保存到本地后缀.mp4|.flv</param>
+            <returns>下载保存的路径</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.DelMapPath(System.String)">
+            <summary>
+            删除相对路径文件
+            web/image/aa.txt web为根目录 取 image/aa.txt
+            </summary>
+            <param name="file">文件相对路径</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Import_File_Write(System.String,System.Data.DataSet)">
+            <summary>
+            导出数据到文件
+            </summary>
+            <param name="path">导出文件绝对路径</param>
+            <param name="ds">数据源</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Import_File_Write(System.Data.DataSet)">
+            <summary>
+            导出数据到缓存
+            </summary>
+            <param name="ds">数据源</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Import_File_Read(System.String,System.Data.DataSet)">
+            <summary>
+            导入数据
+            </summary>
+            <param name="path">导入文件绝对路径</param>
+            <param name="ds">数据源</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.Import_File_Read(System.Web.HttpPostedFile)">
+            <summary>
+            Excel数据导入Datable
+            </summary>
+            <param name="TextName">HttpPostedFile 上传控件</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.QRCodeImg(System.String,System.String)">
+            <summary>
+            生成二维码图片
+            </summary>
+            <param name="text">二维码内容</param>
+            <param name="filename">文件名称不指定 默认生成唯一名称</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.QRCodeImg_LOGO(System.String,System.String,System.String)">
+            <summary>
+            生成带logo二维码图片
+            </summary>
+            <param name="logo">logo路径</param>
+            <param name="text">二维码内容</param>
+            <param name="filename">文件名称不指定 默认生成唯一名称</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebFileTool.QRCode(System.String)">
+            <summary>
+            HTTP 二维码输出到页面
+            </summary>
+            <param name="text">文本内容</param>
+        </member>
+        <member name="P:ZY_WebLibrary.WebFileTool.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.Width_Height">
+            <summary>
+            上次图片判断
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Width_Height.MinWidth">
+            <summary>
+            宽小于高
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Width_Height.MinHeight">
+            <summary>
+            高小于宽
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Width_Height.Proportion">
+            <summary>
+            比例
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.FileExtension">
+            <summary>
+            文件类型
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.WebTool">
+            <summary>
+            web工具方法
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.MD5(System.String)">
+            <summary>
+            MD5加密
+            </summary>
+            <param name="Password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.AES(System.String)">
+            <summary>
+            AES加密
+            </summary>
+            <param name="Password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.DEAES(System.String)">
+            <summary>
+            AES解密
+            </summary>
+            <param name="Password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryShort(System.Object)">
+            <summary>
+            转short
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryNumber(System.Object)">
+            <summary>
+            转int
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryLong(System.Object)">
+            <summary>
+            转long
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryFloat(System.Object)">
+            <summary>
+            转float
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryDouble(System.Object)">
+            <summary>
+            转double
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryString(System.Object)">
+            <summary>
+            转string
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryDecimal(System.Object)">
+            <summary>
+            转decimal
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryDateTime(System.Object)">
+            <summary>
+            转datetime
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryBool(System.Object)">
+            <summary>
+            转bool
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.QeryByte(System.Object)">
+            <summary>
+            转byte
+            </summary>
+            <param name="ID">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.Sensitive(System.String)">
+            <summary>
+            屏蔽关键词
+            </summary>
+            <param name="str">原始内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.CleanInvalidCharsForXML(System.String)">
+            <summary>  
+            清除xml中的不合法字符  
+            </summary>  
+            <remarks>  
+            无效字符：  
+            0x00 - 0x08  
+            0x0b - 0x0c  
+            0x0e - 0x1f  
+            </remarks>  
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.CheckBadStr(System.String)">
+            <summary>  
+             判断是否有非法字符 
+            </summary>  
+            <param name="strString">内容</param>  
+            <returns>返回TRUE表示有非法字符，返回FALSE表示没有非法字符。</returns>  
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetHTML(System.String)">
+            <summary>
+            防止注入
+            </summary>
+            <param name="str">代码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.ReplaceHtmlTag(System.String)">
+            <summary>
+            去所有脚本
+            </summary>
+            <param name="Htmlstring">文章文本内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.ReplaceHtmlTag1(System.String)">
+            <summary>
+            去文章脚本
+            </summary>
+            <param name="Htmlstring">文章内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetTimeNum(System.String,System.Int32)">
+            <summary>
+            得到唯一编码（时间 流水号）
+            </summary>
+            <param name="key">哪张表的</param>
+            <param name="num">几位流水号</param>
+            <returns>编码</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetTimeNum(System.String,System.String,System.Int32)">
+            <summary>
+            得到唯一编码（前缀 时间 流水号）
+            </summary>
+            <param name="key">哪张表的</param>
+            <param name="num">几位流水号</param>
+            <param name="head">前缀</param>
+            <returns>编码</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetNum(System.String,System.Int32)">
+            <summary>
+            得到唯一编码
+            </summary>
+            <param name="key">哪张表的</param>
+            <param name="num">几位流水号</param>
+            <returns>编码</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetNum(System.String,System.String,System.Int32)">
+            <summary>
+            得到唯一编码（前缀 流水号）
+            </summary>
+            <param name="key">哪张表的</param>
+            <param name="head">前缀</param>
+            <param name="num">几位流水号</param>
+            <returns>编码</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.Banck(System.String)">
+            <summary>
+            JS返回alert
+            </summary>
+            <param name="tex"></param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetUrl(System.String,System.String)">
+            <summary>
+            页面跳转
+            </summary>
+            <param name="Message">为“”时不弹出提示</param>
+            <param name="URL">跳转到页面</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.RequestType">
+            <summary>
+            是否是get请求
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetBeforUrl">
+            <summary>
+            链接到该请求页的url
+            链接形式：http://localhost:8489/HouseWX/Mobile/index.html
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetUrl">
+            <summary>
+            客户端当前请求的完整url
+            http://localhost:8489/HouseWX/Mobile/jfcx.aspx?page_id=13
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.RawUrl">
+            <summary>
+            客户端当前请求的原始url
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetUrlAll">
+            <summary>
+            获取地址栏完整URL
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetSessionID(System.String)">
+            <summary>
+            获取客户端SessionID
+            </summary>
+            <param name="URL">网站链接</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.UrlToHost(System.String)">
+            <summary>
+            根据url路径获取域名
+            </summary>
+            <param name="Url">url路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetHttpWebRequest(System.String,System.String)">
+            <summary>
+            获取目标网站网页内容
+            </summary>
+            <param name="url">url</param>
+            <param name="encoding">编码 utf-8,gb2312</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetNEWS(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            新闻采集器
+            </summary>
+            <param name="url">采集网站文章的列表页地址</param>
+            <param name="encoding">目标网站编码</param>
+            <param name="allurl">完整地址</param>
+            <param name="listbegin">新闻列表开始标签</param>
+            <param name="listend">新闻列表结束标签</param>
+            <param name="urlbegin">内容链接开始标签</param>
+            <param name="urlend">内容链接结束标签</param>
+            <param name="titlebegin">内容页，标题开始标签</param>
+            <param name="titleend">内容页，标题结束标签</param>
+            <param name="contentbegin">内容页，内容开始标签</param>
+            <param name="contentend">内容页，内容结束标签</param>
+            <param name="page_id">插入数据库where条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GrilledWeb(System.String,System.String,System.String)">
+            <summary>
+            扒网页源码
+            </summary>
+            <param name="url">网站路径</param>
+            <param name="begin">开始标识</param>
+            <param name="end">结束标识</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetHomePage">
+            <summary>
+            生成设置首页
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetSetFavorite">
+            <summary>
+            生成设置收藏
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetQQ">
+            <summary>
+            生成在线QQ交谈
+            </summary>
+            <returns>str</returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetUser_Action">
+            <summary>
+            获取网站访问记录 txt
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetBUG(System.Exception)">
+            <summary>
+            记录页面错误日志 txt
+            </summary>
+            <param name="ex">Exception 错误</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetBUG">
+            <summary>
+            记录页面错误日志 在全局变量配置 txt
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetLog(System.String)">
+            <summary>
+            记录页面错误日志 txt
+            </summary>
+            <param name="ex">日志内容</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetWebSite">
+            <summary>
+            获取网站访问记录 sql
+            </summary>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.GetOperationlog(System.String,System.String)">
+            <summary>
+            管理员操作日志 sql
+            </summary>
+            <param name="eventstr">事件名称</param>
+            <param name="remark">操作说明</param>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.ISRight(ZY_WebLibrary.Jurisdiction,System.Boolean,System.String)">
+            <summary>
+            判断岗位权限
+            </summary>
+            <param name="sys">操作行为</param>
+            <param name="admin">是否把超级管理员加入权限判断 默认不加人</param>
+            <param name="remark">说明</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.ISMobile">
+            <summary>
+            判断访问端是否是移动设备
+            是移动设备为true;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.CheckCode(System.Int32,System.Int32)">
+            <summary> 
+            创建验证码,返回验证码字符串 
+            </summary> 
+            <param name="CodeLen">int CodeLe:验证码长度</param> 
+            <param name="CodeType">int CodeType:0纯数字;1纯字母;2数字与字母混合;3纯汉字</param> 
+            <returns></returns> 
+            
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.UrlEncode(System.String)">
+            <summary>
+            汉字编码
+            </summary>
+            <param name="t">提交的汉字编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_WebLibrary.WebTool.UrlDecode(System.String)">
+            <summary>
+            汉字解码
+            </summary>
+            <param name="t">提交的汉字解码</param>
+            <returns></returns>
+        </member>
+        <member name="P:ZY_WebLibrary.WebTool.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_WebLibrary.Jurisdiction">
+            <summary>
+            权限枚举
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Jurisdiction.select">
+            <summary>
+            查询
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Jurisdiction.insert">
+            <summary>
+            新增
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Jurisdiction.update">
+            <summary>
+            修改
+            </summary>
+        </member>
+        <member name="F:ZY_WebLibrary.Jurisdiction.delete">
+            <summary>
+            删除
+            </summary>
+        </member>
+    </members>
+</doc>

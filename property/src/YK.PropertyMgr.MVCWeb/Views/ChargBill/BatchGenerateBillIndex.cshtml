@@ -1,0 +1,170 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divBatchGenerateBillIndexController" ng-controller="BatchGenerateBillIndexController">
+    <div class="modal-header">
+        <h4 class="ng-binding">资源选择</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-5" style="height:450px;overflow:auto">
+            <div id="treeBatchBill">
+                <i class='fa fa-hand-o-left'></i>请选择收费项目
+            </div>
+        </div>
+        <div class="col-md-7">
+            <label style=" display: block ">结束时间</label>
+            <div style="width: 250px;float: left;">
+                <div class="input-append  date  dateEnddate input-group">
+                    <input type="text" name="Enddate" class="form-control" disabled="disabled">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="ModalFormMagin col-md-2 has-feedback" style="float: left">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="button" id="BatchGenerateBillSave" class="btn btn-primary" value="确定生成">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.PaymentTasksListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
+    <script type="text/javascript">
+        function getLastDay(year, month) {
+            var new_year = year;    //取当前的年份
+            var new_month = month++;//取下一个月的第一天，方便计算（最后一天不固定）
+            if (month > 12)            //如果当前大于12月，则年份转到下一年
+            {
+                new_month -= 12;        //月份减
+                new_year++;            //年份增
+            }
+            var new_date = new Date(new_year, new_month, 1);              //取当年当月中的第一天
+            //var date_count =   (new Date(new_date.getTime()-1000*60*60*24)).getDate();//获取当月的天数
+            var last_date = new Date(new_date.getTime() - 1000 * 60 * 60 * 24);//获得当月最后一天的日期
+            //return date_count;
+            return last_date;
+        }
+
+        //绑定资源树
+        function BindBatchGenerateBillTree(typedata) {
+            $('#treeBatchBill').jstree("destroy");
+            //var typedata = action.node.original.id;
+            var typeId = typedata.split('_');
+            if (typeId[1] == DeptTypeInfos.ChargeSubject) {
+                $('#SelectSubjectType').val(typeId[3]);
+                $('#treeBatchBill').jstree({
+                    'core': {
+                        'data': {
+                            'cache': false,
+                            'url': function (node) {
+                                if (node.id == "#") {
+                                    var selectNode = $("#SelectDeptId").val();
+                                    var SubjectType = $("#SelectSubjectType").val();
+                                    return 'PropertyMgr/ChargBill/GetSubjectSelectChildTree?id=' + selectNode + "&type=" + SubjectType;
+                                }
+                            }
+                        },
+                    },
+                    "checkbox": {
+                        "keep_selected_style": false,
+                        "visible": true
+                    },
+                    "plugins": ["checkbox"]
+                });
+            }
+            else {
+                $('#treeBatchBill').jstree("destroy");
+                $("#treeBatchBill").html("<i class='fa fa-hand-o-left'></i>请选择收费项目");
+            }
+        }
+
+        //设置结束时间弹出视图格式
+        function SetEndTimeFormat(typedata) {
+            $('.dateEnddate').datetimepicker('remove');
+            var subjectArry = typedata.split('_');
+            var BillPeriod = subjectArry[4];
+            //如果收费周期为每日计费
+            if (BillPeriod == 1) {
+                $('.dateEnddate').datetimepicker({
+                    format: 'yyyy-mm-dd',
+                    minView: 2,
+                    startView: 2,
+                    pickerPosition: "bottom-Top"
+                }).off("changeDate").on('changeDate', function (ev) {
+                    if (ev.date.valueOf() != undefined || ev.date.valueOf() != "") {
+                        var sdate = ev.date;
+                        //var newDate = getLastDay(sdate.getFullYear(), sdate.getMonth() + 1);
+                        $('.dateEnddate').datetimepicker('setDate', ev.date);
+                    }
+                });
+            } else {
+                $('.dateEnddate').datetimepicker({
+                    format: 'yyyy-mm-dd',
+                    minView: 3,
+                    startView: 3,
+                    pickerPosition: "bottom-Top"
+                }).off("changeDate").on('changeDate', function (ev) {
+                    if (ev.date.valueOf() != undefined || ev.date.valueOf() != "") {
+                        var sdate = ev.date;
+                        var newDate = getLastDay(sdate.getFullYear(), sdate.getMonth() + 1);
+                        $('.dateEnddate').datetimepicker('setDate', newDate);
+                    }
+                });
+            }
+            var EndDate = $("#divBatchGenerateBillIndexController input[name='Enddate']").val();
+            //if (EndDate.length <= 0) {
+            var myDate = new Date();
+            var datestr = getLastDay(myDate.getFullYear(), myDate.getMonth() + 1);
+            $('.dateEnddate').datetimepicker('setDate', datestr);
+        }
+
+        ckFramework.ClickResourceChange = function (typedata) {
+            BindBatchGenerateBillTree(typedata);
+            SetEndTimeFormat(typedata);
+        }
+
+        $(function () {
+            $("#BatchGenerateBillSave").click(function () {
+                var nodes = $("#treeBatchBill").jstree("get_checked") /*选中的节点*/
+                var EndDate = $("#divBatchGenerateBillIndexController input[name='Enddate']").val();
+                var ChargeSubjectId = $("#SelectDeptId").val();
+                if (EndDate.length <= 0) {
+                    ckFramework.ModalHelper.Alert("请选择结束时间");
+                    return;
+                }
+
+                if (Object.prototype.toString.call(nodes) != "[object Array]") {
+                    ckFramework.ModalHelper.Alert("请选择资源");
+                    return;
+                }
+
+                if (nodes.length > 0) {
+
+                    ckFramework.ModalHelper.OpenWait();
+                    $.post("/PropertyMgr/ChargBill/SaveGenerateBillI",
+                        {
+                            Nodes: nodes,
+                            EndDate: EndDate,
+                            ChargeSubjectId: ChargeSubjectId
+                        },
+                        function (data) {
+                            if (data.IsSuccess) {
+                                ckFramework.ModalHelper.Alert(data.Msg);
+                                ckFramework.ModalHelper.CloseWait();
+                            } else {
+                                ckFramework.ModalHelper.Alert(data.Msg);
+                                ckFramework.ModalHelper.CloseWait();
+                            }
+                        });
+                }
+                else {
+                    ckFramework.ModalHelper.Alert("请选择资源后再提交");
+                }
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,44 @@
+﻿
+// Generated helper templates
+// Generated items
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayChargeBillSynchronizerDetailDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayChargeBillSynchronizerDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayChargeBillDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayRoomDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayAPPAuthTokenDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayCommunityDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\AlipayApiRequestLogDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ClientPaymentLogDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ReceiptBookHistoryDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ReceiptBookDetailDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ReceiptBookDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\TemplatePrintRecordDetailDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\TemplatePrintRecordDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PaymentDiscountInfoDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\TicketSerialNumberDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ShareKeyDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ProvinceDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\CountyDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\CityDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\EntranceUserDetailDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\EntranceUserDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\EntranceLogDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\EntranceDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ChargeBillRecordMatchingDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\RefundRecordDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ReceiptDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\MeterReadRecordDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\MeterDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PaymentTaskDetailDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PaymentTasksDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PreferentialRecordDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PrepayAccountDetailDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PrepayAccountDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ChargeRecordDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ChargeSubjectSnaDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ChargBillDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\SubjectHouseRefDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\ChargeSubjectDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\NotificeConfigDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\PrepayAccountLogDomainService.cs
+// E:\git\property\src\YK.PropertyMgr.DomainService\CommunityConfigDomainService.cs

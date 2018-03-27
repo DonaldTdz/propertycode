@@ -1,0 +1,8 @@
+{
+  "name": "物业终端缴费",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

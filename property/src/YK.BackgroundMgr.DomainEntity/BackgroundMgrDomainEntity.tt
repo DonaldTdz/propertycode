@@ -1,0 +1,205 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<#
+	var manager = TemplateFileManager.Create(this);
+	string[] ProjectNames = new string[]{ "BackgroundMgr", "ParkingSys"};
+	string[] EntityNames = new string[]{ "DomainEntity" ,"ParkingDomainEntity" };
+
+	for(int i=0; i < ProjectNames.Length; i++)
+	{	
+		string strProjectName = ProjectNames[i];
+		EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+		XmlDocument doc = new XmlDocument();
+		var strProjectPath = dte.ActiveDocument.Path;
+		var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+		var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.BackgroundMgr.MVCWeb\Models\FrameworkTemplate.xml");
+		doc.Load(strTemplateFilePath);
+		var frameworkTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='"+EntityNames[i]+"']");
+		foreach (XmlNode templateNode in frameworkTemplateNodes)
+		{
+		manager.StartNewFile(templateNode.Attributes["Name"].Value + ".cs");
+#>
+using KW.Sprite.Common.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace YK.<#= strProjectName #>.DomainEntity
+{
+	<#if(templateNode.Attributes["Type"].Value != "DomainEntity"){#>
+	[Table("<#= templateNode.Attributes["Name"].Value #>", Schema = "dbo")]
+	<#}#>
+	public partial class <#= templateNode.Attributes["Name"].Value #>: IAggregateRoot
+	{
+<#
+		foreach (XmlNode itemNode in templateNode.ChildNodes)
+        {
+			string tempExtention = "";
+			string tempTypeName = "";
+			string tempFieldName = "";
+			string tempFieldCnName = "";
+			if (itemNode.LocalName == "TemplateItem")
+            {				
+				foreach (XmlNode itemDetailNode in itemNode.ChildNodes)
+				{
+					if(itemDetailNode.LocalName == "Type")
+					{
+						switch(itemDetailNode.InnerText)
+						{
+							case "dict":
+								tempTypeName = "int?";
+								break;
+							case "int":
+								tempTypeName = "int?";
+								break;
+							case "double":
+								tempTypeName = "double?";
+								break;
+							case "float":
+								tempTypeName = "float?";
+								break;
+							case "Guid":
+								tempTypeName = "Guid?";
+								break;
+							case "date":
+							case "datetime":
+								tempTypeName = "DateTime?";
+								break;
+							default:
+								tempTypeName = itemDetailNode.InnerText;
+								break;
+						}
+					}
+					else if(itemDetailNode.LocalName == "Field")
+					{
+						tempFieldName = itemDetailNode.InnerText;
+					}
+					else if(itemDetailNode.LocalName == "CnName")
+					{
+						tempFieldCnName = itemDetailNode.InnerText;
+					}
+				}
+#>
+		/// <summary>
+        /// <#= tempFieldCnName #>
+        /// </summary>
+		public <#= tempTypeName #> <#= tempFieldName #> { get; set; }
+<#
+            }
+			else if(itemNode.LocalName == "EntityExtention")
+            {
+				tempExtention = itemNode.InnerText;
+#>
+		<#= tempExtention #>
+<#
+            }
+        }
+#>
+	 }
+	public partial class <#=templateNode.Attributes["Name"].Value#>Mapper : EntityMapper<<#=templateNode.Attributes["Name"].Value#>>
+    {
+        public <#=templateNode.Attributes["Name"].Value#>Mapper()
+        {
+			<#
+			if(templateNode.Attributes["Name"].Value == "Parking")
+			{
+			#>
+			HasKey(s => s.Parking_id);
+			<#
+			}
+			else
+			{
+			#>
+			HasKey(s => s.Id);
+			<#
+			}
+			#>
+            
+<# foreach (XmlNode itemNode in templateNode.ChildNodes)
+        {
+			string tempExtention = "";
+			string tempTypeName = "";
+			string tempFieldName = "";
+			string tempIsRequred = "";
+			string tempMaxLength = "";
+			string tempStringLength = "";
+			string tempIdentity = "";
+			if (itemNode.LocalName == "TemplateItem")
+            {				
+				foreach (XmlNode itemDetailNode in itemNode.ChildNodes)
+				{
+					if(itemDetailNode.LocalName == "Type")
+					{
+						switch(itemDetailNode.InnerText)
+						{
+							case "dict":
+								tempTypeName = "int";
+								break;
+							case "date":
+							case "datetime":
+								tempTypeName = "DateTime";
+								break;
+							default:
+								tempTypeName = itemDetailNode.InnerText;
+								break;
+						}
+					}
+					else if(itemDetailNode.LocalName == "Field")
+					{
+						tempFieldName = itemDetailNode.InnerText;
+					}
+					else if(itemDetailNode.LocalName == "IsRequred")
+					{
+						tempIsRequred = itemDetailNode.InnerText=="true"?".IsRequired()":".IsOptional()";
+					}
+					else if(itemDetailNode.LocalName == "MaxLength")
+					{
+						tempMaxLength = itemDetailNode.InnerText;
+					}
+					else if(itemDetailNode.LocalName == "IsIdentity" && itemDetailNode.InnerText=="true")
+					{
+						tempIdentity = ".HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)";
+					}
+				}
+				if(tempFieldName=="Id" || (templateNode.Attributes["Name"].Value == "Parking" && tempFieldName=="Parking_id"))
+                {
+					continue;
+                }
+				if(tempTypeName == "string")
+                {	if(tempMaxLength == "10000")
+					{
+						tempStringLength = ".IsMaxLength()";
+					}
+					else
+					{
+						tempStringLength = ".HasMaxLength("+tempMaxLength+")";
+					}
+                }
+#>
+			Property(s => s.<#= tempFieldName #>)<#= tempStringLength #><#= tempIdentity#><#= tempIsRequred #>;
+<#
+            }
+			else if(itemNode.LocalName == "EntityMapperExtention")
+            {
+				tempExtention = itemNode.InnerText;
+#>
+			<#= tempExtention #>
+<#
+            }
+        }
+#>
+        }
+    }
+}
+<#
+    }
+	}
+	manager.Process();
+#>

@@ -1,0 +1,82 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divDeleteChargBillListController" ng-controller="DeleteChargBillListController">
+    <div id="DeleteChargBillSearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>资源</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="ResourcesName" />
+                </div>
+
+                <div class="col-md-3">
+                    <label>收费项目</label>
+                    <select class="form-control" name="ChargeSubjectId" ng-model="ChargeSubjectListId" ng-options="m.Id as m.Name for m in ChargeSubjectList"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="box-footer">
+                <div class="checkbox pull-right">
+                    <label>
+                        <label>
+                            <input type="checkbox" ng-model="IsShowSearch" />显示
+                        </label>
+                    </label>
+                </div>
+                <div class="pull-right">
+                    <input type="button" id="btnDeleteChargBillSearch" class="btn btn-primary" value="查询" />
+
+                </div>
+
+            </div>
+     
+
+        <div id="divDeleteChargBillListTable" />
+        @*设置MVC的一些页面变量事件绑定*@
+        <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+
+        ckFramework.ChargBillListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.DeleteChargBillTable = null;
+
+        ckFramework.createDeleteChargBillListData = {
+            TableId:'table_ckFramework_DeleteChargBillList',
+            IsAddOperate:false,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.ChargBillListData.TemplateModels,
+            DivTable:$('#divDeleteChargBillListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60
+
+            }
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createDeleteChargBillListData);
+
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+
+            ckFramework.DeleteChargBillTable = $('#' + ckFramework.createDeleteChargBillListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createDeleteChargBillListData),
+                filterOptions: {
+                    searchButton: "btnDeleteChargBillSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "DeleteChargBillSearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "ChargBill", "GetDeleteChargeBillList")',
+                    DrawTable:function(){
+                        ckFramework.DeleteChargBillTable.draw();
+                    
+                    }
+                }
+            });
+
+
+
+        });
+        </script>
+ 
+    </div>

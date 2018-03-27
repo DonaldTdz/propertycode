@@ -1,0 +1,111 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divPersonalizedConfigurationController" ng-controller="PersonalizedConfigurationController">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Horizontal Form -->
+            <div class="box box-primary" ng-show="IsShowData">
+                <div class="box-header with-border">
+                    <h3 class="box-title">收费票据</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form id="formNotificeConfig" class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">房号打印项</label>
+
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="CommunityConfig.IsBuilding" ng-checked="CommunityConfig.IsBuilding"> 楼栋
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="CommunityConfig.IsUnit" ng-checked="CommunityConfig.IsUnit"> 单元
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="CommunityConfig.IsFloor" ng-checked="CommunityConfig.IsFloor"> 楼层
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="CommunityConfig.IsNumber" ng-checked="CommunityConfig.IsNumber"> 楼号
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">收费后默认打印票据</label>
+
+                            <div class="col-sm-4">
+                                <select ng-model="CommunityConfig.IsDefaultPrintReceipt" class="form-control" ng-options="a.Value as a.Name for a in EnableList" ></select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">确认收费弹出框</label>
+
+                            <div class="col-sm-4">
+                                <select ng-model="CommunityConfig.IsChargeConfirm" class="form-control" ng-options="a.Value as a.Name for a in EnableList"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">生成账单自动预存抵扣</label>
+
+                            <div class="col-sm-4">
+                                <select ng-model="CommunityConfig.IsPreAutomaticDeduction" class="form-control" ng-options="a.Value as a.Name for a in EnableList"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">预存抵扣收费记录合并</label>
+
+                            <div class="col-sm-4">
+                                <select ng-model="CommunityConfig.IsPreMergeChargeRecord" class="form-control" ng-options="a.Value as a.Name for a in EnableList"></select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary" ng-click="SaveData()">确 定</button>
+                        <button type="button" id="btnPersonalizedConfigurationSearch" style="display:none;" ng-click="GetCommunityConfig()"></button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <div class="box box-primary" ng-show="!IsShowData">
+                <div class="box-header with-border">
+                    <h3 class="box-title">收费票据</h3>
+                </div>
+                <div class="box-body" id="divNoNoticeData">
+                    <div class="col-md-3 col-sm-4">
+                        <i class="fa fa-hand-o-left"></i>请选择小区
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    var ckFramework = ckFramework || {};
+    ckFramework.InitCommunityConfig = function () {
+        $("#btnPersonalizedConfigurationSearch").click();
+    }
+</script>
+
+

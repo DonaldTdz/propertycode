@@ -1,0 +1,31 @@
+<ion-content class="pageBg">
+  <!--顶部标题区域-->
+ <ion-item class="mobile_head_total">
+   <ion-icon item-left class="mobile_head_logo"><img src="assets/images/logo_dh.png"/></ion-icon>
+   <h1 item-left class="mobile_head_title">{{resultData.Data.FName}}</h1>
+   <!--倒计时区域-->
+   <count-down [time]="10" [showBack]="false" #countDown ></count-down>
+ </ion-item>
+
+ <!--中间内容区域-->
+ <div class="mobile_content_total">
+   <div class="clearfix" text-center>
+     <!--支付成功-->
+      <div class="pay_result_total" *ngIf="resultData.IsSuccess" >
+          <p class="pay_result_img"><img  src="assets/images/success.png"/></p>
+          <h2 class="pay_result_title">支付成功</h2>
+          <p class="pay_reuslt_tips">感谢您的使用！ 交易金额: ￥{{resultData.Amount}}</p>
+      </div>
+
+      <!--支付失败-->
+
+      <div class="pay_result_total" *ngIf="!resultData.IsSuccess" >
+          <p class="pay_result_img"><img  src="assets/images/fail.png"/></p>
+          <h2 class="pay_result_title">支付失败</h2>
+          <p class="pay_reuslt_tips">抱歉！支付未能完成！</p>
+          <p class="pay_reuslt_tips">失败原因：{{resultData.Msg}}</p>
+          <button ion-button clear class="pay_result_reset" (tap)="reTry()" >重试</button>
+      </div>
+   </div>
+ </div>
+</ion-content>

@@ -1,0 +1,129 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divReciptBookManagerListController" ng-controller="ReciptBookManagerListController">
+    <div id="SearchContainerReciptBookManager" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+
+                <div class="col-md-3">
+
+
+                    <label>票据名</label>
+                    <br />
+                    <input type="text" id="Name" name="Name" class="form-control">
+
+
+                </div>
+
+                <div class="col-md-3">
+                    <div dictionary id="divReceiptBookTypeEnum" dict-source="ckFramework.ReciptBookManagerListData.TemplateModels" dict-label="票据类型" dict-name="RceciptType" dict-field-name="ReceiptBookType"></div>
+
+                </div>
+                <div class="col-md-3">
+                    <label>状态</label>
+                    <select class="form-control" name="Status">
+                        <option value="">--请选择--</option>
+                        <option value="1">启用</option>
+                        <option value="-1">停用</option>
+
+                    </select>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <input type="button" id="btnSearchReciptBookManager" class="btn btn-primary" value="查询">
+                        <input type="button" id="btnExportReciptBookManager" class="btn btn-primary" ng-click="Save()" value="新增">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="divReciptBookManagerTable" />
+
+
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.ReciptBookManagerListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            ckFramework.ReceiptBookViewUrlAdd = '@Url.PluginAction("PropertyMgr", "ReceiptBook", "ReceiptBookViewAdd")';
+            ckFramework.ReceiptBookViewUrlEdit = '@Url.PluginAction("PropertyMgr", "ReceiptBook", "ReceiptBookViewEdit")';
+            ckFramework.ReceiptBookViewUrlShow = '@Url.PluginAction("PropertyMgr", "ReceiptBook", "ReceiptBookDetailShowView")';
+
+            ckFramework.InitReceiptBook = function () {
+
+                $("#btnSearchReciptBookManager").click();
+                $("#btnSearchReciptBookHistory").click();
+            }
+        ckFramework.createReciptBookManagerListData = {
+            TableId:'table_ckFramework_ReciptBookManagerList',
+            IsAddOperate:JQCheckPermission("EditReceiptBook"),
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas: ckFramework.ReciptBookManagerListData.TemplateModels,
+            DivTable:$('#divReciptBookManagerTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":100,
+                "render": function()
+                {
+
+                    var editContent = "";
+                    var showDetail ="";
+                    if (JQCheckPermission("EditReceiptBook")) {
+                        editContent = '<a herf="#" class="btn columnTool Edit"><i class="ui-tooltip fa fa-edit"  title="编辑"></i></a>'
+                    }
+                    if (JQCheckPermission("ShowReceiptBookDetail")) {
+                        showDetail = '<a herf="#" class="btn columnTool Show"><i class="ui-tooltip  fa fa-tasks" title="详情"></i></a>'
+                    }
+                    return editContent+showDetail;
+                }
+        }
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createReciptBookManagerListData);
+
+
+
+
+        $(document).ready(function () {
+
+
+
+            ckFramework.ReciptBookManagerTable = $('#' + ckFramework.createReciptBookManagerListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createReciptBookManagerListData),
+                filterOptions: {
+                    searchButton: "btnSearchReciptBookManager",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerReciptBookManager",
+                    Url: '/PropertyMgr/ReceiptBook/GetReciptBookList',
+                    DrawTable:function(){
+                        ckFramework.ReciptBookManagerTable.draw();
+                    }
+                }
+
+            });
+
+            $('#' + ckFramework.createReciptBookManagerListData.TableId + ' tbody').on('click', '.Edit', function () {
+                var data = ckFramework.ReciptBookManagerTable.rows($(this).parents('tr')).data();
+
+                var ReceiptBookListService = ckFramework.GetAngularService('ReceiptBookService');
+                ReceiptBookListService.ShowReceiptBookView('Edit', data[0].Id);
+            });
+
+            $('#' + ckFramework.createReciptBookManagerListData.TableId + ' tbody').on('click', '.Show', function () {
+                var data = ckFramework.ReciptBookManagerTable.rows($(this).parents('tr')).data();
+                var ReceiptBookListService = ckFramework.GetAngularService('ReceiptBookService');
+                ReceiptBookListService.ShowReceiptBookDetailView(data[0].Id);
+            });
+
+
+
+
+            $("div.toolbar").html($('#divToolbar'));
+
+        });
+    </script>
+</div>
+

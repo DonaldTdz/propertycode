@@ -1,0 +1,35 @@
+﻿<div id="divDeveloperIndexController" ng-controller="DeveloperIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+            <li class="active">
+                <a href="#tabDeveloperCharge" role="tab" data-toggle="tab" onclick="DeveloperChargeClick()" class="ng-binding">开发商收费</a>
+            </li>
+            <li><a href="#tabDeveloperChargeRecord" role="tab" data-toggle="tab" onclick="DeveloperChargeRecordClick()" class="ng-binding">费用记录</a></li>
+           
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabDeveloperCharge">
+                <div id="divDeveloperChargContainer"></div>
+            </div>
+            <div class="tab-pane" id="tabDeveloperChargeRecord">
+                <div id="divDeveloperChargeRecordContainer"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            DeveloperChargeClick();
+
+        });
+        //开发商收费
+        function DeveloperChargeClick() {
+
+            deptContainerService.ShowContainerContent('divDeveloperChargContainer', 'PropertyMgr/ChargBill/DeveloperChargeList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/DeveloperChargeListController.js'], 'divDeveloperChargeListController');
+        }
+        //费用记录
+        function DeveloperChargeRecordClick() {
+            var SettleAccount = JQCheckPermission("SettleAccount")
+            deptContainerService.ShowContainerContent('divDeveloperChargeRecordContainer', 'PropertyMgr/ChargeRecord/ChargeRecordList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargeRecord/ChargeRecordListController.js'], 'divChargeRecordListController', { IsShowHouse: true, SettleAccount: SettleAccount });
+        }
+    </script>
+</div>

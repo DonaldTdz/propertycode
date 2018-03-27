@@ -1,0 +1,49 @@
+<ion-content class="pageBg">
+  <!--顶部标题区域-->
+ <ion-item class="mobile_head_total">
+   <ion-icon item-left class="mobile_head_logo"><img src="assets/images/logo_dh.png"/></ion-icon>
+   <h1 item-left class="mobile_head_title">{{community.Name}}</h1>
+    <!--倒计时区域-->
+   <count-down [time]="60" (onPrevious)="goPrevious()" #countDown ></count-down>
+ </ion-item>
+
+ <!--中间内容区域-->
+ <div class="mobile_content_total" >
+   <div class="clearfix owner_content_all" *ngIf="!showError">
+      <h1 class="owner_title">您选择的房屋是</h1>
+      <ion-card class="owner_card_total" *ngIf="user" >
+        <p>房屋：{{houseInfo.FName}}</p>
+        <p>业主姓名: {{user.FUserName}}</p>
+        <!--<p>业主电话：{{user.FPhoneNumber}}</p>-->
+      </ion-card>
+
+      <ion-list no-lines class="owner_warning_total clearfix" *ngIf="!showError">
+        <h1 class="owner_title">操作说明</h1>
+        <p class="owener_warning_content">请仔细核对您选择的房屋信息，确认无误后点击“确认”按钮进入
+          下一步；若点击“放弃”按钮则取消操作返回首页。
+        </p>
+        <ion-item class="mobile_left_bottom">
+          <ion-icon class="mobile_bottom_icon" item-left>
+            <img  src="assets/images/waning.png"/>
+          </ion-icon>
+          请在页面倒计时结束前完成操作，否则将返回首页。
+        </ion-item>
+      </ion-list>
+
+     <!--底部按钮区域-->
+      <ion-item class="mobile_btn_total owner_btn_total">
+        <button ion-button clear class="mobile_btn_reset" item-left (tap)="countDown.goHome()">放弃</button>
+        <button ion-button clear class="mobile_btn_submit" item-right *ngIf="user" (tap)="goProprietor()">确认</button>
+      </ion-item>
+   </div>
+   <div class="clearfix owner_content_all" *ngIf="showError">
+      <ion-card class="owner_card_total" >
+          <p>{{errorMsg}}</p>
+        </ion-card>
+      <!--底部按钮区域-->
+      <ion-item class="mobile_btn_total owner_btn_total text-center">
+          <button ion-button clear class="mobile_btn_submit" (tap)="countDown.goHome()">确认</button>
+        </ion-item>
+   </div>
+ </div>
+</ion-content>

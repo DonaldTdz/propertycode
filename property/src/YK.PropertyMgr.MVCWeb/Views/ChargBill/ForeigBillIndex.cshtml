@@ -1,0 +1,35 @@
+﻿<div id="divForeigBillIndexController" ng-controller="ForeigBillIndexController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+            <li class="active">
+                <a href="#tabForeigBillCharge" role="tab" data-toggle="tab" onclick="ForeigBillChargeClick()" class="ng-binding">对外收费</a>
+            </li>
+            <li><a href="#tabForeigBillChargeRecord" role="tab" data-toggle="tab" onclick="ForeigBillChargeRecordClick()" class="ng-binding">费用记录</a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabForeigBillCharge">
+                <div id="divForeigBillChargContainer"></div>
+            </div>
+            <div class="tab-pane" id="tabForeigBillChargeRecord">
+                <div id="divForeigBillChargeRecordContainer"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ForeigBillChargeClick();
+
+        });
+        //开发商收费
+        function ForeigBillChargeClick() {
+
+            deptContainerService.ShowContainerContent('divForeigBillChargContainer', 'PropertyMgr/ChargBill/ForeigBillChargeList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/ForeigBillChargeListController.js'], 'divForeigBillChargeListController');
+        }
+        //费用记录
+        function ForeigBillChargeRecordClick() {
+            var SettleAccount = JQCheckPermission("SettleAccount")
+            deptContainerService.ShowContainerContent('divForeigBillChargeRecordContainer', 'PropertyMgr/ChargeRecord/ForegiChargeRecordList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargeRecord/ForgiChargeRecordListController.js'], 'divForegiChargeRecordListController', { SettleAccount: SettleAccount });
+        }
+    </script>
+</div>

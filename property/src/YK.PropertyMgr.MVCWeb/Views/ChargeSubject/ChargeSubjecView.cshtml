@@ -1,0 +1,424 @@
+﻿<div id="divChargeSubjectViewController" ng-controller="ChargeSubjectViewController" aria-labelledby="basicModal" aria-hidden="true">
+    <div id="content" style='margin-top:5%;display:none; background-color:white;position:absolute;height:100%;width:100%;top:-55px;left:0;z-index:200000'>
+
+        <table class="table table-bordered">
+            <tr>
+                <td>计算公式:</td>
+                <td colspan="8">
+
+                    <input type="text" id="txtFormula" class="form-control ckFormControl" value="单价" disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td>运算符号:</td>
+                <td align="center" name="operator" type="1">+</td>
+                <td align="center" name="operator" type="1">-</td>
+                <td align="center" name="operator" type="1">*</td>
+                <td align="center" name="operator" type="1">/</td>
+                <td align="center" name="operator" type="2">(</td>
+                <td align="center" name="operator" type="3">)</td>
+                <td align="center" name="">@*倍率：<input type="text" id="time" value="1" />*@</td>
+            </tr>
+            <tr id="chargeFormulaItem"></tr>
+            <tr>
+                <td colspan="9">
+                    <input type="button" id="btnCancle" class="btn ng-binding" value="取消" />
+                    <input type="button" id="btnReSet" class="btn ng-binding" value="重置" />
+                    <input type="button" id="btnConfirm" class="btn btn-primary" ng-click="ConfirmChargeFormula()" value="确定" />
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" id="hidLastHit" value="单价" />
+        <input type="hidden" id="hidFormual" />
+        <input type="hidden" id="hidKeyFormual" />
+        <input type="hidden" id="hidComDeptId">
+    </div>
+    <div class="modal-header">
+        <button type="button" id="btnCloseFormula" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>科目编辑处理</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divContainer">
+            <form id="chargeSubjectViewForm" class="form-horizontal fv-form fv-form-bootstrap  ng-valid" novalidate="novalidate">
+                <button type="submit" class="fv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+            </form>
+            <div class="row form-horizontal fv-form fv-form-bootstrap  ng-valid">
+                <div class="form-group ModalFormMagin col-md-6 has-feedback">
+                    <lable class="control-label ckFormControlLable">*项目编号</lable>
+                    <input type="text" class="form-control ckFormControl  " id="txtCode" ng-disabled="IsReadonlySubjectCode" name="Code" ng-model="FormData.Code" ng-readonly="false">
+                    <lable class="control-label ckFormControlLable">*收费周期</lable>
+                    <select id="drpBillPeriod" convert-to-number="" ng-disabled="IsReadonlySubjectBillPeriod" ng-change="ChangeBillPeriod(FormData.BillPeriod)" ng-model="FormData.BillPeriod" ng-options="m.Code as m.CnName for m in BillBillPeriodList" class="form-control ckFormControl  " name="BillPeriod"></select>
+
+
+                    <lable class="control-label ckFormControlLable">*项目类型</lable>
+                    <select id="drpSubjectType" class="form-control ckFormControl" ng-disabled="IsReadonlySubjectType" name="drpSubjectType" ng-change="ChangeSubjectType()" ng-model="FormData.SubjectType" ng-options="m.Code as m.CnName for m in SubjectTypeList"></select>
+
+
+                    <lable class="control-label ckFormControlLable">*计费公式</lable>
+                    <input type="text" class="form-control ckFormControl" name="ChargeFormulaShow" id="txtChargeFormulaShow" ng-disabled="IsReadonlyChargeFormulaShow" ng-model="FormData.ChargeFormulaShow" ng-readonly="false" data-fv-field="ChargeFormulaShow">
+
+                    <lable class="control-label ckFormControlLable"> <span>*计费开始日</span></lable>
+                    <div class="input-append date input-group ckFormControl">
+                        <input type="text" id="txtBeginDate" name="BeginDate" class="form-control  ng-valid ng-isolate-scope ng-touched" ng-disabled="IsReadonlyStartTime" recipient="FormData.BeginDate" ng-model="FormData.BeginDate" />
+                        <span class="input-group-addon" ng-show="!IsReadonlyStartTime">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group ModalFormMagin col-md-6 has-feedback">
+                    <lable class="control-label ckFormControlLable">*项目名称</lable>
+                    <input type="text" class="form-control ckFormControl" ng-disabled="IsReadonlySubjectName" id="txtName" name="Name" ng-model="FormData.Name" />
+
+                    <lable class="control-label ckFormControlLable">*单价</lable><input type="text" id="txtPrice" class="form-control ckFormControl" name="Price" ng-model="FormData.Price" ng-keyup="toDecimal($event)" ng-blur="isNumber($event)">
+
+                    <lable class="control-label ckFormControlLable">*自动生成账单</lable>
+                    <select ng-model="FormData.AutomaticBill" ng-disabled="BillDayAutomaticBill" id="drpAutomaticBill" class="form-control ckFormControl" ng-change="AutomaticBillChange(FormData.AutomaticBill)" ng-options="m.Id as m.Name for m in IsAutomatic"></select>
+
+                    <lable class="control-label ckFormControlLable">*账单日</lable>
+                    <input type="text" class="form-control ckFormControl" id="txtBillDay" name="BillDay" ng-disabled="BillDayDisabled" ng-model="FormData.BillDay">
+
+
+                    <lable class="control-label ckFormControlLable"><span>备注</span></lable>
+                    <input type="text" class="form-control ckFormControl" id="txtRemark" name="Remark" ng-model="FormData.Remark">
+
+                    <lable class="control-label"><span>&nbsp;</span></lable><br />
+                    <input type="checkbox" ng-checked="!FormData.IsDel" name="IsDel" id="txtIsDel" ng-model="FormData.IsDel" ng-disabled="false"><span>启用</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" ng-checked="FormData.IsOnline" name="IsOnline" id="txtIsOnline" ng-model="FormData.IsOnline" ng-disabled="false"><span>线上支付</span>
+                    <input id="txtId" ng-disabled="true" ng-hide="true" ng-model="FormData.Id" />
+                    <input id="txtHaveBill" ng-disabled="true" ng-hide="true" ng-model="HaveBill" />
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        @*<button type="button" class="btn" id="chargeFormula">警告</button>*@
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" onclick="ckFramework.ChargeSubjectViewPageService.SaveCurrentPage()" ng-disabled="ChargeSubjectViewData.ViewType == 'Look'">保存</button>
+    </div>
+</div>
+@*设置MVC的一些页面变量*@
+<script type="text/javascript">
+    //周期
+    var billPeriodType={
+        DailyCharge : 1,
+        MonthlyCharge : 2,
+        Once : 3,
+    };
+    // 计算类型
+    var chargeFormula={
+        Price:1,
+        HouseInArea:2,
+        BuildArea:3,
+        WaterUnit:4,
+        GasUnit:5,
+        ElectricUnit:6,
+        ParkingSpaceArea:7
+    }
+    var ckFramework = ckFramework || {};
+    ckFramework.ChargeSubjectViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    var  hidFormual=  ckFramework.ChargeSubjectViewData.ChargeSubject.ChargeFormula;
+    var  billDay=  ckFramework.ChargeSubjectViewData.ChargeSubject.BillDay;
+
+    if (hidFormual==""||hidFormual==null) {
+        $("#hidFormual").val(",1,")
+        $("#hidKeyFormual").val(",1,");
+    }else{
+        $("#hidFormual").val(hidFormual);
+        $("#hidKeyFormual").val(hidFormual);
+    }
+    ckFramework.createChargeSubjectFormData = {
+        FormId:'chargeSubjectViewForm',
+        TemplateItemDatas:ckFramework.ChargeSubjectViewData.TemplateModels,
+        jumpFields:['Id','Operator','UpdateTime','CreateTime','IsDel','ComDeptId','ChargeFormula','SubjectType','PenaltyRate','Remark','ChargeFormulaShow'],
+    };
+
+    ckFramework.ChargeSubjectViewPageService = (function (chargeSubjectViewPageService) {
+        var ValidateBaseChargeSubject = function()
+        {
+            var chargeSubjectViewControllerScope = angular.element(document.getElementById('divChargeSubjectViewController')).scope();
+            return chargeSubjectViewControllerScope.Validate(ckFramework.createChargeSubjectFormData.FormId);
+        };
+
+        var SaveBaseChargeSubject = function(isSetRemainSave,callback)
+        {
+            var arr=[];
+            var ComDeptId= $("#hidComDeptId").val();
+            var ChargeFormula=$("#hidKeyFormual").val();
+            var ChargeFormulaShow=  $("body input[name='ChargeFormulaShow']").val();
+            arr.push(ComDeptId);
+            arr.push(ChargeFormula);
+            arr.push(ChargeFormulaShow);
+            var chargeSubjectViewControllerScope = angular.element(document.getElementById('divChargeSubjectViewController')).scope();
+            chargeSubjectViewControllerScope.SaveData(callback,arr);
+        };
+
+        var ChangedChargeSubjectEditType = function(newChargeSubjectId)
+        {
+            ckFramework.ChargeSubjectViewData.ChargeSubject.Id = newChargeSubjectId;
+            ckFramework.ChargeSubjectViewData.ViewType = 'Edit';
+        }
+
+        chargeSubjectViewPageService.SaveCurrentPage = function()
+        {
+            var code=$("#txtCode").val();
+            if (code==""||code.length==0||code=="") {
+                ckFramework.ModalHelper.Alert("编号不能为空!");
+                return false;
+            }else{
+                if (code.length>50) {
+                    ckFramework.ModalHelper.Alert("编号信息过长!");
+                    return false;
+                }
+            }
+            var name= $("#txtName").val();
+            if (name==""||name.length==0||name=="") {
+                ckFramework.ModalHelper.Alert("名称不能为空!");
+                return false;
+            }else{
+                if (name.length>100) {
+                    ckFramework.ModalHelper.Alert("名称信息过长!");
+                    return false;
+                }
+            }
+            var drpBillPeriod=$("#drpBillPeriod").val();
+            if (drpBillPeriod=="?") {
+                ckFramework.ModalHelper.Alert("收费周期不能为空!");
+                return false;
+            }
+            var price=$("#txtPrice").val();
+            if (price==""||price.length==0||price=="") {
+                ckFramework.ModalHelper.Alert("单价不能为空!");
+                return false;
+            }else{
+                if (!(price>0)) {
+                    ckFramework.ModalHelper.Alert("单价必须大于零!");
+                    return false;
+                }
+                if (price.length>10) {
+                    ckFramework.ModalHelper.Alert("单价信息过大!");
+                    return false;
+                }
+            }
+            var txtChargeFormulaShow=$("#txtChargeFormulaShow").val()
+            if (txtChargeFormulaShow==""||txtChargeFormulaShow.length==0||txtChargeFormulaShow=="") {
+                ckFramework.ModalHelper.Alert("公式不能为空!");
+                return false;
+            }else{
+                if (txtChargeFormulaShow.length>200) {
+                    ckFramework.ModalHelper.Alert("公式信息过长!");
+                    return false;
+                }
+            }
+            var txtBillDay=$("#txtBillDay").val()
+            if ((txtBillDay==""||txtBillDay.length==0||txtBillDay=="")&&$("#drpAutomaticBill").val()==1)/*自动生成账单*/ {
+                ckFramework.ModalHelper.Alert("账单日必须不能为空!");
+                return false;
+            }else{
+                if (txtBillDay>26) {
+                    ckFramework.ModalHelper.Alert("账单日必须小于26日!");
+                    return false;
+                }
+            }
+
+
+
+
+            var txtBeginDate=$("#txtBeginDate").val();
+            if (txtBeginDate==""||txtBeginDate.length==0||txtBeginDate=="") {
+                ckFramework.ModalHelper.Alert("请选择计费开始时间!");
+                return false;
+            }
+            //else{
+
+            //    if ($("#txtHaveBill").val()=="false") {
+            //        debugger;
+            //        var arr= txtBeginDate.split('-');
+            //        var date=new Date();
+            //        var year=date.getFullYear();
+            //        var month=date.getMonth()+1;
+            //        var day=date.getDate();
+            //        if (arr[0]<year) {
+            //            ckFramework.ModalHelper.Alert("计费开始日必须大于或等于当月1日");
+            //            return false;
+            //        }else if (year==arr[0]) {
+            //            if(arr[1]<month){
+            //             ckFramework.ModalHelper.Alert("计费开始日必须大于或等于当月1日!");
+            //             return false;
+            //            }
+            //        }
+            //}
+            //}
+
+            SaveBaseChargeSubject(false,ChangedChargeSubjectEditType);
+        };
+        return chargeSubjectViewPageService;
+
+    }(ckFramework.ChargeSubjectViewPageService || {}));
+
+
+
+    $(function(){
+        ckFramework.codes=[chargeFormula.Price];
+        ckFramework.FormService.CreateValidate(ckFramework.createChargeSubjectFormData);
+        $(".date").datetimepicker({
+            format: 'yyyy-mm-dd'
+        });
+        /*设置计费公式框*/
+        $("body input[name='ChargeFormulaShow']").click(function(){
+            ckFramework.ReSetAdd();
+            var selDept=$("#SelectDeptTypeAndId").val();
+            selDept=selDept.split("_");
+            if(selDept.length==2){
+                if ( selDept[1]!=11) {
+                    ckFramework.ModalHelper.Alert("请选择小区!");
+                    return false;
+                }
+            }else{
+                ckFramework.ModalHelper.Alert("请选择小区!");
+                return false;
+            }
+            $("#hidComDeptId").val(selDept[0]);
+
+            var billPeriod=  $("#drpBillPeriod").val();/*（）、区分三表和其他计算类别、三表的话其他的计算类型不显示*/
+
+            if (billPeriod=="?") {
+                ckFramework.ModalHelper.Alert("请选择收费周期");
+                return false;
+            }
+            /*如果为编辑的时候选择计算公式的时候应该默认为原来的公式*/
+            if ($(this).val()==""||$(this).val()==null) {
+                $("#txtFormula").val("单价");
+                $("#hidFormual").val(",1,");
+            }else{
+                $("#txtFormula").val($(this).val());
+                $("#hidFormual").val($("#hidKeyFormual").val());
+            }
+
+            var M=0;
+            var subjectTypeId=  $("#drpSubjectType").val();
+            if (!(billPeriod.indexOf(billPeriodType.Once)>0)) {
+                if (!(subjectTypeId.indexOf("1")>0)&&!(subjectTypeId.indexOf("2")>0)&&!(subjectTypeId.indexOf("3")>0)) {
+                    ckFramework.ModalHelper.Alert("请选择项目类型");
+                    return false;
+                }else{
+                    $("#content").show();
+                    $("#btnCloseFormula").hide();
+                }
+            }else{
+                $("#content").show();
+                $("#btnCloseFormula").hide();
+            }
+
+            $.get("PropertyMgr/ChargeSubject/GetDictionaryModels",{ dicId:'ChargeFormula' },function(data){
+                $("#chargeFormulaItem").empty();
+                $("#chargeFormulaItem").append('<td>计算项目:</td>');
+                data= jQuery.parseJSON(data["ActionInfo"]);
+                var billPeriod=$("#drpBillPeriod").val();
+                $.each(data,function(i){
+                    //if (billPeriod.indexOf(billPeriodType.Once)>0)
+                    //{
+                    //    $("#chargeFormulaItem").append("<td align='center'  code='1' name='operatorFormula' >单价</td>")
+                    //    return false
+                    //}else{
+
+                    /*房屋*/
+                    if (subjectTypeId.indexOf("1")>0) {
+                        if (data[i].EnName=="BuildArea"||data[i].EnName=="HouseInArea") {
+                            $("#chargeFormulaItem").append("<td align='center'  code='"+data[i].Code+"' name='operatorFormula' >"+data[i].CnName+"</td>")
+                        }
+                    }
+                    /*車位*/
+                    if (subjectTypeId.indexOf("2")>0) {
+                        if (data[i].EnName=="ParkingSpaceArea") {
+                            $("#chargeFormulaItem").append("<td align='center'  code='"+data[i].Code+"' name='operatorFormula' >"+data[i].CnName+"</td>")
+                        }
+                    }
+                    /*三表*/
+                    if (subjectTypeId.indexOf("3")>0) {
+                        /*一次性收费三表只显示单价*/
+                        if (billPeriod.indexOf("3")>0) {
+                            $("#chargeFormulaItem").append("<td align='center'  code='1' name='operatorFormula' >单价</td>");
+                            return false;
+                        }else{
+                            if (data[i].EnName=="WaterUnit"||data[i].EnName=="GasUnit"||data[i].EnName=="ElectricUnit") {
+                                $("#chargeFormulaItem").append("<td align='center'  code='"+data[i].Code+"' name='operatorFormula' >"+data[i].CnName+"</td>")
+                            }}
+                    }
+                    /*一次性\对外收费*/
+                    if (subjectTypeId.indexOf("5")>0||subjectTypeId.indexOf("6")>0) {
+                        $("#chargeFormulaItem").append("<td align='center'  code='1' name='operatorFormula' >单价</td>");
+                        return false;
+                    }
+                    //}
+                })
+            })
+        })
+
+        $("#btnCancle").on("click",function(){
+            $("#btnCloseFormula").show();
+            $("#content").hide();
+        });
+        /*重置*/
+        $("#btnReSet").on("click",function(){
+            ckFramework.ReSetAdd();
+        });
+        ckFramework.ReSetAdd=function(){
+            ckFramework.codes=[];
+            $("#txtFormula").val("单价");
+            $("#hidFormual").val(",1,");
+            $("#hidLastHit").val("单价");
+            $("#content td[name='operatorFormula").removeAttr("disabled");
+            $("#content td[name='operatorFormula").css("background-color","white");
+        }
+
+        /*运算符*/
+        $("#content").on("click","td[name='operator']",function(){
+            var lastHit= $("#hidLastHit").val();                  //加减符号
+            if (lastHit==$(this).attr("name")&&$(this).attr("type")==1) {
+                ckFramework.ModalHelper.Alert("请选择计算项目!");
+                return false;
+            }
+
+            var val= $("#txtFormula").val();
+            var hidFormual=  $("#hidFormual").val();
+            $("#hidFormual").val(hidFormual+$(this).html()+',');
+            $("#txtFormula").val(val+$(this).html());
+            $("#hidLastHit").val($(this).attr("name"));
+            // alert($("#hidFormual").val());
+        }).hover(function(){
+            $(this).css("cursor","pointer");
+        })
+        /*计算项目*/
+        $("#content").on("click","td[name='operatorFormula']",function(){
+
+            var lastHit= $("#hidLastHit").val();
+            if (lastHit==$(this).attr("name")||lastHit=='单价') {
+                ckFramework.ModalHelper.Alert("请选择运算符号!");
+                return false;
+            }
+            var val= $("#txtFormula").val();
+            var hidFormual=  $("#hidFormual").val();
+            var code=$(this).attr("code");
+            ckFramework.codes.push(code);
+            if (code!=1) {
+                $(this).siblings("td[name='operatorFormula']").css("background-color","#EEEEEE");
+                $(this).siblings("td[name='operatorFormula']:not(:first)").prop("disabled",true);
+            }
+            //$(this).parent("tr").children("td:eq(1)").removeAttr("background-color").removeAttr("disabled")
+            //$(this).parent("tr").children("td:nth-child(2)").removeAttr("background-color").removeAttr("disabled")
+
+
+            $("#hidFormual").val(hidFormual+$(this).attr("code")+',');
+            $("#hidLastHit").val($(this).attr("name"));
+            $("#txtFormula").val(val+$(this).html());
+
+            // alert($("#hidFormual").val());
+        }).hover(function(){
+            $(this).css("cursor","pointer");
+        })
+    })
+
+</script>

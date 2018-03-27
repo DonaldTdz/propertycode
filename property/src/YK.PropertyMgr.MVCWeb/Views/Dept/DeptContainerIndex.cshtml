@@ -1,0 +1,389 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divDeptContainerController" ng-controller="DeptContainerController">
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.IsDeptContainer = true;
+        ckFramework.DeptContainerHelper = ckFramework.DeptContainerHelper || {};
+        ckFramework.DeptContainerData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.ClientCustomSearch = [];
+        ckFramework.ClientCustomSearch.push({ "name": "DeptId", "value": RootDeptId });
+        ckFramework.ClientCustomSearch.push({ "name": "DeptName", "value": RootDeptName });
+        ckFramework.ClientCustomSearch.push({ "name": "DeptType", "value": RootDeptType });
+    </script>
+    <div class="row">
+        <div class="col-md-3">
+            <input type="hidden" id="hidIsDeveloper" value="false" />
+            <div class="input-group" id="divKeyWord" style="display:none;">
+                <input type="text" id="deptKeyWord" placeholder="房屋 用户姓名 业主手机号" class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" name="btnTopSearch" onclick="fnDeptKeyWordSearch()" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+            <div id="divTreeWrap" style="padding-top:10px; overflow: auto;">
+                <div id="deptTree"></div>
+            </div>
+        </div>
+        <div class="page-context col-md-9" id="divDeptContainer"></div>
+    </div>
+    <input type="hidden" id="SelectDeptId" />
+    <input type="hidden" id="SelectDeptName" />
+    <input type="hidden" id="SelectDeptType" />
+    <input type="hidden" id="SelectDeptTypeAndId" />
+    <input type="hidden" id="SelectSubjectType" />
+
+    <script type="text/javascript">
+        var DeptTypeInfos = {
+            RootNode: 1,
+            WuYE: 10,
+            XiaoQu: 11,
+            LouYu: 12,
+            CheKu: 13,
+            FangWu: 20,
+            CheWei: 21,
+            CheLiang: 22,
+            GongGongZiYuan: 23,
+            SheBei: 24,
+            KaiFaShang: 30,
+            UserOwner: 31,
+            Others: 100,
+            ChargeSubject: 1001//科目-特殊加入
+        };
+
+        ckFramework.DeptContainerType = {
+            PrepayAccount: 1,
+            ChargeSubject: 2,
+            SubjectHouseRef: 3,
+            ChargeBill: 4,
+            Entrance: 5,
+            PaymentTasks: 6,
+            Developer: 7,
+            EntrancePower: 8,
+            EntranceBind: 9,/*设备绑定*/
+            BatchGenerateBil: 10,/*批量生成账单*/
+            ForeigBill: 11,/*对外收费*/
+            DeleteChargBill: 12, /*删除账单*/
+            BillDetail: 13, //账单详情
+            CarParkChargBill: 14, //停车场收费
+            GeneratePayNot: 15, //生成缴费通知单
+            PreAccountManage: 16, //预存账户管理
+            NotificeConfig: 17, //欠费通知设置
+            ReceiptBook: 18,//票据管理
+            ChargeRecordList: 19,//费用记录
+            AlipayProperty: 20, //支付宝接入
+            PersonalizedConfiguration: 21//个性化配置
+
+        };
+
+        $('#divTreeWrap').height($(document).height() - 200);
+        $('#SelectDeptId').val(RootDeptId);
+        $('#SelectDeptName').val(RootDeptName);
+        $('#SelectDeptType').val(RootDeptType);
+        ckFramework.DeptTree = $('#deptTree').jstree({
+            'core': {
+                'data': {
+                    'cache': false,
+                    'url': function (node) {
+                        if ($("#deptKeyWord").val() != "") {
+                            return ckFramework.DeptContainerData.ContentSearchUrl;
+                        }
+                        else {
+                            return node.id === '#' ?
+                                ckFramework.DeptContainerData.ContentUrl : ckFramework.DeptContainerData.ContentChildUrl
+                        }
+                    },
+                    'data': function (node) {
+                        var typeId = node.id.split('_');
+
+                        return { 'id': typeId[0], 'type': typeId[1], 'keyWord': $("#deptKeyWord").val() };
+                    }
+                },
+                "check_callback": true,
+            },
+            "plugins": ["search"]
+        }).on('loaded.jstree', function (event, data) {
+        }).on('changed.jstree', function (node, action, selected, event) {
+            if (action.node == undefined || action.node == null) {
+                action.node = $(this).jstree().get_node($(this).jstree().get_selected());
+            }
+            else {
+                //alert($("span.logo-mini").is(":hidden"))
+                //控制菜单收缩
+                if ($("span.logo-mini").is(":hidden")) {
+                    $("#aLeftMenuControl").click();
+                    var oTable = $('div.dataTables_scrollBody>table.display').dataTable();
+                    if (oTable.length > 0) {
+                        oTable.fnAdjustColumnSizing();
+                    }
+                }
+            }
+            ckFramework.ClientCustomSearch = [];
+            if (action.node && action.node.original) {
+                var typedata = action.node.original.id;
+                var deptId = typedata.split('_')[0];
+                var deptType = typedata.split('_')[1];
+                ckFramework.ClientCustomSearch.push({ "name": "DeptId", "value": deptId });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptName", "value": action.node.original.text });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptType", "value": deptType });
+                $("#deptId").val(deptId);
+                $('#SelectDeptId').val(deptId);
+                $('#SelectDeptName').val(action.node.original.text);
+                $('#SelectDeptType').val(deptType);
+                $('#SelectDeptTypeAndId').val(typedata);
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.PrepayAccount) {//传入的是账户余额管理
+                    if (DeptTypeInfos.XiaoQu == deptType)
+                        $("#divImportPrepayAccount").show();
+                    else
+                        $("#divImportPrepayAccount").hide();
+                }
+                else {
+                    $("#divImportPrepayAccount").hide();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ChargeBill) {//传入的是交款页面
+                    $("#IsDevPay").prop("checked", false);
+                }
+            }
+            else {
+                ckFramework.ClientCustomSearch.push({ "name": "DeptId", "value": RootDeptId });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptName", "value": RootDeptName });
+                ckFramework.ClientCustomSearch.push({ "name": "DeptType", "value": RootDeptType });
+            }
+            if (action.event) {
+
+
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.PrepayAccount) {
+                    if (deptType == DeptTypeInfos.XiaoQu) {
+                        $('#btnOrgListSearch').click();
+                    }
+                }
+                else if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ChargeBill) {
+                    if (deptType == DeptTypeInfos.FangWu) {
+                        $('#btnOrgListSearch').click();
+                        GetOwnerName();
+                    }
+                }
+                else if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.BatchGenerateBil) {
+                    ckFramework.ClickResourceChange(action.node.original.id);
+                }
+                else if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.GeneratePayNot) {
+                    init_page();
+                }
+                else {
+                    $('#btnOrgListSearch').click();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ChargeBill) {
+                    $('#btnTempListSearch').click();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ChargeBill || ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.Developer) {
+                    $('#btnChargeRecordSearch').click();
+                    $('#btnHCSListSearch').click();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ForeigBill) {
+                    ckFramework.ForeigBillCustomerName = "";
+                    $('#btnForeigBillListSearch').click();
+                    $('#btnForegiChargeRecordSearch').click();
+
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.DeleteChargBill) {
+                    var PageController = angular.element(document.getElementById('divDeleteChargBillListController')).scope();
+                    PageController.ChangeSubjectList($("#SelectDeptId").val());
+                    $('#btnDeleteChargBillSearch').click();
+                }
+                
+                if(ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.PersonalizedConfiguration)
+                {
+                    ckFramework.InitCommunityConfig();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.PersonalizedConfiguration) {
+                    ckFramework.InitCommunityConfig();
+                }
+
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.BillDetail) {
+                    var divBillDetailListController = angular.element(document.getElementById('divBillDetailListController')).scope();
+                    divBillDetailListController.GetChargeSubjectList();
+                    $('#btnBillDetailSearch').click();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.PreAccountManage) {
+                    ckFramework.InitPreAccountManage();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.NotificeConfig) {
+                    ckFramework.InitNotificeConfig();
+                }
+
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ChargeRecordList) {
+                    ckFramework.InitChargeRecordList();
+                }
+
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.ReceiptBook) {
+                    ckFramework.InitReceiptBook();
+                }
+                if (ckFramework.DeptContainerData.PageType == ckFramework.DeptContainerType.AlipayProperty) {
+
+
+
+
+                    var divAlipayPropertyIndexController = angular.element(document.getElementById('divAlipayPropertyIndexController')).scope();
+                    divAlipayPropertyIndexController.CheckIsOAuth();
+
+                    var divAlipayAppAuthTokenIndexController = angular.element(document.getElementById('divAlipayAppAuthTokenIndexController')).scope();
+                    divAlipayAppAuthTokenIndexController.GetAppAuthTokenQuery();
+
+                    
+                    
+
+                   
+                }
+
+
+            }
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+
+        var deptContainerService = ckFramework.GetAngularService('DeptContainerService');
+        $("#hidIsDeveloper").val(false);
+        switch (ckFramework.DeptContainerData.PageType) {
+            case ckFramework.DeptContainerType.PrepayAccount:
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/DataInit/Index', ['apps/HomeApp', ''], 'divDataInitIndexController');
+                break;
+            case ckFramework.DeptContainerType.ChargeSubject:
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargeSubject/index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargeSubject/ChargeSubjectListController.js'], 'divChargeSubjectListController');
+                break;
+            case ckFramework.DeptContainerType.SubjectHouseRef:
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/SubjectHouseRef/index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/SubjectHouseRef/SubjectHouseRefListController.js'], 'divSubjectHouseRefListController');
+                break;
+            case ckFramework.DeptContainerType.ChargeBill: {
+                $("#divKeyWord").show();
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/ChargBillIndexController.js'], 'divChargBillIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.Entrance:
+                $("#divKeyWord").show();
+                $("#deptKeyWord").prop("placeholder", "请输入小区名称");
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/Entrance/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Entrance/EntranceListController.js'], 'divEntranceListController');
+                break;
+            case ckFramework.DeptContainerType.PaymentTasks:
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/PaymentTasks/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/PaymentTasks/PaymentTasksListController.js'], 'divPaymentTasksListController');
+                break;
+            case ckFramework.DeptContainerType.Developer: {
+                $("#hidIsDeveloper").val(true);
+                //ckFramework.ClientCustomSearch.push({ "name": "IsDeveloper", "value": true });
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/DeveloperIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/DeveloperIndexController.js'], 'divDeveloperIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.EntrancePower: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/EntrancePower/EntrancePowerList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/EntrancePower/EntrancePowerListController.js'], 'divEntrancePowerListController');
+                break;
+            }
+            case ckFramework.DeptContainerType.EntranceBind: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/EntranceBind/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/EntranceBind/EntranceBindListController.js'], 'divEntranceBindListController');
+                break;
+            }
+            case ckFramework.DeptContainerType.BatchGenerateBil: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/BatchGenerateBillIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/BatchGenerateBillIndexController.js'], 'divBatchGenerateBillIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.GeneratePayNot: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/GeneratePaymentNoticeIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/GeneratePaymentNoticeIndexController.js'], 'divGeneratePaymentNoticeIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.ForeigBill: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/ForeigBillIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/ForeigBillIndexController.js'], 'divForeigBillIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.DeleteChargBill: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargBill/DeleteChargBillList', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargBill/DeleteChargBillListController.js'], 'divDeleteChargBillListController');
+                break;
+            }
+            //case ckFramework.DeptContainerType.AlipayInsert:{
+            //    deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/AlipayInsert/Index', ['apps/HomeApp','/Plugins/PropertyMgr/Scripts/controllers/AlipayInsert/AlipayInsertController.js'], 'divAlipayInsertController');
+            //    break;
+            //}
+            case ckFramework.DeptContainerType.PersonalizedConfiguration: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/PersonalizedConfiguration/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/PersonalizedConfiguration/PersonalizedConfigurationController.js'], 'divPersonalizedConfigurationController');
+                break;
+            }
+            case ckFramework.DeptContainerType.AlipayProperty: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/AlipayProperty/Index', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/AlipayProperty/AlipayPropertyIndexController.js'], 'divAlipayPropertyIndexController');
+                break;
+            }
+
+            case ckFramework.DeptContainerType.BillDetail: {
+                var SettleAccount = JQCheckPermission("SettleAccount");
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/BillDetail/BillDetailList'
+                    , ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/BillDetail/BillDetailListController.js'], 'divBillDetailListController', { SettleAccount: SettleAccount });
+                break;
+            }
+            case ckFramework.DeptContainerType.PreAccountManage: {
+                $("#divKeyWord").show();
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/PreAccountManage/PreAccountManageIndex'
+                    , ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/PreAccountManage/PreAccountManageController.js'], 'divPreAccountManageController');
+                break;
+            }
+            case ckFramework.DeptContainerType.NotificeConfig: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/NotificeConfig/NotificeConfigIndex'
+                    , ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/NotificeConfig/NotificeConfigIndexController.js'], 'divNotificeConfigIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.ReceiptBook: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ReceiptBook/Index'
+                    , ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ReceiptBook/ReceiptBookIndexController.js'], 'divReceiptBookIndexController');
+                break;
+            }
+            case ckFramework.DeptContainerType.ChargeRecordList: {
+                deptContainerService.ShowContainerContent('divDeptContainer', 'PropertyMgr/ChargeRecord/FullChargeRecordListIndex'
+                    , ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ChargeRecord/FullChargeRecordListController.js'], 'divFullChargeRecordListController');
+                break;
+            }
+
+        }
+
+        function SearchNotRefresh() {
+            var to = false;
+            if (to) { clearTimeout(to); }
+            to = setTimeout(function () {
+                var v = $("#deptKeyWord").val();
+                debugger;
+                $('#deptTree').jstree(true).search(v);
+                if (v != "" && v != null) {
+                    $("#deptTree li[aria-level='1']").each(function () {
+                        if (!($(this).html().indexOf("jstree-search") > 0)) {
+                            $(this).hide();
+                        }
+                    })
+                } else {
+                    $("#deptTree li").show();
+                }
+
+            }, 250);
+        }
+
+        function fnDeptKeyWordSearch() {
+            switch (ckFramework.DeptContainerData.PageType) {
+                case ckFramework.DeptContainerType.ChargeBill:
+                    if ($("#deptKeyWord").val().length == 1) {
+                        ckFramework.ModalHelper.Alert("请输入2位以上的字符查询");
+                        return;
+                    }
+                    $('#deptTree').jstree('refresh');
+                    break;
+                case ckFramework.DeptContainerType.PreAccountManage:
+                    if ($("#deptKeyWord").val().length == 1) {
+                        ckFramework.ModalHelper.Alert("请输入2位以上的字符查询");
+                        return;
+                    }
+                    $('#deptTree').jstree('refresh');
+                    break;
+                case ckFramework.DeptContainerType.Entrance:
+                    SearchNotRefresh();
+                    break;
+            }
+        }
+        $(function () {
+            $('#deptKeyWord').bind('keypress', function (event) {
+                if (event.keyCode == "13") {
+                    fnDeptKeyWordSearch()
+                }
+            });
+        });
+    </script>
+</div>

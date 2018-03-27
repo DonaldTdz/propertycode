@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZY_FileLibrary</name>
+    </assembly>
+    <members>
+        <member name="M:ZY_FileLibrary.AppTool.OpenApp(System.String,System.String)">
+            <summary>
+            打开文件/软件
+            </summary>
+            <param name="exe">
+            资源管理器 例如explorer.exe
+            使用指定软件打开
+            </param>
+            <param name="path">被打开软件的路径</param>
+        </member>
+        <member name="M:ZY_FileLibrary.AppTool.OpenApp(System.String)">
+            <summary>
+            打开文件/软件
+            </summary>
+            <param name="path">被打开软件的路径</param>
+        </member>
+        <member name="T:ZY_FileLibrary.FileTool">
+            <summary>
+            本地文件操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.DeleteFile(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="panth">文件绝对路径</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.CopyFile(System.String,System.String,System.Boolean)">
+            <summary>
+            复制文件
+            </summary>
+            <param name="comefile">文件来源</param>
+            <param name="fromfile">复制到哪</param>
+            <param name="overwrite">是否覆盖</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.MoveFile(System.String,System.String)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="comefile">文件源地址</param>
+            <param name="fromfile">移动后文件地址</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.WriteFile(System.String,System.String,System.Boolean)">
+            <summary>
+            在文件中写入文本
+            </summary>
+            <param name="content">文件类容</param>
+            <param name="panth">写入文件路径</param>
+            <param name="line">是否为多行 true为写入后换行</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.WriteFile(System.String,System.String,System.IO.FileMode,System.Boolean)">
+            <summary>
+            在文件中写入文本
+            </summary>
+            <param name="content">文件类容</param>
+            <param name="panth">写入文件路径</param>
+            <param name="mode">文件操作方式</param>
+            <param name="line">是否为多行 true为写入后换行</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.ReadFile(System.String,System.Boolean)">
+            <summary>
+            在文件中读取内容
+            </summary>
+            <param name="path">被读取文件路径</param>
+            <param name="line">读取一行还是所有 true 为一行</param>
+            <returns>string（读取内容）</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.WriteFileByte(System.String,System.Int32,System.Int32)">
+            <summary>
+            将文件转换为二进制流
+            </summary>
+            <param name="path">文件路径</param>
+            <param name="num">读取大小 为0时 全部读取</param>
+            <param name="begion">读取文件开始位置</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.ReadFileByte(System.Byte[],System.String)">
+            <summary>
+            将二进制流读取为文件形式
+            </summary>
+            <param name="by">流文件</param>
+            <param name="path">读取到路径</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.Addelement(System.Byte[],System.Byte[])">
+            <summary>
+            将多个byte[]整合到一起
+            </summary>
+            <param name="come">来源</param>
+            <param name="from">最终整合集合</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:ZY_FileLibrary.FileTool.Stream_Str(System.IO.Stream)">
+            <summary>
+            将数据流转为字符串
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ZY_FileLibrary.FileTool.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.ImgTool">
+            <summary>
+            图片操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_FileLibrary.ImgTool.ImgToIco(System.String)">
+            <summary>
+            img转ico
+            </summary>
+            <param name="Path">图片路径</param>
+            <returns>Icon</returns>
+        </member>
+        <member name="P:ZY_FileLibrary.ImgTool.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.OfficeTool">
+            <summary>
+            Office 操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.Registry_">
+            <summary>
+            注册表操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_FileLibrary.Registry_.Run">
+            <summary>
+            设置程序开机启动
+            </summary>
+        </member>
+        <member name="M:ZY_FileLibrary.Registry_.RunClose">
+            <summary>
+            设置程序开机启动 关闭
+            </summary>
+        </member>
+        <member name="M:ZY_FileLibrary.Registry_.SetValue(System.String,System.String,System.String)">
+            <summary>
+            在注册表创建项 写入值
+            </summary>
+            <param name="item">要创建的项</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_FileLibrary.Registry_.GetValue(System.String,System.String)">
+            <summary>
+            打开注册表 获取值
+            </summary>
+            <param name="item">要读取的项</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:ZY_FileLibrary.Registry_.Delete(System.String)">
+            <summary>
+            在注册表删除项
+            </summary>
+            <param name="item">要删除的项</param>
+        </member>
+        <member name="M:ZY_FileLibrary.Registry_.ItemExist(System.String,System.String)">
+            <summary>
+            判断子项是否存在
+            </summary>
+            <param name="path">需要获取子项的 项目路径</param>
+            <param name="item">子项名称</param>
+            <returns>bool</returns>
+        </member>
+        <member name="P:ZY_FileLibrary.Registry_.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.SystemTool">
+            <summary>
+            系统信息操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetMachineCode">
+            <summary>
+            机器码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetCpuInfo">
+            <summary>
+               获取cpu序列号
+            </summary>
+            <returns> string </returns>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetHDid">
+            <summary>
+               获取硬盘ID
+            </summary>
+            <returns> string </returns>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetMoAddress">
+            <summary>
+               获取网卡硬件地址
+            </summary>
+            <returns> string </returns>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetMacAddress">
+            <summary>
+            获取计算机MAC地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetMacAddress(System.String)">
+            <summary>
+            获得请求客户端Mac地址
+            </summary>
+            <param name="ip">IP地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetUserName">
+            <summary> 
+            操作系统的登录用户名 
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetSystemType">
+            <summary> 
+            PC类型 
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetTotalPhysicalMemory">
+            <summary> 
+            物理内存 
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.GetComputerName">
+            <summary> 
+             获取计算机名称
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.OpenRundll32(ZY_FileLibrary.Rundll32)">
+            <summary>
+            Rundll32系统命令
+            </summary>
+            <param name="rundll32">Rundll32枚举命令</param>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.OpenEXE(ZY_FileLibrary.EXE)">
+            <summary>
+            System 打开系统程序操作命令
+            </summary>
+            <param name="exe">EXE枚举命令</param>
+        </member>
+        <member name="M:ZY_FileLibrary.SystemTool.OpenShutDown(ZY_FileLibrary.ShutDown)">
+            <summary>
+            System 系统cmd 操作命令
+            </summary>
+            <param name="shutdown">ShutDown枚举命令</param>
+        </member>
+        <member name="P:ZY_FileLibrary.SystemTool.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.CmdAttribute">
+            <summary>
+            操作系统命令描述 
+            [Cmd("命令")]
+            系统重启,
+            </summary>
+        </member>
+        <member name="P:ZY_FileLibrary.CmdAttribute.Cmd">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.Rundll32">
+            <summary>
+            Rundll32 系统操作命令
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.EXE">
+            <summary>
+            System 打开系统程序操作命令
+            </summary>
+        </member>
+        <member name="T:ZY_FileLibrary.ShutDown">
+            <summary>
+            System 系统cmd 操作命令
+            </summary>
+        </member>
+    </members>
+</doc>

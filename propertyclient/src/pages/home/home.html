@@ -1,0 +1,33 @@
+<ion-content class="pageBg" text-center>
+  <!--顶部logo区域-->
+  <div class="home_logo">
+    <img src="assets/images/logo_sy.png"/>
+  </div>
+  <!--中间内容区域-->
+  <div class="home_content_total">
+    <h1 class="home_content_title">欢迎使用物业缴费系统</h1>
+    <div class="home_btn_total clearfix">
+      <ion-icon class="home_btn_icon home_btn_left" (tap)="goMobile()">
+        <img  src="assets/images/sj.png"/>
+      </ion-icon>
+
+      <ion-icon  class="home_btn_icon" (tap)="goHousingChoice()">
+        <img  src="assets/images/fw.png"/>
+      </ion-icon>
+    </div>
+  </div>
+
+  <!--二维码扫码区域-->
+  <div class="home_code_total">
+    <p class="home_code_img"><img  src="assets/images/code.png"/></p>
+    <p class="home_code_text">逸社区下载</p>
+  </div>
+
+  <!--底部手机号区域-->
+  <ion-item class="home_tel_total">
+    <ion-icon item-left class="home_tel_icon">
+      <img  src="assets/images/tel_icon.png"/>
+    </ion-icon>
+    <p item-right class="home_tel_num">客服电话：400-115-1787</p>
+  </ion-item>
+</ion-content>

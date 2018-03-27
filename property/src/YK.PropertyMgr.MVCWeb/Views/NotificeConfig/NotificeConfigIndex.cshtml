@@ -1,0 +1,201 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divNotificeConfigIndexController" ng-controller="NotificeConfigIndexController">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Horizontal Form -->
+            <div class="box box-primary" ng-show="IsShowData">
+                <div class="box-header with-border">
+                    <h3 class="box-title">欠费通知设置</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form id="formNotificeConfig" class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">欠费通知</label>
+
+                            <div class="col-sm-4">
+                                <select ng-model="NotificeConfig.IsEnable"
+                                        class="form-control"
+                                        ng-options="a.Id as a.Name for a in EnableList"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">通知方式</label>
+
+                            <div class="col-sm-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="NotificeConfig.APPNotice" ng-checked="NotificeConfig.APPNotice"> APP通知
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="NotificeConfig.SMSNotice" name="SMSNotice" id="SMSNotice" ng-checked="NotificeConfig.SMSNotice"> 短信通知
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">通知条件</label>
+                            <div class="col-sm-1 control-label" style="text-align:right; padding-left:0px;padding-right:0px;">欠费金额</div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" maxlength="11" ng-model="NotificeConfig.ArrearsAmount" id="ArrearsAmount" name="ArrearsAmount" placeholder="欠费金额">
+                            </div>
+                           
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-1 control-label" style="text-align:right; padding-left:0px;padding-right:0px;">欠费月数</div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" maxlength="8" ng-model="NotificeConfig.ArrearsMonth" id="ArrearsMonth" name="ArrearsMonth" placeholder="欠费月数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">通知频率</label>
+
+                            <div class="col-sm-4">
+                                <select ng-model="NotificeConfig.FrequencyType"
+                                        class="form-control"
+                                        ng-options="a.Id as a.Name for a in FrequencyTypeList"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">通知时间</label>
+
+                            <div class="col-sm-2">
+                                <select ng-model="NotificeConfig.NoticeDay"
+                                        class="form-control"
+                                        ng-options="a.Id as a.Name for a in NoticeDayList"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                @*<input type="text" class="form-control" maxlength="5" ng-model="NotificeConfig.NoticeTime" id="NoticeTime" name="NoticeTime" placeholder="时间">*@
+                                <select ng-model="NotificeConfig.NoticeTime"
+                                        class="form-control"
+                                        ng-options="a.Id as a.Name for a in HourData"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="false">
+                            <label for="" class="col-sm-2 control-label">短信内容</label>
+
+                            <div class="col-sm-6">
+                                <textarea class="form-control" rows="3" id="Content" maxlength="60" name="Content" ng-model="NotificeConfig.Content" placeholder="短信内容不超过60个字 ..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" id="btnNoticeSave" ng-if="CheckPermission('NotificeConfigSave')" class="btn btn-primary" >确定</button>
+                        <button type="button" id="btnHidNoticeSave" style="display:none;" ng-click="SaveNotice()"></button>
+                        <button type="button" id="btnNoticeDeptChanage" style="display:none;" ng-click="GetNotificeConfigByComDeptId()" ></button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <div class="box box-primary" ng-show="!IsShowData" >
+                <div class="box-header with-border">
+                    <h3 class="box-title">欠费通知设置</h3>
+                </div>
+                <div class="box-body" id="divNoNoticeData">
+                    <div class="col-md-3 col-sm-4">
+                        <i class="fa fa-hand-o-left"></i>请选择小区
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+     var ckFramework = ckFramework || {};
+    ckFramework.NotificeConfigData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    ckFramework.InitNotificeConfig = function () {
+        //获取预存账户数据
+        $("#btnNoticeDeptChanage").click();
+    }
+
+    //Notification condition 通知条件验证
+    $.validator.addMethod("NC", function (value, element) {
+        if ($("#ArrearsAmount").val() != '' || $("#ArrearsMonth").val() != '') {
+            return true;
+        }
+        return false;
+    }, "通知条件必须填写一个");
+
+    $.validator.addMethod("contentRequired", function (value, element) {
+        if ($("#SMSNotice").prop("checked") && $("#Content").val().length == 0) {
+            return false;
+        }
+        return true;
+    }, "短信通知短信内容为必须");
+
+    $.validator.addMethod("amount", function (value, element) {
+        var regNum = /^\d{0,8}\.{0,1}(\d{1,2})?$/;
+        var result = false;
+        if (regNum.test(value)) {
+                result = true;
+        }
+        return result;
+    }, "请输入非零且小数不超过2位的数");
+
+    $.validator.addMethod("month", function (value, element) {
+        var regNum = /^[1-9]\d*$/;
+        var result = false;
+        if (regNum.test(value)) {
+            result = true;
+        }
+        return result;
+    }, "请输入正整数");
+
+    //$.validator.addMethod("time", function (value, element) {
+    //    var regTime = /^([0-2][0-9]):([0-5][0-9])$/;
+    //    var result = false;
+    //    if (regTime.test(value)) {
+    //        if ((parseInt(RegExp.$1) < 24) && (parseInt(RegExp.$2) < 60)) {
+    //            result = true;
+    //        }
+    //    }
+    //    return result;
+    //}, "时间无效");
+
+    $(function () {
+        $('#divNoNoticeData').height($(document).height() - 300);
+
+        $('#formNotificeConfig').validate({
+            errorElement: 'span', //default input error message container
+            errorClass: 'text-danger', // default input error message class
+            focusInvalid: false, // do not focus the last invalid input
+            ignore: "",
+            rules: {
+                ArrearsAmount: {
+                    NC: true,
+                    amount:true
+                },
+                ArrearsMonth: {
+                    NC: true,
+                    month: true
+                }
+                //,
+                //Content: {
+                //    maxlength: 60,
+                //    contentRequired: true
+                //}
+            },
+
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+
+            success: function (label) {
+                label.closest('.form-group').removeClass('has-error');
+                label.remove();
+            },
+
+            submitHandler: function (form) {
+                //form.submit();
+                $("#btnHidNoticeSave").click();
+            }
+        });
+    });
+</script>

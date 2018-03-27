@@ -1,0 +1,145 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divSubjectHouseRefListController" ng-controller="SubjectHouseRefListController">
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+    </script>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="button" id="btnOrgListSearch" class="btn btn-primary" ng-show="hide()">
+
+            <div class="row" id="deptBindSubject">
+                <div class="col-md-12" id="tabBanner">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#" class="bindType" type="resSubject" data-toggle="tab">按资源绑定收费项目</a></li>
+                        <li><a href="#" class="bindType" type="subjectRes" role="tab" data-toggle="tab">按收费项目绑定资源</a></li>
+                        <li><a href="#" class="bindType" type="subjectLog" role="tab" data-toggle="tab">日志</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs" role="tablist" id="subjectHouseRefTab">
+                <li liType="12" class="active"><a href="#tabHouse" role="tab" loadUrl="/PropertyMgr/ResType/House" data-toggle="tab" type="12">房屋</a></li>
+                <li liType="13"><a href="#tabCar" role="tab" loadUrl="/PropertyMgr/ResType/CarPlace" data-toggle="tab" type="13">车位</a></li>
+                <li liType="1"><a href="#tabMeterWate" role="tab" loadUrl="/PropertyMgr/ResType/MeterWater" data-toggle="tab" type="1">水表</a></li>
+                <li liType="2"><a href="#tabMeterElec" role="tab" loadUrl="/PropertyMgr/ResType/MeterElec" data-toggle="tab" type="2">电表</a></li>
+                <li liType="3"><a href="#tabMeterGas" role="tab" loadUrl="/PropertyMgr/ResType/MeterGas" data-toggle="tab" type="3">气表</a></li>
+            </ul>
+            <div class="tabcontent" id="divTabcontent">
+                <input type="hidden" id="hidType" value="12" />
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function LoadPage() {
+
+    }
+
+    function LoadClick() {
+        var selDept = $("#SelectDeptTypeAndId").val();
+        var bindType = $("#deptBindSubject li[class='active'] a").prop("type");
+        selDept = selDept.split("_");
+        if (selDept.length == 2 || selDept.length == 3) {
+            if (selDept[1] == 11)/*选中的为小区*/ {
+                var liType = 12
+                if (bindType == "bindType") {
+                    $("#subjectHouseRefTab li[liType='" + liType + "'] a").click();
+                } else {
+                    $("#tabBanner li[class='active'] a").click();
+                }
+            }
+        }
+    }
+    function LoadPageDefaultSingleRes(resType) {
+        var selDept = $("#SelectDeptTypeAndId").val();
+        selDept = selDept.split("_");
+        if (selDept.length == 2 || selDept.length == 3) {
+            if (selDept[1] == 11)/*选中的为小区*/ {
+                var subjectHouseRefListService = ckFramework.GetAngularService('SubjectHouseRefListService');                                              /*房屋*/
+                subjectHouseRefListService.ShowContainerContent('divTabcontent', 'PropertyMgr/BindSubjectBySingleRes/Index?commuDeptId=' + selDept[0] + "&resType=" + resType, ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/BindSubjectBySingleRes/BindSubjectBySingleResController.js'], 'divBindSubjectBySingleResController');
+            }
+        }
+    }
+    function LoadPageHouseRef(resType) {
+        var selDept = $("#SelectDeptTypeAndId").val();
+        selDept = selDept.split("_");
+        if (selDept.length == 2 || selDept.length == 3) {
+            if (selDept[1] == 11)/*选中的为小区*/ {
+                var subjectHouseRefListService = ckFramework.GetAngularService('SubjectHouseRefListService');
+                subjectHouseRefListService.ShowContainerContent('divTabcontent', '/PropertyMgr/ResType/House?commuDeptId=' + selDept[0] + "&resType=" + resType, ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ResType/ResTypeIndexController.js'], 'divResTypeIndexController');
+            }
+        }
+    }
+    function LoadPageLog() {
+        var selDept = $("#SelectDeptTypeAndId").val();
+        selDept = selDept.split("_");
+        if (selDept.length == 2 || selDept.length == 3) {
+            if (selDept[1] == 11)/*选中的为小区*/ {
+                var subjectHouseRefListService = ckFramework.GetAngularService('SubjectHouseRefListService');
+                subjectHouseRefListService.ShowContainerContent('divTabcontent', 'PropertyMgr/SubjectBindLog/Index?commuDeptId=' + selDept[0], ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/SubjectBindLog/SubjectBindLogController.js'], 'divBindLogListController');
+            }
+        }
+    }
+    $(function () {
+        $(".bindType").click(function () {
+            $(".tabcontent").empty();
+            var type = 12;
+            if ($(this).prop("type") == "resSubject") {
+                $("#subjectHouseRefTab").show();
+                $("#subjectHouseRefTab li").removeClass("active");
+                $("#subjectHouseRefTab li[liType='12']").addClass("active");
+                LoadPageDefaultSingleRes(type);
+            }
+            else if ($(this).prop("type") == "subjectLog") {
+                $("#subjectHouseRefTab").hide();
+                LoadPageLog();
+            } else {
+                $("#subjectHouseRefTab").hide();
+                LoadPageHouseRef(type)
+            }
+           
+
+        })
+        $("#btnOrgListSearch").click(function () {
+          
+            LoadClick();
+        });
+        $("#subjectHouseRefTab li a").click(function () {
+        
+            var commuDeptId = 0;
+            var subjectType = 0;
+            var billPeriod = 0;
+            var selDept = $("#SelectDeptTypeAndId").val();
+            selDept = selDept.split("_");
+            var bindType = $("#deptBindSubject li[class='active'] a").prop("type");/*父页面选则的*/
+            $(".tabcontent").empty();
+            /*根据科目绑定资源*/
+            if (selDept.length == 2 || selDept.length == 3) {
+                if (selDept[1] == 11)/*选中小区*/ {
+                    commuDeptId = selDept[0]
+                } else {
+                    ckFramework.ModalHelper.Alert("请选择小区!");
+                    return false;
+                }
+            } else {
+                ckFramework.ModalHelper.Alert("请选择小区!");
+                return false;
+            }
+            if (bindType == "subjectRes") {
+                if ($(this).attr("type") > 0) {
+                    var subjectHouseRefListService = ckFramework.GetAngularService('SubjectHouseRefListService');
+                    subjectHouseRefListService.ShowContainerContent('divTabcontent', $(this).attr("loadUrl") + '?commuDeptId=' + commuDeptId + "&resType=" + $(this).prop("type"), ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/ResType/ResTypeIndexController.js'], 'divResTypeIndexController');
+                }
+            }
+
+            else {
+                var subjectHouseRefListService = ckFramework.GetAngularService('SubjectHouseRefListService');
+                subjectHouseRefListService.ShowContainerContent('divTabcontent', 'PropertyMgr/BindSubjectBySingleRes/Index?commuDeptId=' + selDept[0] + "&resType=" + $(this).prop("type"), ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/BindSubjectBySingleRes/BindSubjectBySingleResController.js'], 'divBindSubjectBySingleResController');
+            }
+        })
+
+        var resType = 12;
+        LoadPageDefaultSingleRes(resType);
+    })
+</script>

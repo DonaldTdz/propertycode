@@ -1,0 +1,50 @@
+﻿<div id="divReportArrearsContainerController" ng-controller="ReportArrearsContainerController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+    
+            <li class="active"><a href="#tabArrearsChargeSubject" role="tab" data-toggle="tab" onclick="ArrearsChargeSubjectClick()" class="ng-binding">科目报表</a></li>
+            @*<li>  <a href="#tabArrearsCommunity" role="tab" data-toggle="tab" onclick="ArrearsCommunityClick()" class="ng-binding">小区报表</a></li>*@
+            <li>  <a href="#tabArrearsDetail" role="tab" data-toggle="tab" onclick="ArrearsDetailClick()" class="ng-binding">明细报表</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabArrearsChargeSubject">
+                <div id="divReportArrearsChargeSubjectListController"></div>
+            </div>
+            @*<div class="tab-pane active" id="tabArrearsCommunity">
+                <div id="divReportArrearsCommunityListController"></div>
+            </div>*@
+
+            <div class="tab-pane active" id="tabArrearsDetail">
+                <div id="divReportArrearsDetailListController"></div>
+            </div>
+            
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ArrearsChargeSubjectClick();
+
+        });
+
+        var deptContainerService = ckFramework.GetAngularService('ReportArrearsContainerService');
+
+        //应收-科目
+        function ArrearsChargeSubjectClick() {
+
+            deptContainerService.ShowContainerContent('divReportArrearsChargeSubjectListController', 'PropertyMgr/Report/ArrearsChargeSubjectListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportArrearsChargeSubjectListController.js'], 'divReportArrearsChargeSubjectListController');
+        }
+        function ArrearsCommunityClick()
+        {
+           
+            deptContainerService.ShowContainerContent('divReportArrearsCommunityListController', 'PropertyMgr/Report/ArrearsCommunityListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportArrearsCommunityListController.js'], 'divReportArrearsCommunityListController');
+        }
+
+        function ArrearsDetailClick() {
+
+            deptContainerService.ShowContainerContent('divReportArrearsDetailListController', 'PropertyMgr/Report/ArrearsDetailListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportArrearsDetailListController.js'], 'divReportArrearsDetailListController');
+        }
+         
+    </script>
+</div>

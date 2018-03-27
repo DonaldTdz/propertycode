@@ -1,0 +1,49 @@
+<ion-content class="pageBg">
+  <!--顶部标题区域-->
+ <ion-item class="mobile_head_total">
+   <ion-icon item-left class="mobile_head_logo"><img src="assets/images/logo_dh.png"/></ion-icon>
+   <h1 item-left class="mobile_head_title">{{user.HouseData.FName}}</h1>
+   <!--倒计时区域-->
+   <count-down [time]="60" (onPrevious)="goPrevious()" #countDown ></count-down>
+ </ion-item>
+
+ <!--中间内容区域-->
+ <div class="mobile_content_total">
+   <div class="clearfix">
+    <!--左边内容区域-->
+    <div class="mobile_left_all">
+      <h1 class="mobile_left_title">请输入业主手机号后四位</h1>
+      <!--这里是输入框区域-->
+      <ion-item class="proprietor_input_total">
+        <!-- <ion-input class="proprietor_input" *ngFor="let p of phone4" disabled readonly item-left>{{p}}</ion-input> -->
+        <ion-input class="proprietor_input" item-left disabled readonly [value]="phone1" ></ion-input>
+        <ion-input class="proprietor_input" item-left disabled readonly [value]="phone2" ></ion-input>
+        <ion-input class="proprietor_input" item-left disabled readonly [value]="phone3" ></ion-input>
+        <ion-input class="proprietor_input" item-left disabled readonly [value]="phone4" ></ion-input>
+      </ion-item>
+      <div class="mobile_warning_total">
+        <h2 class="mobile_left_title">操作说明</h2>
+        <p class="mobile_warning_text">点击右侧数字键盘，输入该房屋在物业预留手机号后<span>4</span>
+         位，输入完成后请仔细核对无误。点击“确认”按钮进入下一步。
+        </p>
+      </div>
+      <ion-item class="mobile_left_bottom">
+        <ion-icon class="mobile_bottom_icon" item-left>
+          <img  src="assets/images/waning.png"/>
+        </ion-icon>
+        请在页面倒计时结束前完成操作，否则将返回首页。
+      </ion-item>
+    </div>
+
+    <!--右边内容区域-->
+    <div class="mobile_right_all">
+      <button ion-button clear *ngFor="let n of numbers" (tap)="clickNumber(n)" [class.mobile_btn_text]="n.type == '2'" >{{n.text}}</button>
+    </div>
+  </div>
+  <!--底部按钮区域-->
+  <ion-item class="mobile_btn_total">
+    <button ion-button clear class="mobile_btn_reset" item-left (tap)="countDown.goHome()">放弃</button>
+    <button ion-button clear class="mobile_btn_submit" (tap)="goPayAll()" item-right>确认</button>
+  </ion-item>
+ </div>
+</ion-content>

@@ -1,0 +1,96 @@
+﻿<div id="divConfirmViewController" ng-controller="ConfirmViewController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="ng-binding">确认收费</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="formNotificeConfig" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label for="" style="font-weight:bold;" class="col-sm-5 control-label">业主</label>
+
+                            <label for="" style="font-weight:400; text-align:left;" class="col-sm-7 control-label">{{ConfirmData.UserName}}</label>
+                        </div>
+                        <div class="col-md-9" ng-show="!NoReceiptNo">
+                            <label for="" style="font-weight:bold;" class="col-sm-3 control-label">票据号</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" maxlength="20" ng-model="ConfirmData.ReceiptNo" ng-readonly="IsReadonlyReceiptNo" placeholder="票据号">
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="ConfirmData.IsPrintReceipt" ng-checked="ConfirmData.IsPrintReceipt"> 打印
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9" ng-show="NoReceiptNo">
+                            <label for="" style="font-weight:bold;" class="col-sm-3 control-label">票据号</label>
+                            <label for="" style="font-weight:400; text-align:left;" class="col-sm-9 control-label">{{NoReceiptMsg}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label for="" style="font-weight:bold; color:blue;" class="col-sm-7 control-label">实收金额</label>
+
+                            <label for="" style="color:blue; text-align:left;" class="col-sm-5 control-label">{{ConfirmData.PayAmount | number:2}}</label>
+                        </div>
+                        <div class="col-md-9">
+                            <label for="" style="font-weight:bold;" class="col-sm-3 control-label">预存抵扣</label>
+
+                            <label for="" style="font-weight:400; text-align:left;" class="col-sm-2 control-label">{{ConfirmData.PreDeductibleAmount | number:2}}</label>
+
+                            <label for="" style="font-weight:bold;" class="col-sm-2 control-label">找零</label>
+
+                            <label for="" style="font-weight:400; text-align:left;" class="col-sm-5 control-label">{{ConfirmData.SmallChange | number:2}} {{ConfirmData.SubjectDesc}}</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>门牌号</th>
+                            <th style="width:100px;">收费项目</th>
+                            <th>计费金额</th>
+                            <th>已交金额</th>
+                            <th>应收金额</th>
+                            <th>开始日期</th>
+                            <th>结束日期</th>
+                            <th>减免金额</th>
+                            <th style="width:100px;">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in ShowChargeBillList">
+                            <td>{{item.ResourcesName}}</td>
+                            <td>{{item.ChargeSubjectName}}</td>
+                            <td>{{item.BillAmount | number:2}}</td>
+                            <td>{{item.ReceivedAmount | number:2}}</td>
+                            <td>{{item.AmountShould | number:2}}</td>
+                            <td>{{item.BeginDateFormat}}</td>
+                            <td>{{item.EndDateFormat}}</td>
+                            <td>{{item.ReliefAmount | number:2}}</td>
+                            <td>{{item.Remark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="ConfirmBill()">确定</button>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    var ckFramework = ckFramework || {};
+    ckFramework.ModalHelper.BillConfirmData.ReceiptNo = '@(Model)';
+</script>

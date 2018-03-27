@@ -1,0 +1,32 @@
+﻿<div id="divDeleteBillViewController" ng-controller="DeleteBillViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.DeleteBillViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.createDeleteBillViewFormData = {
+            FormId:'DeleteBillViewForm',
+            DivContainer:$('#divDeleteBillViewContainer'),
+            TemplateItemDatas:ckFramework.DeleteBillViewData.TemplateModels,
+            jumpFields:['Id'],
+            ReadonlyDatas: ['HouseDoorNo', 'Description','BeginDateFormat','EndDateFormat','BillAmount'],
+            ColumnCount:1
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createDeleteBillViewFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createDeleteBillViewFormData);
+        });
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>账单作废</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divDeleteBillViewContainer" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="DeleteBill()">确定</button>
+    </div>
+</div>

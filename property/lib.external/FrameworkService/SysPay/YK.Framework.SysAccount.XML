@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YK.Framework.SysAccount</name>
+    </assembly>
+    <members>
+        <member name="T:YK.Framework.SysAccount.UserAccountBLL">
+            <summary>
+            用户账户数据访问处理，账户信息缓存里面有，则数据库里面一定有，缓存里面没有，数据库里面可能会有
+            </summary>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountBLL.TryInsertAccount(System.String,YK.Framework.SysAccount.UserAccount,System.Boolean)">
+            <summary>
+            尝试新增账户，已经账户已经在Reids里面存在，则忽略，如果不存在，则执行新增操作
+            </summary>
+            <param name="userAccount">账户信息</param>
+            <param name="isLock">默认是会锁定，不需要修改</param>
+            <returns>操作是否成功</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountBLL.BatchInsertAccount(System.String,System.Collections.Generic.IEnumerable{YK.Framework.SysAccount.UserAccount})">
+            <summary>
+            批量插入账户（导入业主时）
+            </summary>
+            <param name="userAccounts">新增账户列表</param>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountBLL.UpdateAccountBalance(System.String,System.Guid,System.Double)">
+            <summary>
+            更新账户余额
+            </summary>
+            <param name="accountId">账户Id</param>
+            <param name="balance">账户余额</param>
+            <returns>操作是否成功</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountBLL.GetAccountIdByPhone(System.String)">
+            <summary>
+            根据电话号码获取账户Id（先从Redis里面获取，如果没有获取到，则判断数据库里面是否存在，数据库存在的话，会执行Redis新增操作）
+            </summary>
+            <param name="phone">电话</param>
+            <returns>账户Id</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountBLL.GetAccountByPhone(System.String)">
+            <summary>
+            获取账户信息
+            </summary>
+            <param name="phone">电话号码</param>
+            <returns>账户信息</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountBLL.GetAccountById(System.Guid)">
+            <summary>
+            根据账户Id获取账户信息
+            </summary>
+            <param name="id">账号Id</param>
+            <returns>账户信息</returns>
+        </member>
+        <member name="T:YK.Framework.SysAccount.DataEncrypt">
+            <summary>
+            实现数据解密接口
+            </summary>
+        </member>
+        <member name="M:YK.Framework.SysAccount.DataEncrypt.MD5(System.String)">
+            <summary>
+            MD5
+            </summary>
+        </member>
+        <member name="T:YK.Framework.SysAccount.BaseDAL">
+            <summary>
+            用户账户数据访问处理
+            </summary>
+        </member>
+        <member name="T:YK.Framework.SysAccount.UserAccountDAL">
+            <summary>
+            用户账户数据访问处理
+            </summary>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountDAL.CheckAccountExsists(System.String)">
+            <summary>
+            检测账户是否存在
+            </summary>
+            <param name="phone">电话号码</param>
+            <returns>账户是否存在</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountDAL.InsertAccount(YK.Framework.SysAccount.UserAccount)">
+            <summary>
+            新增账户
+            </summary>
+            <param name="userAccount">账户信息</param>
+            <returns>新增是否成功</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountDAL.UpdateAccountBalance(System.Guid,System.Double)">
+            <summary>
+            更新账户余额
+            </summary>
+            <param name="accountId">账户Id</param>
+            <param name="balance">账户余额</param>
+            <returns>操作是否成功</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountDAL.GetAccountByPhone(System.String)">
+            <summary>
+            根据电话号码获取账户信息
+            </summary>
+            <param name="phone">电话号码</param>
+            <returns>账户信息</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.UserAccountDAL.GetAccountById(System.Guid)">
+            <summary>
+            根据账户Id获取账户信息
+            </summary>
+            <param name="id">账号Id</param>
+            <returns>账户信息</returns>
+        </member>
+        <member name="T:YK.Framework.SysAccount.UserAccount">
+            <summary>
+            用户账户
+            </summary>
+        </member>
+        <member name="P:YK.Framework.SysAccount.UserAccount.Id">
+            <summary>
+            账户Id(Guid)
+            </summary>
+        </member>
+        <member name="P:YK.Framework.SysAccount.UserAccount.Phone">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:YK.Framework.SysAccount.UserAccount.Balance">
+            <summary>
+            账户余额
+            </summary>
+        </member>
+        <member name="T:YK.Framework.SysAccount.IUserAccountDAL">
+            <summary>
+            用户账户数据访问处理接口
+            </summary>
+        </member>
+        <member name="M:YK.Framework.SysAccount.IUserAccountDAL.CheckAccountExsists(System.String)">
+            <summary>
+            检测账户是否存在
+            </summary>
+            <param name="phone">电话号码</param>
+            <returns>账户是否存在</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.IUserAccountDAL.InsertAccount(YK.Framework.SysAccount.UserAccount)">
+            <summary>
+            新增账户
+            </summary>
+            <param name="userAccount">账户信息</param>
+            <returns>新增是否成功</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.IUserAccountDAL.UpdateAccountBalance(System.Guid,System.Double)">
+            <summary>
+            更新账户余额
+            </summary>
+            <param name="accountId">账户Id</param>
+            <param name="balance">账户余额</param>
+            <returns>操作是否成功</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.IUserAccountDAL.GetAccountByPhone(System.String)">
+            <summary>
+            根据电话号码获取账户信息
+            </summary>
+            <param name="phone">电话号码</param>
+            <returns>账户信息</returns>
+        </member>
+        <member name="M:YK.Framework.SysAccount.IUserAccountDAL.GetAccountById(System.Guid)">
+            <summary>
+            根据账户Id获取账户信息
+            </summary>
+            <param name="id">账号Id</param>
+            <returns>账户信息</returns>
+        </member>
+    </members>
+</doc>

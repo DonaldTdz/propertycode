@@ -1,0 +1,200 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    #AlipayCommunityViewForm .selectContainer .form-control-feedback {
+        /* Adjust feedback icon position */
+        right: 30px;
+    }
+</style>
+<div id="divAlipayCommunityViewController" ng-controller="AlipayCommunityViewController">
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>支付宝小区设置</h4>
+    </div>
+    <form id="AlipayCommunityViewForm" class="form-horizontal">
+        <div class="modal-body">
+            <div class="form-group ModalFormMagin col-md-12 has-feedback">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>小区名称<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtcommunity_name" name="txtcommunity_name" ng-readonly="PageReadOnly" ng-model="PageViewModel.community_name" class=" col-sm-9 form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>省<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9 selectContainer">
+
+                        <select class="form-control ckFormControl" ng-disabled="PageReadOnly" ng-change="ChangeLoadCity(PageViewModel.province_code)" ng-model="PageViewModel.province_code" name="seleprovince_code" id="seleprovince_code" ng-options="m.IdStr as m.Name for m in ProvinceList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>市<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9 selectContainer">
+                        <select class="form-control ckFormControl" ng-disabled="PageReadOnly" ng-change="ChangeLoadDistrict(PageViewModel.city_code)" ng-model="PageViewModel.city_code" name="selecity_code" id="selecity_code" ng-options="m.IdStr as m.Name for m in CityList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>县/区<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9 selectContainer">
+                        <select class="form-control ckFormControl" ng-disabled="PageReadOnly" ng-model="PageViewModel.district_code" name="seledistrict_code" id="seledistrict_code" ng-options="m.IdStr as m.Name for m in DistrictList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>详细地址<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="详细地址" id="txtcommunity_address" name="txtcommunity_address" ng-readonly="PageReadOnly" ng-model="PageViewModel.community_address" class=" col-sm-9 form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>经纬度<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="如有多个经纬度请用/隔开，最多5组" id="txtcommunity_locations" ng-readonly="PageReadOnly" name="txtcommunity_locations" ng-model="PageViewModel.community_locations" class=" col-sm-9 form-control"><a style="cursor: pointer;" target="_blank" href="http://lbs.amap.com/console/show/picker">经纬度获取</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>联系电话<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="联系电话" id="txthotline" name="hotline" ng-readonly="PageReadOnly" ng-model="PageViewModel.hotline" class=" col-sm-9 form-control">
+                    </div>
+                </div>
+
+                <div class="form-group" ng-show="ShowQrCode">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>测试二维码<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-12">
+                        <img  ng-src="{{QrCodeImageUrl}}"   alt="测试二维码"  />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="submit" id="btnAlipayCommunityViewSave" class="btn btn-primary" ng-show="!PageReadOnly" ng-click="SaveData()">保存</button>
+    </div>
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.AlipayCommunityViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+
+
+
+
+
+       $(document).ready(function () {
+     $('#AlipayCommunityViewForm')
+            .formValidation({
+                framework: 'bootstrap',
+
+             button: {
+                  selector: '#btnAlipayCommunityViewSave'
+
+               },
+                icon: {
+               valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    community_name: {
+                        validators: {
+                            notEmpty: {
+                                message: '小区名称不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 32,
+                                message: '名称长度应在1-32之间'
+                            }
+                        }
+                    },
+                    txtcommunity_address: {
+                        validators: {
+                            notEmpty: {
+                                message: '详细地址不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 128,
+                                message: '详细地址应在1-128之间'
+                            }
+                        }
+                    },
+                    txtcommunity_locations: {
+                        validators: {
+                            notEmpty: {
+                                message: '经纬度不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 150,
+                                message: '经纬度度应在1-150之间'
+                            }
+                        }
+                    },
+                    txthotline: {
+                        validators: {
+                            notEmpty: {
+                                message: '联系电话不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 20,
+                                message: '联系电话应在1-20之间'
+                            }
+                        }
+                    },
+                    seleprovince_code:{
+                    validators: {
+                        notEmpty: {
+                            message: '请选择省份'
+                        }
+                    }
+                    },
+                    selecity_code:{
+                        validators: {
+                            notEmpty: {
+                                message: '请选择市/区'
+                            }
+                        }
+                    },
+                    seledistrict_code: {
+                        validators: {
+                            notEmpty: {
+                                message: '请选择县/区'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+
+    </script>
+
+
+</div>
+

@@ -1,0 +1,125 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divEntrancePowerViewController" ng-controller="EntrancePowerViewController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="ng-binding">门禁授权处理</h4>
+    </div>
+    <div id="SearchPowerViewContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>设备名称</label>
+                    <input style="width: 100%; " placeholder="设备名称" class="form-control" type="text" name="Name" />
+                </div>
+                <div class="col-md-4" style="padding-top:24px;">
+                    <input type="button" id="btnDeviceSearch" class="btn btn-primary" value="查询">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <label>设置权限过期时间</label>
+                    <div class='input-group date' id='datetimepickerFrom'>
+                        <input style="width: 100%; " placeholder="设置权限过期时间" id="txtKeyExpressTime" ng-model="PowerViewData.KeyExpressTime" class="form-control" type="text" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding-top:24px;">
+                    <input type="button" id="btnRightPower" class="btn btn-primary" ng-click="Save()" value="授予权限">
+                </div>
+
+
+            </div>
+            <div class="row">
+                <br />
+                <div style="color:red">
+                    &nbsp;  &nbsp;  &nbsp;  &nbsp; 注:【自动授权】不会因授权时间过期而受影响
+                </div>
+            </div>
+        </div>
+
+        @*<div class="box-footer">
+                <input type="button" id="btnDeviceSearch" class="btn btn-primary" value="查询">
+                <input type="button" id="btnRightPower" class="btn btn-primary" ng-click="Save()" value="授予权限">
+            </div>*@
+
+    </div>
+    <div id="divEntrancePowerViewTable" style="height:700px;" />
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.EntrancePowerViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.EntrancePowerViewTable = null;
+        ckFramework.createEntrancePowerViewData = {
+            TableId:'table_ckFramework_EntrancePowerView',
+            IsAddOperate:true,
+            IsAddAllCheck1:true,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.EntrancePowerViewData.TemplateModels,
+            DivTable:$('#divEntrancePowerViewTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60,
+                "render": function(data)
+                {
+                    $(":checkbox[class='chkALL']").prop("checked", false);
+                    editContent = "<input type='checkbox' class='EntrancesInfo' EntrancesId ='"+data.Id+"'/>"
+                    return editContent
+                }
+            }
+        };
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createEntrancePowerViewData);
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#divEntrancePowerViewTable").on("click",".chkALL",function(eve){
+
+                if ($(this).is(":checked")) {
+                    $("#table_ckFramework_EntrancePowerView").find("input[type='checkbox']").each(function()
+                    {
+                        $(this).prop("checked", true);
+                    });
+
+                } else {
+                    $("#table_ckFramework_EntrancePowerView").find("input[type='checkbox']").each(function()
+                    {
+                        $(this).prop("checked", false);
+                    });
+                }
+            })
+
+
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+
+            ckFramework.EntrancePowerViewTable =   $('#' + ckFramework.createEntrancePowerViewData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                paging:false,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createEntrancePowerViewData),
+                filterOptions: {
+                    searchButton: "btnDeviceSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchPowerViewContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "EntrancePower", "GetEntrances")',
+                    DrawTable:function(){
+                        ckFramework.EntrancePowerViewTable.draw();
+                    }
+                }
+            });
+            $('#'+ ckFramework.createEntrancePowerViewData.TableId +' tbody').on('click', '.Edit', function () {
+
+                var data = ckFramework.EntrancePowerViewTable.rows($(this).parents('tr')).data();
+                var EntrancePowerViewService = ckFramework.GetAngularService('EntrancePowerViewService');
+                EntrancePowerViewService.ShowEntranceView('Edit', data[0].Id);
+            });
+            $('#SearchContainer').click();
+        });
+    </script>
+
+</div>
+

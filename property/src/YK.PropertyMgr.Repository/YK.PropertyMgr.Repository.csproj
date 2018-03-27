@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D246B69-BA6B-4059-B491-63DAB8A9B33E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YK.PropertyMgr.Repository</RootNamespace>
+    <AssemblyName>YK.PropertyMgr.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="KW.Sprite.Common.Repository">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\KW.Sprite.Common.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\lib.external\FrameworkService\PublicReference\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlipayApiRequestLogRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayAPPAuthTokenRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillSynchronizerDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayChargeBillSynchronizerRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayCommunityRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayRoomRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargBillRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeBillRecordMatchingRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeSubjectRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeSubjectSnaRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPaymentLogRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityConfigRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountyRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceLogRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceUserDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntranceUserRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterReadRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificeConfigRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentDiscountInfoRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountLogRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyConfiguration.cs" />
+    <Compile Include="PaymentTaskDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTasksRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PreferentialRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrepayAccountRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyMgrMapperCollection1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyMgrMapperCollection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyMgrRepository.cs" />
+    <Compile Include="PropertyMgrDataBaseContext.cs" />
+    <Compile Include="PropertyMgrDatabaseInitializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyMgrMapperCollection.cs">
+      <DependentUpon>PropertyMgrMapperCollection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyMgrRepository1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProvinceRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookHistoryRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefundRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShareKeyRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectHouseRefRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplatePrintRecordDetailRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplatePrintRecordRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketSerialNumberRepository.cs">
+      <DependentUpon>PropertyMgrRepository.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertyMgrMapperCollection.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyMgrMapperCollection1.cs</LastGenOutput>
+    </None>
+    <None Include="PropertyMgrRepository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyMgrRepository1.cs</LastGenOutput>
+    </None>
+    <None Include="TemplateFileManagerV2.1.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YK.PropertyMgr.DomainEntity\YK.PropertyMgr.DomainEntity.csproj">
+      <Project>{d44079aa-1823-4e0e-af79-80afda8d01c1}</Project>
+      <Name>YK.PropertyMgr.DomainEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YK.PropertyMgr.RepositoryContract\YK.PropertyMgr.RepositoryContract.csproj">
+      <Project>{ecc30580-fe67-4fcd-a304-b7620dbf1094}</Project>
+      <Name>YK.PropertyMgr.RepositoryContract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,142 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    #AlipayBasicerviceViewForm .selectContainer .form-control-feedback {
+        /* Adjust feedback icon position */
+        right: 30px;
+    }
+</style>
+<div id="divAlipayBasicerviceViewController" ng-controller="AlipayBasicerviceViewController">
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>支付宝小区初始化</h4>
+    </div>
+    <form id="AlipayBasicerviceViewForm" class="form-horizontal">
+        <div class="modal-body">
+            <div class="form-group ModalFormMagin col-md-12 has-feedback">
+                <div class="form-group" ng-show="PageAdd">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>服务状态<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9 selectContainer">
+
+                        <select class="form-control ckFormControl" ng-disabled="PageReadOnly" ng-model="PageViewModel.status" name="selestatus" id="selestatus" ng-options="m.Id as m.Value for m in BasicServiceStatusList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>服务类型<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9 selectContainer">
+
+                        <select class="form-control ckFormControl" ng-disabled="PageReadOnly" ng-model="PageViewModel.service_type" name="selservice_type" id="selservice_type" ng-options="m.Id as m.Value for m in BasicServiceTypeList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>回调地址<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="回调地址" id="txtexternal_invoke_address" name="txtexternal_invoke_address" ng-readonly="PageReadOnly" ng-model="PageViewModel.external_invoke_address" class=" col-sm-9 form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>服务时间<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9  input-append date  input-group">
+                        <input type="text" id="service_expires" name="service_expires" ng-readonly="true" ng-model="PageViewModel.service_expires" class="form-control">
+                        <span class="input-group-addon" ng-show="!PageReadOnly">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="submit" id="btnAlipayBasicerviceViewSave" class="btn btn-primary" ng-show="!PageReadOnly" ng-click="SaveData()">保存</button>
+    </div>
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.AlipayBasicerviceViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+
+
+
+
+
+       $(document).ready(function () {
+        $('.date').datetimepicker({
+                        format: 'yyyy-mm-dd'
+                    }).on('changeDate', function(ev){
+                      $('#AlipayBasicerviceViewForm').formValidation('revalidateField', 'service_expires');
+            });
+
+
+     $('#AlipayBasicerviceViewForm')
+            .formValidation({
+                framework: 'bootstrap',
+
+             button: {
+                  selector: '#btnAlipayBasicerviceViewSave'
+
+               },
+                icon: {
+               valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    txtexternal_invoke_address: {
+                        validators: {
+                            notEmpty: {
+                                message: '回调地址不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 512,
+                                message: '回调地址应在1-512之间'
+                            }
+                        }
+                    },
+
+                     service_expires: {
+                        validators: {
+                            notEmpty: {
+                                message: '服务时间不能为空'
+                            }
+
+                        }
+                    },
+                    selestatus:{
+                    validators: {
+                        notEmpty: {
+                            message: '请选择服务状态'
+                        }
+                    }
+                    },
+                    service_type:{
+                        validators: {
+                            notEmpty: {
+                                message: '请选择服务类型'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+
+    </script>
+
+
+</div>
+

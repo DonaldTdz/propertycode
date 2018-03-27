@@ -1,0 +1,138 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    .bg {
+        position: absolute;
+        margin-left: 18px;
+        width: 30px;
+        height: 40px;
+        margin-top: -35px;
+        background: transparent url(../../../../Scripts/images/32px.png) no-repeat -70px 10px;
+    }
+
+    .verticaLine {
+        display: block;
+        position: absolute;
+        margin-top: -9px;
+        width: 30px;
+        height: 20px;
+        float: right;
+        margin-left: 18px;
+        background: transparent url(../../../../Scripts/images/32px.png) no-repeat -294px 00px;
+    }
+</style>
+<div id="divDeveloperChargeListController" ng-controller="DeveloperChargeListController">
+    <div class="form-horizontal box box-primary form-group">
+        <div class="box-footer">
+            <div class="row">
+                <div class="ModalFormMagin col-md-5 has-feedback">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">应收金额</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="" placeholder="应收金额" class="form-control" name="AmountShouldTotal" ng-readonly="true" ng-model="PageModel.AmountShouldTotal" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">实收金额</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="" placeholder="实收金额" class="form-control" name="ReceivedAmountTotal" ng-model="PageModel.ReceivedAmountTotal" ng-keyup="toDecimal($event)" ng-blur="isNumber($event)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">找零</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="" placeholder="找零" class="form-control" name="SmallChange" ng-readonly="true" ng-model="PageModel.SmallChange" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ModalFormMagin col-md-4 has-feedback">
+                    @*<div class="form-group">
+                            <label class="col-sm-4 control-label">票据号</label>
+                            <div class="col-sm-8">
+                                <input type="text" value="" placeholder="票据编号" class="form-control" name="ReceiptNum" ng-model="PageModel.ReceiptNum" />
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="text-align:center;">付款方式</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="PageModel.PayTypeId" ng-options="m.Code as m.CnName for m in PayTypeList">
+                                <option value="">-- 请选择 --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*<label class="col-sm-3 control-label">备注</label>*@
+                        <div class="col-sm-12">
+                            <textarea rows="3" ng-model="PageModel.Remark" name="Remark" class="form-control">请您妥善保存交款收据，如是押金类或代收费项目，票据遗失恕不退付</textarea>
+                            <input type="button" id="btnOrgListSearch" ng-click="GetDailyChargList()" class="btn btn-primary" style="display:none;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ModalFormMagin col-md-3 has-feedback">
+                    <div class="form-group">
+                        <div class="col-sm-12" style="margin-top:20px;">
+                            <input type="button" ng-if="CheckPermission('ConfirmDeveloperCharge')" class="btn btn-primary btn-lg" ng-click="SaveData()" value="确认收费">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">
+                    <div class="ModalFormMagin col-md-5 has-feedback">
+
+                    </div>
+                    <div class="ModalFormMagin col-md-7 has-feedback">
+
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    @*修改为angular绑定table*@
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th style="text-align:left;"><input type="checkbox" ng-click="fnDailyCheckedAll()" ng-model="IsCheckedAll" ng-checked="IsCheckedAll" /></th>
+                        <th>收费资源</th>
+                        <th>收费项目</th>
+                        <th>计费金额</th>
+                        <th>已交金额</th>
+                        <th>应收金额</th>
+                        <th>开始日期</th>
+                        <th>结束日期</th>
+                        <th>减免金额</th>
+                        <th>备注</th>
+                        @*<th>描述</th>*@
+                    </tr>
+
+                    <tr ng-repeat="item in ChargeBillList" ng-show="item.IsShow" ng-style="item.GroupId>0?item.CccordionClass:null">
+                        <th style="text-align:left;">
+                            <input type="checkbox" ng-model="item.IsChecked" ng-checked="{{item.IsChecked}}" ng-click="fnDailyChecked(item)" />
+                            <div class="bg" ng-show="item.GroupId>0"></div>
+                            <div class="verticaLine" ng-show="item.GroupId>0"></div>
+                            <a href="#" ng-click="ShowDetailBill(item)" ng-show="item.Id>0" ng-class="item.CccordionClass" style="margin-left:5px;" />
+                        </th>
+                        <td>{{item.ResourcesName}}</td>
+                        <td>{{item.ChargeSubjectName}}</td>
+                        <td>{{item.BillAmount | number:2}}</td>
+                        <td>{{item.ReceivedAmount | number:2}}</td>
+                        <td>{{item.AmountShould | number:2}}</td>
+                        <td>{{item.BeginDateFormat}}</td>
+                        <td>{{item.EndDateFormat}}</td>
+                        <td>{{item.ReliefAmount | number:2}}</td>
+                        <td>{{item.Remark}}</td>
+                        @*<td>{{item.Description}}</td>*@
+                    </tr>
+                    <tr ng-show="ChargeBillList.length == 0">
+                        <td colspan="10" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.DeveloperChargeListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.printPDFChargeRecordUrl='@Url.PluginAction("PropertyMgr", "ChargeRecord", "ReceiptPrintPDF")';
+    </script>
+</div>

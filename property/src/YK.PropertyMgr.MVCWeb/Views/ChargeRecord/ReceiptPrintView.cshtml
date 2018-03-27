@@ -1,0 +1,48 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divReceiptPrintViewController" ng-controller="ReceiptPrintViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ReceiptPrintViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.ReceiptPrintPDFUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ReceiptPrintPDF")';
+        var readonlyDatas = ['HouseDoorNo','CustomerName','Amount','PayMthodId'];
+        //alert(ckFramework.ReceiptPrintViewData.CanEditReceiptNum)
+        if (!ckFramework.ReceiptPrintViewData.CanEditReceiptNum) {
+            readonlyDatas.push('ReceiptNum');
+        }
+        ckFramework.createReceiptPrintViewFormData = {
+            FormId:'ReceiptPrintViewForm',
+            DivContainer:$('#divReceiptPrintViewContainer'),
+            TemplateItemDatas:ckFramework.ReceiptPrintViewData.TemplateModels,
+            jumpFields:['Id'],
+            ReadonlyDatas:readonlyDatas,
+            ColumnCount:1
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createReceiptPrintViewFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createReceiptPrintViewFormData);
+        });
+
+        ckFramework.fnPrintClick = function(chargeRecordId){
+            var href = ckFramework.ReceiptPrintPDFUrl + "?chargeRecordId=" + chargeRecordId;
+            window.open(href,"_blank");
+        }
+
+        //ckFramework.fnReceiptPrintPDF = function(){
+        //    window.location.href = $(this).attr("href");
+        //}
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>补打票据</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divReceiptPrintViewContainer" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="ReceiptPrint()">打印</button>
+        @*<button type="button" class="btn btn-primary" onclick="ckFramework.fnPrintClick('256')" id="btnReceiptPrintPDF">test print</button>*@
+    </div>
+</div>

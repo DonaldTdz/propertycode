@@ -1,0 +1,96 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<#
+	var manager = TemplateFileManager.Create(this);
+	string strProjectName = "PropertyMgr";
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.PropertyMgr.MVCWeb\Models\PropertyMgrTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var frameworkTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='DomainEntity']");
+	foreach (XmlNode templateNode in frameworkTemplateNodes)
+	{
+	manager.StartNewFile(templateNode.Attributes["Name"].Value + "DomainService.cs");
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
+
+using Microsoft.Practices.Unity;
+using YK.<#= strProjectName #>.RepositoryContract;
+using YK.<#= strProjectName #>.DomainEntity;
+using YK.<#= strProjectName #>.Crosscuting;
+
+namespace YK.<#= strProjectName #>.DomainService
+{
+	public partial class <#= templateNode.Attributes["Name"].Value #>DomainService
+	{
+		public bool Insert<#= templateNode.Attributes["Name"].Value #>(<#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+            using (var propertyMgrUnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                propertyMgrUnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Add(domain<#= templateNode.Attributes["Name"].Value #>);
+                propertyMgrUnitOfWork.Commit();
+                return true;
+            }
+        }
+
+        public bool Update<#= templateNode.Attributes["Name"].Value #>(<#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+            using (var propertyMgrUnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                propertyMgrUnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Update(domain<#= templateNode.Attributes["Name"].Value #>);
+                propertyMgrUnitOfWork.Commit();
+                return true;
+            }
+        }
+
+        public bool Delete<#= templateNode.Attributes["Name"].Value #>(object id)
+        {
+            using (var propertyMgrUnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                propertyMgrUnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Delete(id);
+                propertyMgrUnitOfWork.Commit();
+                return true;
+            }
+        }
+
+        public List<<#= templateNode.Attributes["Name"].Value #>> Get<#= templateNode.Attributes["Name"].Value #>s()
+        {
+            using (var propertyMgrUnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                return propertyMgrUnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.GetAll().ToList();
+            }
+        }
+
+		public <#= templateNode.Attributes["Name"].Value #> Get<#= templateNode.Attributes["Name"].Value #>ByKey(object id)
+        {
+            using (var propertyMgrUnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                return propertyMgrUnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.GetByKey(id);
+            }
+        }
+
+		public IList<<#= templateNode.Attributes["Name"].Value #>> Paging(int PageIndex, int PageSize, Expression<Func<<#= templateNode.Attributes["Name"].Value #>, bool>> predicate, string expressions,out int totalCount)
+        {
+			 using (var propertyMgrUnitOfWork = UnityHelper.UnityContainerInstance.Resolve<I<#= strProjectName #>UnitOfWork>())
+            {
+                return propertyMgrUnitOfWork.<#= templateNode.Attributes["Name"].Value #>Repository.Paging(PageIndex,PageSize,predicate,expressions,out totalCount).ToList();
+            }
+        }
+	}
+}
+<#
+    }
+	manager.Process();
+#>

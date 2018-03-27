@@ -1,0 +1,1426 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CBLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:System.ConverterExtension">
+            <summary>
+            类型转换扩展方法
+            </summary>
+        </member>
+        <member name="M:System.ConverterExtension.ToBoolean(System.String,System.Boolean)">
+            <summary>
+            String to Boolean(字符串 转换成 布尔类型)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.IsTrue("true".ToBoolean());
+            Assert.IsFalse("www.xcodex.net".ToBoolean());
+            Assert.IsFalse("www.xcodex.net".ToBoolean(false));//转换失败，返回默认值false
+            Assert.IsTrue("www.xcodex.net".ToBoolean(true));//转换失败，返回默认值true
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>布尔值</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToChar(System.String,System.Char)">
+            <summary>
+            String to Char(字符串 转换成 字符、十六进制换码序列或 Unicode 范围:U+0000 到 U+FFFF)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual('X', "X".ToChar());     //字符字面值
+            Assert.AreEqual(88, "X".ToChar());      //整数字符代码
+            Assert.AreEqual('\x0058', "X".ToChar());//十六进制
+            Assert.AreEqual('\u0058', "X".ToChar());//Unicode
+            Assert.AreEqual('x', "www.xcodex.net".ToChar('x'));//转换失败，返回默认值x
+            Assert.AreEqual(120, "www.xcodex.net".ToChar('x'));//转换失败，返回默认值x
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>字符</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToDecimal(System.String,System.Decimal)">
+            <summary>
+            String to Decimal(字符串 转换成 128位高精度浮点类型 大致范围:(-7.9 x 10^28 - 7.9 x 10^28) / (10^0 - 28))
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(12.34M, "12.34".ToDecimal());
+            Assert.AreEqual(0, "www.xcodex.net".ToDecimal());//转换失败，返回默认值0
+            Assert.AreEqual(100, "www.xcodex.net".ToDecimal(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>高精度浮点数</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToDouble(System.String,System.Double)">
+            <summary>
+            String to Double(字符串 转换成 64位双精度浮点类型 大致范围:±5.0 × 10^−324 到 ±1.7 × 10^308)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(56.78D, "56.78".ToDouble());
+            Assert.AreEqual(0, "www.xcodex.net".ToDouble());//转换失败，返回默认值0
+            Assert.AreEqual(100, "www.xcodex.net".ToDouble(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>双精度浮点数</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToSingle(System.String,System.Single)">
+            <summary>
+            String to Single(字符串 转换成 32位单精度浮点类型 大致范围:-3.4 × 10^38 到 +3.4 × 10^38)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(23.45F, "23.45".ToSingle());
+            Assert.AreEqual(0, "www.xcodex.net".ToSingle());//转换失败，返回默认值0
+            Assert.AreEqual(100, "www.xcodex.net".ToSingle(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>单精度浮点数</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToByte(System.String,System.Byte)">
+            <summary>
+            String to Byte(字符串 转换成 无符号8位整数 范围:0 到 255)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(100, "100".ToByte());
+            Assert.AreEqual(255, "255".ToByte());
+            Assert.AreEqual(0, "256".ToByte());//转换失败，返回默认值0
+            Assert.AreEqual(100, "1000".ToByte(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>byte</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToSByte(System.String,System.SByte)">
+            <summary>
+            String to SByte(字符串 转换成 有符号8位整数 范围:-128 到 127)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(127, "127".ToSByte());
+            Assert.AreEqual(-128, "-128".ToSByte());
+            Assert.AreEqual(0, "128".ToSByte());//转换失败，返回默认值0
+            Assert.AreEqual(100, "-129".ToSByte(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>sbyte</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToInt16(System.String,System.Int16)">
+            <summary>
+            String to Int16(short)(字符串 转换成 有符号16位整数 范围:-32,768 到 32,767)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(-32768, "-32768".ToInt16());
+            Assert.AreEqual(32767, "32767".ToInt16());
+            Assert.AreEqual(0, "32768".ToInt16());//转换失败，返回默认值0
+            Assert.AreEqual(100, "-32769".ToInt16(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>Int16(short)</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToUInt16(System.String,System.UInt16)">
+            <summary>
+            String to UInt16(字符串 转换成 无符号16位整数 范围:0 到 65,535)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(1, "1".ToUInt16());
+            Assert.AreEqual(65535, "65535".ToUInt16());
+            Assert.AreEqual(0, "65536".ToUInt16());//转换失败，返回默认值0
+            Assert.AreEqual(100, "-1".ToUInt16(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>UInt16</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToInt32(System.String,System.Int32)">
+            <summary>
+            String to Int32(字符串 转换成 有符号32位整数 范围:-2,147,483,648 到 2,147,483,647)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(-2147483648, "-2147483648".ToInt32());
+            Assert.AreEqual(2147483647, "2147483647".ToInt32());
+            Assert.AreEqual(0, "-2147483649".ToInt32());//转换失败，返回默认值0
+            Assert.AreEqual(100, "2147483648".ToInt32(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>Int32</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToUInt32(System.String,System.UInt32)">
+            <summary>
+            String to UInt32(字符串 转换成 无符号32位整数 范围:0 到 4,294,967,295)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(1U, "1".ToUInt32());
+            Assert.AreEqual(4294967295, "4294967295".ToUInt32());
+            Assert.AreEqual(0U, "-1".ToUInt32());//转换失败，返回默认值0
+            Assert.AreEqual(100U, "4294967296".ToUInt32(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>UInt32</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToInt64(System.String,System.Int64)">
+            <summary>
+            String to Int64(long)(字符串 转换成 有符号64位整数 范围:-9,223,372,036,854,775,808 到 9,223,372,036,854,775,807)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(-9223372036854775808, "-9223372036854775808".ToInt64());
+            Assert.AreEqual(9223372036854775807, "9223372036854775807".ToInt64());
+            Assert.AreEqual(0, "-9223372036854775809".ToInt64());//转换失败，返回默认值0
+            Assert.AreEqual(100, "9223372036854775808".ToInt64(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>Int64(long)</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToUInt64(System.String,System.UInt64)">
+            <summary>
+            String to UInt64(ulong)(字符串 转换成 无符号64位整数 范围:0 到 18,446,744,073,709,551,615)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(1U, "1".ToUInt64());
+            Assert.AreEqual(18446744073709551615, "18446744073709551615".ToUInt64());
+            Assert.AreEqual(0U, "-1".ToUInt64());//转换失败，返回默认值0
+            Assert.AreEqual(100U, "18446744073709551616".ToUInt64(100));//转换失败，返回默认值100
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>UInt64(ulong)</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToGuid(System.String,System.Guid)">
+            <summary>
+            String to Guid(字符串 转换成 Guid)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(Guid.Parse("F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4"), "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4".ToGuid());
+            Assert.AreEqual(Guid.Empty, "F9168C5ECEB24faaB6BF329BF39FA1E".ToGuid());//转换失败，返回默认值
+            Assert.AreEqual(Guid.Parse("936DA01F-9ABD-4d9d-80C7-02AF85C822A8"), "F9168C5ECEB24faaB6BF329BF39FA1E".ToGuid(Guid.Parse("936DA01F-9ABD-4d9d-80C7-02AF85C822A8")));//转换失败，返回默认值0
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>Guid</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToDateTime(System.String,System.DateTime)">
+            <summary>
+            String to DateTime(字符串 转换成 时间)
+            转换失败返回默认值
+            </summary>
+            <example>
+            Assert.AreEqual(DateTime.Parse("2014-06-23"), "2014-06-23".ToDateTime());
+            Assert.AreEqual(DateTime.Parse("0001-01-01"), "20140623".ToDateTime());//转换失败，返回默认值
+            Assert.AreEqual(DateTime.Parse("1900-01-01"), "20140623".ToDateTime(DateTime.Parse("1900-01-01")));//转换失败，返回默认值
+            </example>
+            <remarks>
+            2014-06-23 16:31 Created By chenbo
+            </remarks>
+            <param name="s">字符串</param>
+            <param name="def">默认值</param>
+            <returns>DateTime</returns>
+        </member>
+        <member name="M:System.ConverterExtension.ToChsStr(System.DateTime)">
+            <summary>
+            将DateTime转换成中文
+            </summary>
+            <example>
+            Assert.AreEqual("刚刚", DateTime.Now.ToChsStr());
+            Assert.AreEqual("1分钟前", DateTime.Now.AddMinutes(-1).ToChsStr());
+            Assert.AreEqual("1小时前", DateTime.Now.AddHours(-1).ToChsStr());
+            Assert.AreEqual("昨天", DateTime.Now.AddDays(-1).ToChsStr());
+            Assert.AreEqual("前天", DateTime.Now.AddDays(-2).ToChsStr());
+            Assert.AreEqual("3天前", DateTime.Now.AddDays(-3).ToChsStr());
+            Assert.AreEqual("1月前", DateTime.Now.AddMonths(-1).ToChsStr());
+            Assert.AreEqual("1年前", DateTime.Now.AddYears(-1).ToChsStr());
+            </example> 
+            <remarks>
+            2014-12-21 12:10 Created By chenbo
+            </remarks>
+            <param name="dateTime">日期时间</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:System.DataTableExtension">
+            <summary>
+            DataTable转换扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.DataTableExtension.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            将泛型集合转换成DataTable
+            </summary>
+            <example>
+            <![CDATA[
+            var personList = new List<Person>();
+            var dataTable = personList.ToDataTable();
+            ]]>
+            </example>
+            <typeparam name="T">类型</typeparam>
+            <param name="source">集合</param>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:System.DataTableExtension.ToListFromDataTable``1(System.Data.DataTable)">
+            <summary>
+            将DataTable转换成泛型集合
+            </summary>
+            <example>
+            <![CDATA[
+            var dataTable = new DataTable();
+            var personList = dataTable.ToList<Person>();
+            ]]>
+            </example>
+            <typeparam name="T">类型</typeparam>
+            <param name="dataTable">dataTable</param>
+            <returns>泛型集合</returns>
+        </member>
+        <member name="T:System.EncryptExtension">
+            <summary>
+            加密/解密扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.EncryptExtension.ToMD5(System.String)">
+            <summary>
+            MD5加密
+            </summary>
+            <example>
+            var md5Encrypted = "www.xcodex.net".ToMd5();
+            </example>
+            <remarks>
+            2013-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">要加密的字符串</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:System.EncryptExtension.ToMD5CustomKey(System.String,System.String)">
+            <summary>
+            基于MD5的自定义字符串加密方法(不可逆,非MD5)
+            </summary>
+            <example>
+            var md5CustomkeyEncrypted = "www.xcodex.net".ToMd5CustomKey();//使用默认加密密钥
+            var md5CustomkeyEncrypted = "www.xcodex.net".ToMd5CustomKey("xcodex");//自定义加密密钥
+            </example>
+            <remarks>
+            2014-11-05 18:53 Created By chenbo
+            </remarks>
+            <param name="source">要加密的字符串</param>
+            <param name="key">加密密钥(默认值:www.xcodex.net)</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:System.EncryptExtension.EncryptReversible(System.String,System.String)">
+            <summary>
+            字符串可逆加密(可通过DecryptReversible()方法解密)
+            </summary>
+            <example>
+            var reversibleEncrypted = "xcodex".EncryptReversible();
+            var reversibleEncrypted = "xcodex".EncryptReversible("c#");
+            </example>
+            <remarks>
+            2014-11-05 18:53 Created By chenbo
+            </remarks>
+            <param name="source">要加密的字符串</param>
+            <param name="key">加密密钥(默认值:www.xcodex.net)</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:System.EncryptExtension.DecryptReversible(System.String,System.String)">
+            <summary>
+            字符串解密(通过EncryptReversible()方法加密的字符串)
+            </summary>
+            <example>
+            var reversibleDecrypted = "8C51017B041F3D56CAB3844D5DE32D86".DecryptReversible();
+            var reversibleDecrypted = "2F801172B19350656FFA3597467436F0".DecryptReversible("c#");
+            </example>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">
+            不正确的数据,可能的原因:
+            1.要解密的字符串不是通过EncryptReversible()方法加密的
+            2.加密解密使用的密钥不一致
+            </exception>
+            <remarks>
+            2014-11-05 18:53 Created By chenbo
+            </remarks>
+            <param name="source">要解密的字符串(通过EncryptReversible()方法加密)</param>
+            <param name="key">加密密钥(默认值:www.xcodex.net)</param>
+            <returns>解密后的字符串</returns>
+        </member>
+        <member name="F:System.EncryptExtension.TimestampLength">
+            <summary>
+            The timestamp length.
+            </summary>
+        </member>
+        <member name="M:System.EncryptExtension.MixUp(System.String)">
+            <summary>
+            用时间简单混淆
+            </summary>
+            <param name="str">原字符串</param>
+            <returns>混淆后字符串</returns>
+        </member>
+        <member name="M:System.EncryptExtension.ClearUp(System.String)">
+            <summary>
+            简单反混淆
+            </summary>
+            <param name="str">混淆后字符串</param>
+            <returns>原字符串</returns>
+        </member>
+        <member name="T:System.Collections.Generic.ListExtension">
+            <summary>
+            集合扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListExtension.IsNullOrEmpty(System.Collections.IList)">
+            <summary>
+            判断集合是否为null或为空
+            </summary>
+            <example>
+            var boolResult = list.IsNullOrEmpty();
+            </example>
+            <remarks>
+            2015-10-8 18:53 Created By chenbo
+            </remarks>
+            <param name="source">集合</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="T:System.ObjectExtension">
+            <summary>
+            Object扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.ObjectExtension.ToDictionary(System.Object,System.Char)">
+            <summary>
+            匿名类转换成字典
+            转换失败返回null
+            </summary>
+            <example>
+            var person = new { Person_Id = 1, Person_Name = "Sam", Person_Gender = 0 };
+            var dictionary = person.ToDictionary();//Person_Id = 1 Person_Name = Sam Person_Gender = 0
+            var dictionary = person.ToDictionary('.');//Person.Id = 1 Person.Name = Sam Person.Gender = 0
+            </example>
+            <remarks>
+            2015-11-18 18:53 Created By chenbo
+            2016-01-23 17:42 Updated By chenbo : Adding an exception to this method.
+            </remarks>
+            <param name="source">匿名类</param>
+            <param name="attrSeparator">属性分隔符，类属性不能有其他字符，_代表字符</param>
+            <returns>属性字典</returns>
+        </member>
+        <member name="M:System.ObjectExtension.IsNull(System.Object)">
+            <summary>
+            判断一个对象是否为NULL
+            </summary>
+            <example>
+            var boolResult = obj.IsNull();
+            </example>
+            <remarks>
+            2015-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">判断对象</param>
+            <returns>是否为NULL</returns>
+        </member>
+        <member name="M:System.ObjectExtension.IsNotNull(System.Object)">
+            <summary>
+            判断一个对象是否不为NULL
+            </summary>
+            <example>
+            var boolResult = obj.IsNotNull();
+            </example>
+            <remarks>
+            2015-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">判断对象</param>
+            <returns>是否不为NULL</returns>
+        </member>
+        <member name="T:System.Web.RequestExtension">
+            <summary>
+            Request扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.Web.RequestExtension.IsPostBack(System.Web.HttpRequest)">
+            <summary>
+            Request扩展IsPostBack方法
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.StreamExtension">
+            <summary>
+            数据流扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.StreamExtension.GetMD5(System.IO.Stream)">
+            <summary>
+            获取数据流的MD5值
+            </summary>
+            <example>
+            var md5Value = stream.GetMD5();
+            </example>
+            <remarks>
+            2016-2-28 18:05:05 Created By chenbo
+            </remarks>
+            <param name="stream">数据流</param>
+            <returns>MD5值</returns>
+        </member>
+        <member name="M:System.StreamExtension.ToBytes(System.IO.Stream,System.Boolean)">
+            <summary>
+            将数据流转换成字节数组
+            </summary>
+            <example>
+            var byteArray = stream.ToBytes();
+            </example>
+            <remarks>
+            2016-3-14 22:47:57 Created By chenbo
+            </remarks>
+            <param name="stream">数据流</param>
+            <param name="isDispose">是否释放资源(默认值:true)</param>
+            <returns>字节数组</returns>
+        </member>
+        <member name="T:System.StringExtension">
+            <summary>
+            String扩展方法类
+            </summary>
+        </member>
+        <member name="M:System.StringExtension.IsNullOrEmpty(System.String)">
+            <summary>
+            判断字符串是否为空或Null
+            </summary>
+            <example>
+            var boolResult = string.IsNullOrEmpty();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">待验证的字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            判断字符串是否为空,Null或空格符
+            </summary>
+            <example>
+            var boolResult = string.IsNullOrWhiteSpace();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">待验证的字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsMatch(System.String,System.String)">
+            <summary>
+            指定的正则表达式在传递过来的字符串中是否找到了匹配项
+            </summary>
+            <example>
+            var boolResult = "13800138000".IsMatch(@"^[1][3-8]\d{9}$");
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">搜索匹配项的字符串</param>
+            <param name="pattern">匹配的正则表达式模式</param>
+            <returns>如果正则表达式找到匹配项，则为true,否则为false</returns>
+        </member>
+        <member name="M:System.StringExtension.Match(System.String,System.String)">
+            <summary>
+            在指定的输入字符串中搜索指定的正则表达式的第一个匹配项
+            </summary>
+            <example>
+            var matchResult = "123abc456".Match(@"\d+");//匹配结果:123
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">要搜索匹配项的字符串</param>
+            <param name="pattern">要配的匹正则表达式对象</param>
+            <returns>返回一个对象，包含有关匹配项的信息</returns>
+        </member>
+        <member name="M:System.StringExtension.Matchs(System.String,System.String)">
+            <summary>
+            在指定的输入字符串中搜索指定的正则表达式的所有匹配项的字符串集合
+            </summary>
+            <example>
+            var matchResults = "123abc456".Matchs(@"\d+");//匹配结果:123,456
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">要搜索匹配项的字符串</param>
+            <param name="pattern">要匹配的正则表达式模式</param>
+            <returns>返回匹配字符串集合</returns>
+        </member>
+        <member name="M:System.StringExtension.IsEmail(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是电子邮件
+            </summary>
+            <example>
+            var boolResult = "chenbo@xcodex.net".IsEmail();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsIpAddress(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是IP地址
+            </summary>
+            <example>
+            var boolResult = "118.114.252.196".IsIpAddress();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks> 
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsNumeric(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否整数
+            </summary>
+            <example>
+            var boolResult = "-1".IsNumeric();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>  
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsUnicode(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是Unicode字符串(中文)
+            </summary>
+            <example>
+            var boolResult = "行".IsUnicode();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>   
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsUrl(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是Url地址
+            </summary>
+            <example>
+            var boolResult = "http://www.xcodex.net".IsUrl();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>   
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsIdentityCard(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是身份证，包含以下三种情况：
+            1.身份证号码为15位数字
+            2.身份证号码为18位数字
+            3.身份证号码为17位数字+1个字母(x)
+            </summary>
+            <example>
+            var boolResult = "110105710923582".IsIdentityCard();
+            var boolResult = "530113199403211681".IsIdentityCard();
+            var boolResult = "41062119930626532x".IsIdentityCard();
+            var boolResult = "62020019880415202X".IsIdentityCard();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks> 
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsMobileNumber(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是手机号码
+            </summary>
+            <example>
+            var boolResult = "13800138000".IsMobileNumber();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks> 
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:System.StringExtension.IsTelephoneNumber(System.String)">
+            <summary>
+            使用正则表达式验证字符串是否是座机电话号码
+            </summary>
+            <example>
+            var boolResult = "028-88888888".IsTelephoneNumber();
+            var boolResult = "85885585".IsTelephoneNumber();
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks> 
+            <param name="source">待验证字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="T:CBLibrary.Utility.ComputerInfoHelper">
+            <summary>
+            获取电脑本机的信息(IP,主机名称,Mac地址)
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.ComputerInfoHelper.GetComputerIp">
+            <summary>
+            获取电脑的IP信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ComputerInfoHelper.GetComputerIps">
+            <summary>
+            获取电脑的IP信息(集合)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ComputerInfoHelper.GetHostName">
+            <summary>
+            获取电脑的主机名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ComputerInfoHelper.GetMacs">
+            <summary>
+            获取电脑的Mac地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CBLibrary.Utility.ConfigHelper">
+            <summary>
+            读取配置文件中的配置项和数据库连接字符串
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.ConfigHelper.GetConfigFile(System.String,System.String)">
+            <summary>
+            读取配置文件
+            </summary>
+            <param name="config_folder">配置文件文件夹名(默认值:~/Configs/)</param>
+            <param name="config_name">配置文件名</param>
+            <returns>配置文件的物理路径</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ConfigHelper.GetAppSetting(System.String,System.String)">
+            <summary>
+            通过key获取配置文件中的配置信息
+            </summary>
+            <param name="key">key</param>
+            <param name="def">默认值</param>
+            <returns>配置信息</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ConfigHelper.GetConnectionString(System.String,System.String)">
+            <summary>
+            通过key获取配置文件中的连接字符串
+            </summary>
+            <param name="key">key</param>
+            <param name="def">默认值</param>
+            <returns>连接字符串</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ConfigHelper.GetMapPath(System.String)">
+            <summary>
+            根据虚拟路径得到物理路径
+            </summary>
+            <param name="virtualPath">虚拟路径</param>
+            <returns>物理路径</returns>
+        </member>
+        <member name="T:CBLibrary.Utility.FileHelper">
+            <summary>
+            文件操作帮助类
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.FileHelper.ReadFromTXT(System.String)">
+            <summary>
+            通过文本文件路径读取文件
+            自动解析源文件编码格式
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>读取到的文件字符串</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.FileHelper.GetEncoding(System.String)">
+            <summary>
+            根据文件路径解析文件编码格式
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>文件的编码格式</returns>
+        </member>
+        <member name="T:CBLibrary.Utility.ImageHelper">
+            <summary>
+            图片操作帮助类
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.CutForSquare(System.IO.Stream,System.String,System.Int32,System.Int32)">
+            <summary>
+            正方型裁剪
+            以图片中心为轴心，截取正方型，然后等比缩放
+            用于头像处理
+            </summary>
+            <param name="fromFile">原图Stream对象</param>
+            <param name="fileSaveUrl">缩略图存放地址</param>
+            <param name="side">指定的边长（正方型）</param>
+            <param name="quality">质量（范围0-100）</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.CutForCustom(System.IO.Stream,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            指定长宽裁剪
+            按模版比例最大范围的裁剪图片并缩放至模版尺寸
+            </summary>
+            <param name="fromFile">原图Stream对象</param>
+            <param name="fileSaveUrl">保存路径</param>
+            <param name="maxWidth">最大宽(单位:px)</param>
+            <param name="maxHeight">最大高(单位:px)</param>
+            <param name="quality">质量（范围0-100）</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.ZoomAuto(System.IO.Stream,System.String,System.Double,System.Double,System.String,System.String)">
+            <summary>
+            图片等比缩放
+            </summary>
+            <param name="fromFile">原图Stream对象</param>
+            <param name="savePath">缩略图存放地址</param>
+            <param name="targetWidth">指定的最大宽度</param>
+            <param name="targetHeight">指定的最大高度</param>
+            <param name="watermarkText">水印文字(为""表示不使用水印)</param>
+            <param name="watermarkImage">水印图片路径(为""表示不使用水印)</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.IsWebImage(System.String)">
+            <summary>
+            判断文件类型是否为WEB格式图片
+            (注：JPG,GIF,BMP,PNG)
+            </summary>
+            <param name="contentType">HttpPostedFile.ContentType</param>
+            <returns></returns>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.MakeThumbnail(System.String,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            生成缩略图
+            </summary>
+            <param name="originalImagePath">源图路径（物理路径）</param>
+            <param name="thumbnailPath">缩略图路径（物理路径）</param>
+            <param name="width">缩略图宽度</param>
+            <param name="height">缩略图高度</param>
+            <param name="mode">生成缩略图的方式</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.ImageWatermark(System.String,System.String,System.String)">
+            <summary>
+            图片水印处理
+            </summary>
+            <param name="path">需要加载水印的图片路径（绝对路径）</param>
+            <param name="waterpath">水印图片（绝对路径）</param>
+            <param name="location">水印位置（传送正确的代码）</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.LetterWatermark(System.String,System.Int32,System.String,System.Drawing.Color,System.String)">
+            <summary>
+            文字水印处理
+            </summary>
+            <param name="path">图片路径（绝对路径）</param>
+            <param name="size">字体大小</param>
+            <param name="letter">水印文字</param>
+            <param name="color">颜色</param>
+            <param name="location">水印位置</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.Compress(System.String,System.String)">
+            <summary>
+            压缩到指定尺寸
+            </summary>
+            <param name="oldfile">原文件</param>
+            <param name="newfile">新文件</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.ResizeImage(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            拉伸图片
+            </summary>
+            <param name="bmp">原始图片</param>
+            <param name="newW">新的宽度</param>
+            <param name="newH">新的高度</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.RevPicLR(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            左右翻转
+            </summary>
+            <param name="mybm">原始图片</param>
+            <param name="width">原始图片的长度</param>
+            <param name="height">原始图片的高度</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.RevPicUD(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            上下翻转
+            </summary>
+            <param name="mybm">原始图片</param>
+            <param name="width">原始图片的长度</param>
+            <param name="height">原始图片的高度</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.GetLocation(System.String,System.Drawing.Image,System.Drawing.Image)">
+            <summary>
+            图片水印位置处理方法
+            </summary>
+            <param name="location">水印位置</param>
+            <param name="img">需要添加水印的图片</param>
+            <param name="waterimg">水印图片</param>
+        </member>
+        <member name="M:CBLibrary.Utility.ImageHelper.GetLocation(System.String,System.Drawing.Image,System.Int32,System.Int32)">
+            <summary>
+            文字水印位置的方法
+            </summary>
+            <param name="location">位置代码</param>
+            <param name="img">图片对象</param>
+            <param name="width">宽(当水印类型为文字时,传过来的就是字体的大小)</param>
+            <param name="height">高(当水印类型为文字时,传过来的就是字符的长度)</param>
+        </member>
+        <member name="T:CBLibrary.Utility.LogHelper">
+            <summary>
+            日志操作帮助类(静态)
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelper.#cctor">
+            <summary>
+            初始化加载配置文件
+            从配置文件读取log4net配置文件(设置"复制到输出目录-始终复制")
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelper.WriteErrorLog(System.String,System.String,System.Exception)">
+            <summary>
+            错误等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelper.WriteDebugLog(System.String,System.String,System.Exception)">
+            <summary>
+            调试等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelper.WriteFatalLog(System.String,System.String,System.Exception)">
+            <summary>
+            致命等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelper.WriteInfoLog(System.String,System.String,System.Exception)">
+            <summary>
+            消息等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelper.WriteWarnLog(System.String,System.String,System.Exception)">
+            <summary>
+            警告等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="T:CBLibrary.Utility.JsonHelper">
+            <summary>
+            JSON操作帮助类
+            </summary>
+            <remarks>
+             2014-11-18 18:56 Created By chenbo
+            </remarks>
+        </member>
+        <member name="F:CBLibrary.Utility.JsonHelper.JsonSerializer">
+            <summary>
+            The json serializer
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.JsonHelper.Serialize(System.Object)">
+            <summary>
+            将一个对象序列化JSON字符串
+            </summary>
+            <remarks>
+             2013-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="obj">待序列化的对象</param>
+            <returns>JSON字符串</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.JsonHelper.Deserialize(System.String)">
+            <summary>
+            将JSON字符串反序列化为一个Object对象
+            </summary>
+            <remarks>
+             2014-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="json">JSON字符串</param>
+            <returns>Object对象</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.JsonHelper.Deserialize``1(System.String)">
+            <summary>
+            将JSON字符串反序列化为一个指定类型对象
+            </summary>
+            <remarks>
+             2014-11-18 18:56 Created By chenbo
+            </remarks>
+            <typeparam name="TObj">对象类型</typeparam>
+            <param name="json">JSON字符串</param>
+            <returns>指定类型对象</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.JsonHelper.DeserializeObject(System.String)">
+            <summary>
+            将JSON字符串反序列化为一个JObject对象
+            </summary>
+            <remarks>
+             2014-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="json">JSON字符串</param>
+            <returns>JObject对象</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.JsonHelper.DeserializeArray(System.String)">
+            <summary>
+            将JSON字符串反序列化为一个JArray数组
+            </summary>
+            <remarks>
+             2014-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="json">JSON字符串</param>
+            <returns>JArray对象</returns>
+        </member>
+        <member name="T:CBLibrary.Utility.LogHelperInstance">
+            <summary>
+            日志操作帮助类(实例)
+            </summary>
+            <remarks>
+            2015-11-18 20:56 Created By chenbo
+            </remarks>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.#ctor(System.String)">
+            <summary>
+            构造方法初始化加载配置文件
+            配置文件需要设置"复制到输出目录-始终复制"
+            </summary>
+            <param name="configPath"></param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.WriteErrorLog(System.String,System.String,System.Exception)">
+            <summary>
+            错误等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.WriteDebugLog(System.String,System.String,System.Exception)">
+            <summary>
+            调试等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.WriteFatalLog(System.String,System.String,System.Exception)">
+            <summary>
+            致命等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.WriteInfoLog(System.String,System.String,System.Exception)">
+            <summary>
+            消息等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.WriteWarnLog(System.String,System.String,System.Exception)">
+            <summary>
+            警告等级日志
+            </summary>
+            <remarks>
+            2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="loggerName">Logger对象名称</param>
+            <param name="msg">日志内容</param>
+            <param name="ex">异常信息</param>
+        </member>
+        <member name="M:CBLibrary.Utility.LogHelperInstance.Logger(System.String)">
+            <summary>
+            日志名称
+            建议写类名
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CBLibrary.Utility.RandomHelper">
+            <summary>
+            随机数生成帮助类
+            important:RandomHelper需进一步完善
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.RandomHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.RandomHelper.GetNumber(System.Int32)">
+            <summary>
+            获取指定长度的随机数字
+            </summary>
+            <param name="length">长度</param>
+            <returns>随机数字</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.RandomHelper.GetNumber(System.Int32,System.Int32)">
+            <summary>
+            生成一个指定范围的随机整数，该随机数范围包括最小值，但不包括最大值
+            </summary>
+            <param name="minNum">最小值</param>
+            <param name="maxNum">最大值</param>
+        </member>
+        <member name="M:CBLibrary.Utility.RandomHelper.GetString(System.Int32)">
+            <summary>
+            获取指定长度的随机字符
+            </summary>
+            <param name="length">长度</param>
+            <returns>随机字符</returns>
+        </member>
+        <member name="T:CBLibrary.Utility.RegexHelper">
+            <summary>
+            正则验证帮助类
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.RegexHelper.IsMatch(System.String,System.String)">
+            <summary>
+            验证输入字符串是否与模式字符串匹配
+            </summary>
+            <example>
+            
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="input">输入字符串</param>
+            <param name="pattern">模式字符串</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.RegexHelper.IsMatch(System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            验证输入字符串是否与模式字符串匹配
+            </summary>
+            <example>
+            
+            </example>
+            <remarks>
+            2014-11-18 18:53 Created By chenbo
+            </remarks>
+            <param name="input">输入的字符串</param>
+            <param name="pattern">模式字符串</param>
+            <param name="options">筛选条件</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="T:CBLibrary.Utility.XmlHelper">
+            <summary>
+            XML序列化操作帮助类
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.Serialize(System.IO.Stream,System.Object,System.Text.Encoding)">
+            <summary>
+            XML序列化
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <param name="stream">流</param>
+            <param name="obj">对象</param>
+            <param name="encoding">编码</param>
+            <exception cref="T:System.ArgumentNullException">
+            o
+            or
+            encoding
+            </exception>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.Serialize(System.Object)">
+            <summary>
+            将一个对象序列化为XML字符串(UTF-8编码)
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <param name="obj">要序列化的对象</param>
+            <returns>序列化产生的XML字符串(UTF-8编码)</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.Serialize(System.Object,System.Text.Encoding)">
+            <summary>
+            将一个对象序列化为XML字符串
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <param name="obj">要序列化的对象</param>
+            <param name="encoding">编码方式</param>
+            <returns>序列化产生的XML字符串</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.SerializeToFile(System.Object,System.String)">
+            <summary>
+            将一个对象按XML序列化的方式写入到一个文件(虚拟路径)UTF-8
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <param name="obj">The object.</param>
+            <param name="virtualPath">虚拟路径</param>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.SerializeToFile(System.Object,System.String,System.Text.Encoding)">
+            <summary>
+            将一个对象按XML序列化的方式写入到一个文件
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <param name="obj">要序列化的对象</param>
+            <param name="virtualPath">虚拟路径</param>
+            <param name="encoding">编码方式</param>
+            <exception cref="T:System.ArgumentNullException">path</exception>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.Deserialize``1(System.String)">
+            <summary>
+            从XML字符串(UTF-8编码)中反序列化对象
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <typeparam name="T">结果对象类型</typeparam>
+            <param name="str">包含对象的XML字符串</param>
+            <returns>反序列化得到的对象</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.Deserialize``1(System.String,System.Text.Encoding)">
+            <summary>
+            从XML字符串中反序列化对象
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <typeparam name="T">结果对象类型</typeparam>
+            <param name="str">包含对象的XML字符串</param>
+            <param name="encoding">编码方式</param>
+            <returns>反序列化得到的对象</returns>
+            <exception cref="T:System.ArgumentNullException">
+            s
+            or
+            encoding
+            </exception>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.DeserializeFromFile``1(System.String)">
+            <summary>
+            读入一个虚拟路径文件(UTF-8编码)，并按XML的方式反序列化对象。
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <typeparam name="T">结果对象类型</typeparam>
+            <param name="virtualPath">虚拟路径</param>
+            <returns>反序列化得到的对象</returns>
+        </member>
+        <member name="M:CBLibrary.Utility.XmlHelper.DeserializeFromFile``1(System.String,System.Text.Encoding)">
+            <summary>
+            读入一个文件，并按XML的方式反序列化对象。
+            </summary>
+            <remarks>
+             2014年01月09日 11:47 Created By chenbo
+            </remarks>
+            <typeparam name="T">结果对象类型</typeparam>
+            <param name="virtualPath">虚拟路径</param>
+            <param name="encoding">编码方式</param>
+            <returns>反序列化得到的对象</returns>
+            <exception cref="T:System.ArgumentNullException">
+            path
+            or
+            encoding
+            </exception>
+        </member>
+        <member name="T:CBLibrary.Web.CaptchaHelper">
+            <summary>
+            随机验证码
+            随机生成设定验证码，并随机旋转一定角度，字体颜色不同
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Web.CaptchaHelper.CreateRandomCode(System.Int32)">
+            <summary>  
+            生成随机码  
+            </summary>  
+            <param  name="length">随机码个数</param>  
+            <returns></returns>
+        </member>
+        <member name="M:CBLibrary.Web.CaptchaHelper.DrawImage(System.String,System.Single,System.Drawing.Color,System.Drawing.Color)">
+            <summary>  
+            创建随机码图片  
+            </summary>  
+            <param  name="vcode">验证码</param>
+            <param name="fontSize">字体大小</param>
+            <param name="background">背景颜色</param>
+            <param name="border">边框颜色</param>
+            <returns>Gif图片二进制流</returns>
+        </member>
+        <member name="T:CBLibrary.Web.HttpHelper">
+            <summary>
+            HTTP请求操作助手类
+            </summary>
+        </member>
+        <member name="M:CBLibrary.Web.HttpHelper.Get(System.String,System.Object)">
+            <summary>
+            以GET方式抓取远程页面内容
+            </summary>
+            <remarks>
+             2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="url">请求URL地址</param>
+            <param name="data">参数列表</param>
+            <returns>响应资源体</returns>
+            <example>
+            string str=HtmlHelper.Get("http://www.xcodex.net",new{p1="hello",p2="world"});
+              </example>
+        </member>
+        <member name="M:CBLibrary.Web.HttpHelper.Get(System.String,System.Object,System.Text.Encoding)">
+            <summary>
+            以GET方式抓取远程页面内容
+            </summary>
+            <remarks>
+             2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="url">请求URL地址</param>
+            <param name="data">参数列表</param>
+            <param name="encoding"></param>
+            <returns>响应资源体</returns>
+            <example>
+            string str=HtmlHelper.Get("http://www.xcodex.net",new{p1="hello",p2="world"});
+            </example>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.HttpHelper.Get(System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.HttpHelper.Get(System.String,System.String,System.Text.Encoding)" -->
+        <member name="M:CBLibrary.Web.HttpHelper.Post(System.String,System.Object)">
+            <summary>
+            以POST方式抓取远程页面内容
+            </summary>
+            <remarks>
+             2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="url">请求URL地址</param>
+            <param name="data">参数列表</param>
+            <returns>响应资源体</returns>
+            <example>
+            string str=HtmlHelper.Post("http://www.xcodex.net",new{p1="hello",p2="world"});
+            </example>
+        </member>
+        <member name="M:CBLibrary.Web.HttpHelper.Post(System.String,System.Object,System.Text.Encoding)">
+            <summary>
+            以POST方式抓取远程页面内容
+            </summary>
+            <remarks>
+             2015-11-18 18:56 Created By chenbo
+            </remarks>
+            <param name="url">请求URL地址</param>
+            <param name="data">参数列表</param>
+            <param name="encoding">字符编码</param>
+            <returns>响应资源体</returns>
+            <example>
+            string str=HtmlHelper.Post("http://www.xcodex.net",new{p1="hello",p2="world"});
+            </example>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.HttpHelper.Post(System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.HttpHelper.Post(System.String,System.String,System.Text.Encoding)" -->
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.HttpHelper.GetStream(System.String,System.Object)" -->
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.HttpHelper.GetStream(System.String,System.String)" -->
+        <member name="T:CBLibrary.Web.PaginationHelper">
+            <summary>
+            分页助手类
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CBLibrary.Web.PaginationHelper.GetPagination(System.String,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Char)" -->
+        <member name="M:CBLibrary.Web.PaginationHelper.GetPageBar(System.Int32,System.Int32)">
+            <summary>
+            获得数字页码条
+            默认页面上显示10个数字页码
+            </summary>
+            <param name="pageIndex">当前页码</param>
+            <param name="pageCount">总页数</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

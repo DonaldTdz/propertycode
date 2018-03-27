@@ -1,0 +1,91 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<#
+	var manager = TemplateFileManager.Create(this);
+	string strProjectName = "BackgroundMgr";
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.BackgroundMgr.MVCWeb\Models\FrameworkTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var frameworkTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='DomainEntity']");
+	foreach (XmlNode templateNode in frameworkTemplateNodes)
+	{
+	manager.StartNewFile(templateNode.Attributes["Name"].Value + "DTO.cs");
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace YK.<#= strProjectName #>.ApplicationDTO
+{
+	[Serializable]
+	public partial class <#= templateNode.Attributes["Name"].Value #>DTO
+	{
+<#
+		foreach (XmlNode itemNode in templateNode.ChildNodes)
+        {
+			string tempExtention = "";
+			string tempTypeName = "";
+			string tempFieldName = "";
+			string tempFieldCnName = "";
+			if (itemNode.LocalName == "TemplateItem")
+            {				
+				bool isRequred = false;
+				
+				foreach (XmlNode itemDetailNode in itemNode.ChildNodes)
+				{
+					if(itemDetailNode.LocalName == "Type")
+					{
+						switch(itemDetailNode.InnerText)
+						{
+							case "dict":
+								tempTypeName = isRequred ? "int" : "int?";
+								break;
+							case "int":
+								tempTypeName = isRequred ? "int" : "int?";
+								break;
+							case "double":
+								tempTypeName = isRequred ? "double" : "double?";
+								break;
+							case "date":
+							case "datetime":
+								tempTypeName = isRequred ? "DateTime" : "DateTime?";
+								break;
+							default:
+								tempTypeName = itemDetailNode.InnerText;
+								break;
+						}
+					}
+					else if(itemDetailNode.LocalName == "Field")
+					{
+						tempFieldName = itemDetailNode.InnerText;
+					}
+					else if(itemDetailNode.LocalName == "CnName")
+					{
+						tempFieldCnName = itemDetailNode.InnerText;
+					}
+				}
+#>
+
+		/// <summary>
+        /// <#= tempFieldCnName #>
+        /// </summary>
+		public <#= tempTypeName #> <#= tempFieldName #> { get; set; }
+<#
+            }
+        }
+#>
+	 }
+}
+<#
+    }
+	manager.Process();
+#>

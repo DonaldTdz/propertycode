@@ -1,0 +1,44 @@
+﻿
+// Generated helper templates
+// Generated items
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayChargeBillSynchronizerDetail.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayChargeBillSynchronizer.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayChargeBill.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayRoom.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayAPPAuthToken.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayCommunity.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\AlipayApiRequestLog.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ClientPaymentLog.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ReceiptBookHistory.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ReceiptBookDetail.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ReceiptBook.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\TemplatePrintRecordDetail.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\TemplatePrintRecord.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PaymentDiscountInfo.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\TicketSerialNumber.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ShareKey.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\Province.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\County.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\City.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\EntranceUserDetail.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\EntranceUser.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\EntranceLog.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\Entrance.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ChargeBillRecordMatching.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\RefundRecord.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\Receipt.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\MeterReadRecord.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\Meter.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PaymentTaskDetail.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PaymentTasks.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PreferentialRecord.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PrepayAccountDetail.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PrepayAccount.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ChargeRecord.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ChargeSubjectSna.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ChargBill.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\SubjectHouseRef.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\ChargeSubject.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\NotificeConfig.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\PrepayAccountLog.cs
+// D:\git\property\src\YK.PropertyMgr.DomainEntity\CommunityConfig.cs

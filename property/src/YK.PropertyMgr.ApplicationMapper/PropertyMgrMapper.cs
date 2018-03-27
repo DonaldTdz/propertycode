@@ -1,0 +1,44 @@
+﻿
+// Generated helper templates
+// Generated items
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayChargeBillSynchronizerDetailMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayChargeBillSynchronizerMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayChargeBillMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayRoomMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayAPPAuthTokenMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayCommunityMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\AlipayApiRequestLogMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ClientPaymentLogMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ReceiptBookHistoryMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ReceiptBookDetailMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ReceiptBookMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\TemplatePrintRecordDetailMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\TemplatePrintRecordMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PaymentDiscountInfoMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\TicketSerialNumberMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ShareKeyMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ProvinceMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\CountyMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\CityMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\EntranceUserDetailMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\EntranceUserMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\EntranceLogMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\EntranceMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ChargeBillRecordMatchingMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\RefundRecordMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ReceiptMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\MeterReadRecordMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\MeterMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PaymentTaskDetailMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PaymentTasksMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PreferentialRecordMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PrepayAccountDetailMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PrepayAccountMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ChargeRecordMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ChargeSubjectSnaMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ChargBillMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\SubjectHouseRefMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\ChargeSubjectMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\NotificeConfigMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\PrepayAccountLogMappers.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationMapper\CommunityConfigMappers.cs

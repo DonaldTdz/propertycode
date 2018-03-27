@@ -1,0 +1,427 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    .treeLabel {
+        width: 200px;
+        display: inline-block;
+    }
+
+    .treeSpan {
+        margin-left: 200px;
+        display: inline-block;
+    }
+
+    .divSubjectItem {
+        border: 1px solid #eeeaea;
+        border-radius: 4px;
+    }
+
+        .divSubjectItem li {
+            width: 100%;
+            list-style: none;
+            border: 1px solid #eeeaea;
+            border-radius: 3px;
+            margin-top: -1px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+    /*#deptResTypeTree {
+        border: 1px solid #eeeaea;
+    }*/
+</style>
+
+<div id="divResTypeIndexController" ng-controller="ResTypeIndexController">
+    <div class="box box-primary form-group">
+        <div class="box-body">
+            <div class="col-md-3" style="text-align: center;padding-top:2%">
+                <ul class="divSubjectItem"></ul>
+            </div>
+            <div class="col-md-7" id="subject">
+                <div class="col-md-12" id="divSearchContent" style="display:none;">
+                    <div class="col-md-3">
+                        车位状态
+                        <select id="drpCarState" ng-disabled="false" class="form-control ckFormControl ng-pristine ng-untouched ng-valid" name="drpCarState">
+                        
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        车位类型
+                        <select id="drpCarType" ng-disabled="false" class="form-control ckFormControl ng-pristine ng-untouched ng-valid" name="drpCarType">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <input type="button" id="bntCarPalace" class="btn btn-primary" value="查询">
+                    </div>
+                </div>
+
+                <div class="col-md-12" id="divSearchHome" style="display:none;">
+                    <div class="col-md-3">
+                        房屋状态：
+                        <select id="HomeState" ng-disabled="false" class="form-control ckFormControl ng-pristine ng-untouched ng-valid" name="HomeState">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        装修情况：
+                        <select id="HouseDecorationState" ng-disabled="false" class="form-control ckFormControl ng-pristine ng-untouched ng-valid" name="HouseDecorationState">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <input type="button" id="bntHouse" class="btn btn-primary" value="查询">
+                    </div>
+                </div>
+
+                <div id="deptResTypeTreeWrap" style="padding: 20px 20px; overflow: auto;">
+                        <div id="deptResTypeTree"></div>
+                    </div>
+            </div>
+            <div class="col-md-2" style="text-align: center;padding-top:2%">
+                <input type="button" id="btnSave" class="btn btn-primary" ng-if="CheckPermission('BindSave')" ng-click="Save()" style="display:none;" value="保存">
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="hidSubjectId" />
+    <input type="hidden" id="hidResType" />
+</div>
+<script type="text/javascript">
+    var ThreeMeter = {
+        WaterMeter: 1,
+        WattHourMeter: 2,
+        GasMeter: 3
+    }
+    var DeptTypeInfos_ = {
+        RootNode: 1,
+        WuYE: 10,
+        XiaoQu: 11,
+        LouYu: 12,
+        CheKu: 13,
+        FangWu: 20,
+        CheWei: 21,
+        CheLiang: 22,
+        GongGongZiYuan: 23,
+        SheBei: 24,
+        KaiFaShang: 30,
+        UserOwner: 31,
+        Others: 100,
+
+        ThreeMeter: 1000,
+        Subejct: 1001
+    };
+    var URLTypeInfos_ = {
+        PrepayAccount: 1,
+        ChargeSubject: 2
+    };
+    /*车位状态和车位类型*/
+    function LoadCarSearch() {
+        $("#divSearchContent").show();
+        if ($("#drpCarState option").length > 1) {
+            return false;
+        }
+        $.post("PropertyMgr/ResType/GetCarStateDictionary", function (data) {
+            var ele;
+            $.each(data, function (i) {
+                ele = document.createElement("option");
+                ele.setAttribute("value", data[i].Code);
+                ele.text = data[i].CnName;
+                $("#drpCarState").append(ele);
+            })
+        })
+        $.post("PropertyMgr/ResType/GeCarortTypeDictionary", function (data) {
+            var ele;
+            $("#drpCarType option:not(:first)").remove();
+            $.each(data, function (i) {
+                ele = document.createElement("option");
+                ele.setAttribute("value", data[i].Code);
+                ele.text = data[i].CnName;
+                $("#drpCarType").append(ele);
+            })
+        })
+
+    }
+
+    /*房屋状态和装修情况*/
+    function LoadHomeSearch() {
+        $("#divSearchHome").show();
+        if ($("#HomeState option").length > 1) {
+            return false;
+        }
+        $.post("PropertyMgr/ResType/GetHomeStateDictionary", function (data) {
+            var ele;
+            $.each(data, function (i) {
+                ele = document.createElement("option");
+                ele.setAttribute("value", data[i].Code);
+                ele.text = data[i].CnName;
+                $("#HomeState").append(ele);
+            })
+        })
+        $.post("PropertyMgr/ResType/GeHouseDecorationStateDictionary", function (data) {
+            var ele;
+            $("#HouseDecorationState option:not(:first)").remove();
+            $.each(data, function (i) {
+                ele = document.createElement("option");
+                ele.setAttribute("value", data[i].Code);
+                ele.text = data[i].CnName;
+                $("#HouseDecorationState").append(ele);
+            })
+        })
+
+    }
+    /*获取选择的元素*/
+    function GetCheckedNodes() {
+        var ids = "";
+        var deptTypeInfo;
+        if ($("#deptResTypeTree").html() == "") {
+            return ids;
+        }
+        var nodes = $("#deptResTypeTree").jstree("get_selected"); /*选中的节点*/
+        var resTypeEle = $("#hidResType").val();
+        $.each(nodes, function (i, n) {
+            deptTypeInfo = nodes[i].split('_');
+            /*选中的房屋*/
+            if (resTypeEle == DeptTypeInfos_.LouYu && deptTypeInfo[1] == DeptTypeInfos_.FangWu) {
+                nodeText = $("#" + n).text();
+                nodeTime = nodeText.replace($("#" + n).find("span").html(), "");
+                if (nodeTime == nodeText) {
+                    ids += deptTypeInfo[0] + ","; 
+                }
+            }
+            /*选中的三表*/
+            if ((resTypeEle == ThreeMeter.WaterMeter || resTypeEle == ThreeMeter.GasMeter || resTypeEle == ThreeMeter.WattHourMeter) && deptTypeInfo[1] == DeptTypeInfos_.ThreeMeter) {
+                nodeText = $("#" + n).text();
+                index = nodeText.indexOf(")");
+                /*注意：如果后台显示格式改变会影响此处功能*/
+                if (index > 0) {
+                    nodeTime = nodeText.substr(index + 1, nodeText.length - index).trim();
+                    if (nodeTime == "") {
+                        ids += deptTypeInfo[2] + "_" + deptTypeInfo[0] + ",";/*资源ID+房屋ID*/
+                    }
+                }
+                else
+                {
+                    ids += deptTypeInfo[2] + "_" + deptTypeInfo[0] + ",";
+                }
+            }
+            /*选中的车位*/
+
+            if (resTypeEle == DeptTypeInfos_.CheKu && deptTypeInfo[1].length == 36) {
+                //alert(111)
+                //nodeText = $("#" + n).text();
+                //alert(nodeText)
+                //index = nodeText.indexOf(")");
+                //if (index > 0) {
+                    //nodeTime = nodeText.substr(index + 1, nodeText.length - index).trim();
+                //if (nodeTime == "") {
+                //修改bug4551 2017-7-4 zzh
+                if (deptTypeInfo.length >= 3) {
+                    ids += deptTypeInfo[0] + "_" + deptTypeInfo[2] + ",";/*资源ID+房屋ID*/
+                }  
+                    //}
+                //}
+            }
+        });
+        return ids;
+    }
+    /*subject:1(房屋)和5（其他） 选项卡楼宇选中*/
+    /*subject:2（车位） 选项卡车位选中*/
+    /*subject:3（三表）* (公式中有4：水表单位|公式中有5：气表单位|公式中有6：电表单位)*/
+    function GetSubjectType(subjectId) {
+        var arr = new Array();
+        var type = 0;
+        $.post("PropertyMgr/ChargeSubject/GetSubject", { subjectId: subjectId }, function (data) {
+            if (data.SubjectType == 1 || data.SubjectType == 5) {
+                type = 12;
+            } else if (data.SubjectType == 2) {
+                type = 13;
+            } else if (data.SubjectType == 3) {
+                var arr = data.ChargeFormula.split(',');
+                for (var m = 0; i < arr.length; m++) {
+                    if (arr[m] == 4) {
+                        type = 1;
+                    }
+                    if (arr[m] == 5) {
+                        type = 3;
+                    }
+                    if (arr[m] == 6) {
+                        type = 2;
+                    }
+                }
+            }
+        });
+        return type;
+    }
+    /*加载树*/
+    function LoadTree(commId) {
+        if (!($("#hidSubjectId").val() > 0)) {
+            return;
+        }
+        $('#deptResTypeTree').jstree({
+            'core': {
+                'data': {
+                    'cache': false,
+                    'url': function (node) {
+                        if (node.id == "#") {
+                            return 'PropertyMgr/ResType/GetSubjectSelectChildTree?id=' + commId + "&type=" + $("#hidResType").val() + "&typeEle=0&subjectId=" + $("#hidSubjectId").val() + "&comDeptId=" + $('#SelectDeptId').val() + "&DecorationState_PM=" + $("#HouseDecorationState").val() + "&HouseState_PM=" + $("#HomeState").val();
+                        } else {
+                            var selectNode = (node.id + "").split('_');
+                            /*加载车位*/
+                            if (selectNode.length == 2 && selectNode[0].length == 36) {
+                                return "PropertyMgr/ResType/GetCarParkSpace?parkIngId=" + selectNode[0] + "&subjectId=" + $("#hidSubjectId").val() + "&carState=" + $("#drpCarState").val() + "&carType=" + $("#drpCarType").val();
+                            }
+                            else {
+                                return "PropertyMgr/ResType/GetSubjectSelectChildTree?id=" + selectNode[0] + "&type=" + $("#hidResType").val() + "&subjectId=" + $("#hidSubjectId").val() + "&typeEle=" + selectNode[1] + "&comDeptId=" + $('#SelectDeptId').val() + "&DecorationState_PM=" + $("#HouseDecorationState").val() + "&HouseState_PM=" + $("#HomeState").val();
+                            }
+
+                        }
+                    }
+                },
+                "check_callback": true
+            },
+            "checkbox": {
+                "keep_selected_style": false,
+                "visible": true
+            },
+            "plugins": ["checkbox", "search"]
+        }).on('loaded.jstree', function () {
+
+        }).on("open_node.jstree", function (e, data) {
+        });
+
+    }
+    /*加载科目和树*/
+    function LoadSubjectsAndTree(commId) {
+        $.post("PropertyMgr/ResType/GetSubjects", { commId: commId }, function (data) {
+            var subjectSetTime = null;
+            var subjectId = 0;
+            $.each(data, function (i) {
+                if (i == 0) {
+                    $("#btnSave").show();
+                    subjectId = data[i].Id
+                    $("#hidSubjectId").val(subjectId);
+                    var type = 0;
+                    if (data[0].SubjectType == 1 || data[0].SubjectType == 5) {
+                        type = 12;
+                    } else if (data[0].SubjectType == 2) {
+                        type = 13;
+                    } else if (data[0].SubjectType == 3) {
+                        var arr = data[0].ChargeFormula.split(',');
+                        for (var m = 0; m < arr.length; m++) {
+                            if (arr[m] == 4) {
+                                type = 1;
+                            }
+                            if (arr[m] == 5) {
+                                type = 3;
+                            }
+                            if (arr[m] == 6) {
+                                type = 2;
+                            }
+                        }
+                    }
+                    $("#hidResType").val(type);
+                }
+                subjectSetTime = "<li id='" + data[i].Id + "'>" + data[i].Name + "</li>";
+                $(".divSubjectItem").append(subjectSetTime);
+                subjectSetTime = null;
+            })
+            $(".divSubjectItem li:first").css("color", "#3c8dbc");
+            if ($("#hidResType").val() == DeptTypeInfos_.CheKu) {
+                LoadCarSearch();
+                $("#divSearchHome").hide();
+            } else {
+                $("#divSearchContent").hide();
+                LoadHomeSearch();
+            }
+            LoadTree(commId);
+        })
+    }
+    /*车位搜索*/
+    function SearchCarRefreshTree() {
+        var selectNode = $('#deptTree').jstree().get_selected() + "";
+        var commId = selectNode.split('_')[0];
+        if (selectNode.split('_')[1] != 11) {
+            return false;
+        }
+        $('#deptResTypeTree').jstree("destroy");
+        $('#deptResTypeTree').empty();
+        LoadTree(commId);
+    }
+    /*房屋搜索*/
+    function SearchHouseTree() {
+        var selectNode = $('#deptTree').jstree().get_selected() + "";
+        var commId = selectNode.split('_')[0];
+        if (selectNode.split('_')[1] != 11) {
+            return false;
+        }
+        $('#deptResTypeTree').jstree("destroy");
+        $('#deptResTypeTree').empty();
+        LoadTree(commId);
+    }
+    /*点击科目加载树显示不同的资源*/
+
+    function LoadResourceBySubject(that, commId) {
+        that.siblings("li").css("color", "black");
+        that.css("color", "#3c8dbc");
+        var subjectId = that.prop("id");
+        $('#HomeState').val("");
+        $('#HouseDecorationState').val("");
+        $.post("PropertyMgr/ChargeSubject/GetSubject", { subjectId: subjectId }, function (data) {
+            var type = 0;
+            if (data.SubjectType == 1 || data.SubjectType == 5) {
+                type = 12;
+            } else if (data.SubjectType == 2) {
+                type = 13;
+            } else if (data.SubjectType == 3) {
+                var arr = data.ChargeFormula.split(',');
+                for (var m = 0; m < arr.length; m++) {
+                    if (arr[m] == 4) {
+                        type = 1;
+                    }
+                    if (arr[m] == 5) {
+                        type = 3;
+                    }
+                    if (arr[m] == 6) {
+                        type = 2;
+                    }
+                }
+            }
+            $("#hidSubjectId").val(subjectId);
+            $("#hidResType").val(type);
+            $('#deptResTypeTree').jstree("destroy");
+            $('#deptResTypeTree').empty();
+            
+
+            LoadTree(commId);
+
+            /*车库时显示搜索框*/
+            if (type == DeptTypeInfos_.CheKu) {
+                LoadCarSearch();
+                $("#divSearchHome").hide();
+            } else {
+                $("#divSearchContent").hide();
+                LoadHomeSearch();
+            }
+        });
+    }
+    $(document).ready(function () {
+        var selectNode = $('#deptTree').jstree().get_selected() + "";
+        var commId = selectNode.split('_')[0];
+        if (selectNode.split('_')[1] != 11) {
+            return false;
+        }
+        LoadSubjectsAndTree(commId)
+        $("#bntCarPalace").click(function () {
+            SearchCarRefreshTree();
+        })
+        $("#bntHouse").click(function () {
+            SearchHouseTree();
+        })
+        /*根据科目加载资源*/
+        $(".divSubjectItem").on("click", "li", function () {
+            LoadResourceBySubject($(this), commId)
+        })
+    });
+
+</script>

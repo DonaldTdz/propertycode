@@ -1,0 +1,412 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZY_SqlLibrary</name>
+    </assembly>
+    <members>
+        <member name="M:ZY_SqlLibrary.Bll.CreateModle(System.String)">
+            <summary>
+            一键生成modle层
+            </summary>
+            <param name="namespace_">命名空间名称 没有不填</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.Bll.ClumnType(System.String)">
+            <summary>
+            获取字段类型
+            </summary>
+            <param name="type">数据类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Bll.Formart(System.String,System.String)">
+            <summary>
+            获取 read 函数中字段读取类型转换
+            </summary>
+            <param name="column"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Bll.DefaultValue(System.String)">
+            <summary>
+            获取 read 函数中字段读取类型转换
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Bll.CreateFile(System.String,System.String,System.Data.DataSet)">
+            <summary>
+            生成对象
+            </summary>
+            <param name="namespace_"></param>
+            <param name="table"></param>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Bll.CreateModle(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            一键生成modle层
+            </summary>
+            <param name="namespace_">命名空间名称 没有不填</param>
+            <param name="tableid">数据库表id</param>
+            <param name="tablename">数据库表名称</param>
+            <param name="old">表命中需要替换的某个字段</param>
+            <param name="news">生成类中替换表中后的某个字段</param>
+        </member>
+        <member name="P:ZY_SqlLibrary.Bll.Instance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_SqlLibrary.DivisionTool">
+            <summary>
+            数据库表分区操作帮助类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.DivisionTool.CreatDiv(System.Int32,System.Int32,System.Int32)">
+            <summary>
+             一键生成分区
+            </summary>
+            <param name="beginnum">分区起始编号从0开始</param>
+            <param name="filenum">分区个数</param>
+            <param name="pagenum">每个区数据条数</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.DivisionTool.CreatDiv(System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            分区操作
+            </summary>
+            <param name="dbo">数据库</param>
+            <param name="table">表</param>
+            <param name="key">主键</param>
+            <param name="beginnum">分区起始编号从0开始</param>
+            <param name="filenum">文件数</param>
+            <param name="pagenum">每个区数据条数</param>
+        </member>
+        <member name="P:ZY_SqlLibrary.DivisionTool.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_SqlLibrary.Special.SchemaTool">
+            <summary>
+            数据库Schema结构树形结构 快速操作帮助类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.Instance(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.Count(System.Int32)">
+            <summary>
+            获取Schema结构表 所有子集总条数
+            </summary>
+            <param name="idvalue">要查找节点的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.ChildList(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            获取Schema结构表 所有子集
+            </summary>
+            <param name="table">表名称</param>
+            <param name="id">自增id字段名称</param>
+            <param name="left">左值字段名称</param>
+            <param name="right">右值字段名称</param>
+            <param name="idvalue">要查找节点的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.List(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            获取Schema结构表 所有子集+本身
+            </summary>
+            <param name="table">表名称</param>
+            <param name="id">自增id字段名称</param>
+            <param name="left">左值字段名称</param>
+            <param name="right">右值字段名称</param>
+            <param name="idvalue">要查找节点的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.Layer(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            获取节点是第几级
+            </summary>
+            <param name="table">表名称</param>
+            <param name="id">自增id字段名称</param>
+            <param name="left">左值字段名称</param>
+            <param name="right">右值字段名称</param>
+            <param name="idvalue">要查找节点的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.AddChild(System.Int32,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            添加下级
+            </summary>
+            <param name="parentid">父节点的id</param>
+            <param name="field">key字段，value 值</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.Layer(System.Int32)">
+            <summary>
+            删除下级
+            </summary>
+            <param name="id">父节点的id</param>
+            <param name="field">key字段，value 值</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Special.SchemaTool.AddChild(System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            添加下级
+            </summary>
+            <param name="parentid">父节点的id</param>
+            <param name="field">key字段，value 值</param>
+            <returns></returns>
+        </member>
+        <member name="T:ZY_SqlLibrary.SqlTool">
+            <summary>
+            数据库简便操作帮助类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.BoolName(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            判断数据重复 重复true
+            </summary>
+            <param name="name">判断【重复的字段】</param>
+            <param name="value">判断【重复的字段的值】</param>
+            <param name="table">表</param>
+            <param name="id">修改时"id=? ",新增时直接""</param>
+            <param name="where">其他条件</param>
+            <returns>重复为true，不重复false</returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.BoolName(ZY_DBHelper.BaseHelper,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            判断数据重复 重复true
+            </summary>
+            <param name="bh">实例化后的BaseHelper对象</param>
+            <param name="name">判断【重复的字段】</param>
+            <param name="value">判断【重复的字段的值】</param>
+            <param name="table">表</param>
+            <param name="id">修改时"id=?" ,新增时""</param>
+            <param name="where">其他条件</param>
+            <returns>重复为true，不重复false</returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.ISnullDataSet(System.Data.DataSet)">
+            <summary>
+            判断dataset 是否有数据
+            </summary>
+            <param name="ds">传入dataset</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.UserNUM``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+            <param name="Users_id">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetBefore(System.Int32,System.String)">
+            <summary>
+            获取上一条数据
+            </summary>
+            <param name="id">id</param>
+            <param name="table">表名</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetNext(System.Int32,System.String)">
+            <summary>
+            获取下一条数据
+            </summary>
+            <param name="id">id</param>
+            <param name="table">表名</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.ValueNull(System.Object)">
+            <summary>
+            数据字段为空处理
+            </summary>
+            <param name="value">值</param>
+            <returns>返回处理后的值</returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetDataTable">
+            <summary>
+            获取链接数据库 表
+            </summary>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetDataColumn(System.String,System.String)">
+            <summary>
+            获取 数据库表中字段
+            </summary>
+            <param name="tableID">表id</param>
+            <param name="columnID">字段id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.CreateModle(System.String,System.String,System.String)">
+            <summary>
+            一键生成modle层
+            </summary>
+            <param name="namespace_">命名空间名称 没有不填</param>
+            <param name="old">表命中需要替换的某个字段</param>
+            <param name="news">生成类中替换表中后的某个字段</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.ClumnType(System.String)">
+            <summary>
+            获取字段类型
+            </summary>
+            <param name="type">数据类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.Formart(System.String,System.String)">
+            <summary>
+            获取 read 函数中字段读取类型转换
+            </summary>
+            <param name="column"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.DefaultValue(System.String)">
+            <summary>
+            获取 read 函数中字段读取类型转换
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.CreateFile(System.String,System.String,System.String,System.Data.DataSet)">
+            <summary>
+            生成对象
+            </summary>
+            <param name="namespace_"></param>
+            <param name="table"></param>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.CreateModle(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            一键生成modle层
+            </summary>
+            <param name="namespace_">命名空间名称 没有不填</param>
+            <param name="tableid">数据库表id</param>
+            <param name="tablename">数据库表名称</param>
+            <param name="old">表命中需要替换的某个字段</param>
+            <param name="news">生成类中替换表中后的某个字段</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.DATAdown(System.String,System.Boolean)">
+            <summary>
+            数据库下载备份
+            数据库自动备份：维护计划
+            登陆数据库-> 管理 -> 维护计划 -> 右键选择维护计划向导 -> 下一步 -> 
+            填写名称，说明，更改计划 -> 下一步 -> 选择备份数据库 -> 下一步 -> 下一步 -> 
+            常规选择数据库 -> 目标选择备份路径 -> 下一步到底
+            </summary>
+            <param name="name">下载后保存的名称</param>
+            <param name="down">可否下载，默认不下载</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.ClearBak(System.DateTime)">
+            <summary>
+            清除以前备份
+            </summary>
+            <param name="time">清除哪段时间以前</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.ClearConnection(System.String)">
+            <summary>
+            清除数据库所有connection 连接
+            </summary>
+            <param name="database">数据库名称</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.Selectlocks">
+            <summary>
+            查看被锁定的表
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.Clearlocks">
+            <summary>
+            解锁所有表
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetDBname">
+            <summary>
+            获取数据库名称
+            </summary>
+            <returns>数据库名称</returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.Open_Service_Broker">
+            <summary>
+            开启数据库Service Broker
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetTrigger(System.Int32)">
+            <summary>
+            查询当前表的所有触发器
+            </summary>
+            <param name="id">表id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.SqlTool.GetTrigger(System.String)">
+            <summary>
+            查询当前表的所有触发器
+            </summary>
+            <param name="tbname">表名称</param>
+            <returns></returns>
+        </member>
+        <member name="P:ZY_SqlLibrary.SqlTool.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_SqlLibrary.Sync">
+            <summary>
+            数据库同步相关操作帮助类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_SqlLibrary.Sync.longDatasource(System.String)">
+            <summary>
+            执行远程操作
+            </summary>
+            <param name="sql">执行远程操作的sql语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Sync.StartIdentity(System.String)">
+            <summary>
+            重执自增
+            </summary>
+            <param name="table">需要重执的表</param>
+        </member>
+        <member name="M:ZY_SqlLibrary.Sync.Long_Select(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            远程服务器数据查询
+            </summary>
+            <param name="ip">远程服务器ip地址</param>
+            <param name="user">远程服务器登陆user</param>
+            <param name="pwd">远程服务器登陆pwd</param>
+            <param name="db">远程服务器数据库名</param>
+            <param name="table">远程服务器查询的表</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Sync.ImportDB(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            将远程服务器表中数据导入到本地（结构和数据）
+            远程服务器不能存在该表
+            </summary>
+            <param name="ip">远程服务器ip地址</param>
+            <param name="user">远程服务器登陆user</param>
+            <param name="pwd">远程服务器登陆pwd</param>
+            <param name="db">远程服务器数据库名</param>
+            <param name="table">远程服务器查询的表</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_SqlLibrary.Sync.Import_LongDB(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            将远程服务器表中数据导入到本地（只有数据）
+            </summary>
+            <param name="ip">远程服务器ip地址</param>
+            <param name="user">远程服务器登陆user</param>
+            <param name="pwd">远程服务器登陆pwd</param>
+            <param name="db">远程服务器数据库名</param>
+            <param name="table">远程服务器插入的表</param>
+            <param name="field">远程服务器插入的表的字段</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

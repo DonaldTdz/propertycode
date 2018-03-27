@@ -1,0 +1,90 @@
+1. 项目添加dll引用
+2. 增加配置节点(也可以不添加配置，组件里同有默认的配置，大多数情况使用默认的配置即可)
+  <configSections>
+    <section name="EmailConfig" type="YK.FrameworkTools.EmailService.EmailConfiguration,YK.FrameworkTools.EmailService" />
+  </configSections>
+  <EmailConfig SystemEmail="yunkai@yun-kai.com" UserName="yunkai" Password="n+kSZXwiUumiIhd84fBLhg==" Smtp="mail-yk.yun-kai.com" Port="25" SingleFileSize="50m" AllFileSize="500m"></EmailConfig>
+3. 编写代码，发送邮件
+	示例：
+            IEmail emailService = new EmailHelper(); // 不制定参数，则使用默认配置，如果制定了，则使用配置文件的配置
+            EmailEntity emailEntity = new EmailEntity()
+            {
+                ToList = new System.Collections.Generic.List<string>() { "kuangqifu@yun-kai.com" },
+		Attachments = new System.Collections.Generic.List<string>(){@"E:\test.html", @"E:\备忘录.txt"},
+                Subject = "发送邮件组件测试",
+                Content = "发送邮件组件测试内容",
+                Priority = System.Net.Mail.MailPriority.High,
+                IsHTMLFormat = false
+            };
+
+            emailService.SendEmail(emailEntity);
+            Console.Read();
+4. 发送邮件Body内容说明
+
+public class EmailEntity
+    {
+        /// <summary>
+        /// 发送主题
+        /// </summary>
+        public string Subject { get; set; }
+
+        /// <summary>
+        /// 邮件正文
+        /// </summary>
+        public string Content { get; set; }
+
+        /// <summary>
+        /// 是否是Html内容
+        /// </summary>
+        public bool IsHTMLFormat { get; set; }
+
+        /// <summary>
+        /// 内容编码方式
+        /// </summary>
+        public Encoding BodyEncoding { get; set; }
+
+        /// <summary>
+        /// 邮件重要等级
+        /// </summary>
+        public MailPriority Priority { get; set; }
+
+        /// <summary>
+        /// 附件，绝对地址
+        /// </summary>
+        public List<string> Attachments { get; set; }
+
+        /// <summary>
+        /// 收件人集合
+        /// </summary>
+        public List<string> ToList { get; set; }
+
+        /// <summary>
+        /// 抄送人集合
+        /// </summary>
+        public List<string> CcList { get; set; }
+
+        /// <summary>
+        /// 秘送人集合
+        /// </summary>
+        public List<string> BccList { get; set; }
+
+        /// <summary>
+        /// 发件人
+        /// </summary>
+        internal string From { get; set; }
+
+        /// <summary>
+        /// 端口
+        /// </summary>
+        internal int Port { get; set; }
+
+        /// <summary>
+        /// 邮件Smtp协议
+        /// </summary>
+        internal string Smtp { get; set; }
+
+        /// <summary>
+        /// 是否使用Ssl加密
+        /// </summary>
+        internal bool Ssl { get; set; }
+    }

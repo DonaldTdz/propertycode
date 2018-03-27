@@ -1,0 +1,125 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divGeneratePaymentNoticeIndexController" ng-controller="GeneratePaymentNoticeIndexController">
+    <div class="modal-header">
+        <h4 class="ng-binding">资源选择</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-5" style="height:450px;overflow:auto">
+            <div id="treePayNot">
+                <i class='fa fa-hand-o-left'></i>请选择小区
+            </div>
+        </div>
+        <div class="col-md-7">
+            <label style="display: block">温馨提示</label>
+            <div style="width: 362px;float: left;">
+                <input type="text" id="Remarks" name="Remarks" class="form-control" maxlength="80">
+            </div>
+            <label style="display: block;clear:both">账单截止时间</label>
+            <div style="width: 250px;float: left;">
+                <div class="input-append  date  dateEnddate input-group">
+                    <input type="text" name="Enddate" class="form-control">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="ModalFormMagin col-md-2 has-feedback" style="float: left">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="button" id="GeneratePaymentNoticeSave" class="btn btn-primary" value="确定生成">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.PaymentTasksListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
+    <script type="text/javascript">
+        // 初始化房屋信息
+        function init_house_tree() {
+            $('#treePayNot').jstree("destroy");
+            var deptType = $('#SelectDeptType').val();
+            var deptId = $('#SelectDeptId').val();
+            if (deptType == DeptTypeInfos.XiaoQu) {
+                $('#treePayNot').jstree({
+                    'core': {
+                        'data': {
+                            'cache': false,
+                            'url': function (node) {
+                                var IdArr = node.id.split('_');
+                                return node.id === '#' ?
+                                    'PropertyMgr/ChargBill/GetPayNotSelectChildTree?id=' + deptId : 'PropertyMgr/ChargBill/GetPayNotSelectChildTreeAysn?id=' + IdArr[0]
+                            }
+                        },
+                    },
+                    "checkbox": {
+                        "keep_selected_style": false,
+                        "visible": true
+                    },
+                    "plugins": ["checkbox"]
+                });
+            }
+            else {
+                $('#treePayNot').jstree("destroy");
+                $("#treePayNot").html("<i class='fa fa-hand-o-left'></i>请选择小区");
+            }
+        }
+
+        // 初始化结束时间
+        function init_endDate()        {
+            $('.dateEnddate').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+            var currentdate = new Date();
+            var y = currentdate.getFullYear();
+            var m = currentdate.getMonth() + 1;
+            var d = currentdate.getDate();
+            var date = y + '-' + (m > 9 ? m : '0' + m) + '-' + (d > 9 ? d : '0' + d);
+            $("#divGeneratePaymentNoticeIndexController input[name='Enddate']").val(date);
+        }
+
+        // 初始化页面值
+        function init_page() {
+            init_house_tree();
+            init_endDate();
+        }
+
+        $(function () {
+            init_page();
+            $("#GeneratePaymentNoticeSave").click(function () {
+                var nodes = $("#treePayNot").jstree("get_checked") /*选中的节点*/
+                var EndDate = $("#divGeneratePaymentNoticeIndexController input[name='Enddate']").val();
+                var Remarks = $("#Remarks").val();
+                var ComDeptId = $("#SelectDeptId").val();
+                if (EndDate.length <= 0) {
+                    ckFramework.ModalHelper.Alert("请选择结束时间");
+                    return;
+                }
+
+                if (Object.prototype.toString.call(nodes) != "[object Array]") {
+                    ckFramework.ModalHelper.Alert("请选择资源");
+                    return;
+                }
+
+
+                if (nodes.length > 0) {
+                    ckFramework.ModalHelper.OpenWait();
+                    var appElement = document.querySelector('[ng-controller=GeneratePaymentNoticeIndexController]');
+                    var $scope = angular.element(appElement).scope();
+                    $scope.SavePaymentNotice(nodes, EndDate, Remarks, ComDeptId);
+                }
+                else {
+                    ckFramework.ModalHelper.Alert("请选择资源后再提交");
+                }
+            });
+        });
+
+    </script>
+
+
+</div>

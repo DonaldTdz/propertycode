@@ -1,0 +1,79 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divForeigBillChargeViewController" ng-controller="ForeigBillChargeViewController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="ng-binding">添加对外收费</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group ModalFormMagin col-md-12 has-feedback">
+
+       
+                <label class="control-label ckFormControlLable">
+                    <span>收费对象<span style="color:red">*</span></span>
+                </label>
+                <div class="input-append input-group ckFormControl">
+                    <input type="text" id="CustomerName" name="CustomerName" ng-readonly="CustomerNameRead" ng-model="PageViewModel.CustomerName" class="form-control">
+                   
+                </div>
+
+                <label class="control-label ckFormControlLable">
+                    <span>收费项目<span style="color:red">*</span></span>
+                </label>
+                <select class="form-control ckFormControl"   ng-model="PageViewModel.SubjectId" id="drpSubject" ng-options="m.Id as m.Name for m in SubjectList">
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <label class="control-label ckFormControlLable">开始日期<span style="color:red">*</span></label>
+                <div class="input-append date input-group ckFormControl">
+                    <input type="text" id="txtBeginDate" name="BeginDate" ng-model="PageViewModel.BeginDate" class="form-control">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <label class="control-label ckFormControlLable">结束日期<span style="color:red">*</span></label>
+                <div class="input-append date input-group ckFormControl">
+                    <input type="text" id="txtEndDate" name="EndDate" ng-model="PageViewModel.EndDate" class="form-control ng-pristine ng-valid ng-isolate-scope ng-touched">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <label class="control-label ckFormControlLable">
+                    <span>金额<span style="color:red">*</span></span>
+                </label>
+                <div class="input-append input-group ckFormControl">
+                    <input type="text" id="txtMoney" name="Money" class="form-control ckFormControl" ng-model="PageViewModel.Money" ng-keyup="toDecimal($event)" ng-blur="isNumber($event)">
+               </div>
+                   
+                        <label class="control-label ckFormControlLable">
+                            <span>备注</span>
+                        </label>
+        
+                    <textarea rows="3" class="form-control ckFormControl ng-pristine ng-valid ng-touched" name="Remark" ng-model="PageViewModel.Remark" ng-readonly="false" data-fv-field="Remark"></textarea><i class="form-control-feedback fv-icon-no-label" data-fv-icon-for="Remark" style="display: none;"></i>
+                    <small class="help-block" data-fv-validator="notEmpty" data-fv-for="Remark" data-fv-result="NOT_VALIDATED" style="display: none;">"备注"，不能为空</small><small class="help-block" data-fv-validator="stringLength" data-fv-for="Remark" data-fv-result="NOT_VALIDATED" style="display: none;">输入了错误的"备注"，长度小于300</small><small class="help-block" data-fv-validator="regexp" data-fv-for="Remark" data-fv-result="NOT_VALIDATED" style="display: none;">"备注",不能为特殊字符</small>
+
+
+
+
+                    </di
+                </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="Save()">确定</button>
+       
+
+    </div>
+</div>
+<script type="text/javascript">
+    var ckFramework = ckFramework || {};
+    ckFramework.ForeigBillChargeViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+  
+   
+
+
+    $(function(){
+        $('.date').datetimepicker({
+            format:  'yyyy-mm-dd'
+        });
+    });
+</script>

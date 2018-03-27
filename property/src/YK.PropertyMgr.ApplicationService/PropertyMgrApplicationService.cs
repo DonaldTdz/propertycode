@@ -1,0 +1,44 @@
+﻿
+// Generated helper templates
+// Generated items
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayChargeBillSynchronizerDetailAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayChargeBillSynchronizerAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayChargeBillAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayRoomAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayAPPAuthTokenAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayCommunityAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\AlipayApiRequestLogAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ClientPaymentLogAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ReceiptBookHistoryAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ReceiptBookDetailAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ReceiptBookAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\TemplatePrintRecordDetailAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\TemplatePrintRecordAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PaymentDiscountInfoAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\TicketSerialNumberAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ShareKeyAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ProvinceAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\CountyAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\CityAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\EntranceUserDetailAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\EntranceUserAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\EntranceLogAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\EntranceAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ChargeBillRecordMatchingAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\RefundRecordAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ReceiptAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\MeterReadRecordAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\MeterAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PaymentTaskDetailAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PaymentTasksAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PreferentialRecordAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PrepayAccountDetailAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PrepayAccountAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ChargeRecordAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ChargeSubjectSnaAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ChargBillAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\SubjectHouseRefAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\ChargeSubjectAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\NotificeConfigAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\PrepayAccountLogAppService.cs
+// E:\git\property\src\YK.PropertyMgr.ApplicationService\CommunityConfigAppService.cs

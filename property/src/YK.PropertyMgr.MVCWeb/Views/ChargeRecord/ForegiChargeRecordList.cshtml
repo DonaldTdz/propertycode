@@ -1,0 +1,164 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divForegiChargeRecordListController" ng-controller="ForegiChargeRecordListController">
+    <div id="ForegiChargeRecordSearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>票据号</label>
+                    <input style="width: 100%; " maxlength="50" class="form-control" type="text" name="ReceiptNum" />
+                    <input type="hidden" name="IsDeveloper" id="hidCRIsDeveloper" />
+                </div>
+                <div class="col-md-3">
+                    <label>开始日期</label>
+                    <div class="input-append date input-group">
+                        <input type="text" name="ChargeStartDate" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>结束日期</label>
+                    <div class="input-append date input-group">
+                        <input type="text" name="ChargeEndDate" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    @*<label>收费类型</label>*@
+                    @*<input style="width: 100%; " maxlength="50" class="form-control" type="text" name="ChargeType" />*@
+                    <div dictionary id="divChargeType" dict-source="ckFramework.ChargeRecordListData.TemplateModels" dict-label="收费类型" dict-name="ChargeType" dict-field-name="ChargeType"></div>
+                </div>
+            </div>
+            <div class="row" ng-if="CheckPermission('SettleAccount')">
+                <div class="col-md-6">
+                    <label>序列号</label>
+                    <input style="width: 100%; " maxlength="50" class="form-control" type="text" name="SerialNumber" />
+                </div>
+                <div class="col-md-3">
+                    <div dictionary id="divAccountingStatus" dict-source="ckFramework.ChargeRecordListData.TemplateModels" dict-label="预结算状态" dict-name="AccountingStatus" dict-field-name="AccountingStatus"></div>
+
+                </div>
+            </div>
+        </div>
+            <div class="box-footer">
+                <input type="button" id="btnRefund" ng-if="CheckPermission('Refund;FinanceRefund')" ng-click="ShowRefundModal()" class="btn btn-primary" value="退款" />
+                <input type="button" id="btnModify" ng-if="CheckPermission('ModifyChargeRecord')" class="btn btn-primary" ng-click="ShowChargeRecordViewModal()" value="修改" />
+                <input type="button" id="btnPrintBill" ng-if="CheckPermission('PrintBill')" class="btn btn-primary" ng-click="ShowReceiptPrintViewModal()" value="票据补打" />
+       
+                <div class="checkbox pull-right">
+                    <label>
+                        <label>
+                            <input type="checkbox" ng-model="IsShowSearch" />显示
+                        </label>
+                    </label>
+                </div>
+                <div class="pull-right">
+                    <input type="button" id="btnForegiChargeRecordSearch" class="btn btn-primary" value="查询" />
+                    <input type="button" id="btnAccountDetails" ng-if="CheckPermission('ForegiChargeRecordDetail')" ng-show="IsDeveloper == 'false'" class="btn btn-primary" ng-click="ShowBillChargeRecordViewModal('','')" value="账户费用详情" />
+                </div>
+
+            </div>
+  
+        <div id="divChargeRecordListTable" />
+        @*设置MVC的一些页面变量事件绑定*@
+        <script type="text/javascript">
+
+            var ckFramework = ckFramework || {};
+
+            ckFramework.ChargeRecordListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            ckFramework.ForegiRefundRecordUrl= '@Url.PluginAction("PropertyMgr", "RefundRecord", "ForegiRefundModal")';
+            ckFramework.ForegiChargeRecordViewUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ForegiChargeRecordView")';
+            ckFramework.ChargeRecordViewUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ChargeRecordView")';
+            ckFramework.BillChargeRecordViewUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "BillChargeRecordView")';
+            ckFramework.ReceiptPrintViewUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ReceiptPrintView")';
+            ckFramework.ForegiReceiptPrintViewUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ForegiReceiptPrintView")';
+            ckFramework.ChargeRecordTable = null;
+
+            ckFramework.createChargeRecordListData = {
+                TableId:'table_ckFramework_ChargeRecordList',
+                IsAddOperate:true,
+                Language:ckFramework.HomeData.Language,
+                TemplateItemDatas:ckFramework.ChargeRecordListData.TemplateModels,
+                DivTable:$('#divChargeRecordListTable'),
+                OperateColumn:{ "data": null, "orderable": false,"width":40,
+                    "render": function(data)
+                    {
+                        //<i class="ui-tooltip fa fa-edit" data-original-title="Edit"></i>
+                        var content = '<input type="checkbox" data="'+data.Id+'" >'
+                        if (data.AccountingStatus==2) {
+                            content = '<input type="checkbox" data="'+data.Id+'"  settleAccount="SettleAccount">'
+
+                        }else {
+                            content = '<input type="checkbox" data="'+data.Id+'"   settleAccount="">'
+                        }
+                        if (JQCheckPermission("ChargeRecordDetail")) {
+                            content += "&nbsp;&nbsp;&nbsp;<a herf='#' class='btn' title='费用详情' style='padding:0px;' onclick='ckFramework.ShowChargeRecordModal(\""+data.Id+"\", \""+data.ReceiptNum+"\")' ><i class='ui-tooltip fa fa-table' data-original-title='费用详情'></i></a>";
+                        }
+                        return content;
+                    }
+                }
+            };
+
+            ckFramework.TableService.CreateBusinessTable(ckFramework.createChargeRecordListData);
+            $('.date').datetimepicker({
+                format:  'yyyy-mm-dd'
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#hidCRIsDeveloper").val($("#hidIsDeveloper").val());
+                //alert(100)
+                //alert(ckFramework.createChargeRecordListData.TableId)
+                ckFramework.ChargeRecordTable = $('#' + ckFramework.createChargeRecordListData.TableId).dataSearchTableWithFilter({
+                    scrollX: true,
+                    "dom": '<"toolbar">C<"clear">lfrtip',
+                    language: ckFramework.TableLanguage,
+                    columns: ckFramework.TableService.CreateTableColumns(ckFramework.createChargeRecordListData),
+                    filterOptions: {
+                        searchButton: "btnForegiChargeRecordSearch",
+                        clearSearchButton: "ClearSearch",
+                        searchContainer: "ForegiChargeRecordSearchContainer",
+                        Url: '@Url.PluginAction("PropertyMgr", "ChargeRecord", "GetForegiChargeRecordList")',
+                        DrawTable:function(){
+                            ckFramework.ChargeRecordTable.draw();
+                        }
+                    }
+                });
+            });
+          
+            ckFramework.fnGetSelectdChargeRecordIds = function(){
+                var ids = "";
+                $("#table_ckFramework_ChargeRecordList").find("input[type='checkbox']:checked").each(function(){
+                    ids = ids + $(this).attr("data") + ",";
+                });
+                if (ids.length > 0) {
+                    ids =  ids.substr(0,ids.length - 1);
+                }
+                return ids;
+            }
+
+            ckFramework.fnGetChargeRecordInfo = function(data){
+                //alert(55)
+                var row = $("#table_ckFramework_ChargeRecordList").find("input:checkbox[data='"+data+"']").parents('tr');
+                //alert(66)
+                var info = ckFramework.ChargeRecordTable.rows(row).data()[0];
+                //alert(77)
+                //alert(JSON.stringify(info))
+                return info;
+            }
+
+            ckFramework.ShowChargeRecordModal = function(Id,rnum){
+                var element = angular.element($("#divForegiChargeRecordListController"));
+                var controller = element.controller();
+                var scope = element.scope();
+                scope.$apply(function () {
+                    scope.ShowBillChargeRecordViewModal(Id,rnum);
+                });
+            }
+        </script>
+
+    </div>
+   </div>  

@@ -1,0 +1,37 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divAlipayBasicerviceListController" ng-controller="AlipayBasicerviceListController">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>操作</th>
+                        <th>小区</th>
+
+                        <th>状态</th>
+
+                    </tr>
+                    <tr ng-repeat="item in AlipayBasicerviceList">
+                        <td ng-show="item.IsInitialize"><a style="cursor: pointer;" ng-click="AlipayCreateBasicservice('Edit',item.Id)"> 修改</a>/<a style="cursor: pointer;" ng-click="AlipayCreateBasicservice('Show',item.Id)"> 查看</a></td>
+                        <td ng-show="!item.IsInitialize"><a style="cursor: pointer;" ng-click="AlipayCreateBasicservice('Add',item.Id)"> 初始化</a></td>
+                        <td>{{item.CommunityName }}</td>
+                        <td ng-show="item.IsInitialize">
+                            已初始化
+                        </td>
+                        <td ng-show="!item.IsInitialize">
+                            未初始化
+                        </td>
+                    </tr>
+                    <tr ng-show="AlipayBasicerviceList.length == 0">
+                        <td colspan="11" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YK.FrameworkTools.EmailService</name>
+    </assembly>
+    <members>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Subject">
+            <summary>
+            发送主题
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Content">
+            <summary>
+            邮件正文
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.IsHTMLFormat">
+            <summary>
+            是否是Html内容
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.BodyEncoding">
+            <summary>
+            内容编码方式
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Priority">
+            <summary>
+            邮件重要等级
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Attachments">
+            <summary>
+            附件，绝对地址
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.ToList">
+            <summary>
+            收件人集合
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.CcList">
+            <summary>
+            抄送人集合
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.BccList">
+            <summary>
+            秘送人集合
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.From">
+            <summary>
+            发件人
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Smtp">
+            <summary>
+            邮件Smtp协议
+            </summary>
+        </member>
+        <member name="P:YK.FrameworkTools.EmailService.EmailEntity.Ssl">
+            <summary>
+            是否使用Ssl加密
+            </summary>
+        </member>
+        <member name="T:YK.FrameworkTools.EmailService.EmailHelper">
+            <summary>
+            邮件帮助类
+            </summary>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.SendEmail(YK.FrameworkTools.EmailService.EmailEntity)">
+            <summary>
+            发邮件
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.DeleteFiles(YK.FrameworkTools.EmailService.EmailEntity)">
+            <summary>
+            删除邮件附件
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetFileSize">
+            <summary>
+            获取所有文件的大小
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetFilesInfo(System.Collections.Generic.List{System.String})">
+            <summary>
+            把所有的文件构造成UserFileInfo实体
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.AttachmentsDispose">
+            <summary>
+            释放邮件附件
+            </summary>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.InitSmtp(YK.FrameworkTools.EmailService.EmailEntity)">
+            <summary>
+            初始化Smtp
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.InitMailMessage(YK.FrameworkTools.EmailService.EmailEntity)">
+            <summary>
+            初始化MailMessage
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.AddAttchement(YK.FrameworkTools.EmailService.EmailEntity)">
+            <summary>
+            添加配置文件
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.ValidateAllFileSize(System.Collections.Generic.List{System.String})">
+            <summary>
+            判断所有文件的大小是否在允许的范围内
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetAllSize(System.Collections.Generic.List{System.String})">
+            <summary>
+            计算所有文件的总大小
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetSmtp">
+            <summary>
+            获取配置文件中的Smtp信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetPort">
+            <summary>
+            获取配置文件中的端口信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetSingleFileSize">
+            <summary>
+            获取配置文件中单个文件的大小设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetAllFileSize">
+            <summary>
+            获取配置文件中所有文件的大小设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.ValidateSingleFileSize(System.String)">
+            <summary>
+            判断配置文件中文件大小设置是否正确，不正确抛出异常
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YK.FrameworkTools.EmailService.EmailHelper.GetI(System.String)">
+            <summary>
+            根据文件单位，把文件转换为byte
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

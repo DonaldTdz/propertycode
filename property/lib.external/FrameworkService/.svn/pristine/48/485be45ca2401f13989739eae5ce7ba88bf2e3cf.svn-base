@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License>
+  <Data>
+    <LicensedTo>Huawei Technologies Co., Ltd.</LicensedTo>
+    <LicenseType>Developer OEM</LicenseType>
+    <LicenseNote>Limited to 1 developer.</LicenseNote>
+    <OrderID>130723233804</OrderID>
+    <OEM>This is a redistributable license</OEM>
+    <Products>
+      <Product>Aspose.Cells for .NET</Product>
+    </Products>
+    <EditionType>Enterprise</EditionType>
+    <SerialNumber>3231aa7c-152b-4fb7-af81-a3ea150967b7</SerialNumber>
+    <SubscriptionExpiry>20140723</SubscriptionExpiry>
+    <LicenseVersion>2.2</LicenseVersion>
+  </Data>
+  <Signature>JXeXRCxfmEduJFB2a+j158aV6/aUfLT9y3x3bStUh5MTWRfR88Iw4IZ+Hdm2CIMfu5Eje22tQSmanpcI37Cey5uxL56dbYtYFSopCnFyAMqYd+1tRZWDgNCuroDMPtBzpXE+4rvoyz8omX4F+sTSEhtcTLFg1OOTOLcwEmXQBtM=</Signature>
+</License>

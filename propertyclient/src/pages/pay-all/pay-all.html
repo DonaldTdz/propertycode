@@ -1,0 +1,123 @@
+<ion-content class="pageBg">
+  <!--顶部标题区域-->
+ <ion-item class="mobile_head_total">
+   <ion-icon item-left class="mobile_head_logo"><img src="assets/images/logo_dh.png"/></ion-icon>
+   <h1 item-left class="mobile_head_title">{{house.FName}}</h1>
+   <!--倒计时区域-->
+   <count-down [time]="120" (onPrevious)="goPrevious()" (onGoHome)="countDownGoHome()" #countDown ></count-down>
+ </ion-item>
+
+ <!--中间内容区域-->
+ <div class="mobile_content_total">
+   <div class="clearfix">
+      <div class="hc_secondContent clearfix">
+        <!--左边导航按钮-->
+        <div class="hc_second_left_all">
+          <ion-segment [(ngModel)]="pay" class="pay_all_segment">
+            <ion-segment-button value="account">
+              当前物业账单
+            </ion-segment-button>
+            <ion-segment-button value="pre">
+              预存物业费
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+        <!--右边内容区域-->
+         <div class="hc_second_right_all pay_all_right">
+
+           <div [ngSwitch]="pay">
+              <ion-list *ngSwitchCase="'account'">
+                <ion-list  class="account_list_all" *ngIf="bills.length != 0" >
+                  <div class="account_list_main" *ngIf="bills.length != 0" >
+                    <div class="account_list_total" *ngFor="let item of bills;let i = index">
+                      <div class="account_title_total clearfix">
+                        <p class="account_head_checkbox"><ion-checkbox  class="account_checkBox" (tap)="clickGroup = true" (ionChange)="billGroupChange(item)" [(ngModel)]="item.IsChecked" ></ion-checkbox></p>
+                        <ion-item class="account_head_item" (tap)="showAll(item)" >
+                          <h2 class="account_title" item-left>{{item.Name + ' （'+ item.Count +'）'}}</h2>
+                          <p class="account_title_text" item-right>小计：￥{{item.TotalAmount | number:'1.2-2'}}</p>
+                          <ion-icon name="arrow-up-outline" item-right class="account_icon" *ngIf="item.IsUp" ></ion-icon>
+                          <ion-icon name="arrow-down-outline" item-right class="account_icon" *ngIf="!item.IsUp" ></ion-icon>
+                        </ion-item>
+                      </div>
+
+                      <!--中间列表区域-->
+                      <div class="account_content_list" *ngIf="item.IsUp">
+                        <ion-item class="account_content_all" *ngFor="let b of item.BillData" >
+                          <ion-checkbox item-start class="account_checkBox" [(ngModel)]="b.IsChecked" (ionChange)="billChange(item,b)" (tap)="clickItem = true" ></ion-checkbox>
+                          <p class="account_content_date" item-left>{{b.FBeginDate}}~{{b.FEndDate}}</p>
+                          <p class="account_content_dollar" item-right>￥{{b.Amount | number:'1.2-2'}}</p>
+                        </ion-item>
+                      </div>
+                    </div>
+                  </div>
+                  <!--底部确认按钮-->
+                  <ion-item class="account_bottom_total" *ngIf="bills.length != 0">
+                    <ion-checkbox item-start class="account_checkBox" (tap)="clickAll = true" [(ngModel)]="isCheckedAll" (ionChange)="billCheckAll()" ></ion-checkbox>
+                    <p class="account_bottom_text" item-left>全选</p>
+                    <button ion-button clear class="account_bottom_submit" item-right (tap)="goPayment()">
+                      合计： ￥{{payamount | number:'1.2-2'}}  确认支付
+                    </button>
+                  </ion-item>
+                </ion-list>
+                <!--还没有账单的时候-->
+                <div class="account_no_total" *ngIf="bills.length == 0">
+                  <ion-icon class="account_no_img"><img  src="assets/images/wyzd_bg.png"/></ion-icon>
+                  <p class="account_no_text">您的物业账单已缴清</p>
+                </div>
+              </ion-list>
+
+              <ion-list *ngSwitchCase="'pre'" class="account_list_all">
+                <div class="account_list_main">
+                  <!--顶部警告-->
+                  <ion-item class="pre_warning_total">
+                    <ion-icon item-left class="pre_warning_all"><img  src="assets/images/waning.png"/></ion-icon>
+                    <p item-left class="pre_warning_text">预存物业费用于抵扣未来产生的物业费用，实际金额以
+                      当月产生的费用为准。
+                    </p>
+                  </ion-item>
+
+                  <!--预存月份-->
+                  <ion-item class="pre_head_total">
+                    <h2 class="pre_head_title" item-left>请选择预存月份</h2>
+                    <ion-icon class="pre_btn" (tap)="changeMonth(month - 1)" item-right><img  [src]="month == 1? 'assets/images/add_dark_b.png' : 'assets/images/add_b.png'"/></ion-icon>
+                    <button ion-button clear class="pre_choose_btn" item-right (tap)="goMonthList()"><span>{{month}}</span>个月（点击修改）</button>
+                    <ion-icon class="pre_btn" (tap)="changeMonth(month + 1)" item-right><img  [src]="month == 24? 'assets/images/add_dark_a.png' : 'assets/images/add_a.png'"/></ion-icon>
+                  </ion-item>
+                  <ion-item-group class="account_list_total">
+                      <ion-item-divider class="account_title_total">
+                        <!--<ion-checkbox item-start class="account_checkBox"></ion-checkbox>-->
+                        <h2 class="account_title" item-left>费用详情</h2>
+                      </ion-item-divider>
+
+                      <!--中间列表区域-->
+                      <div class="pre_content_total">
+                        <div class="clearfix" *ngFor="let s of subjects" >
+                          <p class="pre_checkbox" [class.pre_checkbox_second]="s.MonthAmount == 0" >
+                            <ion-checkbox  class="account_checkBox" (tap)="clicksubject = true" (ionChange)="subjectCheck(s)" [(ngModel)]="s.IsChecked" ></ion-checkbox>
+                          </p>
+                          <ion-item class="pre_content_item pre_content_subitem">
+                              <p class="pre_content_text" item-left>{{s.SubjectName}}</p>
+                              <ion-icon class="pre_btn" (tap)="changePreAmount(s, 2)" *ngIf="s.MonthAmount == 0" item-right><img  [src]="(!s.IsChecked || s.PreAmount == 50)? 'assets/images/add_dark_b.png' : 'assets/images/add_b.png'"/></ion-icon>
+                              <p class="pre_content_dollar" item-right>￥{{s.PreAmount | number:'1.2-2'}}</p>
+                              <ion-icon class="pre_btn" (tap)="changePreAmount(s, 1)" *ngIf="s.MonthAmount == 0" item-right><img  [src]="(!s.IsChecked || s.PreAmount == 9950)? 'assets/images/add_dark_a.png' : 'assets/images/add_a.png'"/></ion-icon>
+                          </ion-item>
+                        </div>
+                      </div>
+                    </ion-item-group>
+
+                    <!--底部确认按钮-->
+                    <ion-item class="account_bottom_total">
+                      <ion-checkbox item-start class="account_checkBox" (tap)="clickallsubject = true" (ionChange)="subjectCheckAll()"  [(ngModel)] = "isSubjectCheckedAll" ></ion-checkbox>
+                      <p class="account_bottom_text" item-left>全选</p>
+                      <button ion-button clear class="account_bottom_submit" item-right (tap)="goPrePayment()">
+                        合计： ￥{{preamount | number:'1.2-2'}}  确认支付
+                      </button>
+                    </ion-item>
+                </div>
+              </ion-list>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+</ion-content>

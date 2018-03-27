@@ -1,0 +1,713 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZY_DAL</name>
+    </assembly>
+    <members>
+        <member name="T:ZY_DAL.Delete">
+            <summary>
+            数据库删除
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DAL.Delete.delete(System.String,System.String)">
+            <summary>
+            删除 拼sql
+            </summary>
+            <param name="Table">表</param>
+            <param name="where">条件</param>
+            <returns>删除条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(System.Int32)">
+            <summary>
+            删除 条件为自增id（对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="id">自增id值</param>
+            <returns>修改条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(System.String,System.Boolean)">
+            <summary>
+            删除 条件为自增id集合（对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="ids">自增id值集合例：1,2,3</param>
+            <param name="In">包含，还是不包含，默认in包含</param>
+            <returns>修改条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(``0)">
+            <summary>
+            删除 条件为传入对象值（对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象</param>
+            <returns>修改条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Transaction_NonQuery(ZY_DBHelper.BaseHelper,System.String,System.String)">
+            <summary>
+            删除 拼sql（事物）
+            </summary>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="Table">表</param>
+            <param name="where">条件</param>
+            <returns>删除的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(ZY_DBHelper.BaseHelper,System.Int32,System.String)">
+            <summary>
+            删除 条件为自增id（对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="id">自增字段的值</param>
+            <param name="mark">标识</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(ZY_DBHelper.BaseHelper,System.String,System.Boolean)">
+            <summary>
+            删除 条件为自增id集合（事务）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="ids">自增id值集合例：1,2,3</param>
+            <param name="In">包含，还是不包含，默认in包含</param>
+            <returns>修改条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(ZY_DBHelper.BaseHelper,``0,System.String)">
+            <summary>
+            删除 条件为传入对象值（事物）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="obj">实体对象的值</param>
+            <param name="mark">标识</param>
+            <returns>删除的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Delete.Deletemodle``1(ZY_DBHelper.BaseHelper,System.String,``0,System.String,System.Boolean)">
+            <summary>
+            删除 条件为传入对象值（事物）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="ids">自增id值集合例：1,2,3</param>
+            <param name="obj">实体对象的值</param>
+            <param name="mark">标识</param>
+            <param name="In">包含，还是不包含，默认in包含</param>
+            <returns>删除的条数</returns>
+        </member>
+        <member name="T:ZY_DAL.Insert">
+            <summary>
+            数据库新增
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DAL.Insert.insert(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            新增 字典拼sql
+            </summary>
+            <param name="table">表</param>
+            <param name="dc">Dictionary《string字段名, object值》新增数据</param>
+            <returns>新增的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.insertReturn(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            新增 并返回自增id
+            </summary>
+            <param name="table">表</param>
+            <param name="dc">Dictionary《string字段名, object值》新增数据</param>
+            <returns>自增id</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.Transaction_NonQuery(ZY_DBHelper.BaseHelper,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+             新增 （事务）
+            </summary>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="table">表</param>
+            <param name="dc">Dictionary《string字段名, object值》新增数据</param>
+            <returns>新增id</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.Transaction_InsertReturn(ZY_DBHelper.BaseHelper,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            新增 返回自增id （事务）
+            </summary>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="table">表</param>
+            <param name="dc">Dictionary《string字段名, object值》新增数据</param>
+            <returns>自增id</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.Transaction_InsertReturn(ZY_DBHelper.BaseHelper,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String)">
+            <summary>
+            新增 返回新增ID 在新增同一张表用（事务）
+            </summary>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="table">表</param>
+            <param name="dc">Dictionary《string字段名, object值》新增数据</param>
+            <param name="Mark">标示</param>
+            <returns>新增id</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.Insertmodle``1(``0)">
+            <summary>
+            新增 （对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象值</param>
+            <returns>新增的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.InsertReturnid``1(``0)">
+            <summary>
+            新增 返回自增id （对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象值</param>
+            <returns>新增的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.InsertReturnmodle``1(``0)">
+            <summary>
+            新增 返回自增id （对象）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象值</param>
+            <returns>新增后的对象</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.Insertmodle``1(ZY_DBHelper.BaseHelper,``0)">
+            <summary>
+            新增（对象+事务）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="obj">实体对象值</param>
+            <returns>新增的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.InsertReturnid``1(ZY_DBHelper.BaseHelper,``0)">
+            <summary>
+            新增 返回新增ID（对象+事物）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="obj">实体对象值</param>
+            <returns>自增id</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.InsertReturnmodle``1(ZY_DBHelper.BaseHelper,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="obj">实体对象值</param>
+            <returns>新增后对象</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.Insertmodle``1(ZY_DBHelper.BaseHelper,``0,System.String)">
+            <summary>
+            新增 加标识（对象+事物）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">BaseHelper 对象</param>
+            <param name="obj">实体类</param>
+            <param name="mark">标识</param>
+            <returns>新增的条数</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.InsertReturnid``1(ZY_DBHelper.BaseHelper,``0,System.String)">
+            <summary>
+            新增 加标识 返回新增ID （对象+事务）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">BaseHelper 对象</param>
+            <param name="obj">实体类</param>
+            <param name="mark">标识</param>
+            <returns>自增id</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.InsertReturnmodle``1(ZY_DBHelper.BaseHelper,``0,System.String)">
+            <summary>
+            新增 加标识 返回新增对象（对象+事务）
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">BaseHelper 对象</param>
+            <param name="obj">实体类</param>
+            <param name="mark">标识</param>
+            <returns>返回新增后对象</returns>
+        </member>
+        <member name="M:ZY_DAL.Insert.insert(System.String,System.Web.UI.Page,System.String,System.String)">
+            <summary>
+            新增 自动获取页面控件值
+            控件id 和 数据库字段一致
+            控件必须为runat="server"
+            目前支持：
+            InputText TextBox DropDownList Select TextArea
+            InputRadio InputCheckBox InputFile FileUpload
+            </summary>
+            <param name="TableName">表名</param>
+            <param name="page">this.Page</param>
+            <param name="defaultfiled">手动追加的字段名 例如：type,date</param>
+            <param name="defaultval">手动追加的值 例如：1,'2013-5-5'</param>
+            <returns>新增的条数</returns>
+        </member>
+        <member name="T:ZY_DAL.SqlDAL">
+            <summary>
+            数据库查询
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataRead(System.Web.UI.Page,System.String,System.String)">
+            <summary>
+            查询 给页面控件赋值（控件）
+            只适用于单表
+            控件id 和 数据库字段一致, 控件必须为runat="server"
+            目前支持 InputText TextBox DropDownList Select TextArea
+            InputRadio InputCheckBox img UploadImg
+            </summary>
+            <param name="page">this.page</param>
+            <param name="table">要查询的表名称</param>
+            <param name="where">条件</param>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataRead(System.Web.UI.Page,System.String,System.String,System.String)">
+            <summary>
+            查询 给页面控件赋值（控件）
+            只适用于单表
+            控件id 和 数据库字段一致, 控件必须为runat="server"
+            目前支持 InputText TextBox DropDownList Select TextArea
+            InputRadio InputCheckBox img
+            </summary>
+            <param name="page">this.page</param>
+            <param name="column">要查询的字段</param>
+            <param name="table">要查询的表名称</param>
+            <param name="where">条件</param>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataRead(System.Web.UI.Page,System.Data.IDataReader)">
+            <summary>
+            查询 给页面控件赋值（控件）
+            放在if(read.Read())内
+            只适用于单表
+            控件id 和 数据库字段一致
+            控件必须为runat="server"
+            目前支持 InputText TextBox DropDownList Select TextArea
+            InputRadio InputCheckBox img
+            </summary>
+            <param name="page">this.page</param>
+            <param name="read">IDataReader </param>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader(System.String,System.String,System.String)">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader(System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="column">列名</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="top">查询条数</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="top">查询条数</param>
+            <param name="column">字段</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 分页 返回DataReader
+            </summary>
+            <param name="top">每页显示数据数目</param>
+            <param name="pageSize">第n-1总共的数据数目</param>
+            <param name="id">主表自增id</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 分页 返回DataReader
+            </summary>
+            <param name="top">每页显示数据数目</param>
+            <param name="pageSize">第n-1总共的数据数目</param>
+            <param name="id">主表自增id字段名</param>
+            <param name="column">查询的列名称</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>IDataReader</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataQuery(System.String,System.String,System.String)">
+            <summary>
+            查询 返回DataSet
+            </summary>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataQuery(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 分页 返回DataSet
+            </summary>
+            <param name="top">每页显示数据数目</param>
+            <param name="pageSize">第n-1总共的数据数目</param>
+            <param name="id">分页唯一标示</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataQuery(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 分页 返回DataSet
+            </summary>
+            <param name="top">每页显示数据数目</param>
+            <param name="pageSize">第n-1总共的数据数目</param>
+            <param name="id">分页唯一标示</param>
+            <param name="column">查询的列名称</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue``1(System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="column">列名</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader``1(System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象集合
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象集合
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="column">列名</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader``1(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象集合
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="top">查询条数</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.DataReader``1(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象集合
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="top">每页显示数据数目</param>
+            <param name="pageSize">第n-1总共的数据数目</param>
+            <param name="id">主表自增id字段名</param>
+            <param name="table">表名</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue``1(System.Int32)">
+            <summary>
+            查询 返回对象 传入id
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="id">自增字段的值</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue``1(``0)">
+            <summary>
+            查询 返回对象 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象的值</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetCount``1">
+            <summary>
+            查询 返回总条数
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <returns>总条数</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetCount``1(``0)">
+            <summary>
+            查询 返回总条数 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象值</param>
+            <returns>总条数</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetList``1(``0)">
+            <summary>
+            查询 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象的值</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetList``1(``0,System.String,System.String)">
+            <summary>
+            查询 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象的值</param>
+            <param name="where">条件</param>
+            <param name="order">排序</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetList``1(``0,System.String)">
+            <summary>
+            查询 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实例化对象的值</param>
+            <param name="where">附加条件</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetList``1(``0,System.Int32,System.Int32,System.String)">
+            <summary>
+            查询 分页 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实例化对象</param>
+            <param name="page">当前第几页</param>
+            <param name="top">每页几条</param>
+            <param name="orders">排序字段</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetList``1(``0,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            查询 分页 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实例化对象值</param>
+            <param name="page">当前第几页</param>
+            <param name="top">每页几条</param>
+            <param name="where">附加条件</param>
+            <param name="orders">排序字段</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetMultiValue``1(``0)">
+            <summary>
+            查询 返回对象 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象的值</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetMultiCount``1(``0)">
+            <summary>
+            查询 返回总条数 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象值</param>
+            <returns>总条数</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetMultiList``1(``0)">
+            <summary>
+            查询 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体对象的值</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetMultiList``1(``0,System.Int32,System.Int32,System.String)">
+            <summary>
+            查询 分页 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实例化对象</param>
+            <param name="page">当前第几页</param>
+            <param name="top">每页几条</param>
+            <param name="orders">排序字段</param>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.CorrelationObj(System.Object,System.Text.StringBuilder,System.Text.StringBuilder,System.Collections.Generic.List{System.Data.IDataParameter},System.String)">
+            <summary>
+            查询关联对象
+            </summary>
+            <param name="obj">实体类(实体类为空查询所有)</param>
+            <param name="parenttable">父表名称</param>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue``1(ZY_DBHelper.BaseHelper,System.Int32,System.String)">
+            <summary>
+            查询 事务 返回对象 传入id
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">BaseHelper对象</param>
+            <param name="id">自增字段的值</param>
+            <param name="Mark">标识 处理事务时多个业务处理同个对象</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue``1(ZY_DBHelper.BaseHelper,``0,System.String)">
+            <summary>
+            查询 返回对象 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">BaseHelper对象</param>
+            <param name="obj">实体对象的值</param>
+            <param name="Mark">标识 处理事务时多个业务处理同个对象</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetCount``1(ZY_DBHelper.BaseHelper,``0,System.String)">
+            <summary>
+            查询 返回总条数 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">BaseHelper对象</param>
+            <param name="obj">实体对象值</param>
+            <param name="Mark">标识 处理事务时多个业务处理同个对象</param>
+            <returns>总条数</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetAssemblyList(System.String@,System.String,System.String,System.String)">
+            <summary>
+            查询 返回对象集 传入对象名反射得到集合
+            </summary>
+            <param name="idname">自增字段的名字</param>
+            <param name="ClassName">表名</param>
+            <param name="Assembly">类库名字</param>
+            <param name="Namespace">命名空间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetCacheList``1">
+            <summary>
+            查询 分页 返回对象集 以传入对象值做条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <returns>对象集合</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetCount(System.String,System.String)">
+            <summary>
+            获取总条数
+            </summary>
+            <param name="table">表</param>
+            <param name="where">条件</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:ZY_DAL.SqlDAL.GetValue(System.String,System.String,System.String)">
+            <summary>
+            获取首行首列
+            </summary>
+            <param name="column">需要查询的列</param>
+            <param name="table">表</param>
+            <param name="where">条件</param>
+            <returns>object</returns>
+        </member>
+        <member name="P:ZY_DAL.SqlDAL.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_DAL.Update">
+            <summary>
+            数据库修改
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DAL.Update.update(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            修改
+            </summary>
+            <param name="Table">表</param>
+            <param name="where">条件</param>
+            <param name="dr">Dictionary《string字段名, obj值>更改内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DAL.Update.Transaction_NonQuery(ZY_DBHelper.BaseHelper,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            修改 (事务)
+            </summary>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="Table">表</param>
+            <param name="where">条件</param>
+            <param name="dr">Dictionary《string字段名, obj值>更改内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DAL.Update.Transaction_NonQuery(ZY_DBHelper.BaseHelper,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String)">
+            <summary>
+            修改 加标识 （事务）
+            </summary>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="Table">表</param>
+            <param name="where">条件</param>
+            <param name="dr">Dictionary《string字段名, obj值>更改内容</param>
+            <param name="Mark">标示</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DAL.Update.update(System.String,System.String,System.Web.UI.Page,System.String)">
+            <summary>
+            【修改】 自动获取控件值 进行修改
+            控件id 和 数据库字段一致 
+            控件必须为runat="server"
+            目前支持 InputText TextBox DropDownList Select TextArea
+            InputRadio InputCheckBox InputFile FileUpload
+            </summary>
+            <param name="TableName">表名</param>
+            <param name="where">条件</param>
+            <param name="page">this.Page</param>
+            <param name="defultset">手动追加的修改数据：例如 statu=1,date='2013-5-5'</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DAL.Update.Updatemodle``1(``0,System.String)">
+            <summary>
+            利用对象修改 默认id作为条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="obj">实体类</param>
+            <param name="wh">附加条件</param>
+        </member>
+        <member name="M:ZY_DAL.Update.Updatemodle``1(ZY_DBHelper.BaseHelper,``0,System.String,System.String)">
+            <summary>
+            利用对象修改 默认id作为条件
+            </summary>
+            <typeparam name="T">实体对象类型</typeparam>
+            <param name="bh">已经实例化的BaseHelper对象</param>
+            <param name="obj">实体类</param>
+            <param name="where">附加条件</param>
+            <param name="mark">标识</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,67 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divPreCostBatchDeductionController" ng-controller="PreCostBatchDeductionController">
+    <div id="divBatchDeductionSearchContainer">
+        <input type="button" id="btnBatchDeduction" class="btn btn-primary" style="display:none;" value="查询" />
+    </div>
+    <div id="divToolbar" class="pull-left" style="padding-left:10px; padding-bottom:10px;">
+        <a class="btn btn-primary" ng-click="PreCostBatchDeduction()"> 确认抵扣</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="padding-top:10px;">
+            <div id="divBatchDeductionTable" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.BatchDeductionData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.BatchDeductionTable = null;
+
+        ckFramework.createBatchDeductionData = {
+            TableId: 'table_ckFramework_BatchDeduction',
+            Language: ckFramework.HomeData.Language,
+            TemplateItemDatas: ckFramework.BatchDeductionData.TemplateModels,
+            IsAddOperate: true,
+            IsAddAllCheck1: true,
+            DivTable: $('#divBatchDeductionTable'),
+            OperateColumn: {
+                "data": null, "orderable": false, "width": 60,
+                "render": function (data) {
+                    var content = "<input type='checkbox' class='DeductionCheckbox'  value ='" + data.HouseDeptId + "," + data.SubjectId +"'/>";  
+                    return content;
+                }
+            }
+        };
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createBatchDeductionData);
+
+        ckFramework.InitBatchDeduction = function () {
+            $(".chkALL").prop("checked", false);
+            $("#btnBatchDeduction").click();
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chkALL").click(function (eve) {
+                $("#" + ckFramework.createBatchDeductionData.TableId)
+                    .find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
+            });
+
+            ckFramework.BatchDeductionTable = $('#' + ckFramework.createBatchDeductionData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createBatchDeductionData),
+                filterOptions: {
+                    searchButton: "btnBatchDeduction",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "divBatchDeductionSearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "PreAccountManage", "GetBatchDeductionBillList")',
+                    DrawTable:function(){
+                        ckFramework.BatchDeductionTable.draw();
+                    }
+                }
+            });
+
+            $("#divBatchDeductionTable").find("div.toolbar").html($('#divToolbar'));
+        });
+    </script>
+</div>

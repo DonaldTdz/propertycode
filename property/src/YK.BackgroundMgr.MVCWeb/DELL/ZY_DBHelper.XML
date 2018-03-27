@@ -1,0 +1,669 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZY_DBHelper</name>
+    </assembly>
+    <members>
+        <member name="T:ZY_DBHelper.TableAttribute">
+            <summary>
+            实体对象 表属性
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.TableAttribute.name">
+            <summary>
+            表名称
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.TableAttribute.primary">
+            <summary>
+            该表的主键
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.TableAttribute.identity">
+            <summary>
+            该表的标识列名称
+            </summary>
+        </member>
+        <member name="T:ZY_DBHelper.FieldAttribute">
+            <summary>
+            实体对象 字段属性
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.FieldAttribute.name">
+            <summary>
+            数据库字段名称
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.FieldAttribute.type">
+            <summary>
+            数据库字段数据类型
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.FieldAttribute.lenth">
+            <summary>
+            数据库字段长度
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.FieldAttribute.key">
+            <summary>
+            数据库字段类型
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.FieldAttribute.reftable">
+            <summary>
+            数据库字段对应主键表名
+            </summary>
+        </member>
+        <member name="P:ZY_DBHelper.FieldAttribute.refcolumn">
+            <summary>
+            数据库字段对应主键表字段
+            </summary>
+        </member>
+        <member name="F:ZY_DBHelper.Key.identity">
+            <summary>
+            自增
+            </summary>
+        </member>
+        <member name="F:ZY_DBHelper.Key.primary">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="F:ZY_DBHelper.Key.id_primary">
+            <summary>
+            自增主键
+            </summary>
+        </member>
+        <member name="F:ZY_DBHelper.Key.reference">
+            <summary>
+            外键
+            </summary>
+        </member>
+        <member name="F:ZY_DBHelper.Key.field">
+            <summary>
+            普通字段
+            </summary>
+        </member>
+        <member name="T:ZY_DBHelper.BaseHelper">
+            <summary>
+            数据库增删改查基类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="F:ZY_DBHelper.BaseHelper.connstring">
+            <summary>
+            链接数据库字符串
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetParameter(System.String,System.Object)">
+            <summary>
+            获取parameter
+            </summary>
+            <param name="name">@key</param>
+            <param name="value">value</param>
+            <returns>IDataParameter</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetValue(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 某个字段
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.DataQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回DataSet
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.DataReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.InsertReturn(System.String,System.Data.IDataParameter[])">
+            <summary>
+            新增 返回新增后Id
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.ExecuteNonQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            新增 修改 删除
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>返回修改条数int</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.ExecuteNonQuery_NoTransacion(System.String)">
+            <summary>
+            特殊用途
+            </summary>
+            <param name="sql">sql语句</param>
+            <returns>变更的条数</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.DataQuery_Cathe(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+            <summary>
+            查询 依赖缓存 通知模式
+            select id,name from db.table
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <param name="cache">缓存依赖</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.DataReader_Cathe(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+            <summary>
+            查询 依赖缓存 通知模式
+            select id,name from db.table
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <param name="cache">缓存依赖</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.DataReader_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程返回查询结果集
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.DataQuery_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程返回查询结果集
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.ExecuteNonQuery_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程处理业务逻辑返回处理结果
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_BeginNonQuery">
+            <summary>
+            事务 开始
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_ExecuteScalar(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 查询 
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_DataReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 查询 返回DataReader
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_InsertReturn(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 新增 返回id
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_NonQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 新增 修改 删除  
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_Rollback">
+            <summary>
+            事务 回滚
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Transaction_EndNonQuery">
+            <summary>
+            事物 结束
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetValue``1(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回对象
+            </summary>
+            <typeparam name="T">实体对象的类型</typeparam>
+            <param name="sql">需要提交的sql语句</param>
+            <param name="spms">sql语句中需要用到的参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetValue``1(ZY_DBHelper.BaseHelper,System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回对象
+            </summary>
+            <typeparam name="T">实体对象的类型</typeparam>
+            <param name="bh">BaseHelper 实例对象</param>
+            <param name="sql">需要提交的sql语句</param>
+            <param name="spms">sql语句中需要用到的参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetList``1(System.String,System.Data.IDataParameter[])">
+             <summary>
+            查询 返回对象集
+             </summary>
+             <typeparam name="T">实体对象的类型</typeparam>
+             <param name="sql">需要提交的sql语句</param>
+             <param name="spms">sql语句中需要用到的参数</param>
+             <returns></returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetList(System.String,System.Data.IDataParameter[],System.Object)">
+             <summary>
+            查询 返回对象集
+             </summary>
+             <param name="sql">需要提交的sql语句</param>
+             <param name="spms">sql语句中需要用到的参数</param>
+             <param name="spms">实例化实体对象</param>
+             <returns></returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.GetList``1(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+             <summary>
+            查询 返回对象集 依赖缓存
+             </summary>
+             <typeparam name="T">实体对象的类型</typeparam>
+             <param name="sql">需要提交的sql语句</param>
+             <param name="spms">sql语句中需要用到的参数</param>
+             <param name="cache">缓存依赖</param>
+             <returns></returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Instance``1(System.Data.IDataReader)">
+            <summary>
+            使用反射技术获取实体对象
+            </summary>
+            <typeparam name="T">实体类的类型</typeparam>
+            <param name="reader">实体类构造函数的参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZY_DBHelper.BaseHelper.Instance(System.Object,System.Data.IDataReader)">
+            <summary>
+            使用反射技术获取实体对象
+            </summary>
+            <param name="obj">要接收值的对象</param>
+            <param name="reader">实体类构造函数的参数</param>
+            <returns></returns>
+        </member>
+        <member name="P:ZY_DBHelper.BaseHelper.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_DBHelper.OleDbHelper">
+            <summary>
+            Access 数据库操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.GetParameter(System.String,System.Object)">
+            <summary>
+            获取parameter
+            </summary>
+            <param name="name">@key</param>
+            <param name="value">value</param>
+            <returns>IDataParameter</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.GetValue(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 某个字段
+            </summary>
+            <param name="OleDb">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.DataQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回Dataset
+            </summary>
+            <param name="OleDb">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.DataReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="OleDb">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>OleDbDataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.InsertReturn(System.String,System.Data.IDataParameter[])">
+            <summary>
+            新增 返回Id
+            </summary>
+            <param name="OleDb">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.ExecuteNonQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            新增 修改 删除
+            </summary>
+            <param name="OleDb">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>返回修改条数int</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.ExecuteNonQuery_NoTransacion(System.String)">
+            <summary>
+            特殊用途
+            </summary>
+            <param name="sql">sql语句</param>
+            <returns>变更的条数</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.DataQuery_Cathe(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+            <summary>
+            查询 依赖缓存 通知模式
+            select id,name from db.table
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <param name="cache">缓存依赖</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.DataReader_Cathe(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+            <summary>
+            查询 依赖缓存 通知模式
+            select id,name from db.table
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <param name="cache">缓存依赖</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.DataReader_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程返回查询结果集
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.DataQuery_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程返回查询结果集
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.ExecuteNonQuery_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程处理业务逻辑返回处理结果
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_BeginNonQuery">
+            <summary>
+            事务 开始
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_ExecuteScalar(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 查询
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_DataReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 查询 返回DataReader
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_InsertReturn(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 新增 返回Id
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_NonQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 新增 修改 删除
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>变更条数</returns>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_Rollback">
+            <summary>
+            事务 回滚
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.Transaction_EndNonQuery">
+            <summary>
+            事务 结束
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.OleDbHelper.SetSQL(System.String,System.Data.IDataParameter[])">
+            <summary>
+            记录数据库操作
+            </summary>
+            <param name="str">sql语句</param>
+            <param name="Parameter">参数集合</param>
+        </member>
+        <member name="P:ZY_DBHelper.OleDbHelper.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_DBHelper.SqlHelper">
+            <summary>
+            mssql 数据库操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.GetParameter(System.String,System.Object)">
+            <summary>
+            获取parameter
+            </summary>
+            <param name="name">@name</param>
+            <param name="value">value</param>
+            <returns>IDataParameter</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.GetValue(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 某个字段
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.DataQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回dataset
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.DataReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.InsertReturn(System.String,System.Data.IDataParameter[])">
+            <summary>
+            新增 返回Id
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.ExecuteNonQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            新增 修改 删除
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>变更的条数</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.ExecuteNonQuery_NoTransacion(System.String)">
+            <summary>
+            特殊用途
+            </summary>
+            <param name="sql">sql语句</param>
+            <returns>变更的条数</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.DataQuery_Cathe(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+            <summary>
+            查询 依赖缓存 通知模式
+            select id,name from db.table
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <param name="cache">缓存依赖</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.DataReader_Cathe(System.String,System.Data.IDataParameter[],System.Web.Caching.SqlCacheDependency)">
+            <summary>
+            查询 依赖缓存 通知模式
+            select id,name from db.table
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <param name="cache">缓存依赖</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.DataReader_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程返回查询结果集
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.DataQuery_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程返回查询结果集
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.ExecuteNonQuery_Poc(System.String,System.Data.IDataParameter[])">
+            <summary>
+            存储过程处理业务逻辑返回处理结果
+            </summary>
+            <param name="sql">存储过程</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_BeginNonQuery">
+            <summary>
+            事务 开始
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_ExecuteScalar(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 查询某个字段
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_DataReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 查询 返回DataReader
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>DataReader</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_InsertReturn(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 新增 返回Id
+            </summary>
+            <param name="sql">sql语句</param>
+            <param name="Parameter">Parameter[]参数集</param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_NonQuery(System.String,System.Data.IDataParameter[])">
+            <summary>
+            事务 新增 修改 删除
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_Rollback">
+            <summary>
+            事务 回滚
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.Transaction_EndNonQuery">
+            <summary>
+            事务 结束
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.SetSQL(System.String,System.Data.IDataParameter[])">
+            <summary>
+            记录数据库操作
+            </summary>
+            <param name="str">sql语句</param>
+            <param name="Parameter">参数集合</param>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.GridView_Update(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            DataGridView编辑后保存
+            </summary>
+            <param name="ds">修改后的DataSet</param>
+            <param name="column">修改数据 的字段</param>
+            <param name="table">修改数据 表的名称</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:ZY_DBHelper.SqlHelper.GridView_Update(System.Data.DataSet,System.String)">
+            <summary>
+            DataGridView编辑后保存
+            </summary>
+            <param name="ds">修改后的DataSet</param>
+            <param name="sql">修改数据 表的名称</param>
+            <returns>int</returns>
+        </member>
+        <member name="P:ZY_DBHelper.SqlHelper.CreateInstance">
+            <summary>
+            创建对象
+            </summary>
+        </member>
+        <member name="T:ZY_DBHelper.ExelHelper">
+            <summary>
+            exel 数据库操作类
+            周游 QQ：15228834746  电话：15228834746
+            </summary>
+        </member>
+        <member name="M:ZY_DBHelper.ExelHelper.DataQuery(System.String)">
+            <summary>
+            查询 返回DataSet
+            </summary>
+            <param name="sheetname">工作单</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:ZY_DBHelper.ExelHelper.DataReader(System.String)">
+            <summary>
+            查询 返回DataReader
+            </summary>
+            <param name="sheetname">工作单名称</param>
+            <returns>DataReader</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,369 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    .save {
+        float: right;
+    }
+
+    .treeLabel {
+        width: 200px;
+        display: inline-block;
+    }
+
+    .treeSpan {
+        margin-left: 200px;
+        display: inline-block;
+    }
+
+    .divSubjectItem {
+        width: 690px;
+        height: 74px;
+        float: left;
+    }
+
+        .divSubjectItem li {
+            width: 230px;
+            float: left;
+            display: block;
+            text-align: left;
+            font-size: 20px;
+            height: 40px;
+            border: 1px solid #dcd9d9;
+            margin-top: -1px;
+            padding: 5px 0 0 5px;
+        }
+
+   /*th {
+        text-align: center;
+        height: 30px;
+    }
+
+   td {
+        text-align: center;
+        height: 35px;
+    }*/
+
+    border-right {
+        border: 1px solid black;
+    }
+</style>
+
+<div id="divBindSubjectBySingleResController" ng-controller="BindSubjectBySingleResController">
+    <div class="box box-primary form-group">
+        <div class="box-body">
+            <div class="row col-md-12">
+                <div class="col-md-3">
+                    <div id="treeBindSubjectBySingleRes" style="height:700px;overflow-y:auto;">
+
+                    </div>
+
+                </div>
+                <div class="col-md-9" style="border:1px solid #dcd9d9;padding:0;">
+                    <table id="table_subject" class="table table-bordered table-striped dataTable" role="grid" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th colspan="5" style="font-size:18px; padding:5px;" id="houseState"></th>
+                            </tr>
+                            <tr role="row" style="height: 0px;">
+                                <th style="word-wrap: break-word; white-space: nowrap; width: 140px; padding:5px;" class="sorting_disabled border-right" rowspan="1" colspan="1">收费项目</th>
+
+                                <th colspan="2" style="word-wrap: break-word; white-space: nowrap; width: 87px; padding:5px;" class="sorting_disabled" rowspan="1">开发商代缴</th>
+
+                                <th colspan="2" style="word-wrap: break-word; white-space: nowrap; width: 87px; padding:5px;" class="sorting_disabled" rowspan="1">开始计费日期</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr role="row" class="odd" ng-repeat="item in ChargeSubjects" on-finish-render-filters>
+
+                                <td style="text-align:left;" class="border-right">
+                                    <input type="checkbox" id="{{item.Id}}" name="chkSetTime" ng-checked="fase" subjectName="{{item.Name}}" />&nbsp;&nbsp;{{item.Name}}
+                                </td>
+
+                                <td>
+                                    <div class='input-group date' id="{{'setTimeBegin'+item.Id}}">
+                                        <input type='text' class="form-control" placeholder="开始时间*" ng-checked="fase" id="{{'txtBeginDate' + item.Id}}" />
+                                        <span class="input-group-addon btn">
+                                            <i class="fa fa-remove" ng-click="CllearTime('txtBeginDate' + item.Id)"></i>
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar Time">
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class='input-group date' id="{{'setTimeEnd'+item.Id}}">
+                                        <input type='text' class="form-control" placeholder="结束时间*" id="{{'txtEndDate' + item.Id }}" />
+                                        <span class="input-group-addon btn">
+                                            <i class="fa fa-remove" ng-click="CllearTime('txtEndDate' + item.Id)" id="time"></i>
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar Time" ng-class="ChargeSubjectsIndex(item.Id,item.BillPeriod)">
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class='input-group date' id="{{'setCreateTime'+item.Id}}">
+                                        <input type='text' true class="form-control" placeholder="计费开始时间*" id="{{'txtCreateTime' + item.Id}}" />
+                                        <span class="input-group-addon" id="{{'spanCreateTime' +item.Id }}" >
+                                            <span class="glyphicon glyphicon-calendar Time" >
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" style="text-align:left">
+                                    <input type="button" class="btn btn-primary" ng-click="Save()" ng-if="CheckPermission('BindSave')" ng-show="ChargeSubjects.length>0" value="保存">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-2" style="text-align: center;padding-top:2%">
+                @*       <input type="button" id="btnSave" class="btn btn-primary btn-lg" value="保存">*@
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="communityId" value="@Request["commuDeptId"]" />
+    <input type="hidden" id="resType" value="@Request["resType"]" />
+</div>
+<script type="text/javascript">
+    var ckFramework = ckFramework || {};
+    ckFramework.BindSubjectBySingleResListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    ckFramework.time=$("#time").val();
+</script>
+
+<script type="text/javascript">
+    var SubjectTypeEnum=
+    {
+        House : 1,
+        ParkingSpace : 2,
+        Meter : 3,
+    }
+
+    function LoadSubject(type) {
+        var LoadInfo = new Object();
+        LoadInfo.CommId = $("#communityId").val();
+        LoadInfo.TempSetTime = "<li><div class='input-group date' id='datetimepickerFrom'><input type='text' class='form-control' placeholder='开始时间*' id='txtBeginDate'  readonly /> <span class='input-group-addon btn' onclick='fnRemoveCalendar(this)'> <i class='fa fa-remove'></i></span><span class='input-group-addon'> <span class='glyphicon glyphicon-calendar'> </span></span></div></li><li><div class='input-group date' id='datetimepickerTo'> <input type='text' class='form-control' placeholder='结束时间*' id='txtEndDate' readonly /> <span class='input-group-addon btn' onclick='fnRemoveCalendar(this)'> <i class='fa fa-remove'></i> </span> <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></li><li><div class='input-group date' id='datetimepickerFromT'><input type='text' class='form-control' placeholder='开始时间*' id='txtCreateTime' readonly/> <span class='input-group-addon btn' onclick='fnRemoveCalendar(this)'> <i class='fa fa-remove'></i></span><span class='input-group-addon'> <span class='glyphicon glyphicon-calendar'> </span></span></div></li>";
+        $.post("PropertyMgr/BindSubjectBySingleRes/GetSubjects", { commId: LoadInfo.CommId, type: type }, function (data) {
+            var subjectSetTime = null;
+            $.each(data, function (i) {
+                subjectSetTime = null;
+            })
+        });
+    }
+    function ReturnNodeIdAndSubjectType(selecteNode,sourceType){
+        var arr=selecteNode.split('_')
+        var resId=0;
+        var arrType=new Array();
+        var subjectType=0;
+        if (sourceType==1||sourceType==2||sourceType==3) {
+            if (arr.length==3&&arr[1]==1000) {
+                resId=arr[2];
+                subjectType=SubjectTypeEnum.Meter;
+            }
+        }else if (sourceType==20||sourceType==12) {
+            resId=arr[0];
+            subjectType=SubjectTypeEnum.House;
+        } else if (sourceType==13) {
+            if (arr[1].length==36){
+                resId=arr[0];
+                subjectType=SubjectTypeEnum.ParkingSpace;
+            }
+        }
+        //$("#resId").val(resId);
+        ckFramework.ResourcBindHouseDeptId = resId;
+        arrType.push(resId);
+        arrType.push(subjectType);
+        return arrType;
+    }
+    /*点击资源设置开发商代缴的时间*/
+    function SetSubjectChecked(resId, subjectType) {
+        //alert(11)
+        if (!(resId>0||subjectType>0)) {
+            return false;
+        }
+
+        $.post( 'PropertyMgr/BindSubjectBySingleRes/SetSubjectChecked',{ resId:resId,subjectType:subjectType },function(data){
+            $(".date").hide();
+            ckFramework.SelectedResultData = JSON.parse(data);
+            ckFramework.SetSubjectResultData();
+            
+        });
+    }
+    /*设置显示开发商代缴的时间*/
+    ckFramework.SetSubjectResultData = function(){
+        
+        var data = ckFramework.SelectedResultData;
+        $("#table_subject").find("input[type='checkbox']").prop("checked",false);
+        $.each(data,function(i){
+            $("#"+data[i].ChargeSubjecId).prop("checked",true);
+            $("#txtBeginDate"+ data[i].ChargeSubjecId).val(data[i].DevBeginDate);
+            $("#txtEndDate"+ data[i].ChargeSubjecId).val(data[i].DevEndDate);
+            $("#txtCreateTime"+ data[i].ChargeSubjecId).val(data[i].BeginDateBill);
+            $("#table_subject").find("#setCreateTime"+data[i].ChargeSubjecId).show();
+            var begin= $("#setTimeBegin"+ data[i].ChargeSubjecId);
+            var end= $("#setTimeEnd"+ data[i].ChargeSubjecId);
+            if (begin.length>0) {
+                begin.show();
+                end.show();
+            }
+            //判断是否有账单 有就不能修改计费开始日
+            if (data[i].IsBill) {
+                $("#txtCreateTime" + data[i].ChargeSubjecId).attr("disabled", true);
+                $("#spanCreateTime" + data[i].ChargeSubjecId).hide();
+            } else {
+                $("#txtCreateTime" + data[i].ChargeSubjecId).attr("disabled", false);
+                $("#spanCreateTime" + data[i].ChargeSubjecId).show();
+            }
+        })
+    }
+
+
+
+    /*设置房屋状态*/
+    function LoadHouseState(houseDeptId,communityId){
+        $.post('PropertyMgr/BindSubjectBySingleRes/GetHouseInfo',{ houseDeptId:houseDeptId,communityId:communityId },function(data){
+            $("#houseState").empty();
+            var arr=data.split(',');
+            $("#houseState").html(arr[0]+"("+arr[1]+")");
+        });
+    }
+    /*点击资源*/
+    function NodeClick(){
+        $("#table_subject").find("input[type='checkbox']").attr("checked",false);
+        $("#table_subject").find("input[type='text']").val("");
+        $("#houseState").empty();
+        var sourceType=  $("#subjectHouseRefTab li[class='active']").attr("litype");
+        var selecteNode = $('#treeBindSubjectBySingleRes').jstree().get_selected();
+        var selecteVillage=$('#deptTree').jstree().get_selected()
+        selecteNode=selecteNode.toString();
+        selecteVillage=selecteVillage.toString();
+        if (selecteNode!=null||selecteNode!="") {
+            var   arrNode=selecteNode.split('_');
+            var   villageNode=selecteVillage.split('_');
+            /*房屋*/
+            if (arrNode.length==2)
+            {
+                if (arrNode[1]==20) {
+                    var arr=  ReturnNodeIdAndSubjectType(selecteNode,sourceType);
+                    SetSubjectChecked(arr[0],arr[1]);
+                    if (villageNode[1]==11) {
+                        LoadHouseState(arrNode[0],villageNode[0])
+                    }
+                }
+
+            }
+            /*三表、车位*/
+            if (arrNode.length==3) {
+
+                if (arrNode[1]==1000||arrNode[1].length==36) {
+                    var arr=  ReturnNodeIdAndSubjectType(selecteNode,sourceType);
+                    SetSubjectChecked(arr[0],arr[1]);
+                    if (arrNode[1].length==36) {
+                        LoadHouseState(arrNode[2],villageNode[0])
+                        ckFramework.CarHouseDeptId=arrNode[2];//选着车位时的房屋id
+                    }else{
+                        LoadHouseState(arrNode[2],villageNode[0])
+                    }
+                }
+            }
+        }
+    }
+
+    $(function () {
+        $("#table_subject").find(".date").hide();
+        /*01加载资源信息*/
+        if ($("#SelectDeptTypeAndId").val()) {
+            ckFramework.DeptTree = $('#treeBindSubjectBySingleRes').jstree({
+                'core': {
+                    'data': {
+                        'cache': false,
+                        'url': function (node) {
+                            if (node.id == "#") {
+                                var selectNode = $("#SelectDeptTypeAndId").val();
+                                var arr = selectNode.split('_');
+                                if (arr[1] == 11) {
+                                    //alert(99)
+                                    return 'PropertyMgr/BindSubjectBySingleRes/GetSubjectSelectChildTree?id=' + arr[0] + "&type=" + $("#resType").val() + "&comDeptId=" + $('#SelectDeptId').val();
+                                }
+                            } else {
+                                var selectNode = (node.id + "").split('_');
+                                if (selectNode.length == 2 && selectNode[0].length == 36) {
+                                    return 'PropertyMgr/BindSubjectBySingleRes/GetCarParkSpace';
+                                } else {
+                                    //alert(88)
+                                    return 'PropertyMgr/BindSubjectBySingleRes/GetSubjectSelectChildTree';
+                                }
+                            }
+                        },
+                        'data': function (node) {
+                            var selectNode = node.id.split('_');
+                            var resType = $("#resType").val();
+                            ckFramework.resType = resType;
+                            /*没有加载科目的时候才去请求*/
+                            if (!($(".divSubjectItem li").length > 3)) {
+                                LoadSubject(resType);
+                            }
+                            /*加载科目信息*/
+                            if (resType == 13) {
+                                /*车位*/
+                                return { 'parkIngId': selectNode[0] };
+                            } else {
+                                /*房屋或三表*/
+                                return { 'id': selectNode[0], 'type': resType, 'comDeptId': $('#SelectDeptId').val() };
+                            }
+                        }
+                    },
+                }
+                //}).on('loaded.jstree', function () {
+                //}).on('changed.jstree', function (node, action, selected, event) {
+                //}).on("open_node.jstree", function (e, data) {
+            }).on("click.jstree", function (node) {
+                NodeClick();
+            })
+        }
+
+        /*03勾选框选中显示时间*/
+        $("#table_subject").on("click",":checkbox",function(){
+            var subjectId=$(this).prop("id")
+            if ($(this).is(":checked")) {
+                $("#table_subject").find("#setTimeBegin"+ subjectId).show();
+                $("#table_subject").find("#setTimeEnd"+subjectId).show();
+                $("#table_subject").find("#setCreateTime"+subjectId).show();
+                $.post('PropertyMgr/BindSubjectBySingleRes/GetChargList', { ResourcesId: ckFramework.ResourcBindHouseDeptId, ChargeSubjecId: subjectId,resType: ckFramework.resType ,CarHouseDeptId:ckFramework.CarHouseDeptId},function(data){
+                    //$("#table_subject").find("#txtCreateTime" + subjectId).val(data.Data.EndDateFormat);
+                    //ckFramework.IsBill=data.Data.HouseDeptId;
+                    $("#txtCreateTime" + subjectId).val(data.Data.DefalutDate);
+                    //判断是新增还是编辑
+                    if (!data.Data.IsNew) {//编辑
+                        //存在账单将不可修改
+                        if (data.Data.IsBill) {
+                            $("#txtCreateTime" + subjectId).attr("disabled", true);
+                            $("#spanCreateTime" + subjectId).hide();
+                        } else {
+                            $("#txtCreateTime" + subjectId).attr("disabled", false);
+                            $("#spanCreateTime" + subjectId).show();
+                        }
+                    } else { //新增
+                        //如果有账单 需要限制最小时间不能小于账单最晚日
+                        if (data.Data.IsBill){
+                            $("#setCreateTime" + subjectId).datetimepicker('setStartDate', data.Data.MinDate);
+                        } 
+                        $("#txtCreateTime" + subjectId).attr("disabled", false);
+                        $("#spanCreateTime" + subjectId).show();
+                    }
+                });
+            }else{
+                $("#table_subject").find("#setTimeBegin"+ subjectId).hide();
+                $("#table_subject").find("#setTimeEnd" + subjectId).hide();
+                $("#table_subject").find("#setCreateTime" + subjectId).hide();
+            }
+        })
+    })
+</script>

@@ -1,0 +1,308 @@
+﻿<div id="divPrePaymentDetailReportContainerController" ng-controller="PrePaymentDetailReportContainerController">
+    <div id="SearchContainerPrePayDetailRep" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">小区</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="ComDeptIdStr" id="ComDeptIdStr" ng-change="PreComDeptIdChange()" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList"></select>
+                        <input type="hidden" id="DefaultComDeptId" name="DefaultComDeptId" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">资源名称</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ResourceName" name="ResourceName" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-md-4 control-label">楼栋资源</label>
+                    <div class="col-sm-8">
+                        <input id="LouyuName" name="LouyuName" type="text" readonly value="" class="form-control" style="background-color: #FFF" onclick="showMenu();" />
+                        <input type="hidden" id="LouyuIdStr" name="LouyuIdStr" />
+                        <!--下拉列表-->
+                        <div id="PrePaymentDetailReportContainermenuContent" class="col-sm-8" style="display:none; position: absolute;top:59px;background:#FFF;z-index:1000">
+                            <ul id="PrePaymentDetailReportContainertreeDemo" class="ztree form-control" style="margin-top:0; height: 300px;overflow:auto;"></ul>
+                            <div style="text-align:center; padding-bottom:5px; padding-top:5px;">
+                                <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuSelect()" value="全选">
+                                <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuReset()" value="清除">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">业主姓名</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="OwnerName" name="OwnerName" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">票据号</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ReceiptNum" name="ReceiptNum" class="form-control">
+                    </div>
+                </div>
+               
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">收费项目</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="ChargeSubjectIdStr" id="ChargeSubjectIdStr" ng-model="ChargeSubjectId" ng-options="m.Id as m.Name for m in ChargeSubjectList"></select>
+                        <input type="hidden" id="DefaultChargeSubjectId" name="DefaultChargeSubjectId" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">收费开始日期</label>
+                    <div class="col-sm-8">
+                        <div class="input-append date dateBeginMonth input-group">
+                            <input type="text" id="ChargeBeginDate" name="ChargeBeginDate" class="form-control">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-4 control-label">收费结束日期</label>
+                    <div class="col-sm-8">
+                        <div class="input-append date dateEndMonth input-group">
+                            <input type="text" id="ChargeEndDate" name="ChargeEndDate" class="form-control">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="button" id="btnSearchPrePayDetailRep" class="btn btn-primary" value="查询">
+                    <input type="button" id="btnExportPrePayDetailRep" class="btn btn-primary" ng-click="PrePayDetailRepExportData()" value="导出">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="divPrePayDetailRepTable" />
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份 
+                "d+": this.getDate(),                    //日 
+                "h+": this.getHours(),                   //小时 
+                "m+": this.getMinutes(),                 //分 
+                "s+": this.getSeconds(),                 //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds()             //毫秒 
+            };
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                }
+            }
+            return fmt;
+        }        
+        var ckFramework = ckFramework || {};
+        ckFramework.PrePayDetailRepListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $("#DefaultComDeptId").val(ckFramework.PrePayDetailRepListData.DefaultDeptId);
+        $("#DefaultChargeSubjectId").val(ckFramework.PrePayDetailRepListData.DefaultChargeSubjectId);
+      
+        ckFramework.createPrePayDetailRepListData = {
+            TableId:'table_ckFramework_PrePayDetailRepList',
+            IsAddOperate:false,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.PrePayDetailRepListData.TemplateModels,
+            DivTable:$('#divPrePayDetailRepTable')
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createPrePayDetailRepListData);
+
+        function getLastDay() {
+            var date = new Date;
+            var new_year = date.getFullYear();    //取当前的年份
+            var new_month = date.getMonth();
+            var new_date = new Date(new_year, new_month, 1).format("yyyy-MM-dd");              //取当年当月中的第一天
+            var last_date = new Date().format("yyyy-MM-dd");//获得当月当天
+            $("#ChargeBeginDate").val(new_date);
+            $("#ChargeEndDate").val(last_date); 
+        }
+
+        var setting = {
+            async: { //异步加载
+                type: "get",
+                enable: true,
+                url: getUrl
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick,
+                onCheck: onCheck
+            },
+            view: {
+                showIcon: false
+            }
+        };
+
+        function getUrl() {
+
+
+
+            var ComDeptId = $("#SearchContainerPrePayDetailRep select[name='ComDeptIdStr']").val();
+            if (ComDeptId == null) {
+                ComDeptId = $("#SearchContainerPrePayDetailRep input:hidden[name='DefaultComDeptId']").val();
+            }
+            else {
+                ComDeptId = ComDeptId.replace("number:", "");
+            }
+
+            return "PropertyMgr/Report/GetCommunityLouyuDeptList?ComDeptId=" + ComDeptId;
+        }
+
+        function beforeClick(treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("PrePaymentDetailReportContainertreeDemo");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            return false;
+        }
+
+        function GetbtnAllLouyuSelect() {
+            var zTree = $.fn.zTree.getZTreeObj("PrePaymentDetailReportContainertreeDemo");
+            zTree.checkAllNodes(true);
+            var nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerPrePayDetailRep input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerPrePayDetailRep input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function GetbtnAllLouyuReset() {
+            var treeObj = $.fn.zTree.getZTreeObj("PrePaymentDetailReportContainertreeDemo");
+            treeObj.checkAllNodes(false);
+            var cityObj = $("#SearchContainerPrePayDetailRep input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerPrePayDetailRep input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", "");
+            cityObj.prop("value", "");
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("PrePaymentDetailReportContainertreeDemo"),
+                nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerPrePayDetailRep input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerPrePayDetailRep input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function showMenu() {
+
+            var cityObj = $("#SearchContainerPrePayDetailRep input[name='LouyuName']");
+            var cityOffset = $("#SearchContainerPrePayDetailRep input[name='LouyuName']").offset();
+            //$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+            $("#PrePaymentDetailReportContainermenuContent").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#PrePaymentDetailReportContainermenuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+
+
+            if (!(event.target.id == "menuBtn" || event.target.id == "LouyuName" || event.target.id == "PrePaymentDetailReportContainermenuContent" || $(event.target).parents("#PrePaymentDetailReportContainermenuContent").length > 0)) {
+                hideMenu();
+            }
+        }
+
+
+
+
+
+        $(document).ready(function () {
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+
+            getLastDay();
+
+            ckFramework.PrePayDetailRepTable = $('#' + ckFramework.createPrePayDetailRepListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createPrePayDetailRepListData),
+                filterOptions: {
+                    searchButton: "btnSearchPrePayDetailRep",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerPrePayDetailRep",
+                    Url: '/PropertyMgr/Report/GetPrePaymentDetailReportList',
+                    DrawTable:function(){
+                        ckFramework.PrePayDetailRepTable.draw();
+                    }
+                },
+                fnDrawCallback:function(){
+                    if(ckFramework.otherData != null && ckFramework.otherData.totalAmount != null){
+                        var totalAmount="合计金额："+ckFramework.otherData.totalAmount;
+                        var totAmoHtml = '<span id="PayDisTotalAmount" style="position: absolute;left: 1px;font-size: larger;font-weight: 550;">'+totalAmount+'</span>';
+                        var jqPayDis=$('#PayDisTotalAmount');
+                        if(jqPayDis== null||jqPayDis.length==0){
+                            $('#table_ckFramework_PrePayDetailRepList_length').prepend(totAmoHtml);
+                        }
+                        else{
+                            jqPayDis.empty().html(totalAmount);
+                        }
+                    }
+                }
+            });
+            $.fn.zTree.init($("#PrePaymentDetailReportContainertreeDemo"), setting);
+
+            $("#SearchContainerPrePayDetailRep select[name='ComDeptIdStr']").change(function () {
+                var cityObj = $("#SearchContainerPrePayDetailRep input[name='LouyuName']");
+                var LouyuIdstr = $("#SearchContainerPrePayDetailRep input:hidden[name='LouyuIdStr']")
+                LouyuIdstr.prop("value", "");
+                cityObj.prop("value", "");
+                var treeObj = $.fn.zTree.getZTreeObj("PrePaymentDetailReportContainertreeDemo");
+                treeObj.reAsyncChildNodes(null, "refresh");
+
+
+            });
+
+        });
+    </script>
+</div>
+

@@ -1,0 +1,94 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divManuallyGenerateBillViewController" ng-controller="ManuallyGenerateBillViewController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="ng-binding">手动生成账单</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <div id="divManuallyTreeWrap" style="padding-top:10px; overflow: auto;">
+                <div id="ManuallyTree" style="height:300px"></div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <label>结束时间</label>
+            <div class="input-append  date  dateEnddate input-group"  style="padding-right:10px;">
+                <input type="text" name="Enddate" class="form-control" disabled="disabled">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" name="ManuallySave" ng-click="ManuallyGenerateBill()">保存</button>
+    </div>
+</div>
+<script type="text/javascript">
+    var ckFramework = ckFramework || {};
+    ckFramework.TempChargeViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+    function getLastDay(year,month){
+        var new_year = year;    //取当前的年份
+        var new_month = month++;//取下一个月的第一天，方便计算（最后一天不固定）
+        if(month>12)            //如果当前大于12月，则年份转到下一年
+        {
+            new_month -=12;        //月份减
+            new_year++;            //年份增
+        }
+        var new_date = new Date(new_year,new_month,1);              //取当年当月中的第一天
+        //var date_count =   (new Date(new_date.getTime()-1000*60*60*24)).getDate();//获取当月的天数
+        var last_date =   new Date(new_date.getTime()-1000*60*60*24);//获得当月最后一天的日期
+        //return date_count;
+        return last_date;
+    }
+
+    $(function(){
+        $('.dateEnddate').datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: 2,
+            startView: 2,
+        });
+        //    .on('changeDate', function (ev) {
+        //    if (ev.date.valueOf() != undefined || ev.date.valueOf() != "") {
+        //        var sdate = ev.date;
+        //        var newDate = getLastDay(sdate.getFullYear(),sdate.getMonth()+1);
+
+        //        $('.dateEnddate').datetimepicker('setDate', newDate);
+
+        //    }
+        //});
+
+        $('#ManuallyTree').jstree(
+        { 'core' : {
+            'data': {
+                'cache' : false,
+                'url':function(node){
+                    return "/PropertyMgr/ChargBill/GetChargeSubjectList?houseDeptId="
+                        + ckFramework.TempChargeViewData.ChargBillInfo.HouseDeptId
+                        + "&DeptName=" + $('#SelectDeptName').val()
+                        + "&DeptType=" + $('#SelectDeptType').val();
+                },
+                'data' : function(node){
+                }
+            }
+        },
+            "checkbox": {
+                "keep_selected_style": false,
+                "visible": true
+            },
+            "plugins": ["checkbox"]
+        });
+
+        var EndDate = $("#divManuallyGenerateBillViewController input[name='Enddate']").val();
+        if(EndDate.length<=0)
+        {
+            var myDate = new Date();
+            var datestr= getLastDay(myDate.getFullYear(),myDate.getMonth()+1);
+            $('.dateEnddate').datetimepicker('setDate', datestr);
+
+        }
+    });
+
+</script>

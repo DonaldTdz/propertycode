@@ -1,0 +1,116 @@
+﻿@using YK.FrameworkTools.PluginService;
+
+<div id="divArrearsCollComparisonChartController" ng-controller="ArrearsCollComparisonChartController">
+
+    <div id="SearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>小区</label>
+                    <select class="form-control" name="ComDeptIdStr"  ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList">
+                        <option value="">-- 请选择 --</option>
+                    </select>
+
+                </div>
+                <div class="col-md-4" style="padding-top:25px">
+              
+                    <input type="button" id="btnOrgListSearch" class="btn btn-primary" ng-click="SeachEcharts()" value="{{ClientMessage.Search}}">
+                </div>
+                </div>
+        </div>
+        
+    </div>
+
+    <div id="Echartmain" style="width: 900px;height:700px;"></div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ArrearsCollComparisonChartData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.getDataUrl = '@Url.PluginAction("PropertyMgr", "Report", "GetArrearsCollComparisonChart")';
+
+    </script>
+    <script type="text/javascript">
+        var myChart =echarts.init(document.getElementById('Echartmain'));
+
+        // 指定图表的配置项和数据
+        var     option = {
+            title : {
+                text: '缴费对比表',
+
+                x:'center'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    restore: {title:'刷新'},
+                    saveAsImage: {}
+                }
+            },
+            tooltip : {
+                trigger: 'item',
+                
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['未缴金额','实缴金额','减免金额']
+            },
+            series : [
+                {
+                    name: '收费',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        function seachEchartsByComDeptId(ComDeptId)
+        {
+            var data = {'ComDeptId':ComDeptId};
+            $.post( ckFramework.getDataUrl, data).success(function(result) {
+               
+                myChart.setOption({
+                    title : {
+                        text: '缴费对比表',
+
+                        x:'center'
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            restore: {title:'刷新'},
+                            saveAsImage: {}
+                        }
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['未缴金额','实缴金额','减免金额']
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        name: '收费',
+                        data:  result.MoneyList
+                    }]
+                });
+            });
+        }
+
+   </script>
+</div>

@@ -1,0 +1,276 @@
+﻿<style type="text/css">
+    #ReceiptBookForm .selectContainer .form-control-feedback {
+        /* Adjust feedback icon position */
+        right: 30px;
+    }
+</style>
+
+
+<div id="divReceiptBookViewController" ng-controller="ReceiptBookViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ReceiptBookViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $(document).ready(function () {
+         $('#ReceiptBookForm')
+            .formValidation({
+                framework: 'bootstrap',
+
+                   button: {
+            selector: '#btnReceiptbookSave'
+
+        },
+                icon: {
+                   valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+                },
+
+
+                fields: {
+
+                    seleReceiptBookType:{
+                    validators: {
+                        notEmpty: {
+                            message: '请选择票据类型'
+                        }
+                    }
+                    },
+                    Name: {
+                        validators: {
+                            notEmpty: {
+                                message: '名称不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 30,
+                                message: '名称长度应在1-30之间'
+                            }
+                        }
+                    },
+                    Prefix: {
+                        validators: {
+                            notEmpty: {
+                                message: '前缀不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 7,
+                                message: '前缀长度应在1-7之间'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: '请输入字母或者数字'
+                            }
+                        }
+                    },
+                    Suffix: {
+                        validators: {
+                            notEmpty: {
+                                message: '后缀位数不能为空'
+                            },
+                            stringLength: {
+                                min: 0,
+                                max: 1,
+                                message: '后缀范围应在1-9之间'
+                            },
+
+                            regexp: {
+                                regexp: /^[1-9]+$/,
+                                message: '请输入正确的数字'
+                            },
+                             callback: {
+                                callback: function (value, validator, $field) {
+                                     $('#ReceiptBookForm')
+                                    .formValidation('revalidateField', 'BeginCode')
+                                    .formValidation('revalidateField', 'EndCode')
+
+
+                                     return true;
+                                }
+                            }
+                        }
+                    },
+                    BeginCode: {
+                        validators: {
+                            notEmpty: {
+                                message: '起号不能为空'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '请输入0-9的数字'
+                            },
+                            callback: {
+                                callback: function (value, validator, $field) {
+                                    var Suffix = parseInt($('#txtSuffix').val());
+                                    if (Suffix > 9)
+                                        Suffix = 9
+
+                                    if (value.length > Suffix) {
+                                        return false;
+                                    }
+                                    else {
+                                        return true;
+                                    }
+                                },
+                                message: '起号位数不能大于后缀位数设置'
+                            }
+                        }
+                    },
+                    EndCode: {
+                        validators: {
+                            notEmpty: {
+                                message: '止号不能为空'
+                            },
+
+
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '请输入0-9的数字'
+                            },
+
+                        callback: {
+                            callback: function (value, validator, $field) {
+                                var Suffix = parseInt($('#txtSuffix').val());
+                                if (Suffix > 9)
+                                    Suffix=9
+
+                                if (value.length > Suffix) {
+                                    return false;
+                                }
+                                else {
+                                    return true;
+                                }
+                            },
+                            message: '止号位数不能大于后缀位数设置'
+                        }
+                        }
+                    },
+                    CurrentReceiptNum: {
+                        validators: {
+                            notEmpty: {
+                                message: '当前票据号不能为空'
+                            }
+                        }
+                    },
+                    selStatus:{
+                        validators: {
+                            notEmpty: {
+                                message: '请选择状态'
+                            }
+                        }
+                    }
+
+                }
+            });
+        });
+
+
+        function padLeft(str,lenght){
+
+
+        if(str.length >= lenght)
+        return str;
+        else
+        return padLeft("0" +str,lenght);
+        }
+
+
+
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>票据配置</h4>
+    </div>
+    <form id="ReceiptBookForm" class="form-horizontal">
+        <div class="modal-body">
+            <div class="form-group ModalFormMagin col-md-12 has-feedback">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>票据类型<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9 selectContainer">
+                        <select class="form-control ckFormControl" ng-disabled="PageReadOnly" ng-model="PageViewModel.ReceiptBookTypeStr" name="seleReceiptBookType" id="ReceiptBookTypeId" ng-options="m.Code as m.CnName for m in ReceiptBookTypeList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>票据名称<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtName" name="Name" ng-readonly="PageReadOnly" ng-model="PageViewModel.Name" class=" col-sm-9 form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>前缀<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtPrefix" name="Prefix" ng-readonly="PageReadOnly" ng-change="CalculationNum()" ng-model="PageViewModel.Prefix" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>后缀位数<span style="color:red">*</span></span>
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" id="txtSuffix" ng-readonly="PageReadOnly" ng-change="CalculationNum()" name="Suffix" ng-model="PageViewModel.Suffix" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        票据样例:
+                    </label>
+                    <div class="col-sm-9">
+                        {{ReceiptExample }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>起号<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtBeginCode" name="BeginCode" ng-readonly="PageReadOnly" ng-change="CalculationNum()" ng-model="PageViewModel.BeginCode" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>止号<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtEndCode" name="EndCode" ng-model="PageViewModel.EndCode" ng-change="CalculationNum()" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label ckFormControlLable">
+                        <span>当前票据号<span style="color:red">*</span></span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtCurrentReceiptNum" name="CurrentReceiptNum" ng-model="PageViewModel.ReceiptCurrentNumberView" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" col-sm-3 control-label ckFormControlLable">
+                        <span>状态<span style="color:red">*</span></span>
+                    </label>
+                    <div class=" col-sm-9 selectContainer">
+                        <select class="form-control ckFormControl" ng-change="StatusWarning()" ng-model="PageViewModel.StatusStr" name="selStatus" id="StatusId" ng-options="m.Code as m.CnName for m in ReceiptBookStatusList">
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="submit" id="btnReceiptbookSave" class="btn btn-primary" ng-click="SaveData()">保存</button>
+    </div>
+
+</div>

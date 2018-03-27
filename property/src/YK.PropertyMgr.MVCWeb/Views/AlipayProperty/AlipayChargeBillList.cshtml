@@ -1,0 +1,107 @@
+﻿@using YK.FrameworkTools.PluginService;
+
+<div id="divAlipayChargeBillListController" ng-controller="AlipayChargeBillListController">
+    <div id="SearchContainerAlipayChargeBill" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label>小区</label>
+                    <select class="form-control" name="ComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in CommunityDeptList">
+                    </select>
+                    <input type="hidden" id="DefaultComDeptId" name="DefaultComDeptId" />
+
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <input type="button" id="btnSearchAlipayChargeBill" class="btn btn-primary" value="查询">
+                        <input type="button" id="btnExportAlipayChargeBill" class="btn btn-primary" ng-click="ShowUploadAlipayChargeBillView()" value="上传账单">
+                        <input type="button" id="btnExportAlipayChargeBill" class="btn btn-primary" ng-click="BatchDelete()" value="批量删除">
+                        <input type="button" id="btnExportAlipayChargeBill" class="btn btn-primary" ng-click="SynchronizationChargeBillInfo()" value="数据同步">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="divAlipayChargeBillTable" />
+
+
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.AlipayChargeBillListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        $("#SearchContainerAlipayChargeBill input:hidden[name='DefaultComDeptId']").val(ckFramework.AlipayChargeBillListData.DefaultComDeptId);
+            ckFramework.InitAlipayChargeBill = function () {  
+               
+            }
+        ckFramework.createAlipayChargeBillListData = {
+            TableId:'table_ckFramework_AlipayChargeBillList',
+            IsAddOperate:true,
+            IsAddAllCheck2:true,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas: ckFramework.AlipayChargeBillListData.TemplateModels,
+            DivTable:$('#divAlipayChargeBillTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":100,
+                "render": function(data)
+                {
+                    var content = '<input type="checkbox" name="AlipayChargeBiLLCheck" data="' + data.Id + '" >'
+                    return content;
+                }
+        }
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createAlipayChargeBillListData);
+        
+
+
+        $(document).ready(function () {
+
+
+
+            ckFramework.AlipayChargeBillTable = $('#' + ckFramework.createAlipayChargeBillListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createAlipayChargeBillListData),
+                filterOptions: {
+                    searchButton: "btnSearchAlipayChargeBill",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerAlipayChargeBill",
+                    Url: '/PropertyMgr/AlipayProperty/GetAlipayChargeBillList',
+                    DrawTable:function(){
+                        ckFramework.AlipayChargeBillTable.draw();
+                    }
+                }
+
+            });
+            $("div.toolbar").html($('#divToolbar'));
+
+           
+
+        });
+
+        function allCheckList() {
+            var Ischeck = $("#tableallCheckList").prop("checked");
+            $("#table_ckFramework_AlipayChargeBillList").find("input[type='checkbox']").each(function () {
+
+                if (Ischeck) {
+                    $(this).prop("checked", true);
+                }
+                else {
+                    $(this).prop("checked", false);
+                }
+
+            });
+
+
+        }
+
+    </script>
+</div>
+

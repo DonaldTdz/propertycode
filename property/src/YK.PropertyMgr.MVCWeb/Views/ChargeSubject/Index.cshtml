@@ -1,0 +1,95 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divChargeSubjectListController" ng-controller="ChargeSubjectListController">
+
+    <div id="SearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>项目名称</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="Name" />
+                </div>
+                <div class="col-md-4">
+                    <label>项目编号</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="Code" />
+                </div>
+                <div class="col-md-4">
+                    <label>是否启用</label>
+                    <br />
+                    <select name="IsDel">
+                        <option value="">全部</option>
+                        <option value="false" selected="selected">是</option>
+                        <option value="true">否</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <input type="button" id="btnOrgListSearch" class="btn btn-primary" value="查询">
+
+        </div>
+    </div>
+    <div id="divToolbar" class="pull-left">
+
+        <a ng-if="CheckPermission('AddSubject')" class="btn btn-app" ng-click="Save()" id="btnAdd">
+            <i class="fa fa-pencil pull-left"></i>新增
+
+        </a>
+    </div>
+    <div id="divChargeSubjectListTable" />
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ChargeSubjectListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.ChargeSubjectViewUrlAdd = '@Url.PluginAction("PropertyMgr", "ChargeSubject", "ChargeSubjectViewAdd")';
+        ckFramework.ChargeSubjectViewUrlEdit = '@Url.PluginAction("PropertyMgr", "ChargeSubject", "ChargeSubjectViewEdit")';
+        ckFramework.ChargeSubjectViewUrlLook = '@Url.PluginAction("PropertyMgr", "ChargeSubject", "ChargeSubjectViewLook")';
+        ckFramework.ChargeSubjectTable = null;
+        ckFramework.createChargeSubjectListData = {
+            TableId:'table_ckFramework_ChargeSubjectList',
+            IsAddOperate:JQCheckPermission("EditSubject"),
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.ChargeSubjectListData.TemplateModels,
+            DivTable:$('#divChargeSubjectListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60,
+                "render": function()
+                {
+                    var editContent = "";
+                    var deleteContent = "";
+                    if (JQCheckPermission("EditSubject")) {
+                        editContent = '<a herf="#" class="btn columnTool Edit"><i class="ui-tooltip fa fa-edit" data-original-title="Edit"></i></a>'
+                    }
+                    return deleteContent+editContent;
+                }
+            }
+        };
+        ckFramework.TableService.CreateBusinessTable( ckFramework.createChargeSubjectListData);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ckFramework.ChargeSubjectTable = $('#' + ckFramework.createChargeSubjectListData.TableId).dataTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createChargeSubjectListData),
+                filterOptions: {
+                    searchButton: "btnOrgListSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "ChargeSubject", "GetChargeSubjects")',
+                    DrawTable:function(){
+                        ckFramework.ChargeSubjectTable.draw();
+                    }
+                }
+            });
+            $('#'+ ckFramework.createChargeSubjectListData.TableId +' tbody').on('click', 'tr', function () {
+
+                var data = ckFramework.ChargeSubjectTable.rows($(this)).data();
+                var chargeSubjectOwnerListService = ckFramework.GetAngularService('ChargeSubjectListService');
+                chargeSubjectOwnerListService.ShowChargeSubjectView('Edit', data[0].Id);
+            });
+            $("div.toolbar").html($('#divToolbar'));
+            //$('#SearchContainer').click();
+            //$("#btnOrgListSearch").click();
+        });
+    </script>
+</div>

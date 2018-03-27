@@ -1,0 +1,37 @@
+﻿<div id="divRefundRecordController" ng-controller="RefundRecordController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.RefundRecordData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.createRefundRecordFormData = {
+            FormId:'refundRecordForm',
+            DivContainer:$('#divContainer'),
+            TemplateItemDatas:ckFramework.RefundRecordData.TemplateModels,
+            jumpFields:['Id'],
+            ReadonlyDatas:['HouseDoorNo','ReceiptNum','Amount'],
+            ColumnCount:1
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createRefundRecordFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createRefundRecordFormData);
+        });
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>退款</h4>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-info alert-dismissible" ng-show="IsBillDetail">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-info"></i> 温馨提示!</h4>
+            退款功能只能对整张票据的金额进行全部退款.
+        </div>
+        <div id="divContainer" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="SaveData()">保存</button>
+    </div>
+</div>

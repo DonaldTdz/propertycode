@@ -1,0 +1,184 @@
+﻿@using YK.FrameworkTools.PluginService;
+<style type="text/css">
+    .bg {
+        position: absolute;
+        margin-left: 18px;
+        width: 30px;
+        height: 40px;
+        margin-top: -35px;
+        background: transparent url(../../../../Scripts/images/32px.png) no-repeat -70px 10px;
+    }
+
+    .verticaLine {
+        display: block;
+        position: absolute;
+        margin-top: -9px;
+        width: 30px;
+        height: 20px;
+        float: right;
+        margin-left: 18px;
+        background: transparent url(../../../../Scripts/images/32px.png) no-repeat -294px 00px;
+    }
+
+    .trbgcolor {
+        background-color: #ededd2;
+    }
+</style>
+<div id="divDailyChargListController" ng-controller="DailyChargListController">
+    <div class="form-horizontal box box-primary">
+        <div class="box-body">
+            <div class="ModalFormMagin col-md-12 has-feedback" style="margin-bottom:0px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">应收金额</label>
+                    <div class="col-sm-3">
+                        <input type="text" value="" placeholder="应收金额" class="form-control" name="AmountShouldTotal" ng-readonly="true" ng-model="PageModel.AmountShouldTotal" />
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <label class="col-sm-3 control-label" style="text-align:center;">付款方式</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" ng-model="PageModel.PayTypeId" ng-options="m.Code as m.CnName for m in PayTypeList">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" style="text-align:center;">
+                                <input type="button" ng-if="CheckPermission('ConfirmCharge')" class="btn btn-primary btn-lg" ng-click="SaveData()" value="确认收费">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">实收金额</label>
+                    <div class="col-sm-3">
+                        <input type="text" value="" placeholder="实收金额" class="form-control" name="ReceivedAmountTotal" ng-model="PageModel.ReceivedAmountTotal" ng-keyup="toDecimal($event)" ng-blur="isNumber($event)" />
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <label>
+                                            <input type="checkbox" ng-checked="PageModel.IsSmallToPrepay" ng-model="PageModel.IsSmallToPrepay" />将找零预存为
+                                        </label>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <select class="form-control" ng-model="PageModel.SmallToPrepaySubjectId" id="selectSmallToPrepay" ng-options="m.Id as m.Name for m in ChargeSubjectList">
+                                    <option value="0">所有收费项目</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" style="text-align:center;" >
+                                <div id="SearchContainer">
+                                    <div class="checkbox">
+                                        <label>
+                                            <label>
+                                                <input type="checkbox" ng-click="GetDailyChargList()" ng-checked="ChargBillSearch.IsDevPay" ng-model="ChargBillSearch.IsDevPay" />显示开发商代缴
+                                            </label>
+                                        </label>
+                                    </div>
+                                </div>
+                                <input type="button" id="btnOrgListSearch" ng-click="SearchDailyChargList()" class="btn btn-primary" style="display:none;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">预存抵扣</label>
+                    <div class="col-sm-3">
+                        <input type="text" placeholder="预存抵扣" class="form-control" ng-readonly="true" name="ReceivedAmountTotal" ng-model="PageModel.PreDeductibleAmount" />
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <label>
+                                            <input type="checkbox" ng-checked="PageModel.IsPreDeductible" ng-model="PageModel.IsPreDeductible" />预存抵扣
+                                        </label>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-9" style="display:inline-block;min-height:20px;padding-top:7px;">
+                                {{PageModel.PreAmountInfo}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:0px;">
+                    <label class="col-sm-2 control-label">找零</label>
+                    <div class="col-sm-3">
+                        <input type="text" value="" placeholder="找零" class="form-control" name="SmallChange" ng-readonly="true" ng-model="PageModel.SmallChange" />
+                    </div>
+                    <div class="col-sm-6">
+                        <textarea rows="2" ng-model="PageModel.Remark" name="Remark" class="form-control">请您妥善保存交款收据，如是押金类或代收费项目，票据遗失恕不退付</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <input type="button" id="btnSplit" ng-if="CheckPermission('SplitBill')" ng-click="ShowSplitBillView()" class="btn btn-primary" value="账单拆分">
+            <input type="button" id="btnRefresh" ng-if="CheckPermission('RefreshBill')" ng-click="GetDailyChargList()" class="btn btn-primary" value="刷新账单">
+            <input type="button" id="btnPrepare" ng-if="CheckPermission('PrepareAmount')" ng-click="ShowPrepareAmountViewModal()" ng-show="ShowbtnPrepare" class="btn btn-primary" value="生成预存费">
+            <input type="button" id="btnDelete" ng-if="CheckPermission('DeleteBill')" ng-click="ShowDeleteBillView()" class="btn btn-primary" value="作废账单">
+            <button type="button" id="btnManualGenerationBill" ng-if="CheckPermission('ManuallyGenerateBill')" ng-click="ShowManuallyGenerateBillView()" class="btn btn-default pull-right">手动生成账单</button>
+        </div>
+    </div>
+    @*修改为angular绑定table*@
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th style="text-align:left;width:60px;"><input type="checkbox" ng-click="fnDailyCheckedAll()" ng-model="IsCheckedAll" ng-checked="IsCheckedAll" /></th>
+                        <th>收费资源</th>
+                        <th>收费项目</th>
+                        <th>计费金额</th>
+                        <th>已交金额</th>
+                        <th>应收金额</th>
+                        <th>开始日期</th>
+                        <th>结束日期</th>
+                        <th>减免金额</th>
+                        <th style="max-width:140px;" >备注</th>
+                        @*<th>描述</th>*@
+                    </tr>
+                    <tr ng-repeat="item in ChargeBillList" ng-show="item.IsShow" ng-style="item.GroupId>0?item.CccordionClass:null">
+                        <th style="text-align:left;">
+                            <input type="checkbox" ng-model="item.IsChecked" ng-checked="{{item.IsChecked}}" ng-click="fnDailyChecked(item,this)" />
+                            <div class="bg" ng-show="item.GroupId>0"></div>
+                            <div class="verticaLine" ng-show="item.GroupId>0"></div>
+                            <a href="#" ng-click="ShowDetailBill(item)" ng-show="item.Id>0" ng-class="item.CccordionClass" style="margin-left:5px;" />
+                        </th>
+                        <td>{{item.ResourcesName}}</td>
+                        <td>{{item.ChargeSubjectName}}</td>
+                        <td>{{item.BillAmount | number:2}}</td>
+                        <td>{{item.ReceivedAmount | number:2}}</td>
+                        <td>{{item.AmountShould | number:2}}</td>
+                        <td>{{item.BeginDateFormat}}</td>
+                        <td>{{item.EndDateFormat}}</td>
+                        <td>{{item.ReliefAmount | number:2}}</td>
+                        <td>{{item.Remark}}</td>
+                        @*<td>{{item.Description}}</td>*@
+                    </tr>
+                    <tr ng-show="ChargeBillList.length == 0">
+                        <td colspan="10" style="text-align:center;">没有数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*设置MVC的一些页面变量事件绑定*@
+<script type="text/javascript">
+
+
+
+    var ckFramework = ckFramework || {};
+    ckFramework.DailyChargListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    ckFramework.SplitBillViewUrl = '@Url.PluginAction("PropertyMgr", "ChargBill", "SplitBillView")';
+    ckFramework.DeleteBillViewUrl = '@Url.PluginAction("PropertyMgr", "ChargBill", "DeleteBillView")';
+    ckFramework.PrepareAmountViewUrl = '@Url.PluginAction("PropertyMgr", "ChargBill", "PrepareAmountView")';
+    ckFramework.printPDFChargeRecordUrl = '@Url.PluginAction("PropertyMgr", "ChargeRecord", "ReceiptPrintPDF")';
+    ckFramework.ManuallyGenerateBillViewUrl='@Url.PluginAction("PropertyMgr", "ChargBill", "ManuallyGenerateBillView")';
+    ckFramework.ConfirmViewUrl = '@Url.PluginAction("PropertyMgr", "ChargBill", "ConfirmView")';
+</script>

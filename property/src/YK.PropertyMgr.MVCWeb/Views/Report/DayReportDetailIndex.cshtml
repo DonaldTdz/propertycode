@@ -1,0 +1,229 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divDayReportDetailController" ng-controller="DayReportDetailController">
+    <div id="SearchContainerDaytDetailReport" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="col-md-3" >小区</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="ComDeptIdStr" id="dllComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList"></select>
+                        <input type="hidden" id="hidDetailDefaultComDeptId" name="DefaultComDeptId" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="col-md-3" >收费日期</label>
+                    <div class="col-sm-8">
+                        <div class="input-append date dateBeginMonth input-group">
+                            <input type="text" id="txtDetailChargeDate" name="ChargeDate" class="form-control">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="col-md-3">楼栋资源</label>
+                    <div class="col-sm-9">
+                        <input id="LouyuName" name="LouyuName" type="text" readonly value="" class="form-control" style="background-color: #FFF" onclick="showMenu();" />
+                        <input type="hidden" id="LouyuIdStr" name="LouyuIdStr" />
+                        <!--下拉列表-->
+                        <div id="DayReportDetailmenuContent" class="col-sm-8" style="display:none; position: absolute;top:59px;background:#FFF;z-index:1000">
+                            <ul id="DayReportDetailtreeDemo" class="ztree form-control" style="margin-top:0; height: 300px;overflow:auto;"></ul>
+                            <div style="text-align:center; padding-bottom:5px; padding-top:5px;">
+                                <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuSelect()" value="全选">
+                                <input type="button" class="btn-xs btn-primary" onclick="GetbtnAllLouyuReset()" value="清除">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <input type="button" id="btnSearchDayReportDetail" class="btn btn-primary" value="查询">
+                    <input type="button" id="btnExportDayReportDetail" class="btn btn-primary" ng-click="DayDetailReportExportData()" value="导出">
+                </div>
+            </div>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="divDayReportDetailTable" />
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.DayReportDetailData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $("#hidDetailDefaultComDeptId").val(ckFramework.DayReportData.DefaultDeptId);
+        ckFramework.DayReportDetailTable = null;
+
+        ckFramework.createDayReportDetailData = {
+            TableId: 'table_ckFramework_DayReportDetail',
+            Language: ckFramework.HomeData.Language,
+            TemplateItemDatas: ckFramework.DayReportDetailData.TemplateModels,
+            DivTable: $('#divDayReportDetailTable')
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createDayReportDetailData);
+
+    </script>
+    <script type="text/javascript">
+        var setting = {
+            async: { //异步加载
+                type: "get",
+                enable: true,
+                url: getUrl
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick,
+                onCheck: onCheck
+            },
+            view: {
+                showIcon: false
+            }
+        };
+
+        function getUrl() {
+
+
+
+            var ComDeptId = $("#SearchContainerDaytDetailReport select[name='ComDeptIdStr']").val();
+            if (ComDeptId == null) {
+                ComDeptId = $("#SearchContainerDaytDetailReport input:hidden[name='DefaultComDeptId']").val();
+            }
+            else {
+                ComDeptId = ComDeptId.replace("number:", "");
+            }
+
+            return "PropertyMgr/Report/GetCommunityLouyuDeptList?ComDeptId=" + ComDeptId;
+        }
+
+        function beforeClick(treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("DayReportDetailtreeDemo");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            return false;
+        }
+
+        function GetbtnAllLouyuSelect() {
+            var zTree = $.fn.zTree.getZTreeObj("DayReportDetailtreeDemo");
+            zTree.checkAllNodes(true);
+            var nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerDaytDetailReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerDaytDetailReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function GetbtnAllLouyuReset() {
+            var treeObj = $.fn.zTree.getZTreeObj("DayReportDetailtreeDemo");
+            treeObj.checkAllNodes(false);
+            var cityObj = $("#SearchContainerDaytDetailReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerDaytDetailReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", "");
+            cityObj.prop("value", "");
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("DayReportDetailtreeDemo"),
+                nodes = zTree.getCheckedNodes(true),
+                v = "";
+            var idstr = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+                idstr += nodes[i].id + ","
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+
+            if (idstr.length > 0) idstr = idstr.substring(0, idstr.length - 1);
+            var cityObj = $("#SearchContainerDaytDetailReport input[name='LouyuName']");
+            var LouyuIdstr = $("#SearchContainerDaytDetailReport input:hidden[name='LouyuIdStr']")
+            LouyuIdstr.prop("value", idstr);
+            cityObj.prop("value", v);
+        }
+
+        function showMenu() {
+
+            var cityObj = $("#SearchContainerDaytDetailReport input[name='LouyuName']");
+            var cityOffset = $("#SearchContainerDaytDetailReport input[name='LouyuName']").offset();
+            //$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+            $("#DayReportDetailmenuContent").slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#DayReportDetailmenuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+
+
+            if (!(event.target.id == "menuBtn" || event.target.id == "LouyuName" || event.target.id == "DayReportDetailmenuContent" || $(event.target).parents("#DayReportDetailmenuContent").length > 0)) {
+                hideMenu();
+            }
+        }
+
+
+
+
+        $(document).ready(function () {
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+            var currentdate = new Date();
+            var y = currentdate.getFullYear();
+            var m = currentdate.getMonth() + 1;
+            var d = currentdate.getDate();
+            var date = y+'-'+ (m > 9?m:'0'+m) + '-'+ (d > 9?d:'0'+d);
+            $('#txtDetailChargeDate').val(date);
+
+            ckFramework.DayReportDetailTable = $('#' + ckFramework.createDayReportDetailData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createDayReportDetailData),
+                filterOptions: {
+                    searchButton: "btnSearchDayReportDetail",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerDaytDetailReport",
+                    Url: '@Url.PluginAction("PropertyMgr", "Report", "GetDayReportDetailList")',
+                    DrawTable:function(){
+                        ckFramework.DayReportDetailTable.draw();
+                    }
+                }
+            });
+               $.fn.zTree.init($("#DayReportDetailtreeDemo"), setting);
+
+            $("#SearchContainerDaytDetailReport select[name='ComDeptIdStr']").change(function () {
+                var cityObj = $("#SearchContainerDaytDetailReport input[name='LouyuName']");
+                var LouyuIdstr = $("#SearchContainerDaytDetailReport input:hidden[name='LouyuIdStr']")
+                LouyuIdstr.prop("value", "");
+                cityObj.prop("value", "");
+                var treeObj = $.fn.zTree.getZTreeObj("DayReportDetailtreeDemo");
+                treeObj.reAsyncChildNodes(null, "refresh");
+
+
+            });
+
+
+        });
+    </script>
+</div>

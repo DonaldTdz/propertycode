@@ -1,0 +1,96 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Xml"#>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="TemplateFileManagerV2.1.ttinclude" #>
+<#
+	var manager = TemplateFileManager.Create(this);
+	string strProjectName = "PropertyMgr";
+	EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
+	XmlDocument doc = new XmlDocument();
+	var strProjectPath = dte.ActiveDocument.Path;
+	var strSolutionPath = strProjectPath.Substring(0, strProjectPath.IndexOf("src") + 3);
+	var strTemplateFilePath = System.IO.Path.Combine(strSolutionPath, @"YK.PropertyMgr.MVCWeb\Models\PropertyMgrTemplate.xml");
+	doc.Load(strTemplateFilePath);
+	var frameworkTemplateNodes = doc.SelectNodes("/FrameworkTemplates/FrameworkTemplate[@Type='DomainEntity']");
+	foreach (XmlNode templateNode in frameworkTemplateNodes)
+	{
+	manager.StartNewFile(templateNode.Attributes["Name"].Value + "Mappers.cs");
+#>
+using AutoMapper;
+using YK.<#= strProjectName #>.ApplicationDTO;
+using YK.<#= strProjectName #>.DomainEntity;
+using System;
+using System.Collections.Generic;
+
+namespace YK.<#= strProjectName #>.ApplicationMapper
+{
+	public partial class <#= templateNode.Attributes["Name"].Value #>Mappers
+	{
+		public static <#= templateNode.Attributes["Name"].Value #> ChangeDTOTo<#= templateNode.Attributes["Name"].Value #>New(<#= templateNode.Attributes["Name"].Value #>DTO dto<#= templateNode.Attributes["Name"].Value #>)
+        {
+			var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<<#= templateNode.Attributes["Name"].Value #>DTO, <#= templateNode.Attributes["Name"].Value #>>();
+            });
+            var domain<#= templateNode.Attributes["Name"].Value #> = config.CreateMapper().Map<<#= templateNode.Attributes["Name"].Value #>DTO, <#= templateNode.Attributes["Name"].Value #>>(dto<#= templateNode.Attributes["Name"].Value #>);
+
+            return domain<#= templateNode.Attributes["Name"].Value #>;
+        }
+
+		public static void ChangeDTOTo<#= templateNode.Attributes["Name"].Value #>Update(<#= templateNode.Attributes["Name"].Value #>DTO dto<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+			var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<<#= templateNode.Attributes["Name"].Value #>DTO, <#= templateNode.Attributes["Name"].Value #>>();
+            });
+            config.CreateMapper().Map<<#= templateNode.Attributes["Name"].Value #>DTO, <#= templateNode.Attributes["Name"].Value #>>(dto<#= templateNode.Attributes["Name"].Value #>, domain<#= templateNode.Attributes["Name"].Value #>);
+        }
+
+		public static void Change<#= templateNode.Attributes["Name"].Value #>ToDTO(<#= templateNode.Attributes["Name"].Value #>DTO dto<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+			var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #>DTO>();
+            });
+            config.CreateMapper().Map<<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #>DTO>(domain<#= templateNode.Attributes["Name"].Value #>, dto<#= templateNode.Attributes["Name"].Value #>);
+        }
+
+		public static <#= templateNode.Attributes["Name"].Value #>DTO Change<#= templateNode.Attributes["Name"].Value #>ToDTO(<#= templateNode.Attributes["Name"].Value #> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+			var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #>DTO>();
+            });
+            return config.CreateMapper().Map<<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #>DTO>(domain<#= templateNode.Attributes["Name"].Value #>);
+        }
+
+		public static List<<#= templateNode.Attributes["Name"].Value #>DTO> Change<#= templateNode.Attributes["Name"].Value #>ToDTOs(List<<#= templateNode.Attributes["Name"].Value #>> domain<#= templateNode.Attributes["Name"].Value #>)
+        {
+			var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #>DTO>();
+            });
+            var dto<#= templateNode.Attributes["Name"].Value #> = config.CreateMapper().Map<List<<#= templateNode.Attributes["Name"].Value #>>, List<<#= templateNode.Attributes["Name"].Value #>DTO>>(domain<#= templateNode.Attributes["Name"].Value #>);
+
+            return dto<#= templateNode.Attributes["Name"].Value #>;
+        }
+
+		public static IEnumerable<<#= templateNode.Attributes["Name"].Value #>DTO> Change<#= templateNode.Attributes["Name"].Value #>ToDTOs(IEnumerable<<#= templateNode.Attributes["Name"].Value #>> domain<#= templateNode.Attributes["Name"].Value #>s)
+        {
+			var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<<#= templateNode.Attributes["Name"].Value #>, <#= templateNode.Attributes["Name"].Value #>DTO>();
+            });
+            var dto<#= templateNode.Attributes["Name"].Value #> = config.CreateMapper().Map<IEnumerable<<#= templateNode.Attributes["Name"].Value #>>, IEnumerable<<#= templateNode.Attributes["Name"].Value #>DTO>>(domain<#= templateNode.Attributes["Name"].Value #>s);
+
+            return dto<#= templateNode.Attributes["Name"].Value #>;
+        }
+	}
+}
+<#
+    }
+	manager.Process();
+#>

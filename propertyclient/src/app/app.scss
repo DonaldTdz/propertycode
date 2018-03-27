@@ -1,0 +1,943 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+// 1. Wechat
+// --------------------------------------------------
+.wechat{
+    ion-header{
+        display: none !important;
+    }
+
+    ion-content{
+        .fixed-content{
+             margin-top: 0 !important;
+        }
+
+        .scroll-content{
+            margin-top: 0 !important;
+        }
+    }
+}
+
+
+// 页面背景样式
+.pageBg{
+    background: url($img-path + 'bg_img.png') no-repeat;
+    background-size: cover;
+}
+
+// 去除item的border
+.item-inner{
+    border: none !important;
+}
+
+// 去除图片边距
+img{
+    vertical-align: bottom;
+}
+
+// 清除浮动公共样式
+.clearfix:after{ content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.clearfix{ display:block;}
+
+
+// 中间内容背景公共样式
+@mixin common_bg{
+    background: url($img-path + 'bg_big.png') no-repeat;
+    background-size: cover;
+    padding:1vh 2vw;
+    margin: 3vh auto 0 auto;
+}
+
+// 中间内容公共样式
+@mixin content_common($w,$pd){
+    background: $color_aph;
+    margin-top: 3vh;
+    margin-left: 2vw;
+    width: $w;
+    padding: $pd;
+    float: left;
+    min-height: $width_main;
+}
+// 逸社区缴费顶部样式
+.mobile_head_total{
+    background: transparent;
+    padding-left:0 !important;
+    width: $width_content;
+    margin: 0 auto;
+    border-bottom: 1px solid $color_white;
+    padding: 1vh 0;
+    box-sizing: border-box;
+    .item-inner{
+        padding-right: 0 !important;
+    }
+
+    .mobile_head_logo{
+        width: 20vw;
+        margin: 0 2vw 0 0 !important;
+
+        img{
+            max-width: 200px;
+        }
+    }
+
+    .mobile_head_title{
+        min-width: 44vw;
+        margin:0 2vw 0 0 !important;
+        text-align: center;
+        font-size: $middle_large_font;
+        color: $color_white;
+    }
+
+    .mobile_head_btn{
+        margin: 0 !important;
+        float: right;
+        .mobile_head_time{
+            float:left;
+            width: 60px;
+            padding: 15px 5px;
+            height: 60px;
+            font-size: 1.3rem;
+            color: #ffffff;
+            line-height: 15px;
+            text-align: center;
+            margin: 0 !important;
+            background-size: contain;
+            .mobile_time_num{
+                font-size:$large_small_font;
+                color: $color_yellow;
+            }
+            .mobile_time_text{
+                display: block;
+                font-size: $small_font;
+                font-weight: 100;
+            }
+        }
+
+        // 返回首页按钮
+        .mobile_head_return{
+            margin: 5px 0 0 10px !important;
+            float: left;
+            padding: 0 !important;
+            height: 55px;
+            .mobile_head_returnIcon{
+                margin: 0 !important;
+                padding: 0 !important;
+
+                img{
+                    height: 58px;
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+
+// 逸社区缴费中间内容样式
+
+.mobile_content_total{
+    width: $width_content;
+    height: auto;
+    min-height: 80vh;
+    color: $color_white;
+    @include common_bg();
+
+// 左边内容区域
+    .mobile_left_all{
+        @include  content_common(52vw,2vh 5vw);
+
+    .mobile_left_title{
+        font-size:$large_small_font;
+        margin-top: 0 !important;
+    }
+
+    // 输入框样式
+    .mobile_input{
+        width:100%;
+        margin: 2vh auto 6vh auto;
+        border: 1px solid $color_green;
+        box-sizing: border-box;
+        .text-input{
+            height: 30px;
+            line-height:30px;
+            text-align: center;
+            font-size: $large_small_font;
+            color: $color_green;
+            letter-spacing: 1px;
+        }
+
+        .text-input[disabled]{
+            opacity: 1 !important;
+        }
+    }
+
+    // 业主尾号输入框样式
+    .proprietor_input_total{
+        background: transparent;
+        display: flex;
+
+        .proprietor_input{
+            margin: 1vh 1vw 4vh auto;
+            box-sizing: border-box;
+        }
+
+        .text-input{
+            width: 60px;
+            height: 60px;
+            line-height:60px;
+            text-align: center;
+            font-size: $large_small_font;
+            color: $color_green;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 1px solid $color_green;
+        }
+        .text-input[disabled]{
+            opacity: 1;
+        }
+    }
+
+    // 操作说明样式
+    .mobile_warning_text{
+        font-size: $middle_font;
+        text-indent: 30px;
+        line-height: 25px;
+        margin-bottom: 8vh;
+        span{
+            color: #FEBB42;
+            margin: 0 3px;
+            text-align: center;
+        }
+    }
+// 警告样式
+    .mobile_left_bottom{
+        background: transparent;
+        color: $color_white;
+        font-size: $middle_md_font;
+        ion-label{
+            overflow: visible !important;
+            white-space: normal !important;
+        }
+        .mobile_bottom_icon{
+            margin-right: 10px;
+
+            img{
+                width: 20px;
+            }
+        }
+    }
+}
+    // 右边内容区域
+     .mobile_right_all{
+        @include  content_common(34vw,2vh 2vw);
+        button:nth-child(3n){
+            margin-right: 0 !important;
+        }
+        .activated{
+            span{
+                background: url($img-path + 'jp_bg_a.png') no-repeat;
+                background-size:cover; 
+             }
+        }
+        .button-clear-ios:hover:not(.disable-hover), .button-clear:hover:not(.disable-hover){
+            span{
+                background: url($img-path + 'jp_bg_a.png') no-repeat;
+                background-size:cover; 
+            }
+        }
+        button{
+            margin: 0 1vw 0 0;
+            padding: 0 !important;
+            width:9vw;
+            height: 13vh;
+            background: transparent;
+            text-align: center;
+            span{
+                display: block;
+                // width:auto;
+                // height:60%;
+                // line-height: 4rem;
+                // max-height: 100px;
+                // margin: 0 auto;
+                width:10vh;
+                height: 10vh;
+                line-height: 10vh;
+                margin: 0 auto;
+                color: $color_white;
+                background: url($img-path + 'jp_bg.png') no-repeat;
+                background-size:cover; 
+                border-radius: 5px;
+                overflow: hidden;
+                font-size: $large_font;
+            }
+            .button-ios{
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+
+        .mobile_btn_text{
+            span{
+                font-size: $middle_large_font !important;
+                font-weight: 100;
+            }  
+        }
+    }
+}
+
+// 底部按钮区域样式
+.mobile_btn_total{
+    width: 88vw;
+    margin:2vh auto;
+    background: $color_aph;
+    height: auto;
+    padding:3vh 2vw;
+    button{
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 10px;
+    }
+
+    .button-clear-ios:hover:not(.disabled-hover),.button-clear:hover:not(.disabled-hover){
+        color: $color_white;
+    }
+    .mobile_btn_reset{
+        background: url($img-path + 'reset.png') no-repeat;
+        background-size:cover; 
+        min-height: 5vw;
+        min-width: 23vw;
+        font-size: $large_small_font;
+        color: $color_white;
+    }
+
+    .mobile_btn_submit{
+        background: url($img-path + 'submit.png') no-repeat;
+        background-size:cover; 
+        min-height: 5vw;
+        min-width: 42vw;
+        font-size: $large_small_font;
+        color: $color_white;
+    }
+}
+
+
+// 房屋选择按钮公共样式
+@mixin choose_btn_common($w:20vh,$h:10vh,$m:2vh auto){
+    display: block;
+    width: $w;
+    height:$h;
+    line-height: 10vh;
+    background: url($img-path + 'xunzhe_buttona.png') no-repeat;
+    background-size:cover; 
+    font-size: 1.5em;
+    margin:$m;
+}
+
+// 房屋楼栋号小于25时，页面样式
+.hc_firstContent{
+     @include  content_common(88vw,1vh 2vw);
+     height: 73vh;
+     .hc_second_right_content{
+        width: 100%;
+        height: 100%;
+
+        .hc_second_content_all{
+            width: 100%;
+            height: 73vh !important;
+            display: block !important;
+             button:nth-child(5n){
+                    margin-right: 0 !important;
+                }
+            .activated{
+                    span{
+                        background: url($img-path + 'xunzhe_buttonb.png') no-repeat;
+                        background-size:contain; 
+                        color: $color_white;
+                    }
+                }
+                .button-clear-ios:hover:not(.disable-hover), .button-clear:hover:not(.disable-hover){
+                    span{
+                        background: url($img-path + 'xunzhe_buttonb.png') no-repeat;
+                        background-size:contain;
+                        color: $color_white; 
+                    }
+                }
+            .hc_second_content_btn{
+                width: 15vw;
+                height: 14vh;
+                text-align: center;
+                margin: 0 1.9vw 0 0;
+                //margin: 0 1.2vw 0 1.4vw;
+                padding: 0;
+                color: $color_white;
+                display: block;
+                float: left;
+                span{
+                    @include choose_btn_common();
+                }
+            }
+        }
+    }
+    /* button:nth-child(5n){
+            margin-right: 0 !important;
+        }
+      .activated{
+            span{
+                background: url($img-path + 'xunzhe_buttonb.png') no-repeat;
+                background-size:contain; 
+                color: $color_white;
+             }
+        }
+        .button-clear-ios:hover:not(.disable-hover), .button-clear:hover:not(.disable-hover){
+            span{
+                background: url($img-path + 'xunzhe_buttonb.png') no-repeat;
+                background-size:contain;
+                color: $color_white; 
+            }
+        }
+      .button{
+            width: 15vw;
+            height: 14vh;
+            text-align: center;
+            margin: 0 1.9vw 0 0;
+            padding: 0;
+            color: $color_white;
+            display: block;
+            float: left;
+            span{
+               @include choose_btn_common();
+            }
+        }*/
+}
+
+// 向上和向下按钮公共样式
+@mixin button_common(){
+    margin: 3vh 0 0 0;
+    padding: 0;
+    width: 100%;
+    height: 5vh;
+}
+// 房屋楼栋号大于25时，页面样式
+.hc_secondContent{
+
+    // 左边导航区域
+    .hc_second_left_all{
+        @include  content_common(15vw,0);
+        height: 73vh;
+        float: left;
+
+        // 向上按钮样式
+        .hc_backBtn{
+            @include button_common();
+
+            img{
+                height: auto;
+                width: auto;
+            }
+        }
+
+        .hc_forwardBtn{
+            @include button_common();
+            img{
+                height: auto;
+                width: auto;
+            }
+        }
+
+        // 导航样式
+        .hc_second_nav{
+            width: 100%;
+            height: 53vh;
+            margin: 1.5vh 0;
+
+            .swiper-slide{
+                width: 100%;
+                height: 10.5vh !important;
+
+                .hc_second_title{
+                    width: 18vh;
+                    height: 9vh;
+                    line-height: 9vh;
+                    background: url($img-path + 'bq_qian.png') no-repeat;
+                    background-size: cover;
+                    margin: 2vh auto !important;
+                    font-size: 1em;
+                    color: $color_white;
+                }
+
+                // 导航高光样式
+                .nav_actived{
+                    background: url($img-path + 'bq_xuanzhong.png') no-repeat;
+                    background-size: cover;
+                }
+            }
+        }
+    }
+
+    //右边内容区域
+    .hc_second_right_all{
+        @include  content_common(71vw,0);
+        height: 73vh;
+        float: left;
+
+        .hc_second_right_content{
+            width: 100%;
+            height: 100%;
+
+            .hc_second_content_all{
+                width: 100%;
+                height: 73vh !important;
+                display: block !important;
+                 button:nth-child(4n){
+                        margin-right: 0 !important;
+                    }
+                .activated{
+                        span{
+                            background: url($img-path + 'xunzhe_buttonb.png') no-repeat;
+                            background-size:contain; 
+                            color: $color_white;
+                        }
+                    }
+                    .button-clear-ios:hover:not(.disable-hover), .button-clear:hover:not(.disable-hover){
+                        span{
+                            background: url($img-path + 'xunzhe_buttonb.png') no-repeat;
+                            background-size:contain;
+                            color: $color_white; 
+                        }
+                    }
+                .hc_second_content_btn{
+                    width: 15vw;
+                    height: 14vh;
+                    text-align: center;
+                    //margin: 0 1.9vw 0 0;
+                    margin: 0 1.2vw 0 1.4vw;
+                    padding: 0;
+                    color: $color_white;
+                    display: block;
+                    float: left;
+                    span{
+                        @include choose_btn_common();
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// 业主信息确认
+.owner_content_all {
+    height: 73vh;
+    width: 88vw;
+    padding: 3vh 2vw;
+
+    .owner_title{
+        font-size: $large_small_font;
+        margin-bottom: $mr10;
+        margin-top: 0 !important;
+    }
+
+    .owner_card_total{
+        margin: 2vh 0;
+        background: transparent;
+        border: 1px solid $color_green;
+        height: 20vh;
+        padding: 3vh 30vw;
+        p{
+            font-size: $middle_large_font;
+            color: $color_green;
+            font-weight: 600;
+            min-height: 4vh;
+            line-height:4vh;
+        }
+
+    }
+    .owner_warning_total{
+        margin: 2vh 0 0 0;
+        .owener_warning_content{
+            font-size: $middle_md_font;
+            margin: 0;
+            text-indent: 20px;
+            min-height: 18vh;
+        }
+
+        .mobile_left_bottom{
+            background: transparent;
+            color: $color_white;
+            .mobile_bottom_icon{
+                margin: 0 5px 0 0!important;
+
+                img{
+                    width: 20px;
+                }
+            }
+            ion-label{
+                margin: 0;
+                font-size: $middle_md_font;
+            }
+        }
+
+         // 业主信息缴费房屋按钮样式
+        .ci_list_content{
+            min-height: 30vh;
+            button:nth-child(4n){
+                margin-right: 0 !important;
+            }
+
+            .button{
+                width: 54vh;
+                height: 10vh;
+                margin: 0 1vw 2vh 0;
+                padding: 0;
+                color: $color_white;
+                background:  url($img-path + 'fawu.png') no-repeat;
+                background-size: cover;
+                span{
+                    font-size: 1.2em;
+                }
+            }
+        }
+    }
+    
+}
+
+
+// 底部按钮样式
+.owner_btn_total{
+    background: transparent !important;
+}
+
+
+// 物业缴费页面样式
+.pay_all_right{
+    overflow: auto;
+    position: relative;
+}
+.pay_all_segment{
+    display: block !important;
+    width: 100%;
+    margin: $mr10 auto;
+
+    .segment-button:first-of-type,.segment-button:last-of-type{
+        border: none !important;
+        margin: 0 auto 1vh auto;
+    }
+    .segment-button{
+        display: block;
+        flex: none !important;
+        height: 9vh;
+        line-height: 9vh;
+        width: 18vh;
+        border: none;
+        background:  url($img-path + 'bq_qian.png') no-repeat;
+        background-size: cover;
+        color: $color_white;
+        margin: 0 auto 1vh auto;
+        padding: 0 !important;
+        font-size: 1.25em;
+    }
+
+    .segment-button.segment-activated{
+        background:  url($img-path + 'bq_xuanzhong.png') no-repeat;
+        background-size: cover;
+    }
+}
+
+
+// 物业账单样式
+.account_list_all{
+    padding: 2vh 2vw;
+
+    .account_list_main{
+        height: 60vh;
+        overflow: auto;
+    }
+}
+
+// 单选按钮样式
+ .account_checkBox{
+     width: 21px;
+     height: 21px;
+     box-sizing: border-box;
+    .checkbox-icon{
+        width: 21px;
+        height: 21px;
+        background: transparent;
+        border-color: $color_white;
+        box-sizing: border-box;
+    }
+
+    .checkbox-checked{
+        width: 28px;
+        height: 28px;
+        background: url($img-path  + 'slect_bg.png') no-repeat;
+        background-size: cover;
+        border:transparent !important;
+        margin: -4px 0 0 -3px;
+    }
+    .checkbox-inner{
+        display: none !important;
+    }
+}
+
+.account_list_total:first-child{
+    border-top: 1px solid $border_color;
+}
+.account_list_total:last-child{
+   margin-bottom: 8vh;
+}
+.account_list_total{
+    width: 100%;
+    border-bottom: 1px solid $border_color;
+    background: transparent;
+    .account_title_total{
+        width: 100%;
+        height: 7vh;
+        margin: 0 auto;
+        background: transparent;
+        color: $color_white;
+        padding-left: 0;
+        .account_head_checkbox{
+            float: left;
+            min-width: 21px;
+        }
+        .account_head_item{
+            float: left;
+            width: 96%;
+            background: transparent;
+
+            .item-inner{
+                padding-right: 0;
+            }
+        }
+        .account_title{
+            font-size: $middle_large_font;
+             color: $color_white;
+        }
+
+        .account_title_text{
+            color: $color_white;
+            font-size: $middle_md_font;
+        }
+        .account_icon{
+            color: $color_white;
+            font-size: 2em;
+        }
+    }
+
+
+    // 中间内容区域样式
+    .account_content_list:first-child{
+        display: block;
+    }
+    .account_content_list{
+        display: block;
+        width: 95%;
+        margin:0 0 0 5%;
+        border-top: 1px solid $border_color;
+        padding: 1vh 0;
+        .account_content_all{
+            background: transparent;
+            min-height: 3vh;
+            padding-left: 0;
+            .item-inner{
+                padding-right: 0;
+            }
+
+            .account_content_date{
+                 color: $diff_color_white;
+                 font-size: $middle_md_font;
+                 height: 20px;
+                 line-height: 20px; 
+            }
+
+            .account_content_dollar{
+                 color: $diff_color_white;
+                 font-size: $middle_md_font;
+                 height: 20px;
+                 line-height: 20px; 
+                 margin: 0 !important;
+            }
+        }
+    }
+}
+
+
+// 确认按钮样式
+.account_bottom_total{
+    background: transparent;
+    min-height: 8vh;
+    border-top: 1px solid $border_color;
+    border-bottom: none !important;
+    width: 68vw;
+    position: fixed;
+    bottom: 8vh;
+    padding-left: 0;
+    .account_bottom_text{
+        color: $color_white;
+        font-size: $middle_font;        
+    }
+    .item-inner{
+        padding: 0 !important;
+    }
+    .account_bottom_submit{
+        height: 6vh;
+        line-height: 6vh;
+        width: 45vh;
+        margin: 0;
+        padding: 0;
+        background:  url($img-path + 'submit.png') no-repeat;
+        background-size: cover;
+        color: $color_white;
+        font-size: $middle_md_font;
+    }
+
+    .button-clear-ios:hover:not(.disable-hover){
+        color: $color_white;
+    }
+}
+
+
+// 物业账单缴清样式
+.account_no_total{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    .account_no_img{
+        height:18vw;
+        width: 18vw;
+        display: block;
+        margin: 10vh auto 0 auto;
+        img{
+            width: 100%;
+        }
+    }
+
+    .account_no_text{
+        margin: $mr5 0 0 0;
+        font-size: $middle_large_font;
+        color: $color_white; 
+    }
+}
+
+// 预存物业费警告样式
+.pre_warning_total{
+    background: transparent;
+    padding-left: 0 !important;
+
+    .item-inner{
+        padding-right: 0 !important;
+    }
+    .pre_warning_all{
+        margin: 0 10px 0 0 !important;
+        img{
+            width: 20px;
+        }
+    }
+
+    .pre_warning_text{
+        color: $color_white;
+        font-size: $middle_md_font;
+        margin: 0 !important;
+        line-height: 20px;
+    }
+}
+
+// 加减按钮样式
+.pre_btn{
+    width: 40px;
+}
+// 预存月份顶部样式
+.pre_head_total{
+    background: transparent;
+    padding-left: 0 !important;
+    border-top: 1px solid $border_color;
+    border-bottom: 1px solid $border_color;
+    .item-inner{
+        padding-right: 0 !important;
+    }
+
+    .pre_head_title{
+        color: $color_white;
+        font-size: $middle_large_font;
+    }
+
+    .pre_choose_btn{
+        margin: 0 !important;
+        color: $color_white;
+        font-size: $middle_font;
+    }
+
+    .button-clear-ios:hover:not(.disable-hover){
+        color: $color_white;
+    }
+}
+
+// 费用详情中间样式
+.pre_content_total{
+    width: 95%;
+    margin: 0 0 0 5%;
+    border-top: 1px solid $border_color;
+    padding: 1vh 0;
+    .pre_content_item{
+        background: transparent;
+        min-height: 4vh;
+        padding-left: 0;
+        .pre_content_text{
+            color: $diff_color_white;
+            font-size: $middle_md_font;
+            margin: 0 !important;
+            line-height: 30px;
+        }
+
+        .pre_content_dollar{
+            color: $diff_color_white;
+            font-size: $middle_md_font;
+            margin: 0 !important;
+            line-height: 30px;
+        }
+    }
+}
+
+// 月份列表样式
+.month_list_content{
+    margin: 1vh 2vw;
+    padding: 2vh 2vw;
+    background:  url($img-path + 'bg_big.png') no-repeat;
+    background-size: cover;
+
+    .month_list_total{
+        background: $color_aph;
+        padding: 1vh 2vw; 
+    }
+    .month_list_btn{
+        display: block;
+        float: left;
+        width: 100px;
+        height: 50px;
+        color: $color_white;
+        font-size: $middle_font;
+        background:  url($img-path + 'xunzhe_buttona.png') no-repeat;
+        background-size: cover;
+        margin: 0 10px 10px 0;
+    }
+}
+
+.text-center{
+    text-align: center;
+}

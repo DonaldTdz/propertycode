@@ -1,0 +1,70 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divPaymentTaskDetailListViewController" ng-controller="PaymentTaskDetailListController">
+    <div>
+        <div id="divPaymentTaskDetailListTable" style="height:370px" />
+    </div>
+
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+
+        ckFramework.PaymentTaskDetailListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.PaymentTaskDetailTable = null;
+
+        ckFramework.createPaymentTaskDetailListData = {
+            TableId:'table_ckFramework_PaymentTaskDetailList',
+            IsAddOperate:false,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.PaymentTaskDetailListData.TemplateModels,
+            DivTable:$('#divPaymentTaskDetailListTable'),
+            OperateColumn:{ "data":null, "orderable": false,"width":40
+            }
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createPaymentTaskDetailListData);
+        $('.date').datetimepicker({
+            format:  'yyyy-mm-dd'
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ptd_search_params;
+            ckFramework.PaymentTaskDetailTable = $('#' + ckFramework.createPaymentTaskDetailListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                tableHeight:270,
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createPaymentTaskDetailListData),
+                filterOptions: {
+                    searchButton: "btnOrgListSearchView",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchDetailContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "PaymentTasks", "GetPaymentTaskDetailViewList")',
+                    DrawTable:function(){
+                        ckFramework.PaymentTaskDetailTable.draw();
+                    }
+                }
+            });
+
+            $('#' + ckFramework.createPaymentTaskDetailListData.TableId).on({
+                'xhr.dt': function ( e, settings, json, xhr ) {
+                    ptd_search_params = settings.oAjaxData.search;
+                },
+                'draw.dt': function (){
+                    $.get('@Url.PluginAction("PropertyMgr", "PaymentTasks", "GetPaymentTaskDetailViewListTotalMoney")',ptd_search_params,function(res){
+                        $("#div_PTD_TotalMoney").remove();
+                        if(res.IsSuccess){
+                            var div_table = $('#' + ckFramework.createPaymentTaskDetailListData.TableId).parent();
+                            div_table.css("border-bottom","0");
+                            div_table.after("<div id='div_PTD_TotalMoney' style='border-bottom:1px solid #111;font-weight:bold;'>金额合计:"+parseFloat(res.Data.TotalMoney).toFixed(2)+"</div>");
+                        }
+                    });
+                }
+            });
+            //ckFramework.ResetWindowLayout();
+        });
+    </script>
+</div>
+

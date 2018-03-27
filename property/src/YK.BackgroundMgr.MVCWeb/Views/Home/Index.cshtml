@@ -1,0 +1,211 @@
+﻿@using YK.FrameworkTools.PluginService;
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+@section HeadCss
+{
+    <style type="text/css">
+        .ActiveLink {
+            font-weight: bold;
+            background-color: #2786bd;
+        }
+    </style>
+}
+
+@section HeadJs
+{
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.HomeData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.UrlLogout = '@Url.PluginAction("Login", "Logout")';
+
+        function layout(){
+            $(".sidebar-menu").css("max-height",$(window).height() - 110);
+            $(".content-wrapper").css("max-height",$(window).height()-110);
+        }
+        layout();
+        $(window).resize(function(){layout()});
+    </script>
+}
+<script type="text/javascript" language="javascript">
+    var JQCheckPermission = function (action) {
+        var userOperates = action.split(';');
+        for (var i = 0; i < userOperates.length; i++) {
+            var tempUserOperate = userOperates[i];
+            for (var j = 0; j < ckFramework.HomeData.OperateCodeAndRoleInfos.length; j++) {
+                var tempCodeAndRole = ckFramework.HomeData.OperateCodeAndRoleInfos[j];
+                if (tempCodeAndRole.Code == tempUserOperate) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+</script>
+
+<!-- Main Header -->
+<!--<script type="text/javascript">
+    function layout(){
+        $(".sidebar-menu").css("max-height",$(window).height()-$(".main-header").height()-$(".user-panel").height());
+        $(".content-wrapper").css("max-height",$(window).height()-$(.main-header).height());
+        alert($(".content-wrapper").height());
+    }
+    layout();
+    $(window).resize(function(){layout();});
+</script>-->
+<div class="main-header">
+    <!-- Logo -->
+    <a class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">逸</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>{{homeData.FrameworkName}}</b></span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" id="aLeftMenuControl" data-toggle="offcanvas" role="button">
+            <span class="sr-only"></span>
+        </a>
+        <div class="navbar-custom-menu pull-left" id="navbar-collapse">
+            <ul class="nav navbar-nav hidden-xs">
+                <li ng-cloak ng-repeat="item in homeData.RootModules">
+                    <a href="{{$index == 0? item.Url : (homeData.CurrentModule.Id == item.Id? '#' : item.Url + '?UserName='+homeData.LoginUserInfo.UserName+'&Password='+homeData.LoginUserInfo.Password)}}" ng-class="{true:'ActiveLink',false:'NormalActive'}[homeData.CurrentModule.Id==item.Id]"><i class="fa {{item.Iconic}}"></i>{{homeData.Language=="zh-CN"?item.CnName : item.EnName}}</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav hidden-md hidden-lg">
+                <!-- Project Menu -->
+                <li ng-cloak class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-dashboard"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <ul class="menu">
+                                <li ng-repeat="item in homeData.RootModules" ng-click="ChangeModule(item.Id,homeData.Language=='zh-CN'?item.CnName : item.EnName)">
+                                    <a>
+                                        <i class="fa {{item.Iconic}}"></i> {{homeData.Language=="zh-CN"?item.CnName : item.EnName}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-custom-menu pull-right">
+            <ul class="nav navbar-nav">
+                <!-- User Account Menu -->
+                <li ng-cloak class="dropdown user user-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <!-- The user image in the navbar-->
+                        <img src="Scripts/AdminLTE/dist/img/user2-160x160.png" class="user-image" alt="User Image" />
+                        <span class="hidden-xs">{{homeData.LoginUserInfo.UserName}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- The user image in the menu -->
+                        <li class="user-header">
+                            <img src="Scripts/AdminLTE/dist/img/user2-160x160.png" class="img-circle" alt="User Image" />
+                            <p>
+                                {{homeData.LoginUserInfo.UserName}}{{ClientMessage.Welcome}}
+                                <small>{{ClientMessage.Email}}:{{homeData.LoginUserInfo.Email}} </small>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer" style="background-color:#ececec">
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-default btn-flat" ng-click="Logout()">{{ClientMessage.Logout}}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                <li class="dropdown">
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section ng-cloak class="sidebar" style="height:auto;" >
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="Scripts/AdminLTE/dist/img/user2-160x160.png" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+                <p>{{homeData.LoginUserInfo.UserName}}</p>
+                <!-- Status -->
+                <a href="#"><i class="fa fa-circle text-success"></i>{{ClientMessage.Online}}</a>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <li class="header">{{homeData.CurrentModule.CnName}}</li>
+            <li class="treeview {{(homeData.CurrentLeftModule.Id == item.Id || homeData.CurrentLeftModule.PId == item.Id)?'active':item.ChildrenModule.length!=0?'treeview':'NormalActive'}}" ng-repeat="item in homeData.LeftModules">
+                <a id="{{item.Id}}" href="#" ng-click="ChangeLeftModule(item.Id)">
+                    <i class='fa {{item.Iconic}}'></i>
+                    <span>{{homeData.Language=="zh-CN"?item.CnName : item.EnName}}</span>
+                    <i class="{{item.ChildrenModule.length!=0?'fa fa-angle-left pull-right':'NormalActive'}}"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="{{childItem.Id}}" ng-repeat="childItem in item.ChildrenModule"><a class="{{homeData.CurrentLeftModule.Id==childItem.Id?'TreeLeftStyle':'NormalActive'}}" href="#" ng-click="ChangeLeftModule(childItem.Id)"><i class='fa {{childItem.Iconic}}'></i>{{homeData.Language=="zh-CN"?childItem.CnName : childItem.EnName}}</a></li>
+                </ul>
+            </li>
+        </ul><!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section ng-cloak class="content-header">
+        <h1>
+            {{homeData.CurrentLeftModule.Name}}
+            <small>{{homeData.CurrentLeftModule.Description}}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i></li>
+            <li>{{homeData.CurrentModule.CnName}}</li>
+            <li class="active">{{homeData.CurrentLeftModule.Name}}</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div ng-view></div>
+    </section>
+</div>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!-- Home tab content -->
+        <div class="tab-pane active" id="control-sidebar-home-tab">
+            <h3>云凯科技</h3>
+            <h4 class="control-sidebar-heading">电话</h4>
+            <span>023-63072876</span>
+            <h4 class="control-sidebar-heading">传真</h4>
+            <span>023-63072876</span>
+            <h4 class="control-sidebar-heading">网址</h4>
+            <span>www.yun-kai.com</span>
+            <h4 class="control-sidebar-heading">邮箱</h4>
+            <span>yunkaikeji@126.com</span>
+            <h4 class="control-sidebar-heading">地址</h4>
+            <span>重庆市渝北区洪湖西路21号蓝爵公馆1603 </span>
+        </div><!-- /.tab-pane -->
+    </div>
+</aside><!-- /.control-sidebar -->
+<!-- Add the sidebar's background. This div must be placed
+     immediately after the control sidebar -->
+<div class='control-sidebar-bg'></div>
+

@@ -1,0 +1,116 @@
+﻿<div id="divExternalchargeDetailContainerController" ng-controller="ExternalchargeDetailContainerController">
+    <div id="SearchContainerExternalchargeDetailRep" class="form-horizontal box box-primary">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">小区</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="ComDeptIdStr" id="ComDeptIdStr" ng-model="ComDeptId" ng-options="m.Id as m.Name for m in ComDeptList"></select>
+                            <input type="hidden" id="DefaultComDeptId" name="DefaultComDeptId" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">收费对象</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="ResourceName" name="ResourceName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">票据号</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="Number" name="Number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">收费开始日期</label>
+                        <div class="col-sm-8">
+                            <div class="input-append date dateBeginMonth input-group">
+                                <input type="text" id="BeginDate" name="BeginDate" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-sm-4 control-label">收费结束日期</label>
+                        <div class="col-sm-8">
+                            <div class="input-append date dateEndMonth input-group">
+                                <input type="text" id="EndDate" name="EndDate" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" id="btnSearchExternalchargeDetailRep" class="btn btn-primary" value="查询">
+                        <input type="button" id="btnExportExternalchargeDetailRep" class="btn btn-primary" ng-click="ExternalchargeReportExportData()" value="导出">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div id="divMeterDetailRepTable" class="col-md-12" />*@
+    <div class="row">
+        <div class="col-md-12">
+            <div id="divExternalchargeDetailRepTable" />
+        </div>
+    </div>
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+
+        var ckFramework = ckFramework || {};
+        ckFramework.ExternalchargeDetailRepListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        $("input:hidden[name='DefaultComDeptId']").val(ckFramework.ExternalchargeDetailRepListData.DefaultDeptId);
+
+
+        ckFramework.createExternalchargeDetailRepListData = {
+            TableId:'table_ckFramework_ExternalchargeDetailRepList',
+            IsAddOperate:false,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.ExternalchargeDetailRepListData.TemplateModels,
+            DivTable:$('#divExternalchargeDetailRepTable')
+        };
+
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createExternalchargeDetailRepListData);
+
+
+        $(document).ready(function () {
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd'
+            });
+
+            var currentdate = new Date();
+            var y = currentdate.getFullYear();
+            var m = currentdate.getMonth() + 1;
+            var d = currentdate.getDate();
+            var mfirday= y+'-'+ (m > 9?m:'0'+m) + '-01';
+            var date = y+'-'+ (m > 9?m:'0'+m) + '-'+ (d > 9?d:'0'+d);
+            $("input[name='BeginDate']").val(mfirday);
+            $("input[name='EndDate']").val(date);
+
+
+
+            ckFramework.ExternalchargeDetailRepTable = $('#' + ckFramework.createExternalchargeDetailRepListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createExternalchargeDetailRepListData),
+                filterOptions: {
+                    searchButton: "btnSearchExternalchargeDetailRep",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainerExternalchargeDetailRep",
+                    Url: '/PropertyMgr/Report/GetExternalchargeDetailReportList',
+                    DrawTable:function(){
+                        ckFramework.ExternalchargeDetailRepTable.draw();
+                    }
+                }
+
+            });
+        });
+    </script>
+</div>

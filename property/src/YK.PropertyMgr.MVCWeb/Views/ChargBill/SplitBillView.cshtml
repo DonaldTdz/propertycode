@@ -1,0 +1,32 @@
+﻿<div id="divSplitBillViewController" ng-controller="SplitBillViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.SplitBillViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        ckFramework.createSplitBillViewFormData = {
+            FormId:'SplitBillViewForm',
+            DivContainer:$('#divSplitBillViewContainer'),
+            TemplateItemDatas:ckFramework.SplitBillViewData.TemplateModels,
+            jumpFields:['Id'],
+            ReadonlyDatas:['HouseDoorNo','Description','BeginDate'],
+            ColumnCount:1
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createSplitBillViewFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createSplitBillViewFormData);
+        });
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>账单拆分</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divSplitBillViewContainer" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="SplitBill()">确定</button>
+    </div>
+</div>

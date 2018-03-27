@@ -1,0 +1,48 @@
+﻿<div id="divIntegratedReportContainerController" ng-controller="IntegratedReportContainerController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+
+            <li class="active"><a href="#tabIntegratedChargeSubject" role="tab" data-toggle="tab" onclick="IntegratedChargeSubjectClick()" class="ng-binding">项目</a></li>
+            @*<li>  <a href="#tabArrearsCommunity" role="tab" data-toggle="tab" onclick="ArrearsCommunityClick()" class="ng-binding">小区报表</a></li>*@
+            <li>  <a href="#tabIntegratedHouse" role="tab" data-toggle="tab" onclick="IntegratedHouseClick()" class="ng-binding">收费资源</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabIntegratedChargeSubject">
+                <div id="divIntegratedReportByChargeSubject"></div>
+            </div>
+            @*<div class="tab-pane active" id="tabArrearsCommunity">
+                    <div id="divIntegratedReportCommunityListController"></div>
+                </div>*@
+
+            <div class="tab-pane active" id="tabIntegratedHouse">
+                <div id="divIntegratedReportByHouse"></div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            IntegratedChargeSubjectClick();
+
+        });
+
+       // var deptContainerService = ckFramework.GetAngularService('IntegratedReportContainerService');
+
+        //应收-科目
+        function IntegratedChargeSubjectClick() {
+          
+         var deptContainerService = ckFramework.GetAngularService('IntegratedReportContainerService');
+            deptContainerService.ShowContainerContent('divIntegratedReportByChargeSubject', 'PropertyMgr/Report/IntegratedReportByChargeSubject', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/IntegratedReportByChargeSubjectController.js'], 'divIntegratedReportByChargeSubjectController');
+        }
+        function IntegratedHouseClick()
+        {
+      
+            var deptContainerService = ckFramework.GetAngularService('IntegratedReportContainerService');
+            deptContainerService.ShowContainerContent('divIntegratedReportByHouse', 'PropertyMgr/Report/IntegratedReportByHouse', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/IntegratedReportByHouseController.js'], 'divIntegratedReportByHouseController');
+        }
+
+
+    </script>
+</div>

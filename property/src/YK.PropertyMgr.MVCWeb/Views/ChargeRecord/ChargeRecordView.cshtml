@@ -1,0 +1,37 @@
+﻿<div id="divChargeRecordViewController" ng-controller="ChargeRecordViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.ChargeRecordViewData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var readonlyCols = ['HouseDoorNo','CustomerName','ReceiptNum','Amount'];
+        //为钱包抵扣，不可编辑
+        if (ckFramework.ChargeRecordViewData.ChargeRecordInfo.PayMthodId == 6) {
+            readonlyCols = ['HouseDoorNo','CustomerName','ReceiptNum','Amount','PayMthodId'];
+        }
+
+        ckFramework.createChargeRecordViewFormData = {
+            FormId:'chargeRecordViewForm',
+            DivContainer:$('#divChargeRecordViewContainer'),
+            TemplateItemDatas:ckFramework.ChargeRecordViewData.TemplateModels,
+            jumpFields:['Id'],
+            ReadonlyDatas:readonlyCols,
+            ColumnCount:1
+        };
+
+        $(document).ready(function () {
+            ckFramework.FormService.CreateBusinessForm(ckFramework.createChargeRecordViewFormData);
+            ckFramework.FormService.CreateValidate(ckFramework.createChargeRecordViewFormData);
+        });
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>修改</h4>
+    </div>
+    <div class="modal-body">
+        <div id="divChargeRecordViewContainer" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="SaveData()">保存</button>
+    </div>
+</div>

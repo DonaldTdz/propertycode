@@ -1,0 +1,41 @@
+﻿<div id="divPreAccountCostTransferViewController" ng-controller="PreAccountCostTransferViewController" aria-labelledby="basicModal" aria-hidden="true">
+    @*设置MVC的一些页面变量*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.PreAccountCostTransferData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>预存费用转移</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-sm-4">{{PreAccountTransfer.ChargeSubjectName}}</label>
+                <label class="col-sm-8">{{PreAccountTransfer.Balance | number:2}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-sm-4">转移到</label>
+                <div class="col-sm-8">
+                    <select ng-model="FormData.ChargeSubjectId"
+                            class="form-control"
+                            ng-options="a.Id as a.Name for a in HouseSubjectList"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-sm-4">备注</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" ng-model="FormData.Remark" maxlength="500" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="PreAccountCostTransfer()">确定</button>
+    </div>
+</div>

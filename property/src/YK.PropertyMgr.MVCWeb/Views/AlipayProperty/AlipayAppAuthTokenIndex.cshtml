@@ -1,0 +1,73 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divAlipayAppAuthTokenIndexController" ng-controller="AlipayAppAuthTokenIndexController">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Horizontal Form -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">授权信息</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form id="formNotificeConfig" class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">授权商户Id：</label>
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px;background-color:white" class="form-control" ng-model="PageModel.user_id">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">授权商户AppId:</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px;background-color:white" class="form-control" ng-model="PageModel.auth_app_id">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">授权生效时间:</label>
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px;background-color:white" class="form-control" value="{{PageModel.auth_start| date:'yyyy-MM-dd HH:mm:ss'}}">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">授权失效时间:</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px;background-color:white" class="form-control" value="{{PageModel.auth_end| date:'yyyy-MM-dd HH:mm:ss'}}">
+                            </div>
+
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">状态:</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px;background-color:white" class="form-control" ng-model="PageModel.status">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary" ng-click="ReGetOAuthUrl()">重新授权</button>
+                        <button type="submit" class="btn btn-primary" ng-click="RefreshAppAuthToken()">刷新授权</button>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+

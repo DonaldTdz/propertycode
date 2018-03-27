@@ -1,0 +1,120 @@
+﻿@using YK.FrameworkTools.PluginService;
+<div id="divEntrancePowerListController" ng-controller="EntrancePowerListController">
+
+    <div id="SearchContainer" class="box box-primary form-group">
+        <div class="box-body" ng-show="IsShowSearch">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>姓名</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="Name" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>房屋</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="DoorNum" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>电话</label>
+                    <input style="width: 100%; " class="form-control" type="text" name="Phone" />
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <input type="button" id="btnOrgListSearch" class="btn btn-primary" value="查询">
+        </div>
+        <div class="box-footer1">
+        </div>
+    </div>
+    <div id="divToolbar" class="pull-left">
+
+        <a class="btn btn-app" ng-if="CheckPermission('EntrancePower')" ng-click="ShowEntrancePowerView('Add',0)">
+            <i class="fa fa-pencil pull-left"></i>门禁授权
+        </a>
+    </div>
+    <div id="divEntrancePowerListTable" />
+    @*设置MVC的一些页面变量事件绑定*@
+    <script type="text/javascript">
+        var ckFramework = ckFramework || {};
+        ckFramework.EntrancePowerListData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        ckFramework.EntrancePowerViewUrlAdd  = '@Url.PluginAction("PropertyMgr", "EntrancePower", "EntrancePowerViewAdd")';
+        ckFramework.EntrancePowerViewUrlEdit = '@Url.PluginAction("PropertyMgr", "EntrancePower", "EntrancePowerViewEdit")';
+        ckFramework.EntrancePowerViewUrlLook = '@Url.PluginAction("PropertyMgr", "EntrancePower", "EntrancePowerViewLook")';
+        ckFramework.EntrancePowerTable = null;
+        ckFramework.createEntrancePowerListData = {
+            TableId:'table_ckFramework_EntrancePowerList',
+            IsAddOperate:true,
+            IsAddAllCheck1:true,
+            Language:ckFramework.HomeData.Language,
+            TemplateItemDatas:ckFramework.EntrancePowerListData.TemplateModels,
+            DivTable:$('#divEntrancePowerListTable'),
+            OperateColumn:{ "data": null, "orderable": false,"width":60,
+                "render": function(data)
+                {
+                    $("#tableallCheck").prop("checked", false);
+                    var editContent = "";
+                    var deleteContent = "";
+
+                    editContent = "<input type='checkbox' class='UserInfo' userId ='"+data.GuidId+"'/>"
+                    editContent += '&nbsp;&nbsp;<a herf="#" class="btn columnTool Edit"><i class="ui-tooltip fa fa-edit" data-original-title="Edit"></i></a>'
+                    return editContent + deleteContent;
+                }
+            }
+        };
+        ckFramework.TableService.CreateBusinessTable(ckFramework.createEntrancePowerListData);
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#divEntrancePowerListTable").on("click",".chkALL",function(eve){
+                if ($(this).is(":checked")) {
+                    $("#table_ckFramework_EntrancePowerList").find("input[type='checkbox']").each(function()
+                    {
+                        $(this).prop("checked", true);
+                    });
+                } else {
+                    $("#table_ckFramework_EntrancePowerList").find("input[type='checkbox']").each(function()
+                    {
+                        $(this).prop("checked", false);
+                    });
+                }
+            })
+            ckFramework.EntrancePowerTable = $('#' + ckFramework.createEntrancePowerListData.TableId).dataSearchTableWithFilter({
+                scrollX: true,
+                "dom": '<"toolbar">C<"clear">lfrtip',
+                language: ckFramework.TableLanguage,
+                columns: ckFramework.TableService.CreateTableColumns(ckFramework.createEntrancePowerListData),
+                filterOptions: {
+                    searchButton: "btnOrgListSearch",
+                    clearSearchButton: "ClearSearch",
+                    searchContainer: "SearchContainer",
+                    Url: '@Url.PluginAction("PropertyMgr", "EntrancePower", "GetEntrancePowers")',
+                    DrawTable:function(){
+                        ckFramework.EntrancePowerTable.draw();
+                    }
+                }
+            });
+            $('#'+ ckFramework.createEntrancePowerListData.TableId +' tbody').on('click', '.Edit', function () {
+                if (ckFramework.ClientCustomSearch.length>=4) {
+
+                    ckFramework.ClientCustomSearch.pop();/*移除上次加入的GUID*/
+                }
+                var data = ckFramework.EntrancePowerTable.rows($(this).parents('tr')).data();
+                //alert(JSON.stringify(data[0]))
+                ckFramework.ClientCustomSearch.push({ "name": "Guid", "value": data[0].GuidId });
+                //添加，对于发送授权通知所需要参数
+                ckFramework.ShowPopData = {};
+                ckFramework.ShowPopData.EntranceSendMsgList = [];
+                ckFramework.ShowPopData.EntranceSendMsgList.push({ "HouseDeptId": data[0].HouseDeptId, "DoorNo": data[0].AllRoomNo, "Phone": data[0].Telephone });
+                var EntrancePowerListService = ckFramework.GetAngularService('EntrancePowerListService');
+                EntrancePowerListService.ShowEntrancePowerView('AddPowperPersonal',data[0].GuidId);
+            });
+
+
+            $("div.toolbar").html($('#divToolbar'));
+            $('#SearchContainer').click();
+
+        });
+    </script>
+</div>
+

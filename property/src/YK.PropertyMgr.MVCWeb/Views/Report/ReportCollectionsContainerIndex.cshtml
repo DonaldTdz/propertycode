@@ -1,0 +1,50 @@
+﻿<div id="divReportCollectionsContainerController" ng-controller="ReportCollectionsContainerController">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist" id="moduleTab">
+
+            <li class="active"><a href="#tabCollectionsChargeSubject" role="tab" data-toggle="tab" onclick="CollectionsChargeSubjectClick()" class="ng-binding">科目报表</a></li>
+           @* <li>  <a href="#tabCollectionsCommunity" role="tab" data-toggle="tab" onclick="CollectionsCommunityClick()" class="ng-binding">小区报表</a></li>*@
+            <li>  <a href="#tabCollectionsDetail" role="tab" data-toggle="tab" onclick="CollectionsDetailClick()" class="ng-binding">明细报表</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabCollectionsChargeSubject">
+                <div id="divReportCollectionsChargeSubjectListController"></div>
+            </div>
+            @*<div class="tab-pane active" id="tabCollectionsCommunity">
+                <div id="divReportCollectionsCommunityListController"></div>
+            </div>*@
+
+            <div class="tab-pane active" id="tabCollectionsDetail">
+                <div id="divReportCollectionsDetailListController"></div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            CollectionsChargeSubjectClick();
+
+        });
+
+        var deptContainerService = ckFramework.GetAngularService('ReportCollectionsContainerService');
+
+        //应收-科目
+        function CollectionsChargeSubjectClick() {
+
+            deptContainerService.ShowContainerContent('divReportCollectionsChargeSubjectListController', 'PropertyMgr/Report/CollectionsChargeSubjectListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportCollectionsChargeSubjectListController.js'], 'divReportCollectionsChargeSubjectListController');
+        }
+        function CollectionsCommunityClick()
+        {
+
+            deptContainerService.ShowContainerContent('divReportCollectionsCommunityListController', 'PropertyMgr/Report/CollectionsCommunityListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportCollectionsCommunityListController.js'], 'divReportCollectionsCommunityListController');
+        }
+
+        function CollectionsDetailClick() {
+
+            deptContainerService.ShowContainerContent('divReportCollectionsDetailListController', 'PropertyMgr/Report/CollectionsDetailListIndex', ['apps/HomeApp', '/Plugins/PropertyMgr/Scripts/controllers/Report/ReportCollectionsDetailListController.js'], 'divReportCollectionsDetailListController');
+        }
+
+    </script>
+</div>
